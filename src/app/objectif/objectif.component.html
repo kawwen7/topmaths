@@ -1,23 +1,21 @@
 <div class="containerPrincipal">
-  <h1>5C11 : Traduire un enchaînement d’opérations à l’aide d’une expression avec des parenthèses</h1>
+  <h1>{{ titre }}</h1>
   <h2>Rappel du cours</h2>
-  <img src="../assets/img/Vocabulaire-des-operations.png"/>
+  <p>{{ rappelDuCours }}</p>
   <h2>Vidéo d'explication</h2>
+
+  <div><p>???{{ liensExercices[0] }}<br>{{ liensExercices[1] }}<br>{{ liensExercices[2] }}</p></div>
+  
   <div class="container">
-    <iframe class="responsive-iframe" src="https://www.youtube.com/embed/fpqFXBis5nQ" allowfullscreen="" frameborder="0"></iframe>
+    <iframe class="responsive-iframe" [src]="VideoSrc" allowfullscreen="" frameborder="0"></iframe>
   </div>
-  <p style="text-align:left;font-size:small"><u>Vidéo de <a href="https://www.youtube.com/channel/UCJm9gdUbZhS0m8xGPQySgzg" target="_blank" rel="noopener noreferrer">*Mme Maths*</a></u></p>
+  <p style="text-align:left;font-size:small"><u>Vidéo de <a [href]="lienAuteurVideo" target="_blank" rel="noopener noreferrer">{{ auteurVideo }}</a></u></p>
   <h2>S'entraîner</h2>
   <h3>Niveau 1 - jaune</h3>
   <div class="container">
-    <iframe class="responsive-iframe" src="https://coopmaths.fr/exercice.html?ex=5C11,s=1,s2=false,s3=true,s4=true,n=1,i=0&amp;v=e"></iframe>
+    <iframe class="responsive-iframe" src="{{ liensExercices[0] }}"></iframe>
   </div>
-  <h3>Niveau 2 - vert clair</h3>
-  <div class="container">
-    <iframe class="responsive-iframe" src="https://coopmaths.fr/exercice.html?ex=5C12-1,s=2,s2=false,s3=true,s4=true,n=1,i=0&amp;v=e"></iframe>
-  </div>
-  <h3>Niveau 3 - vert foncé</h3>
-  <div class="container">
-    <iframe class="responsive-iframe" src="https://coopmaths.fr/exercice.html?ex=5C12-1,s=3,s2=false,s3=true,s4=true,n=1,i=0&amp;v=e"></iframe>
-  </div>
+</div>
+<div *ngFor="let exercice of exercices; index as i">
+  {{i + 1}}: {{exercice.couleur}} - {{exercice.slug}}
 </div>
