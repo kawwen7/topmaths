@@ -1,20 +1,25 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ObjectifComponent } from './objectif/objectif.component';
 import { AccueilComponent } from './accueil/accueil.component';
+import { SafePipe } from './safe.pipe';
+import { ObjectifsComponent } from './objectifs/objectifs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ObjectifComponent,
-    AccueilComponent
+    AccueilComponent,
+    SafePipe,
+    ObjectifsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

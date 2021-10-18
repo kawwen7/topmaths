@@ -1,21 +1,18 @@
 <div class="containerPrincipal">
   <h1>{{ titre }}</h1>
   <h2>Rappel du cours</h2>
-  <p>{{ rappelDuCours }}</p>
+  <p><img *ngIf="rappelDuCoursImage != ''" [src]="rappelDuCoursImage"/></p>
+  <p [innerHTML]="rappelDuCoursHTML"></p>
   <h2>Vidéo d'explication</h2>
-
-  <div><p>???{{ liensExercices[0] }}<br>{{ liensExercices[1] }}<br>{{ liensExercices[2] }}</p></div>
-  
-  <div class="container">
-    <iframe class="responsive-iframe" [src]="VideoSrc" allowfullscreen="" frameborder="0"></iframe>
-  </div>
+<div class="container">
+  <iframe class="responsive-iframe" [src]="VideoSrc | safe" allowfullscreen="" frameborder="0"></iframe>
+ </div>
   <p style="text-align:left;font-size:small"><u>Vidéo de <a [href]="lienAuteurVideo" target="_blank" rel="noopener noreferrer">{{ auteurVideo }}</a></u></p>
   <h2>S'entraîner</h2>
-  <h3>Niveau 1 - jaune</h3>
+  <div *ngFor="let exercice of exercices; index as i">
+  <h3>Niveau {{ i + 1 }} - {{ exercice.couleur }}</h3>
   <div class="container">
-    <iframe class="responsive-iframe" src="{{ liensExercices[0] }}"></iframe>
+    <iframe class="responsive-iframe" [src]="exercice.lien| safe"></iframe>
   </div>
 </div>
-<div *ngFor="let exercice of exercices; index as i">
-  {{i + 1}}: {{exercice.couleur}} - {{exercice.slug}}
 </div>

@@ -1,0 +1,75 @@
+{
+    "5e": {
+        "Nombres_et_Calculs": {
+            "Calculs": {
+                "5C11": {
+                    "titre": "Traduire un enchaînement d’opérations à l’aide d’une expression avec des parenthèses",
+                    "rappelDuCoursHTML": "",
+                    "rappelDuCoursImage": "Vocabulaire-des-operations.png",
+                    "slugVideo": "fpqFXBis5nQ",
+                    "auteurVideo": "*Mme Maths*",
+                    "lienAuteurVideo": "https://www.youtube.com/channel/UCJm9gdUbZhS0m8xGPQySgzg",
+                    "exercices": [
+                        {
+                            "couleur": "Jaune",
+                            "slug": "5C11,s=1,s2=false,s3=true,s4=true,n=1"
+                        },
+                        {
+                            "couleur": "Vert Clair",
+                            "slug": "5C12-1,s=2,s2=false,s3=true,s4=true,n=1"
+                        },
+                        {
+                            "couleur": "Vert Foncé",
+                            "slug": "5C12-1,s=3,s2=false,s3=true,s4=true,n=1"
+                        }
+                    ]
+                },
+                "5C12": {
+                    "titre": "Effectuer un enchaînement d’opérations en respectant les priorités opératoires",
+                    "rappelDuCoursHTML": "Pour faire un calcul lorsqu'il y a plusieurs opérations différentes, on fait d'abord les multiplications et les divisions. <br> On dit que les multiplications et les divisions sont prioritaires.",
+                    "rappelDuCoursImage": "",
+                    "slugVideo": "OUMnDWhgf5w",
+                    "auteurVideo": "Khan Academy",
+                    "lienAuteurVideo": "http://www.khanacademy.org",
+                    "exercices": [
+                        {
+                            "couleur": "Jaune",
+                            "slug": "5C12,s=2,s2=false,s3=true,s4=true,n=1"
+                        },
+                        {
+                            "couleur": "Vert clair",
+                            "slug": "5C12,s=3,s2=false,s3=true,s4=true,n=1"
+                        },
+                        {
+                            "couleur": "Vert foncé",
+                            "slug": "5C12,s=4,s2=false,s3=true,s4=true,n=1"
+                        }
+                    ]
+                }
+            }
+        }
+    }, "4e": {
+        "Calculs": {
+            "Relatifs": {
+                "4C10": {
+                    "titre": "Effectuer des produits ou des quotients avec des nombres relatifs",
+                    "rappelDuCoursHTML": "<strong>MÉMÉ</strong>, c'est la <strong>+</strong> vieille : deux fois le <strong>MÊME</strong> signe, ça fait <strong>+</strong>",
+                    "rappelDuCoursImage": "",
+                    "slugVideo": "-RHuYaV5eSI?end=353",
+                    "auteurVideo": "Mathrix",
+                    "lienAuteurVideo": "https://www.youtube.com/channel/UCdH4RLzP9UIxV299clvj1rg",
+                    "exercices": [
+                        {
+                            "couleur": "Vert Clair",
+                            "slug": "4C10-3,s=10,s2=false,n=1,i=0&ex=4C10-4,s=true,n=1"
+                        },
+                        {
+                            "couleur": "Vert Foncé",
+                            "slug": "4C10-1,s=3,n=1,i=0&ex=4C10-2,s=4,n=1"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,8 @@
+<ul>
+    <li *ngFor="let reference of references; index as i">
+        <a routerLink="/{{references[i]}}" routerLinkActive="active">
+            {{references[i]}} : {{titres[i]}}<br>
+        </a>
+    </li>
+</ul>
+<!-- J'aimerais bien mettre des séparations quand on change de niveau ou de thème. *ngIf ? -->
