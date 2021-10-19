@@ -3,7 +3,7 @@
         "niveau": "5e",
         "themes": [
             {
-                "nom": "Nombres_et_Calculs",
+                "nom": "Nombres et Calculs",
                 "sous_themes": [
                     {
                         "nom": "Calculs",
@@ -50,6 +50,26 @@
                                     {
                                         "couleur": "Vert foncé",
                                         "slug": "5C12,s=4,s2=false,s3=true,s4=true,n=1"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "nom": "Nombres Relatifs",
+                        "objectifs": [
+                            {
+                                "reference": "5R10",
+                                "titre": "Utiliser la notion d’opposé",
+                                "rappelDuCoursHTML": "On dit que – 8 est <strong>l’opposé</strong> de + 8 et que + 8 est <strong>l’opposé</strong> de – 8,<br>ou encore que + 8 et – 8 sont <strong>opposés</strong>.<br>De la même façon -5 est <strong>l'opposé</strong> de +5 et +5 est <strong>l'opposé </strong>de -5 etc.",
+                                "rappelDuCoursImage": "",
+                                "slugVideo": "HKuJUkDbb_w?start=21",
+                                "auteurVideo": "Matich Fastich",
+                                "lienAuteurVideo": "https://www.youtube.com/channel/UCcPFyq0PJn0NHlreVBkyZsA",
+                                "exercices": [
+                                    {
+                                        "couleur": "Vert Foncé",
+                                        "slug": "5R10-0,s=1,n=1"
                                     }
                                 ]
                             }

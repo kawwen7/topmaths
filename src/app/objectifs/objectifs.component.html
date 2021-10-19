@@ -1,8 +1,9 @@
-<ul>
-    <li *ngFor="let lien of liens;">
-        <a routerLink="/{{lien.reference}}" routerLinkActive="active">
-            {{lien.reference}} : {{lien.titre}}<br>
-        </a>
-    </li>
-</ul>
+<span *ngFor="let ligne of lignes;">
+  <h1 *ngIf="ligne.niveau != null">{{ligne.niveau}}</h1>
+  <h2 *ngIf="ligne.theme != null">{{ligne.theme}}</h2>
+  <h3 *ngIf="ligne.sous_theme != null">{{ligne.sous_theme}}</h3>
+  <a *ngIf="ligne.reference != null" routerLink="/{{ligne.reference}}" routerLinkActive="active">
+    {{ligne.reference}} : {{ligne.titre}}<br>
+  </a>
+</span>
 <!-- J'aimerais bien mettre des séparations quand on change de niveau ou de thème. *ngIf ? -->
