@@ -17,7 +17,7 @@ interface Ligne {
 @Component({
   selector: 'app-objectifs',
   templateUrl: './objectifs.component.html',
-  styleUrls: ['./objectifs.component.css']
+  styleUrls: ['../../assets/css/mystyles.css']
 })
 export class ObjectifsComponent implements OnInit {
   lignes: Ligne[]

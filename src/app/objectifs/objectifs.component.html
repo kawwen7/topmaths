@@ -1,7 +1,7 @@
 <span *ngFor="let ligne of lignes;">
-  <h1 *ngIf="ligne.niveau != null">{{ligne.niveau}}</h1>
-  <h2 *ngIf="ligne.theme != null">{{ligne.theme}}</h2>
-  <h3 *ngIf="ligne.sous_theme != null">{{ligne.sous_theme}}</h3>
+  <p *ngIf="ligne.niveau != null" class="title is-3">{{ligne.niveau}}</p>
+  <p *ngIf="ligne.theme != null" class="title is-4">{{ligne.theme}}</p>
+  <p *ngIf="ligne.sous_theme != null" class="subtitle is-5">{{ligne.sous_theme}}</p>
   <a *ngIf="ligne.reference != null" routerLink="/{{ligne.reference}}" routerLinkActive="active">
     {{ligne.reference}} : {{ligne.titre}}<br>
   </a>
