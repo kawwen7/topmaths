@@ -16,22 +16,22 @@ export class ObjectifsComponent implements OnInit {
   constructor(public http: HttpClient) {
     this.liens = []
   }
-  
+
   ngOnInit(): void {
-      this.http.get('assets/data/objectifs.json').subscribe(
-        (data : any) => {
-          this.liens = []
-          for (const niveau of data) {
-            for (const theme of niveau.themes) {
-              for (const sousTheme of theme.sous_themes) {
-                for (const reference of sousTheme.objectifs) {
-                  this.liens.push(reference)
-                }
+    this.http.get('assets/data/objectifs.json').subscribe(
+      (data: any) => {
+        this.liens = []
+        for (const niveau of data) {
+          for (const theme of niveau.themes) {
+            for (const sousTheme of theme.sous_themes) {
+              for (const reference of sousTheme.objectifs) {
+                this.liens.push(reference)
               }
             }
           }
         }
-      )
+      }
+    )
   }
 
 }
