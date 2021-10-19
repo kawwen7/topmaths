@@ -1,7 +1,7 @@
 <ul>
-    <li *ngFor="let reference of references; index as i">
-        <a routerLink="/{{references[i]}}" routerLinkActive="active">
-            {{references[i]}} : {{titres[i]}}<br>
+    <li *ngFor="let lien of liens;">
+        <a routerLink="/{{lien.reference}}" routerLinkActive="active">
+            {{lien.reference}} : {{lien.titre}}<br>
         </a>
     </li>
 </ul>
