@@ -1,0 +1,52 @@
+<div class="container is-max-desktop" style="text-align:center">
+    <div class="box">
+        <h1 [innerHTML]="titre" class="title is-2"></h1>
+    </div>
+    <div class="box">
+        <h2 class="title is-3">Objectifs</h2>
+        <p> Cette séquence a {{objectifs.length}} objectifs :</p>
+        <ul>
+            <li *ngFor="let objectif of objectifs">
+                <a [routerLink]="['/objectif',objectif.reference]">{{objectif.reference}} : {{objectif.titre}}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="box">
+        <h2 class="title is-3">Calcul Mental</h2>
+        <div *ngFor="let calculMental of calculsMentaux; index as i">
+            <p>Dans cette séquence, le calcul mental porte sur {{calculMental.objectif}}</p>
+            <div><br></div>
+            <div *ngFor="let niveau of calculMental.niveaux; index as j">
+                <h3 class="title is-4" *ngIf="calculMental.niveaux.length > 1">Niveau {{j + 1}}</h3>
+                <p>{{niveau.commentaire}}</p>
+                <div class="image is-16by9">
+                    <iframe class="has-ratio" [src]="niveau.lien | safe" allowfullscreen="" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box">
+        <h2 class="title is-3">Questions Flash</h2>
+        <p>Dans cette séquence, une question flash porte sur l’un des objectifs ci-dessus et les
+            {{questionsFlash.length}} autres portent sur :</p>
+        <div><br></div>
+        <ul>
+            <li *ngFor="let questionFlash of questionsFlash; index as i"><a [href]="questionFlash.lien" target="_blank"
+                    rel="noopener noreferrer">{{questionFlash.objectif}}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="box">
+        <h2 class="title is-3">Évaluation</h2>
+        <a [href]="lienEval" target="_blank" rel="noopener noreferrer">S'entraîner pour l'évaluation</a>
+    </div>
+    <div class="box">
+        <h2 class="title is-3">Téléchargements</h2>
+        <ul>
+            <li><a *ngIf="lienCours != ''" [href]="lienCours" target="_blank" rel="noopener noreferrer">Télécharger le cours</a></li>
+            <li><a>Télécharger le résumé</a></li>
+            <li><a>Télécharger la mission</a></li>
+            <li><a>Télécharger le paquet Anki de la séquence</a></li>
+        </ul>
+    </div>
+</div>

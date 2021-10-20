@@ -7,6 +7,8 @@ import { ObjectifComponent } from './objectif/objectif.component';
 import { AccueilComponent } from './accueil/accueil.component';
 import { SafePipe } from './safe.pipe';
 import { ObjectifsComponent } from './objectifs/objectifs.component';
+import { SequencesComponent } from './sequences/sequences.component';
+import { SequenceComponent } from './sequence/sequence.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { ObjectifsComponent } from './objectifs/objectifs.component';
     ObjectifComponent,
     AccueilComponent,
     SafePipe,
-    ObjectifsComponent
+    ObjectifsComponent,
+    SequencesComponent,
+    SequenceComponent
   ],
   imports: [
     BrowserModule,

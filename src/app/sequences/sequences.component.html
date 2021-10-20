@@ -1,0 +1,21 @@
+<div class="tabs is-medium is-centered">
+    <ul class="tabs-menu">
+      <li [ngClass]="{'is-active': ongletActif == 'tout'}"><a [routerLink]="['/sequences/tout']">Tout afficher</a></li>
+      <li *ngFor="let ligne of lignes;" [ngClass]="{'is-active': ongletActif == ligne.niveau}">
+        <a *ngIf="ligne.niveau != null && ligne.reference == null"
+          [routerLink]="['/sequences', ligne.niveau]">{{ligne.niveau}} </a>
+      </li>
+    </ul>
+  </div>
+  <div class="container is-max-desktop">
+    <span *ngFor="let ligne of lignes; index as i">
+      <h1 *ngIf="ligne.niveau != null && ligne.reference == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau)"
+        class="title is-3" style="text-align:center; padding: 5px;">{{ligne.niveau}}</h1>
+      <p *ngIf="ligne.reference != null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau)"
+        style="text-align:center; padding: 5px;">
+        <a routerLink="/{{ligne.reference}}" routerLinkActive="active">
+          Séquence {{ligne.numero}} : {{ligne.titre}}<br>
+        </a>
+      </p>
+    </span>
+  </div>

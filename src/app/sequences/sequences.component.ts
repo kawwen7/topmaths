@@ -10,17 +10,16 @@ import { Router, ActivatedRoute, ParamMap, NavigationStart, Event as NavigationE
  */
 interface Ligne {
   niveau?: string;
-  theme?: string;
-  sousTheme?: string;
+  numero?: number;
   reference?: string;
   titre?: string
 }
 @Component({
-  selector: 'app-objectifs',
-  templateUrl: './objectifs.component.html',
+  selector: 'app-sequences',
+  templateUrl: './sequences.component.html',
   styleUrls: ['../../assets/css/mystyles.css']
 })
-export class ObjectifsComponent implements OnInit {
+export class SequencesComponent implements OnInit {
   lignes: Ligne[]
   filtre: Ligne
   event$: any
@@ -40,28 +39,23 @@ export class ObjectifsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.filtre.niveau = params.niveau
-      this.filtre.theme = params.theme
-      this.filtre.sousTheme = params.sousTheme
     })
-    this.http.get('assets/data/objectifs.json').subscribe(
+    this.http.get('assets/data/sequences.json').subscribe(
       (data: any) => {
         this.lignes = [] // va contenir toutes les lignes à afficher.
+        let numeroDeSequence : number
         for (const niveau of data) {
           this.lignes.push({ niveau: niveau.niveau })
-          for (const theme of niveau.themes) {
-            this.lignes.push({ niveau: niveau.niveau, theme: theme.nom })
-            for (const sousTheme of theme.sousThemes) {
-              this.lignes.push({ niveau: niveau.niveau, theme: theme.nom, sousTheme: sousTheme.nom })
-              for (const objectif of sousTheme.objectifs) {
-                this.lignes.push({niveau: niveau.niveau, theme: theme.nom, sousTheme: sousTheme.nom, reference: objectif.reference, titre: objectif.titre})
-              }
-            }
+          numeroDeSequence = 1
+          for (const sequence of niveau.sequences) {
+            this.lignes.push({ niveau: niveau.niveau, reference: sequence.reference, titre: sequence.titre, numero: numeroDeSequence })
+            numeroDeSequence ++
           }
         }
       }
     )
   }
-  
+
   ngOnDestroy() {
     this.event$.unsubscribe();
   }

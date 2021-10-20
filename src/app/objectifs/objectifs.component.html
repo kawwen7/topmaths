@@ -12,14 +12,14 @@
     <h1 *ngIf="ligne.niveau != null && ligne.theme == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau)"
       class="title is-3" style="text-align:center; padding: 5px;">{{ligne.niveau}}</h1>
     <h2
-      *ngIf="ligne.theme != null && ligne.sous_theme == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau) && (filtre.theme == null || filtre.theme == ligne.theme)"
+      *ngIf="ligne.theme != null && ligne.sousTheme == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau) && (filtre.theme == null || filtre.theme == ligne.theme)"
       class="title is-4" style="text-align:center; padding: 5px;">{{ligne.theme}}</h2>
     <h3
-      *ngIf="ligne.sous_theme != null && ligne.reference == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau) && (filtre.theme == null || filtre.theme == ligne.theme) && (filtre.sous_theme == null || filtre.sous_theme == ligne.sous_theme)"
-      class="subtitle is-5" style="text-align:center; padding: 20px;">{{ligne.sous_theme}}</h3>
-    <p *ngIf="ligne.reference != null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau) && (filtre.theme == null || filtre.theme == ligne.theme) && (filtre.sous_theme == null || filtre.sous_theme == ligne.sous_theme)"
+      *ngIf="ligne.sousTheme != null && ligne.reference == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau) && (filtre.theme == null || filtre.theme == ligne.theme) && (filtre.sousTheme == null || filtre.sousTheme == ligne.sousTheme)"
+      class="subtitle is-5" style="text-align:center; padding: 20px;">{{ligne.sousTheme}}</h3>
+    <p *ngIf="ligne.reference != null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau) && (filtre.theme == null || filtre.theme == ligne.theme) && (filtre.sousTheme == null || filtre.sousTheme == ligne.sousTheme)"
       style="text-align:center; padding: 5px;">
-      <a routerLink="/{{ligne.reference}}" routerLinkActive="active">
+      <a routerLink="/objectif/{{ligne.reference}}" routerLinkActive="active">
         {{ligne.reference}} : {{ligne.titre}}<br>
       </a>
     </p>

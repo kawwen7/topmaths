@@ -44,8 +44,8 @@ export class ObjectifComponent implements OnInit {
       // On cherche dans le json la bonne référence
       data.find((niveau: any) => {
         return niveau.themes.find((theme: any) => {
-          return theme.sous_themes.find((sous_theme: any) => {
-            return sous_theme.objectifs.find((objectif: any) => {
+          return theme.sousThemes.find((sousTheme: any) => {
+            return sousTheme.objectifs.find((objectif: any) => {
               // Une fois qu'on l'a trouvée, on modifie les attributs
               if (objectif.reference == this.reference) {
                 this.titre = `${objectif.reference} : ${objectif.titre}`
