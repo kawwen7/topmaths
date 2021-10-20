@@ -11,7 +11,7 @@ interface Exercice {
 @Component({
   selector: 'app-objectif',
   templateUrl: './objectif.component.html',
-  styleUrls: ['./objectif.component.css']
+  styleUrls: ['../../assets/css/mystyles.css']
 })
 export class ObjectifComponent implements OnInit {
   reference: string
@@ -37,9 +37,9 @@ export class ObjectifComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.reference = this.route.snapshot.params['ref'];
-    });
+    this.route.params.subscribe(params => {
+      this.reference = params.ref
+    })
     this.http.get('assets/data/objectifs.json').subscribe((data: any) => {
       // On cherche dans le json la bonne référence
       data.find((niveau: any) => {
