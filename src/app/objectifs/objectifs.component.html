@@ -1,9 +1,27 @@
-<span *ngFor="let ligne of lignes;">
-  <p *ngIf="ligne.niveau != null" class="title is-3">{{ligne.niveau}}</p>
-  <p *ngIf="ligne.theme != null" class="title is-4">{{ligne.theme}}</p>
-  <p *ngIf="ligne.sous_theme != null" class="subtitle is-5">{{ligne.sous_theme}}</p>
-  <a *ngIf="ligne.reference != null" routerLink="/{{ligne.reference}}" routerLinkActive="active">
-    {{ligne.reference}} : {{ligne.titre}}<br>
-  </a>
-</span>
-<!-- J'aimerais bien mettre des séparations quand on change de niveau ou de thème. *ngIf ? -->
+<div class="tabs is-medium is-centered">
+  <ul class="tabs-menu">
+    <li [ngClass]="{'is-active': ongletActif == 'tout'}"><a [routerLink]="['/objectifs/tout']">Tout afficher</a></li>
+    <li *ngFor="let ligne of lignes;" [ngClass]="{'is-active': ongletActif == ligne.niveau}">
+      <a *ngIf="ligne.niveau != null && ligne.theme == null"
+        [routerLink]="['/objectifs', ligne.niveau]">{{ligne.niveau}} </a>
+    </li>
+  </ul>
+</div>
+<div class="container is-max-desktop">
+  <span *ngFor="let ligne of lignes;">
+    <h1 *ngIf="ligne.niveau != null && ligne.theme == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau)"
+      class="title is-3" style="text-align:center; padding: 5px;">{{ligne.niveau}}</h1>
+    <h2
+      *ngIf="ligne.theme != null && ligne.sous_theme == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau) && (filtre.theme == null || filtre.theme == ligne.theme)"
+      class="title is-4" style="text-align:center; padding: 5px;">{{ligne.theme}}</h2>
+    <h3
+      *ngIf="ligne.sous_theme != null && ligne.reference == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau) && (filtre.theme == null || filtre.theme == ligne.theme) && (filtre.sous_theme == null || filtre.sous_theme == ligne.sous_theme)"
+      class="subtitle is-5" style="text-align:center; padding: 20px;">{{ligne.sous_theme}}</h3>
+    <p *ngIf="ligne.reference != null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau) && (filtre.theme == null || filtre.theme == ligne.theme) && (filtre.sous_theme == null || filtre.sous_theme == ligne.sous_theme)"
+      style="text-align:center; padding: 5px;">
+      <a routerLink="/{{ligne.reference}}" routerLinkActive="active">
+        {{ligne.reference}} : {{ligne.titre}}<br>
+      </a>
+    </p>
+  </span>
+</div>
