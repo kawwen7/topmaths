@@ -1,8 +1,10 @@
-<nav>
-  <ul>
-    <li><a routerLink="/accueil" routerLinkActive="active">Accueil</a></li>
-    <li><a routerLink="/objectifs" routerLinkActive="active">Liste des objectifs</a></li>
+<div class="tabs is-large is-centered" id="header-menu">
+  <ul class="tabs-menu">
+    <li [ngClass]="{'is-active': ongletActif == 'accueil'}"><a routerLink="/accueil"
+        routerLinkActive="active" class="tabs-menu-link">Accueil</a></li>
+    <li [ngClass]="{'is-active': ongletActif == 'objectifs'}"><a routerLink="/objectifs/tout"
+        routerLinkActive="active" class="tabs-menu-link">Liste des objectifs</a></li>
   </ul>
-</nav>
+</div>
 <!-- The routed views render in the <router-outlet>-->
 <router-outlet></router-outlet>
