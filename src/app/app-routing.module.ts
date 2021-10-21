@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'objectifs', redirectTo: 'objectifs/tout' },
   { path: 'sequences/:niveau', component: SequencesComponent },
   { path: 'sequences', redirectTo: 'sequences/tout' },
+  { path: '', component: AccueilComponent },
   { path: ':ref', component: SequenceComponent }
 ];
 

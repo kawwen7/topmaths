@@ -14,6 +14,9 @@ export class AppComponent implements OnDestroy {
     this.event$ = this.router.events.subscribe((event: NavigationEvent) => {
       if (event instanceof NavigationStart) {
         this.ongletActif = event.url.split('/')[1]
+        if (this.ongletActif == '') {
+          this.ongletActif = 'accueil'
+        }
       }
     });
   }
