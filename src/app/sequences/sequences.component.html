@@ -10,7 +10,7 @@
   <div class="container is-max-desktop">
     <span *ngFor="let ligne of lignes; index as i">
       <h1 *ngIf="ligne.niveau != null && ligne.reference == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau)"
-        class="title is-3" style="text-align:center; padding: 5px;">{{ligne.niveau}}</h1>
+        class="title is-3" style="text-align:center; padding: 8px;">{{ligne.niveau}}</h1>
       <p *ngIf="ligne.reference != null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau)"
         style="text-align:center; padding: 5px;">
         <a routerLink="/{{ligne.reference}}" routerLinkActive="active">
