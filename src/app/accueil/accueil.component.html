@@ -1,5 +1,17 @@
-<div class="container is-max-desktop">
-<div class="box">
-    <button class="button is-danger">Button</button>
+
+<div class="columns is-8">
+  <div class="column" style="text-align: right;">
+    <a [routerLink]="['/objectifs/tout']">
+    <button class="button is-large is-info is-outlined" style="padding: 50px;">
+      <h1 style="font-size: xx-large;">Objectifs</h1>
+    </button>
+  </a>
+  </div>
+  <div class="column" style="text-align: left;">
+    <a [routerLink]="['/sequences/tout']">
+    <button class="button is-large is-link is-outlined" style="padding: 50px;">
+      <h1 style="font-size: xx-large;">Séquences</h1>
+    </button>
+  </a>
   </div>
 </div>
