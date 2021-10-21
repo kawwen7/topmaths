@@ -1,27 +1,11 @@
-# Topmaths
+# topmaths.fr
+Site de Guillaume Valmont, professeur de mathématiques en collège, lui permettant de partager avec ses élèves ses contenus de cours ainsi que des liens vers :
+- des vidéos d'explication sur YouTube,
+- des exercices générés par le formidable [MathAléa](https://coopmaths.fr/mathalea.html?),
+- des exercices de calcul mental générés par le formidable [MathsMentales](https://mathsmentales.net/).
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.10.
+Le but étant, à terme, de rendre disponible l'ensemble de ces ressources pour chaque attendu de fin d'année.
 
-## Development server
+Le site est basé sur [Angular 12](https://angular.io/) et utilise [Bulma](https://bulma.io/) pour son apparence.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Le code source est sous licence [AGPL 3.0](https://www.gnu.org/licenses/agpl-3.0.html) tandis que le contenu du site est sous licence [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.fr)
