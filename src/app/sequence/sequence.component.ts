@@ -97,18 +97,16 @@ export class SequenceComponent implements OnInit {
                     }
                   }
                 }
+                // On crée le lien pour s'entraîner pour l'évaluation
+                this.lienEval = 'https://coopmaths.fr/mathalea.html?'
+                for (const thisObjectif of this.objectifs) {
+                  for (let j = 0; j < thisObjectif.slugs.length; j++) {
+                    this.lienEval = this.lienEval.concat('ex=',thisObjectif.slugs[j],'&')
+                  }
+                }
+                this.lienEval = this.lienEval.concat('v=e')
               }
             )
-            // On crée le lien pour s'entraîner pour l'évaluation
-            this.lienEval = 'https://coopmaths.fr/mathalea.html?'
-            for (const objectif of this.objectifs) {
-              console.log(objectif.slugs)
-              console.log(objectif.slugs.length)
-              for (let j = 0; j < objectif.slugs.length; j++) {
-                this.lienEval = this.lienEval.concat(this.lienEval,'ex=',objectif.slugs[j],'&')
-              }
-            }
-            this.lienEval = this.lienEval.concat('v=e')
             this.calculsMentaux = [] // Au cas où l'attribut ne serait pas réinitialisé lors d'un changement de référence
             for (let i = 0; i < sequence.calculsMentaux.length; i++) {
               let niveauxTemp = []

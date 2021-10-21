@@ -31,8 +31,9 @@
             {{questionsFlash.length}} autres portent sur :</p>
         <div><br></div>
         <ul>
-            <li *ngFor="let questionFlash of questionsFlash; index as i"><a [href]="questionFlash.lien" target="_blank"
-                    rel="noopener noreferrer">{{questionFlash.objectif}}</a>
+            <li *ngFor="let questionFlash of questionsFlash; index as i">
+                <a *ngIf="questionFlash.lien != ''; else questionFlashSansLien" [href]="questionFlash.lien" target="_blank" rel="noopener noreferrer">{{questionFlash.objectif}}</a>
+                <ng-template #questionFlashSansLien>{{questionFlash.objectif}}</ng-template>
             </li>
         </ul>
     </div>
