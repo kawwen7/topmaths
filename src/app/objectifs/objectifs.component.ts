@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap, NavigationStart, Event as NavigationEvent } from '@angular/router';
+import { Router, ActivatedRoute, NavigationStart, Event as NavigationEvent } from '@angular/router';
 
 /**
  * Type d'objet de toutes les lignes qui seront affichées
@@ -30,6 +30,22 @@ export class ObjectifsComponent implements OnInit {
     this.lignes = []
     this.filtre = {}
     this.ongletActif = 'tout'
+    this.recupereOngletActif()
+  }
+
+  ngOnInit(): void {
+    this.recupereParametresUrl()
+    this.recupereContenuLignesAAfficher()
+  }
+  
+  ngOnDestroy() {
+    this.event$.unsubscribe();
+  }
+
+  /**
+   * Récupère l'onglet actif à partir de l'url pour le mettre en surbrillance
+   */
+  recupereOngletActif(){
     this.event$ = this.router.events.subscribe((event: NavigationEvent) => {
       if (event instanceof NavigationStart) {
         this.ongletActif = event.url.split('/')[2]
@@ -37,12 +53,21 @@ export class ObjectifsComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  /**
+   * Récupère le niveau, le thème et le sous-thème à partir de l'url afin de pouvoir éventuellement les filtrer
+   */
+  recupereParametresUrl(){
     this.route.params.subscribe(params => {
       this.filtre.niveau = params.niveau
       this.filtre.theme = params.theme
       this.filtre.sousTheme = params.sousTheme
     })
+  }
+
+  /**
+   * Récupère les niveaux, thèmes, sous-thèmes et références de objectifs.json et les ajoute à this.lignes pour pouvoir les afficher
+   */
+  recupereContenuLignesAAfficher(){
     this.http.get('assets/data/objectifs.json').subscribe(
       (data: any) => {
         this.lignes = [] // va contenir toutes les lignes à afficher.
@@ -61,9 +86,4 @@ export class ObjectifsComponent implements OnInit {
       }
     )
   }
-  
-  ngOnDestroy() {
-    this.event$.unsubscribe();
-  }
-
 }

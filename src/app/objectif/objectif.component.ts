@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 interface Exercice {
   couleur: string;
@@ -41,39 +41,34 @@ export class ObjectifComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.recupereReference()
+    this.modificationDesAttributs()
+  }
+
+  /**
+   * Récupère la référence de l'objectif à partir de l'url
+   */
+  recupereReference() {
     this.route.params.subscribe(params => {
       this.reference = params.ref
     })
+  }
+
+  /**
+   * Ouvre objectifs.json,
+   * cherche l'objectif qui a pour référence this.reference,
+   * une fois trouvé, lance this.recupereAttributsObjectif(objectif)
+   */
+  modificationDesAttributs() {
+    // On cherche dans le json la bonne référence
     this.http.get('assets/data/objectifs.json').subscribe((data: any) => {
-      // On cherche dans le json la bonne référence
       data.find((niveau: any) => {
         return niveau.themes.find((theme: any) => {
           return theme.sousThemes.find((sousTheme: any) => {
             return sousTheme.objectifs.find((objectif: any) => {
               // Une fois qu'on l'a trouvée, on modifie les attributs
               if (objectif.reference == this.reference) {
-                this.titre = `${objectif.reference} : ${objectif.titre}`
-                this.rappelDuCoursHTML = objectif.rappelDuCoursHTML
-                if (objectif.rappelDuCoursImage == '') {
-                  this.rappelDuCoursImage = '' // Au cas où l'attribut ne serait pas réinitialisé lors d'un changement de référence
-                } else {
-                  this.rappelDuCoursImage = '../assets/img/' + objectif.rappelDuCoursImage
-                }
-                this.slugVideo = objectif.slugVideo
-                this.VideoSrc = "https://www.youtube.com/embed/" + this.slugVideo
-                this.auteurVideo = objectif.auteurVideo
-                this.lienAuteurVideo = objectif.lienAuteurVideo
-                this.exercices = [] // Au cas où l'attribut ne serait pas réinitialisé lors d'un changement de référence
-                // Le nombre d'exercices varie selon la référence, on a donc quelque chose de dynamique
-                for (let i = 0; i < objectif.exercices.length; i++) {
-                  if (objectif.exercices[i].slug != '') {
-                    this.exercices.push({
-                      couleur: objectif.exercices[i].couleur,
-                      slug: objectif.exercices[i].slug,
-                      lien: 'https://coopmaths.fr/exercice.html?ex=' + objectif.exercices[i].slug + 'i=0&v=e'
-                    })
-                  }
-                }
+                this.recupereAttributsObjectif(objectif)
               }
               return objectif.reference == this.reference;
             })
@@ -81,9 +76,48 @@ export class ObjectifComponent implements OnInit {
         })
       })
     })
+    // On termine par créer les liens de téléchargement si les fichiers existent
     this.lienFiche = this.creerLienTelechargement('fiche')
     this.lienAnki = this.creerLienTelechargement('anki')
   }
+
+  /**
+   * Copie tous les objectif.attribut dans les this.attribut en les travaillant un peu éventuellement
+   * @param objectif 
+   */
+  recupereAttributsObjectif(objectif: any) {
+    this.titre = `${objectif.reference} : ${objectif.titre}`
+    this.rappelDuCoursHTML = objectif.rappelDuCoursHTML
+    if (objectif.rappelDuCoursImage == '') {
+      this.rappelDuCoursImage = '' // Au cas où l'attribut ne serait pas réinitialisé lors d'un changement de référence
+    } else {
+      this.rappelDuCoursImage = '../assets/img/' + objectif.rappelDuCoursImage
+    }
+    this.slugVideo = objectif.slugVideo
+    this.VideoSrc = "https://www.youtube.com/embed/" + this.slugVideo
+    this.auteurVideo = objectif.auteurVideo
+    this.lienAuteurVideo = objectif.lienAuteurVideo
+    this.exercices = [] // Au cas où l'attribut ne serait pas réinitialisé lors d'un changement de référence
+    // Le nombre d'exercices varie selon la référence, on a donc quelque chose de dynamique
+    for (const exercice of objectif.exercices) {
+      if (exercice.slug != '') {
+        this.exercices.push({
+          couleur: exercice.couleur,
+          slug: exercice.slug,
+          lien: 'https://coopmaths.fr/exercice.html?ex=' + exercice.slug + 'i=0&v=e'
+        })
+      }
+    }
+  }
+
+  /**
+   * Vérifie si le fichier assets/type/niveau/Type_reference.extension existe et renvoie le lien si c'est le cas
+   * @param type peut être fiche ou anki
+   * le niveau peut être 6e, 5e, 4e ou 3e
+   * la référence correspond à this.reference
+   * l'extension est apkg si le type est anki, pdf sinon
+   * @returns lien de téléchargement du fichier s'il existe, une chaîne vide sinon
+   */
   creerLienTelechargement(type: string) {
     let extension: string
     if (type == 'anki') {
@@ -97,6 +131,12 @@ export class ObjectifComponent implements OnInit {
     }
     return lien
   }
+
+  /**
+   * Vérifie si un fichier existe ou pas
+   * @param urlToFile url du fichier
+   * @returns true s'il existe, false sinon
+   */
   doesFileExist(urlToFile: string) {
     var xhr = new XMLHttpRequest();
     xhr.open('HEAD', urlToFile, false);

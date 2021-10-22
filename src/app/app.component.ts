@@ -11,6 +11,16 @@ export class AppComponent implements OnDestroy {
   event$: any
   constructor(private router: Router) {
     this.ongletActif = 'accueil'
+    this.recupereOngletActif()
+  }
+  ngOnDestroy() {
+    this.event$.unsubscribe();
+  }
+
+  /**
+   * Récupère l'onglet actif à partir de l'url pour le mettre en surbrillance
+   */
+  recupereOngletActif() {
     this.event$ = this.router.events.subscribe((event: NavigationEvent) => {
       if (event instanceof NavigationStart) {
         this.ongletActif = event.url.split('/')[1]
@@ -19,8 +29,5 @@ export class AppComponent implements OnDestroy {
         }
       }
     });
-  }
-  ngOnDestroy() {
-    this.event$.unsubscribe();
   }
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap, NavigationStart, Event as NavigationEvent } from '@angular/router';
+import { Router, ActivatedRoute, NavigationStart, Event as NavigationEvent } from '@angular/router';
 
 /**
  * Type d'objet de toutes les lignes qui seront affichées
@@ -29,6 +29,22 @@ export class SequencesComponent implements OnInit {
     this.lignes = []
     this.filtre = {}
     this.ongletActif = 'tout'
+    this.recupereOngletActif()
+  }
+
+  ngOnInit(): void {
+    this.recupereParametresUrl()
+    this.recupereContenuLignesAAfficher()
+  }
+
+  ngOnDestroy() {
+    this.event$.unsubscribe();
+  }
+
+  /**
+   * Récupère l'onglet actif à partir de l'url pour le mettre en surbrillance
+   */
+  recupereOngletActif() {
     this.event$ = this.router.events.subscribe((event: NavigationEvent) => {
       if (event instanceof NavigationStart) {
         this.ongletActif = event.url.split('/')[2]
@@ -36,28 +52,32 @@ export class SequencesComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  /**
+   * Récupère le niveau à partir de l'url afin de pouvoir éventuellement le filtrer
+   */
+  recupereParametresUrl() {
     this.route.params.subscribe(params => {
       this.filtre.niveau = params.niveau
     })
+  }
+
+  /**
+   * Récupère les niveaux, thèmes, sous-thèmes et références de objectifs.json et les ajoute à this.lignes pour pouvoir les afficher
+   */
+  recupereContenuLignesAAfficher() {
     this.http.get('assets/data/sequences.json').subscribe(
       (data: any) => {
         this.lignes = [] // va contenir toutes les lignes à afficher.
-        let numeroDeSequence : number
+        let numeroDeSequence: number
         for (const niveau of data) {
           this.lignes.push({ niveau: niveau.niveau })
           numeroDeSequence = 1
           for (const sequence of niveau.sequences) {
             this.lignes.push({ niveau: niveau.niveau, reference: sequence.reference, titre: sequence.titre, numero: numeroDeSequence })
-            numeroDeSequence ++
+            numeroDeSequence++
           }
         }
       }
     )
   }
-
-  ngOnDestroy() {
-    this.event$.unsubscribe();
-  }
-
 }

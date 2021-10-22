@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 interface Objectif {
   reference: string
@@ -58,90 +56,154 @@ export class SequenceComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.recupereReference()
+    this.modificationDesAttributs()
+  }
+
+  /**
+   * Récupère la référence de l'objectif à partir de l'url
+   */
+  recupereReference() {
     this.route.params.subscribe(params => {
       this.reference = params.ref
     })
+  }
+
+  /**
+   * Ouvre sequences.json,
+   * cherche la séquence qui a pour référence this.reference,
+   * une fois trouvé, lance this.recupereAttributsSequence(sequence)
+   */
+  modificationDesAttributs() {
     this.http.get('assets/data/sequences.json').subscribe((data: any) => {
-      // On cherche dans le json des séquences la bonne référence
       data.find((niveau: any) => {
         return niveau.sequences.find((sequence: any) => {
-          // Une fois qu'on l'a trouvée, on modifie les attributs
           if (sequence.reference == this.reference) {
-            this.numero = niveau.sequences.findIndex((sequence: any) => { return sequence.reference == this.reference; }) + 1
-            this.titre = `Séquence ${this.numero} :<br>${sequence.titre}`
-            this.objectifs = [] // Au cas où l'attribut ne serait pas réinitialisé lors d'un changement de référence
-            for (const objectif of sequence.objectifs) {
-              if (objectif.reference != '') {
-                this.objectifs.push({
-                  reference: objectif.reference,
-                  slugs: []
-                })
-              }
-            }
-            // On cherche dans le json des objectifs les différents objectifs pour récupérer leur titre (pour l'afficher) ainsi que leurs slugs (pour s'entraîner pour l'évaluation)
-            this.http.get('assets/data/objectifs.json').subscribe(
-              (data: any) => {
-                for (const niveau of data) {
-                  for (const theme of niveau.themes) {
-                    for (const sousTheme of theme.sousThemes) {
-                      for (const JSONobjectif of sousTheme.objectifs) {
-                        for (const thisObjectif of this.objectifs) {
-                          if (thisObjectif.reference == JSONobjectif.reference) { // On a trouvé la bonne référence
-                            // On complète le titre et les slugs des exercices
-                            thisObjectif.titre = JSONobjectif.titre
-                            for (const exercice of JSONobjectif.exercices) {
-                              thisObjectif.slugs.push(exercice.slug)
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-                // On crée le lien pour s'entraîner pour l'évaluation
-                this.lienEval = 'https://coopmaths.fr/mathalea.html?'
-                for (const thisObjectif of this.objectifs) {
-                  for (const slug of thisObjectif.slugs) {
-                    this.lienEval = this.lienEval.concat('ex=', slug, '&')
-                  }
-                }
-                this.lienEval = this.lienEval.concat('v=e')
-              }
-            )
-            this.calculsMentaux = [] // Au cas où l'attribut ne serait pas réinitialisé lors d'un changement de référence
-            for (const calculMental of sequence.calculsMentaux) {
-              let niveauxTemp = []
-              for (const niveau of calculMental.niveaux) {
-                niveauxTemp.push({
-                  commentaire: niveau.commentaire,
-                  lien: niveau.lien
-                })
-              }
-              this.calculsMentaux.push({
-                objectif: calculMental.objectif,
-                niveaux: niveauxTemp
-              }
-              )
-            }
-            this.questionsFlash = [] // Au cas où l'attribut ne serait pas réinitialisé lors d'un changement de référence
-            for (const questionFlash of sequence.questionsFlash) {
-              if (questionFlash.objectif != '') {
-                this.questionsFlash.push({
-                  objectif: questionFlash.objectif,
-                  lien: questionFlash.lien
-                })
-              }
-            }
-            this.lienCours = this.creerLienTelechargement('cours')
-            this.lienResume = this.creerLienTelechargement('resume')
-            this.lienMission = this.creerLienTelechargement('mission')
-            this.lienAnki = this.creerLienTelechargement('anki')
+            this.recupereAttributsSequence(niveau, sequence)
           }
           return sequence.reference == this.reference;
         })
       })
     })
   }
+
+  /**
+   * Copie tous les sequence.attribut dans les this.attribut après les avoir retravaillés
+   * @param niveau 
+   * @param sequence 
+   */
+  recupereAttributsSequence(niveau: any, sequence: any) {
+    this.numero = niveau.sequences.findIndex((sequence: any) => { return sequence.reference == this.reference; }) + 1
+    this.titre = `Séquence ${this.numero} :<br>${sequence.titre}`
+    this.recupereObjectifsSequence(sequence)
+    this.recupereDetailsObjectifs()
+    this.recupereCalculsMentaux(sequence)
+    this.recupereQuestionsFlash(sequence)
+    this.lienCours = this.creerLienTelechargement('cours')
+    this.lienResume = this.creerLienTelechargement('resume')
+    this.lienMission = this.creerLienTelechargement('mission')
+    this.lienAnki = this.creerLienTelechargement('anki')
+  }
+
+  /**
+   * Récupère les références des objectifs de la séquence,
+   * les push à this.objectifs
+   * @param sequence 
+   */
+  recupereObjectifsSequence(sequence: any) {
+    this.objectifs = []
+    for (const objectif of sequence.objectifs) {
+      if (objectif.reference != '') {
+        this.objectifs.push({
+          reference: objectif.reference,
+          slugs: []
+        })
+      }
+    }
+  }
+  /**
+   * Ouvre le json des objectifs,
+   * cherche les différents objectifs pour récupérer leur titre (pour l'afficher) ainsi que leurs slugs (pour s'entraîner pour l'évaluation),
+   * crée le lien pour s'entraîner pour l'évaluation.
+   * Modifie les this.objectifs.titre, les this.objectifs.slugs et le this.lienEval
+   */
+  recupereDetailsObjectifs() {
+    this.http.get('assets/data/objectifs.json').subscribe(
+      (data: any) => {
+        for (const niveau of data) {
+          for (const theme of niveau.themes) {
+            for (const sousTheme of theme.sousThemes) {
+              for (const JSONobjectif of sousTheme.objectifs) {
+                for (const thisObjectif of this.objectifs) {
+                  if (thisObjectif.reference == JSONobjectif.reference) { // On a trouvé la bonne référence
+                    // On complète le titre et les slugs des exercices
+                    thisObjectif.titre = JSONobjectif.titre
+                    for (const exercice of JSONobjectif.exercices) {
+                      thisObjectif.slugs.push(exercice.slug)
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        // On crée le lien pour s'entraîner pour l'évaluation
+        this.lienEval = 'https://coopmaths.fr/mathalea.html?'
+        for (const thisObjectif of this.objectifs) {
+          for (const slug of thisObjectif.slugs) {
+            this.lienEval = this.lienEval.concat('ex=', slug, '&')
+          }
+        }
+        this.lienEval = this.lienEval.concat('v=e')
+      }
+    )
+  }
+
+  /**
+   * Récupère les calculs mentaux de la séquence,
+   * les push à this.calculsMentaux
+   * @param sequence 
+   */
+  recupereCalculsMentaux(sequence: any) {
+    this.calculsMentaux = []
+    for (const calculMental of sequence.calculsMentaux) {
+      let niveauxTemp = []
+      for (const niveau of calculMental.niveaux) {
+        niveauxTemp.push({
+          commentaire: niveau.commentaire,
+          lien: niveau.lien
+        })
+      }
+      this.calculsMentaux.push({
+        objectif: calculMental.objectif,
+        niveaux: niveauxTemp
+      }
+      )
+    }
+  }
+
+  /**
+   * Récupère la liste des questions flash de la séquence,
+   * les push à this.questionsFlash
+   * @param sequence 
+   */
+  recupereQuestionsFlash(sequence: any) {
+    this.questionsFlash = [] // Au cas où l'attribut ne serait pas réinitialisé lors d'un changement de référence
+    for (const questionFlash of sequence.questionsFlash) {
+      if (questionFlash.objectif != '') {
+        this.questionsFlash.push({
+          objectif: questionFlash.objectif,
+          lien: questionFlash.lien
+        })
+      }
+    }
+  }
+
+  /**
+   * Donne l'écriture en lettres d'un nombre
+   * @param nombre 
+   * @returns string
+   */
   nombreEnLettres(nombre: number) {
     switch (nombre) {
       case 1:
@@ -166,6 +228,15 @@ export class SequenceComponent implements OnInit {
         return '?'
     }
   }
+
+  /**
+   * Vérifie si le fichier assets/type/niveau/Type_reference.extension existe et renvoie le lien si c'est le cas
+   * @param type peut être cours, resume, mission ou anki
+   * le niveau peut être 6e, 5e, 4e ou 3e
+   * la référence correspond à this.reference
+   * l'extension est apkg si le type est anki, pdf sinon
+   * @returns lien de téléchargement du fichier s'il existe, une chaîne vide sinon
+   */
   creerLienTelechargement(type: string) {
     let extension: string
     if (type == 'anki') {
@@ -179,6 +250,12 @@ export class SequenceComponent implements OnInit {
     }
     return lien
   }
+
+  /**
+   * Vérifie si un fichier existe ou pas
+   * @param urlToFile url du fichier
+   * @returns true s'il existe, false sinon
+   */
   doesFileExist(urlToFile: string) {
     var xhr = new XMLHttpRequest();
     xhr.open('HEAD', urlToFile, false);
