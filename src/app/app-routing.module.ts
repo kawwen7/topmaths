@@ -5,6 +5,7 @@ import { ObjectifComponent } from './objectif/objectif.component';
 import { ObjectifsComponent } from './objectifs/objectifs.component';
 import { SequencesComponent } from './sequences/sequences.component';
 import { SequenceComponent } from './sequence/sequence.component';
+import { JeuxComponent } from './jeux/jeux.component';
 
 const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'objectifs', redirectTo: 'objectifs/tout' },
   { path: 'sequences/:niveau', component: SequencesComponent },
   { path: 'sequences', redirectTo: 'sequences/tout' },
+  { path: 'jeux', component: JeuxComponent },
   { path: '', component: AccueilComponent },
   { path: ':ref', component: SequenceComponent }
 ];

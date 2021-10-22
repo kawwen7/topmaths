@@ -7,12 +7,15 @@
         class="tabs-menu-link">Objectifs</a></li>
     <li [ngClass]="{'is-active': ongletActif == 'sequences'}"><a routerLink="/sequences/tout" routerLinkActive="active"
         class="tabs-menu-link">Séquences</a></li>
+    <li [ngClass]="{'is-active': ongletActif == 'jeux'}"><a routerLink="/jeux" routerLinkActive="active"
+        class="tabs-menu-link">Jeux</a></li>
   </ul>
 </div>
 <!-- Affichage principal -->
 <router-outlet></router-outlet>
 <!-- Footer -->
-<footer style="position: absolute; left: 0; bottom: 0; height: 40px; width: 100%; text-align: center;">
+<div><br><br><br></div>
+<footer class="footer">
   <div class="content has-text-centered">
     <p>
       <strong>topmaths.fr</strong> © 2021 de <a href="https://github.com/gvalmont/" target="_blank" rel="noopener noreferrer">Guillaume Valmont</a>.

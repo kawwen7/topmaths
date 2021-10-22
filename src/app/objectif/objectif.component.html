@@ -10,7 +10,7 @@
   <div class="box">
     <h2 class="title is-3">Vidéo d'explication</h2>
     <div class="image is-16by9">
-      <iframe class="has-ratio" [src]="VideoSrc | safe" allowfullscreen="" frameborder="0"></iframe>
+      <iframe class="has-ratio" [src]="VideoSrc | safe"></iframe>
     </div>
     <p><u>Vidéo de <a [href]="lienAuteurVideo" target="_blank" rel="noopener noreferrer">{{ auteurVideo }}</a></u></p>
   </div>
@@ -19,7 +19,7 @@
     <div class="box">
       <h3 class="title is-4">Niveau {{ i + 1 }} - {{ exercice.couleur }}</h3>
       <div class="image is-16by9">
-        <iframe class="has-ratio" [src]="exercice.lien| safe" frameborder="1"></iframe>
+        <iframe class="has-ratio" [src]="exercice.lien| safe"></iframe>
       </div>
     </div>
     <div><br></div>

@@ -9,6 +9,7 @@ import { SafePipe } from './safe.pipe';
 import { ObjectifsComponent } from './objectifs/objectifs.component';
 import { SequencesComponent } from './sequences/sequences.component';
 import { SequenceComponent } from './sequence/sequence.component';
+import { JeuxComponent } from './jeux/jeux.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SequenceComponent } from './sequence/sequence.component';
     SafePipe,
     ObjectifsComponent,
     SequencesComponent,
-    SequenceComponent
+    SequenceComponent,
+    JeuxComponent
   ],
   imports: [
     BrowserModule,

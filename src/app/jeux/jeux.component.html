@@ -1,0 +1,37 @@
+<!-- Vignettes de tous les jeux -->
+<div class="columns is-centered">
+  <div class="column is-narrow" *ngFor="let projet of projets">
+    <div class="card" style="width: 300px;">
+      <header class="card-header">
+        <p class="card-header-title is-centered">
+          {{ projet.title }}
+        </p>
+      </header>
+      <div class="card-image">
+        <div class="image is-4by3">
+          <iframe class="has-ratio" [src]="'https://scratch.mit.edu/projects/' + projet.id + '/embed' | safe"
+            allowfullscreen=""></iframe>
+        </div>
+      </div>
+      <footer class="card-footer">
+        <span class="card-footer-item">{{ projet.description }}</span>
+        <span class="icon is-large">
+          <i class="fas fa-2x fa-expand" (click)="ouvrirModal(projet.id)"></i>
+        </span>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<!-- Modale avec le jeu en plein écran -->
+<div id="myModal" class="modal">
+  <div class="modal-background" (click)="fermerModal()"></div>
+  <div class="modal-content" [style]="determinerLargeurJeu()">
+    <div *ngIf="determinerLargeurJeu() == 'width: 100%;'"><br><br><br></div>
+    <!--Si mode portrait, on descend un peu pour que la croix ne soit pas sur le logo Scratch-->
+    <div class="image is-4by3">
+      <iframe class="has-ratio" [src]="srcModal | safe" allowfullscreen=""></iframe>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close" (click)="fermerModal()"></button>
+</div>
