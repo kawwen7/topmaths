@@ -4,12 +4,12 @@
     </div>
     <div class="box">
         <h2 class="title is-3">Objectifs</h2>
-        <p> Cette séquence a {{objectifs.length}} objectifs :</p>
-        <ul>
-            <li *ngFor="let objectif of objectifs">
+        <p> Cette séquence a {{nombreEnLettres(objectifs.length)}} objectifs :</p>
+        <div style="padding: 5px;">
+            <div *ngFor="let objectif of objectifs" style="padding: 5px;">
                 <a [routerLink]="['/objectif',objectif.reference]">{{objectif.reference}} : {{objectif.titre}}</a>
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
     <div class="box">
         <h2 class="title is-3">Calcul Mental</h2>
@@ -30,12 +30,12 @@
         <p>Dans cette séquence, une question flash porte sur l’un des objectifs ci-dessus et les
             {{questionsFlash.length}} autres portent sur :</p>
         <div><br></div>
-        <ul>
-            <li *ngFor="let questionFlash of questionsFlash; index as i">
+        <div style="padding: 5px;">
+            <div style="padding: 5px;" *ngFor="let questionFlash of questionsFlash; index as i">
                 <a *ngIf="questionFlash.lien != ''; else questionFlashSansLien" [href]="questionFlash.lien" target="_blank" rel="noopener noreferrer">{{questionFlash.objectif}}</a>
                 <ng-template #questionFlashSansLien>{{questionFlash.objectif}}</ng-template>
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
     <div class="box">
         <h2 class="title is-3">Évaluation</h2>
@@ -43,11 +43,11 @@
     </div>
     <div class="box">
         <h2 class="title is-3">Téléchargements</h2>
-        <ul>
-            <li><a *ngIf="lienCours != ''" [href]="lienCours" target="_blank" rel="noopener noreferrer">Télécharger le cours</a></li>
-            <li><a>Télécharger le résumé</a></li>
-            <li><a>Télécharger la mission</a></li>
-            <li><a>Télécharger le paquet Anki de la séquence</a></li>
-        </ul>
+        <div style="padding: 5px;">
+            <div style="padding: 5px;"><a *ngIf="lienCours != ''" [href]="lienCours">Télécharger le cours</a></div>
+            <div style="padding: 5px;"><a *ngIf="lienResume != ''" [href]="lienResume">Télécharger le résumé</a></div>
+            <div style="padding: 5px;"><a *ngIf="lienMission != ''" [href]="lienMission">Télécharger la mission</a></div>
+            <div style="padding: 5px;"><a *ngIf="lienAnki != ''" [href]="lienAnki">Télécharger le paquet Anki de la séquence</a></div>
+        </div>
     </div>
 </div>

@@ -1,29 +1,34 @@
 <div class="container is-max-desktop" style="text-align:center">
   <div class="box">
-  <h1 class="title is-1">{{ titre }}</h1>
+    <h1 class="title is-2">{{ titre }}</h1>
   </div>
   <div class="box">
-  <h2 class="title is-2">Rappel du cours</h2>
-  <p><img *ngIf="rappelDuCoursImage != ''" [src]="rappelDuCoursImage" /></p>
-  <p [innerHTML]="rappelDuCoursHTML"></p>
+    <h2 class="title is-3">Rappel du cours</h2>
+    <p><img *ngIf="rappelDuCoursImage != ''" [src]="rappelDuCoursImage" /></p>
+    <p [innerHTML]="rappelDuCoursHTML"></p>
   </div>
   <div class="box">
-  <h2 class="title is-2">Vidéo d'explication</h2>
-  <div class="image is-16by9">
-    <iframe class="has-ratio" [src]="VideoSrc | safe" allowfullscreen="" frameborder="0"></iframe>
-  </div>
-  <p><u>Vidéo de <a [href]="lienAuteurVideo" target="_blank"
-        rel="noopener noreferrer">{{ auteurVideo }}</a></u></p>
-  </div>
-  <h2 class="title is-2">S'entraîner</h2>
-  <div *ngFor="let exercice of exercices; index as i">
-  <div class="box">
-    <h3 class="title is-3">Niveau {{ i + 1 }} - {{ exercice.couleur }}</h3>
+    <h2 class="title is-3">Vidéo d'explication</h2>
     <div class="image is-16by9">
-      <iframe class="has-ratio" [src]="exercice.lien| safe" frameborder="1"></iframe>
+      <iframe class="has-ratio" [src]="VideoSrc | safe" allowfullscreen="" frameborder="0"></iframe>
     </div>
+    <p><u>Vidéo de <a [href]="lienAuteurVideo" target="_blank" rel="noopener noreferrer">{{ auteurVideo }}</a></u></p>
+  </div>
+  <h2 class="title is-3">S'entraîner</h2>
+  <div *ngFor="let exercice of exercices; index as i">
+    <div class="box">
+      <h3 class="title is-4">Niveau {{ i + 1 }} - {{ exercice.couleur }}</h3>
+      <div class="image is-16by9">
+        <iframe class="has-ratio" [src]="exercice.lien| safe" frameborder="1"></iframe>
+      </div>
     </div>
     <div><br></div>
   </div>
-  <div><br></div>
+  <div class="box">
+    <h2 class="title is-3">Téléchargements</h2>
+    <div style="padding: 5px;">
+        <div style="padding: 5px;"><a *ngIf="lienFiche != ''" [href]="lienFiche">Télécharger la fiche</a></div>
+        <div style="padding: 5px;"><a *ngIf="lienAnki != ''" [href]="lienAnki">Télécharger le paquet Anki</a></div>
+    </div>
+</div>
 </div>

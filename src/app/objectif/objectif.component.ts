@@ -23,6 +23,8 @@ export class ObjectifComponent implements OnInit {
   auteurVideo: string
   lienAuteurVideo: string
   exercices: Exercice[]
+  lienFiche: string
+  lienAnki: string
 
   constructor(public http: HttpClient, private route: ActivatedRoute) {
     this.reference = ''
@@ -34,6 +36,8 @@ export class ObjectifComponent implements OnInit {
     this.auteurVideo = ''
     this.lienAuteurVideo = ''
     this.exercices = []
+    this.lienFiche = ''
+    this.lienAnki = ''
   }
 
   ngOnInit(): void {
@@ -77,5 +81,31 @@ export class ObjectifComponent implements OnInit {
         })
       })
     })
+    this.lienFiche = this.creerLienTelechargement('fiche')
+    this.lienAnki = this.creerLienTelechargement('anki')
+  }
+  creerLienTelechargement(type: string) {
+    let extension: string
+    if (type == 'anki') {
+      extension = 'apkg'
+    } else {
+      extension = 'pdf'
+    }
+    let lien = `assets/${type}/${this.reference.slice(0, 1)}e/${type.charAt(0).toUpperCase() + type.slice(1)}_${this.reference}.${extension}`
+    if (!this.doesFileExist(lien)) {
+      lien = ''
+    }
+    return lien
+  }
+  doesFileExist(urlToFile: string) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('HEAD', urlToFile, false);
+    xhr.send();
+
+    if (xhr.status == 404) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
