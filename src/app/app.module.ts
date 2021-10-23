@@ -10,6 +10,7 @@ import { ObjectifsComponent } from './objectifs/objectifs.component';
 import { SequencesComponent } from './sequences/sequences.component';
 import { SequenceComponent } from './sequence/sequence.component';
 import { JeuxComponent } from './jeux/jeux.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { JeuxComponent } from './jeux/jeux.component';
     AppRoutingModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
