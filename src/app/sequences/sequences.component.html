@@ -13,7 +13,7 @@
         class="title is-3" style="text-align:center; padding: 8px;">{{ligne.niveau}}</h1>
       <p *ngIf="ligne.reference != null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau)"
         style="text-align:center; padding: 5px;">
-        <a routerLink="/{{ligne.reference}}" routerLinkActive="active">
+        <a routerLink="/sequence/{{ligne.reference}}" routerLinkActive="active">
           Séquence {{ligne.numero}} : {{ligne.titre}}<br>
         </a>
       </p>
