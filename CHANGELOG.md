@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2](https://github.com/gvalmont/topmaths/compare/v0.0.1...v0.0.2) (2021-10-23)
+
+
+### Features
+
+* Des jeux sont maintenant disponibles ! ([082be1d](https://github.com/gvalmont/topmaths/commit/082be1d725ebd30506040cea23dd4a9d769249db))
+* On peut maintenant télécharger les cours, les résumés, les fiches, les missions et les paquets Anki ([128a807](https://github.com/gvalmont/topmaths/commit/128a8073cb7c19c27f7a78dea76732898206b04b))
+* Tous les objectifs et toutes les séquences de l'ancien site ont été importés dans le nouveau ([980159d](https://github.com/gvalmont/topmaths/commit/980159d00e560e7542abc2707d8130696920f334))
+
 ### 0.0.1 (2021-10-21)
 
 
