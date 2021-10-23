@@ -8,16 +8,10 @@
         </p>
       </header>
       <div class="card-image">
-        <div class="image is-4by3">
-          <iframe class="has-ratio" [src]="'https://scratch.mit.edu/projects/' + projet.id + '/embed' | safe"
-            allowfullscreen=""></iframe>
-        </div>
+        <img [src]="projet.image" (click)="ouvrirModal(projet.id)" />
       </div>
       <footer class="card-footer">
         <span class="card-footer-item">{{ projet.description }}</span>
-        <span class="icon is-large">
-          <i class="fas fa-2x fa-expand" (click)="ouvrirModal(projet.id)"></i>
-        </span>
       </footer>
     </div>
   </div>

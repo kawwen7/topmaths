@@ -1,22 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, isDevMode, HostListener } from '@angular/core';
 
+/**
+ * Interface servant à recevoir les projets scratchs depuis l'API ou le json.
+ * De nombreux autres paramètres sont disponibles et non exploités.
+ */
 interface Projet {
   id: number,
   title: string,
   description: string,
   instructions: string,
-  history: {
-    created: string,
-    modified: string,
-    shared: string,
-  },
-  stats: {
-    views: number,
-    loves: number,
-    favorites: number,
-    comments: number
-  }
+  image: string
 }
 
 @Component({
@@ -42,10 +36,15 @@ export class JeuxComponent implements OnInit {
     this.modal = document.getElementById("myModal")
     this.recuperationDesProjets()
   }
-
+  /**
+   * On détecte les changements de taille de fenêtre,
+   * si on passe en paysage, on affiche des vignettes de largeur 250px,
+   * si on passe en portrait, on affiche des vignettes de 100% de la largeur.
+   * @param event 
+   */
   @HostListener('window:resize', ['$event'])
-  onResize(event : any) {
-    if(innerWidth > innerHeight && !this.paysage) {
+  onResize(event: any) {
+    if (innerWidth > innerHeight && !this.paysage) {
       this.largeurCarte = '250px'
       this.paysage = true
     } else if (innerWidth < innerHeight && this.paysage) {
@@ -54,15 +53,20 @@ export class JeuxComponent implements OnInit {
     }
   }
 
+  /**
+   * Si on est en mode développement, on récupère les projets depuis l'API de Scratch,
+   * il faut alors télécharger le json à la main et le mettre dans assets/data pour le mettre à jour
+   * Si on est en mode production, on récupère les projets depuis le json.
+   */
   recuperationDesProjets() {
-    if(isDevMode()) {
+    if (isDevMode()) {
       this.http.get('/api/users/topmaths-fr/projects').subscribe((projets: any) => {
         for (const projet of projets) {
           this.projets.push(projet)
         }
         var theJSON = JSON.stringify(projets);
         var uri = "data:application/json;charset=UTF-8," + encodeURIComponent(theJSON);
-  
+
         var a = document.createElement('a');
         a.href = uri;
         a.innerHTML = "Right-click and choose 'save as...'";
@@ -73,10 +77,16 @@ export class JeuxComponent implements OnInit {
         for (const projet of projets) {
           this.projets.push(projet)
         }
-        })
+      })
     }
   }
 
+  /**
+   * Au lancement de la modale on détermine si on est en portrait ou en paysage,
+   * en portrait, la modale prend toute la largeur,
+   * en paysage, la modale prend 60% de la largeur.
+   * @returns 'width: 100%;' ou 'width: 60%;'
+   */
   determinerLargeurJeu() {
     if (window.innerHeight > window.innerWidth) {
       return 'width: 100%;'
@@ -85,11 +95,18 @@ export class JeuxComponent implements OnInit {
     }
   }
 
+  /**
+   * Ouvre la modale avec le jeu scratch
+   * @param id id du jeu
+   */
   ouvrirModal(id: number) {
     this.srcModal = `https://scratch.mit.edu/projects/${id}/embed`
     this.modal.style.display = "block";
   }
 
+  /**
+   * Ferme la modale
+   */
   fermerModal() {
     this.modal.style.display = "none";
     this.srcModal = ''
