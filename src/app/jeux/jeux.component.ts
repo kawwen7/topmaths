@@ -28,24 +28,33 @@ export class JeuxComponent implements OnInit {
   constructor(public http: HttpClient) {
     this.srcModal = ''
     this.projets = []
-    this.largeurCarte = '250px'
+    this.largeurCarte = '220px'
     this.paysage = true
   }
 
   ngOnInit(): void {
     this.modal = document.getElementById("myModal")
     this.recuperationDesProjets()
+    this.redimensionneLesCartes()
   }
   /**
    * On détecte les changements de taille de fenêtre,
-   * si on passe en paysage, on affiche des vignettes de largeur 250px,
-   * si on passe en portrait, on affiche des vignettes de 100% de la largeur.
-   * @param event 
+   * et on ajuste la largeur des cartes en conséquence.
+   * @param event
    */
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
+    this.redimensionneLesCartes()
+  }
+
+  /**
+   * Redimensionne les cartes.
+   * En paysage, on affiche des vignettes de largeur 250px,
+   * En portrait, on affiche des vignettes de 100% de la largeur.
+   */
+  redimensionneLesCartes(){
     if (innerWidth > innerHeight && !this.paysage) {
-      this.largeurCarte = '250px'
+      this.largeurCarte = '220px'
       this.paysage = true
     } else if (innerWidth < innerHeight && this.paysage) {
       this.largeurCarte = innerWidth + 'px'
