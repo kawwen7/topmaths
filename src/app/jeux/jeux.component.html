@@ -1,7 +1,7 @@
 <!-- Vignettes de tous les jeux -->
 <div class="columns is-centered">
   <div class="column is-narrow" *ngFor="let projet of projets">
-    <div class="card" style="width: 300px;">
+    <div class="card" [ngStyle]="{'width' : largeurCarte}">
       <header class="card-header">
         <p class="card-header-title is-centered">
           {{ projet.title }}

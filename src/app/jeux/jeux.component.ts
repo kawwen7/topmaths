@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, isDevMode } from '@angular/core';
+import { Component, OnInit, isDevMode, HostListener } from '@angular/core';
 
 interface Projet {
   id: number,
@@ -28,15 +28,30 @@ export class JeuxComponent implements OnInit {
   modal: any
   srcModal: string
   projets: Projet[]
+  largeurCarte: string
+  paysage: boolean
 
   constructor(public http: HttpClient) {
     this.srcModal = ''
     this.projets = []
+    this.largeurCarte = '250px'
+    this.paysage = true
   }
 
   ngOnInit(): void {
     this.modal = document.getElementById("myModal")
     this.recuperationDesProjets()
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event : any) {
+    if(innerWidth > innerHeight && !this.paysage) {
+      this.largeurCarte = '250px'
+      this.paysage = true
+    } else if (innerWidth < innerHeight && this.paysage) {
+      this.largeurCarte = innerWidth + 'px'
+      this.paysage = false
+    }
   }
 
   recuperationDesProjets() {
