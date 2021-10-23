@@ -15,7 +15,8 @@
         ],
         "calculsMentaux": [
           {
-            "objectif": "6C10 : Connaître les tables de multiplication",
+            "reference": "6C10",
+            "titre": "Connaître les tables de multiplication",
             "niveaux": [
               {
                 "commentaire": "",
@@ -26,12 +27,434 @@
         ],
         "questionsFlash": [
           {
-            "objectif": "5G12 : Identifier des symétries dans des frises, des pavages, des rosaces",
-            "lien": "https://coopmaths.fr/exercice.html?ex=5G12-1,s=1&v=l"
+            "reference": "5G12",
+            "titre": "Identifier des symétries dans des frises, des pavages, des rosaces",
+            "slug": "5G12-1,s=1"
           },
           {
-            "objectif": "5G50 : Reconnaître des solides (pavé droit, cube, cylindre, prisme droit, pyramide, cône, boule) à partir d’un objet réel, d’une image, d’une représentation en perspective cavalière",
-            "lien": ""
+            "reference": "5G50",
+            "titre": "Reconnaître des solides (pavé droit, cube, cylindre, prisme droit, pyramide, cône, boule) à partir d’un objet réel, d’une image, d’une représentation en perspective cavalière",
+            "slug": ""
+          }
+        ]
+      },
+      {
+        "reference": "S5S2",
+        "titre": "Symétrie et médiatrice",
+        "objectifs": [
+          {
+            "reference": "5G10"
+          },
+          {
+            "reference": "5G13-1"
+          },
+          {
+            "reference": "5G22"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "5C12",
+            "titre": "Effectuer un enchaînement d’opérations en respectant les priorités opératoires",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=true_i=6ND20~o=4,0~q=0.0,1,2,3-4.0,1,2,3~p=~t=24~n=8"
+              },
+              {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=true_i=6ND20~o=2,6~q=2.0,1,2,3,4,5-6.0,1,2,3,4,5~p=~t=24~n=8"
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "5S11",
+            "titre": "Lire et interpréter des données brutes ou présentées sous forme de tableaux, de diagrammes et de graphiques.",
+            "slug": "6S10,s=1,s2=1"
+          },
+          {
+            "reference": "5C11",
+            "titre": "Traduire un enchaînement d’opérations à l’aide d’une expression avec des parenthèses",
+            "slug": "5C12-1,s=3,s2=false,s3=true,n=1"
+          }
+        ]
+      },
+      {
+        "reference": "S5S3",
+        "titre": "Proportionnalité",
+        "objectifs": [
+          {
+            "reference": "5P10_Nv1"
+          }, {
+            "reference": "5P11_Nv1"
+          }, {
+            "reference": "5P10_Nv2"
+          }, {
+            "reference": "5P11_Nv2"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "6C10",
+            "titre": "Connaître les tables de multiplication",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321&e=correction&o=no&s=1&so=h&c=%7B%220%22%3A%7B%22i%22%3A0%2C%22a%22%3A%7B%220%22%3A%7B%22i%22%3A%226ND6%22%2C%22o%22%3A%5B%5D%2C%22q%22%3A%7B%7D%2C%22p%22%3A%5B%5D%2C%22t%22%3A8%2C%22n%22%3A8%7D%7D%2C%22t%22%3A%22Diapo%201%22%2C%22c%22%3A%5B1%5D%2C%22o%22%3Atrue%7D%7D&f=n"
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "5G22",
+            "titre": "Connaître et utiliser la définition de la médiatrice",
+            "slug": "5G22-1,s=3,s2=false,n=1"
+          },
+          {
+            "reference": "5G13",
+            "titre": "Utiliser les propriétés de conservation du parallélisme, des longueurs et des angles",
+            "slug": "5G13,s=1,s2=1,n=1"
+          }
+        ]
+      },
+      {
+        "reference": "S5S4",
+        "titre": "Constructions de triangles",
+        "objectifs": [
+          {
+            "reference": "5G20"
+          }, {
+            "reference": "5G21"
+          }, {
+            "reference": "5I13"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "",
+            "titre": "",
+            "niveaux": [
+              {
+                "commentaire": "Dans cette séquence, ce sera un peu particulier, nous n'allons pas faire de calcul mental et de questions flash mais allons faire deux séquences en même temps, celle-ci et la suivante : Programmes de calcul « somme et différence »",
+                "lien": ""
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "5G22",
+            "titre": "Connaître et utiliser la définition de la médiatrice",
+            "slug": "5G22-1,s=3,s2=false,n=1"
+          },
+          {
+            "reference": "5G13",
+            "titre": "Utiliser les propriétés de conservation du parallélisme, des longueurs et des angles",
+            "slug": "5G13,s=1,s2=1,n=1"
+          }
+        ]
+      }, {
+        "reference": "S5S5",
+        "titre": "Programmes de calcul « somme et différence »",
+        "objectifs": [
+          {
+            "reference": "5R10"
+          }, {
+            "reference": "5R11"
+          }, {
+            "reference": "5R22"
+          }, {
+            "reference": "5R20"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "5C12",
+            "titre": "Effectuer un enchaînement d’opérations en respectant les priorités opératoires",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321,e=correction,o=no,s=1,so=h,f=n,a=&p=0~t=Diapo 1~c=1~o=true_i=6ND11~o=0,1,2,3~q=0.-1.-2.-3.~p=~t=18~n=8"
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "5G21",
+            "titre": "Connaître et utiliser l’inégalité triangulaire",
+            "slug": "5G21-1,s=1,n=1"
+          },
+          {
+            "reference": "5P11_Nv1",
+            "titre": "Résoudre des problèmes de proportionnalité avec des procédures variées (additivité, homogénéité, passage à l’unité, coefficient de proportionnalité)",
+            "slug": "6P12,s=true,n=1"
+          }
+        ]
+      }, {
+        "reference": "S5S6",
+        "titre": "Représentation de données",
+        "objectifs": [
+          {
+            "reference": "5S10"
+          }, {
+            "reference": "5S11"
+          }, {
+            "reference": "5S12"
+          }, {
+            "reference": "5S13"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "5R20",
+            "titre": "Additionner des nombres relatifs",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321,e=correction,o=no,s=1,so=h,f=n,a=&p=0~t=Diapo 1~c=1~o=true_i=5NC1~o=1~q=1.~p=~t=10~n=8"
+              }, {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321,e=correction,o=no,s=1,so=h,f=n,a=&p=0~t=Diapo 1~c=1~o=true_i=5NC1~o=0~q=0.~p=~t=10~n=8"
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "5R11",
+            "titre": "Repérer un nombre décimal relatif par un point sur une droite graduée",
+            "slug": "5R11,s=1,n=1"
+          },
+          {
+            "reference": "5G20",
+            "titre": "Construire des triangles connaissant des longueurs et/ou des angles",
+            "slug": "5G20-0,s=1,s2=true,n=1"
+          }
+        ]
+      }, {
+        "reference": "S5S7",
+        "titre": "Programmes de calcul « somme et différence » (2ème partie)",
+        "objectifs": [
+          {
+            "reference": "5R21"
+          }, {
+            "reference": "5R12"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "4C11",
+            "titre": "Calculer avec des nombres relatifs",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=true_i=6NB1~o=~q=~p=~t=20~n=8"
+              }, {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=true_i=6NB1~o=~q=~p=~t=10~n=16"
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "5S11",
+            "titre": "Lire et interpréter des données brutes ou présentées sous forme de tableaux, de diagrammes et de graphiques",
+            "slug": "5S11,s=3,s2=2"
+          },
+          {
+            "reference": "5S13",
+            "titre": "Calculer des effectifs et des fréquences",
+            "slug": "5S13,s=3,n=1;5S13-1,s=1"
+          }
+        ]
+      }
+    ]
+  }, {
+    "niveau": "4e",
+    "sequences": [
+      {
+        "reference": "S4S1",
+        "titre": "Statistiques",
+        "objectifs": [
+          {
+            "reference": "5S14"
+          },
+          {
+            "reference": "4S11"
+          },
+          {
+            "reference": "4S10"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "4C11",
+            "titre": "Calculer avec des nombres relatifs",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=true_i=5NC1~o=1~q=1.~p=~t=18~n=8"
+              }, {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=true_i=5NC1~o=4~q=1.-2.-4.~p=~t=35~n=4"
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "5P12",
+            "titre": "Partager une quantité en deux ou trois parts selon un ratio donné",
+            "slug": "5P12,s=1,n=1,cd=1&ex=5P12,s=2,n=1,cd=1"
+          },
+          {
+            "reference": "4L10",
+            "titre": "Réduire une expression littérale",
+            "slug": "4L10-1,s=false,n=1"
+          }
+        ]
+      }, {
+        "reference": "S4S2",
+        "titre": "Multiplication et division de nombres relatifs",
+        "objectifs": [
+          {
+            "reference": "4C10"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "4C11",
+            "titre": "Calculer avec des nombres relatifs",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=true_i=5NC1~o=4~q=4.~p=~t=30~n=4"
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "4G23",
+            "titre": "Trouver quel est le nombre dont le carré est …",
+            "slug": "4G20-2,s=2,s2=1,n=1"
+          },
+          {
+            "reference": "4C21",
+            "titre": "Additionner ou soustraire des nombres positifs en écriture fractionnaire",
+            "slug": "4C21,s=1,s2=false,n=1&ex=4C21,s=2,s2=false,n=1"
+          }
+        ]
+      }, {
+        "reference": "S4S3",
+        "titre": "Racine carrée",
+        "objectifs": [
+          {
+            "reference": "4G23"
+          }, {
+            "reference": "4G24"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "4L10",
+            "titre": "Réduire une expression littérale",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321&e=correction&o=no&s=1&so=h&c=%7B%220%22%3A%7B%22i%22%3A0%2C%22a%22%3A%7B%220%22%3A%7B%22i%22%3A%224NE2%22%2C%22o%22%3A%5B0%5D%2C%22q%22%3A%7B%220%22%3A%5B%5D%7D%2C%22p%22%3A%5B%5D%2C%22t%22%3A24%2C%22n%22%3A8%7D%7D%2C%22t%22%3A%22Diapo%201%22%2C%22c%22%3A%5B1%5D%2C%22o%22%3Atrue%7D%7D&f=n"
+              }, {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321&e=correction&o=no&s=1&so=h&c=%7B%220%22%3A%7B%22i%22%3A0%2C%22a%22%3A%7B%220%22%3A%7B%22i%22%3A%224NE2%22%2C%22o%22%3A%5B0%5D%2C%22q%22%3A%7B%220%22%3A%5B%5D%7D%2C%22p%22%3A%5B%5D%2C%22t%22%3A24%2C%22n%22%3A8%7D%7D%2C%22t%22%3A%22Diapo%201%22%2C%22c%22%3A%5B1%5D%2C%22o%22%3Atrue%7D%7D&f=n"
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "5S14",
+            "titre": "Calculer et interpréter la moyenne d’une série de données",
+            "slug": "5S14,s=1,n=1&ex=5S14,s=3,n=1"
+          },
+          {
+            "reference": "4S11",
+            "titre": "Calculer la médiane d’une série de données de petit effectif total",
+            "slug": "4S11,s=2,n=1"
+          }
+        ]
+      }, {
+        "reference": "S4S4",
+        "titre": "Calcul littéral (1ère partie)",
+        "objectifs": [
+          {
+            "reference": "4L16"
+          }, {
+            "reference": "4L10"
+          }, {
+            "reference": "4L11"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "4C11",
+            "titre": "Calculer avec des nombres relatifs",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=false_i=5NC1~o=0,1~q=0.-1.~p=~t=15~n=4_i=5NC5~o=0~q=0.~p=~t=15~n=4"
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "4C20",
+            "titre": "Comparer et ranger des nombres rationnels (positifs ou négatifs)",
+            "slug": "4C20,s=11,s2=true,n=1&ex=4C20-1,s=true,n=1"
+          },
+          {
+            "reference": "4G24",
+            "titre": "Encadrer la racine carrée d’un nombre positif entre deux entiers",
+            "slug": "4G20-6,s=2,n=1"
+          }
+        ]
+      }, {
+        "reference": "S4S5",
+        "titre": "Théorème de Pythagore",
+        "objectifs": [
+          {
+            "reference": "4G20"
+          }, {
+            "reference": "4G22"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "4A10",
+            "titre": "Reconnaître des nombres premiers inférieurs à 30",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=true_i=5ND5~o=0~q=0.~p=~t=15~n=8"
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "4L10",
+            "titre": "Utiliser la propriété de distributivité simple pour développer un produit ou réduire une expression littérale",
+            "slug": "4L10,s=3,s2=true,n=1"
+          },
+          {
+            "reference": "4L11",
+            "titre": "Utiliser la propriété de distributivité simple pour factoriser une somme",
+            "slug": "4L11,s=2,n=1"
           }
         ]
       }

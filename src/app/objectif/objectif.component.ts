@@ -2,9 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+interface Video {
+  titre: string,
+  slug: string,
+  auteur: string,
+  lienAuteur: string,
+  lienVideo: string
+}
+
 interface Exercice {
-  couleur: string;
-  slug: string;
+  couleur: string,
+  slug: string,
   lien: string
 }
 
@@ -18,10 +26,7 @@ export class ObjectifComponent implements OnInit {
   titre: string
   rappelDuCoursHTML: string
   rappelDuCoursImage: string
-  slugVideo: string
-  VideoSrc: string
-  auteurVideo: string
-  lienAuteurVideo: string
+  videos: Video[]
   exercices: Exercice[]
   lienFiche: string
   lienAnki: string
@@ -31,10 +36,7 @@ export class ObjectifComponent implements OnInit {
     this.titre = ''
     this.rappelDuCoursHTML = ''
     this.rappelDuCoursImage = ''
-    this.slugVideo = ''
-    this.VideoSrc = ''
-    this.auteurVideo = ''
-    this.lienAuteurVideo = ''
+    this.videos = []
     this.exercices = []
     this.lienFiche = ''
     this.lienAnki = ''
@@ -93,19 +95,50 @@ export class ObjectifComponent implements OnInit {
     } else {
       this.rappelDuCoursImage = '../assets/img/' + objectif.rappelDuCoursImage
     }
-    this.slugVideo = objectif.slugVideo
-    this.VideoSrc = "https://www.youtube.com/embed/" + this.slugVideo
-    this.auteurVideo = objectif.auteurVideo
-    this.lienAuteurVideo = objectif.lienAuteurVideo
+    this.videos = [] // Au cas où l'attribut ne serait pas réinitialisé lors d'un changement de référence
+    // Le nombre de vidéos varie selon la référence, on a donc quelque chose de dynamique
+    for (const video of objectif.videos) {
+      if (video.slug != '') {
+        this.videos.push({
+          titre: video.titre,
+          slug: video.slug,
+          auteur: video.auteur,
+          lienAuteur: video.lienAuteur,
+          lienVideo: "https://www.youtube.com/embed/" + video.slug
+        })
+      }
+    }
     this.exercices = [] // Au cas où l'attribut ne serait pas réinitialisé lors d'un changement de référence
     // Le nombre d'exercices varie selon la référence, on a donc quelque chose de dynamique
     for (const exercice of objectif.exercices) {
       if (exercice.slug != '') {
         this.exercices.push({
-          couleur: exercice.couleur,
+          couleur: '',
           slug: exercice.slug,
           lien: 'https://coopmaths.fr/exercice.html?ex=' + exercice.slug + 'i=0&v=e'
         })
+        if (exercice.slug.slice(0,4) == 'http'){
+          this.exercices[this.exercices.length-1].lien = exercice.slug
+        }
+      }
+      // On ajoute la couleur selon le nombre d'exercices
+      this.exercices[this.exercices.length - 1].couleur = "Vert Foncé"
+      switch (this.exercices.length) {
+        case 1:
+          this.exercices[0].couleur = 'Vert Foncé'
+          break;
+        case 2:
+          this.exercices[0].couleur = 'Vert Clair'
+          this.exercices[1].couleur = 'Vert Foncé'
+          break;
+        case 3:
+          this.exercices[0].couleur = 'Jaune'
+          this.exercices[1].couleur = 'Vert Clair'
+          this.exercices[2].couleur = 'Vert Foncé'
+          break;
+
+        default:
+          break;
       }
     }
   }

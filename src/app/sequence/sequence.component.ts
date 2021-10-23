@@ -14,13 +14,17 @@ interface Niveau {
 }
 
 interface CalculMental {
-  objectif: string
+  reference: string
+  titre: string
   niveaux: Niveau[]
+  pageExiste: boolean
 }
 
 interface QuestionFlash {
-  objectif: string
-  lien: string
+  reference: string
+  titre: string
+  slug: string
+  pageExiste: boolean
 }
 
 @Component({
@@ -35,11 +39,14 @@ export class SequenceComponent implements OnInit {
   objectifs: Objectif[]
   calculsMentaux: CalculMental[]
   questionsFlash: QuestionFlash[]
+  lienQuestionsFlash: string
   lienEval: string
   lienCours: string
   lienResume: string
   lienMission: string
   lienAnki: string
+  presenceCalculMental: boolean
+  messagePasDeCalculMental: string
 
   constructor(public http: HttpClient, private route: ActivatedRoute) {
     this.reference = ''
@@ -48,11 +55,14 @@ export class SequenceComponent implements OnInit {
     this.objectifs = []
     this.calculsMentaux = []
     this.questionsFlash = []
+    this.lienQuestionsFlash = ''
     this.lienEval = ''
     this.lienCours = ''
     this.lienResume = ''
     this.lienMission = ''
     this.lienAnki = ''
+    this.presenceCalculMental = true
+    this.messagePasDeCalculMental = ''
   }
 
   ngOnInit(): void {
@@ -96,9 +106,9 @@ export class SequenceComponent implements OnInit {
     this.numero = niveau.sequences.findIndex((sequence: any) => { return sequence.reference == this.reference; }) + 1
     this.titre = `Séquence ${this.numero} :<br>${sequence.titre}`
     this.recupereObjectifsSequence(sequence)
-    this.recupereDetailsObjectifs()
-    this.recupereCalculsMentaux(sequence)
     this.recupereQuestionsFlash(sequence)
+    this.recupereCalculsMentaux(sequence)
+    this.recupereDetailsObjectifs()
     this.lienCours = this.creerLienTelechargement('cours')
     this.lienResume = this.creerLienTelechargement('resume')
     this.lienMission = this.creerLienTelechargement('mission')
@@ -134,13 +144,29 @@ export class SequenceComponent implements OnInit {
           for (const theme of niveau.themes) {
             for (const sousTheme of theme.sousThemes) {
               for (const JSONobjectif of sousTheme.objectifs) {
+                //On complète le titre et les slugs des objectifs de la séquence
                 for (const thisObjectif of this.objectifs) {
-                  if (thisObjectif.reference == JSONobjectif.reference) { // On a trouvé la bonne référence
-                    // On complète le titre et les slugs des exercices
+                  if (thisObjectif.reference == JSONobjectif.reference) {
                     thisObjectif.titre = JSONobjectif.titre
                     for (const exercice of JSONobjectif.exercices) {
                       thisObjectif.slugs.push(exercice.slug)
                     }
+                  }
+                }
+                // On vérifie si la page existe pour les objectifs des questions flash
+                // On en profite pour créer le lien pour s'entraîner aux questions flash
+                this.lienQuestionsFlash = 'https://coopmaths.fr/mathalea.html?'
+                for (const questionFlash of this.questionsFlash) {
+                  this.lienQuestionsFlash = this.lienQuestionsFlash.concat('ex=', questionFlash.slug, '&')
+                  if (questionFlash.reference == JSONobjectif.reference) {
+                    questionFlash.pageExiste = true
+                  }
+                }
+                this.lienQuestionsFlash = this.lienQuestionsFlash.concat('v=e')
+                // On vérifie si la page existe pour les objectifs des calculs mentaux
+                for (const calculMental of this.calculsMentaux) {
+                  if (calculMental.reference == JSONobjectif.reference) {
+                    calculMental.pageExiste = true
                   }
                 }
               }
@@ -151,7 +177,9 @@ export class SequenceComponent implements OnInit {
         this.lienEval = 'https://coopmaths.fr/mathalea.html?'
         for (const thisObjectif of this.objectifs) {
           for (const slug of thisObjectif.slugs) {
-            this.lienEval = this.lienEval.concat('ex=', slug, '&')
+            if (slug.slice(0, 4) != 'http') {
+              this.lienEval = this.lienEval.concat('ex=', slug, '&')
+            }
           }
         }
         this.lienEval = this.lienEval.concat('v=e')
@@ -175,10 +203,15 @@ export class SequenceComponent implements OnInit {
         })
       }
       this.calculsMentaux.push({
-        objectif: calculMental.objectif,
-        niveaux: niveauxTemp
-      }
-      )
+        reference: calculMental.reference,
+        titre: calculMental.titre,
+        niveaux: niveauxTemp,
+        pageExiste: false
+      })
+    }
+    if (this.calculsMentaux[0].reference == '') {
+      this.presenceCalculMental = false
+      this.messagePasDeCalculMental = this.calculsMentaux[0].niveaux[0].commentaire
     }
   }
 
@@ -192,8 +225,10 @@ export class SequenceComponent implements OnInit {
     for (const questionFlash of sequence.questionsFlash) {
       if (questionFlash.objectif != '') {
         this.questionsFlash.push({
-          objectif: questionFlash.objectif,
-          lien: questionFlash.lien
+          reference: questionFlash.reference,
+          titre: questionFlash.titre,
+          slug: questionFlash.slug,
+          pageExiste: false
         })
       }
     }
@@ -204,25 +239,25 @@ export class SequenceComponent implements OnInit {
    * @param nombre 
    * @returns string
    */
-  nombreEnLettres(nombre: number) {
+  nombreObjectifs(nombre: number) {
     switch (nombre) {
       case 1:
-        return 'un'
+        return 'un objectif'
 
       case 2:
-        return 'deux'
+        return 'deux objectifs'
 
       case 3:
-        return 'trois'
+        return 'trois objectifs'
 
       case 4:
-        return 'quatre'
+        return 'quatre objectifs'
 
       case 5:
-        return 'cinq'
+        return 'cinq objectifs'
 
       case 6:
-        return 'six'
+        return 'six objectifs'
 
       default:
         return '?'

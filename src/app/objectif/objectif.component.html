@@ -4,15 +4,17 @@
   </div>
   <div class="box">
     <h2 class="title is-3">Rappel du cours</h2>
+    <p [innerHTML]="rappelDuCoursHTML" style="text-align: left;"></p>
     <p><img *ngIf="rappelDuCoursImage != ''" [src]="rappelDuCoursImage" /></p>
-    <p [innerHTML]="rappelDuCoursHTML"></p>
   </div>
-  <div class="box">
-    <h2 class="title is-3">Vidéo d'explication</h2>
+  <h2 *ngIf="videos.length == 1; else plusieursVideos" class="title is-3">Vidéo d'explication</h2>
+  <ng-template #plusieursVideos><h2 class="title is-3">Vidéos d'explication</h2></ng-template>
+  <div *ngFor="let video of videos" class="box">
+    <h3 class="title is-4">{{video.titre}}</h3>
     <div class="image is-16by9">
-      <iframe class="has-ratio" [src]="VideoSrc | safe"></iframe>
+      <iframe class="has-ratio" [src]="video.lienVideo| safe"></iframe>
     </div>
-    <p><u>Vidéo de <a [href]="lienAuteurVideo" target="_blank" rel="noopener noreferrer">{{ auteurVideo }}</a></u></p>
+    <p><u>Vidéo de <a [href]="video.lienAuteur" target="_blank" rel="noopener noreferrer">{{ video.auteur }}</a></u></p>
   </div>
   <h2 class="title is-3">S'entraîner</h2>
   <div *ngFor="let exercice of exercices; index as i">

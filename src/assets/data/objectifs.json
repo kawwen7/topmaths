@@ -13,20 +13,22 @@
                 "titre": "Traduire un enchaînement d’opérations à l’aide d’une expression avec des parenthèses",
                 "rappelDuCoursHTML": "",
                 "rappelDuCoursImage": "Vocabulaire-des-operations.png",
-                "slugVideo": "fpqFXBis5nQ",
-                "auteurVideo": "*Mme Maths*",
-                "lienAuteurVideo": "https://www.youtube.com/channel/UCJm9gdUbZhS0m8xGPQySgzg",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "fpqFXBis5nQ",
+                    "auteur": "*Mme Maths*",
+                    "lienAuteur": "https://www.youtube.com/channel/UCJm9gdUbZhS0m8xGPQySgzg"
+                  }
+                ],
                 "exercices": [
                   {
-                    "couleur": "Jaune",
                     "slug": "5C11,s=1,s2=false,s3=true,s4=true,n=1"
                   },
                   {
-                    "couleur": "Vert Clair",
                     "slug": "5C12-1,s=2,s2=false,s3=true,s4=true,n=1"
                   },
                   {
-                    "couleur": "Vert Foncé",
                     "slug": "5C12-1,s=3,s2=false,s3=true,s4=true,n=1"
                   }
                 ]
@@ -34,22 +36,24 @@
               {
                 "reference": "5C12",
                 "titre": "Effectuer un enchaînement d’opérations en respectant les priorités opératoires",
-                "rappelDuCoursHTML": "Pour faire un calcul lorsqu'il y a plusieurs opérations différentes, on fait d'abord les multiplications et les divisions. <br> On dit que les multiplications et les divisions sont prioritaires.",
+                "rappelDuCoursHTML": "Pour faire un calcul lorsqu'il y a plusieurs opérations différentes, on fait <strong>d'abord les multiplications et les divisions</strong>. <br> On dit que les multiplications et les divisions sont <strong>prioritaires</strong>.",
                 "rappelDuCoursImage": "",
-                "slugVideo": "OUMnDWhgf5w",
-                "auteurVideo": "Khan Academy",
-                "lienAuteurVideo": "http://www.khanacademy.org",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "OUMnDWhgf5w",
+                    "auteur": "Khan Academy",
+                    "lienAuteur": "http://www.khanacademy.org"
+                  }
+                ],
                 "exercices": [
                   {
-                    "couleur": "Jaune",
                     "slug": "5C12,s=2,s2=false,s3=true,s4=true,n=1"
                   },
                   {
-                    "couleur": "Vert clair",
                     "slug": "5C12,s=3,s2=false,s3=true,s4=true,n=1"
                   },
                   {
-                    "couleur": "Vert foncé",
                     "slug": "5C12,s=4,s2=false,s3=true,s4=true,n=1"
                   }
                 ]
@@ -64,13 +68,485 @@
                 "titre": "Utiliser la notion d’opposé",
                 "rappelDuCoursHTML": "On dit que – 8 est <strong>l’opposé</strong> de + 8 et que + 8 est <strong>l’opposé</strong> de – 8,<br>ou encore que + 8 et – 8 sont <strong>opposés</strong>.<br>De la même façon -5 est <strong>l'opposé</strong> de +5 et +5 est <strong>l'opposé </strong>de -5 etc.",
                 "rappelDuCoursImage": "",
-                "slugVideo": "HKuJUkDbb_w?start=21",
-                "auteurVideo": "Matich Fastich",
-                "lienAuteurVideo": "https://www.youtube.com/channel/UCcPFyq0PJn0NHlreVBkyZsA",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "HKuJUkDbb_w?start=21",
+                    "auteur": "Matich Fastich",
+                    "lienAuteur": "https://www.youtube.com/channel/UCcPFyq0PJn0NHlreVBkyZsA"
+                  }
+                ],
                 "exercices": [
                   {
-                    "couleur": "Vert Foncé",
                     "slug": "5R10-0,s=1,n=1"
+                  }
+                ]
+              }, {
+                "reference": "5R11",
+                "titre": "Repérer un nombre décimal relatif par un point sur une droite graduée",
+                "rappelDuCoursHTML": "<p>Le nombre qui sert à repérer un point sur une droite graduée s'appelle son <strong>abscisse</strong>.</p>",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "SImiMoRB0vU",
+                    "auteur": "Yvan Monka",
+                    "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "5R11,s=1,n=1"
+                  }, {
+                    "slug": "5R11-2,s=1,n=1"
+                  }
+                ]
+              }, {
+                "reference": "5R12",
+                "titre": "Repérer un point dans le plan muni d’un repère orthogonal",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "5R12-RDC.png",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "-S-TZ1eJNKQ",
+                    "auteur": "Yves Le Coadou",
+                    "lienAuteur": "https://www.youtube.com/channel/UCT0wZd0o4uFVKvSi2rE_sKQ"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "5R12,s=1,s2=true"
+                  }, {
+                    "slug": "5R12-2,s=1,s2=true"
+                  }
+                ]
+              }, {
+                "reference": "5R20",
+                "titre": "Additionner des nombres relatifs",
+                "rappelDuCoursHTML": "+7 + (+4) = 7 + 4 ;<br>+7 + (–4) = 7 – 4 ;<br>–7 + (+4) = –7 + 4 ;<br>–7 + (–4) = –7 – 4.<br>Dans une somme de relatifs, il est plus simple de supprimer les parenthèses et les signes + d’addition afin de pouvoir calculer comme dans les programmes de calc",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "B3-1p4c_XYQ",
+                    "auteur": "elisabeth thomas",
+                    "lienAuteur": "https://www.youtube.com/channel/UClUpV7RoSKPmRx2EBQhapuA"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "5R20,s=20,s2=false,n=1"
+                  }
+                ]
+              }, {
+                "reference": "5R21",
+                "titre": "Soustraire des nombres relatifs",
+                "rappelDuCoursHTML": "Pour soustraire un nombre relatif, on ajoute son opposé.",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "ZUuNBh_YJl0",
+                    "auteur": "maths sonic",
+                    "lienAuteur": "https://www.youtube.com/channel/UCcsHDx0cHCPcS7MFVJ_bxsA"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "5R21,s=20,s2=false,n=4"
+                  }, {
+                    "slug": "5R22-2,s=20,n=4"
+                  }, {
+                    "slug": "5R22,s=20,s2=false,n=2"
+                  }
+                ]
+              }, {
+                "reference": "5R22",
+                "titre": "Effectuer une somme algébrique",
+                "rappelDuCoursHTML": "<p>On peut utiliser les signes + et - pour simplifier un programme de calcul.</p><p>Pour simplifier l’écriture du programme de calcul, « à un nombre, on ajoute 45 et on soustrait 46 »,<br>On aurait pu écrire : ... + 45 – 46 = ... –1.<br>On a préféré écrire : +45 – 46 = –1</p>",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "(autre méthode)",
+                    "slug": "9L4lz1NMPoY",
+                    "auteur": "Yvan Monka",
+                    "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "5R20,s=20,s2=true,n=1"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },{
+        "nom": "Algorithmique et programmation",
+        "sousThemes": [
+          {
+            "nom": "",
+            "objectifs": [
+              {
+                "reference": "5I13",
+                "titre": "Savoir construire une figure simple sur Geogebra",
+                "rappelDuCoursHTML": "<p>Il s'agit ici de faire la même chose que <a href='/objectif/5G20'>5G20 : Construire des triangles connaissant des longueurs et/ou des angles</a> mais sur <a href='https://www.geogebra.org/classic' target='_blank' rel='noopener noreferrer'>Geogebra</a>.</p>",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "Niveau 1 - Vert Clair",
+                    "slug": "ptMRvQozNv8",
+                    "auteur": "jean-yves Labouche",
+                    "lienAuteur": "https://www.youtube.com/channel/UCA-i2IV5_F1ak53ZbED1u1w"
+                  }, {
+                    "titre": "Niveau 2 - Vert Foncé",
+                    "slug": "9vGH_inS8aQ",
+                    "auteur": "MINUTESMATHS",
+                    "lienAuteur": "https://www.youtube.com/channel/UCsD5NwzkIrKs-ySUmeSsEwg"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "5G20-0,s=1,s2=true,n=1"
+                  },
+                  {
+                    "slug": "5G20-2,s=false,n=1"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nom": "Organisation et gestion de données",
+        "sousThemes": [
+          {
+            "nom": "Proportionnalité",
+            "objectifs": [
+              {
+                "reference": "5P10_Nv1",
+                "titre": "Reconnaître une situation de proportionnalité ou de non proportionnalité - Niveau 1",
+                "rappelDuCoursHTML": "Deux grandeurs sont <i>probablement</i> proportionnelles si j'obtient un résultat réaliste lorsque je les multiplie par un même nombre (2 ou 10 par exemple)",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "B_S57F69GCE",
+                    "auteur": "jean-yves Labouche",
+                    "lienAuteur": "https://www.youtube.com/channel/UCA-i2IV5_F1ak53ZbED1u1w"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "6P10,s=1-2-3-4,n=4"
+                  }
+                ]
+              }, {
+                "reference": "5P10_Nv2",
+                "titre": "Reconnaître une situation de proportionnalité ou de non proportionnalité",
+                "rappelDuCoursHTML": "<p>Deux grandeurs (longueur, prix, masse, durée etc.) sont <strong>proportionnelles</strong> si les valeurs de l’une s’obtiennent en multipliant les valeurs de l’autre par un même nombre appelé <strong>coefficient de proportionnalité.</strong></p>",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "oNruk3vyMHQ",
+                    "auteur": "jean-yves Labouche",
+                    "lienAuteur": "https://www.youtube.com/channel/UCA-i2IV5_F1ak53ZbED1u1w"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "6P10,s=5,n=1"
+                  }
+                ]
+              }, {
+                "reference": "5P11_Nv1",
+                "titre": "Résoudre un problème de proportionnalité",
+                "rappelDuCoursHTML": "<p>Pour résoudre une situation de proportionnalité, on peut s'aider d'un schéma.</p><p><strong>Exemple : </strong><br>Nawel lit sur sa recette de crêpes pour 3 personnes qu'il faut 150 g de farine. <br>Elle veut adapter sa recette pour 21 personnes. <br>Quelle masse de farine doit-elle prévoir ?</p>",
+                "rappelDuCoursImage": "schema-proportionnalite.png",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "r4CYLxVhnhE",
+                    "auteur": "Maths en pause",
+                    "lienAuteur": "https://www.youtube.com/channel/UCA4wk8mKv6tiOwAcOBRo9rA"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "6P11,s=true,n=1"
+                  }, {
+                    "slug": "6P12,s=true,n=1"
+                  }
+                ]
+              }, {
+                "reference": "5P11_Nv2",
+                "titre": "Résoudre un problème de proportionnalité",
+                "rappelDuCoursHTML": "<p>Pour résoudre une situation de proportionnalité, on peut s'aider d'un schéma.</p><p><strong>Exemple : </strong><br>Nawel lit sur sa recette de crêpes pour 3 personnes qu'il faut 150 g de farine. <br>Elle veut adapter sa recette pour 21 personnes. <br>Quelle masse de farine doit-elle prévoir ?</p>",
+                "rappelDuCoursImage": "schema-proportionnalite.png",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "r4CYLxVhnhE",
+                    "auteur": "Maths en pause",
+                    "lienAuteur": "https://www.youtube.com/channel/UCA4wk8mKv6tiOwAcOBRo9rA"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "6P11,s=false,n=1"
+                  }, {
+                    "slug": "6P12,s=false,n=1"
+                  }
+                ]
+              }
+            ]
+          }, {
+            "nom": "Statistiques",
+            "objectifs": [
+              {
+                "reference": "5S10",
+                "titre": "Recueillir et organiser des données",
+                "rappelDuCoursHTML": "Si on veut juste organiser et regrouper des données pour pouvoir les lire plus facilement, on peut utiliser un tableau :",
+                "rappelDuCoursImage": "5S10-tableau.png",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "gvIZ3bt6gw8",
+                    "auteur": "Math Coaching",
+                    "lienAuteur": "https://www.youtube.com/channel/UCGqY72r3_uGP4VWw8GLSNsQ"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "5S10,s=false,s2=4"
+                  }
+                ]
+              }, {
+                "reference": "5S11",
+                "titre": "Lire et interpréter des données brutes ou présentées sous forme de tableaux, de diagrammes et de graphiques",
+                "rappelDuCoursHTML": "<p>Dans un diagramme en bâtons, chaque bâton représente une donnée.<br>La hauteur du bâton correspond à la valeur de cette donnée qu'on peut lire sur l'axe vertical.</p>",
+                "rappelDuCoursImage": "5S10-tableau.png",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "CR4lSAfho5A",
+                    "auteur": "Yvan Monka",
+                    "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "5S11,s=3,s2=2"
+                  }
+                ]
+              }, {
+                "reference": "5S12",
+                "titre": "Représenter sur papier ou à l’aide d’un tableur-grapheur, des données sous la forme d’un graphique ou d’un diagramme en bâtons",
+                "rappelDuCoursHTML": "<p>Dans un diagramme en bâtons, chaque bâton représente une donnée.<br>La hauteur du bâton correspond à la valeur de cette donnée qu'on peut lire sur l'axe vertical.</p>",
+                "rappelDuCoursImage": "5S12-RDC.png",
+                "videos": [
+                  {
+                    "titre": "Construction à la main",
+                    "slug": "NZnhF5VDy04",
+                    "auteur": "Yvan Monka",
+                    "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
+                  }, {
+                    "titre": "",
+                    "slug": "Qla9YSL99oQ",
+                    "auteur": "Jeremy Navarro",
+                    "lienAuteur": "https://www.youtube.com/channel/UCAD9yVxeKupFV-XftTiSeZw"
+                  }, {
+                    "titre": "Construction à l'aide de Libre Office Calc",
+                    "slug": "8JvLWkXPQKI",
+                    "auteur": "Professeur ROOKY",
+                    "lienAuteur": "https://www.youtube.com/channel/UC-cePs9J43U6FEfwFY0rMdQ"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "5S12,s=3,s2=1,s3=3"
+                  }, {
+                    "slug": "5S12,s=3,s2=1,s3=4"
+                  }
+                ]
+              }, {
+                "reference": "5S13",
+                "titre": "Calculer des effectifs et des fréquences",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "5S13-RDC.png",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "4u1DAOPdKV0",
+                    "auteur": "Maths&Méthodes",
+                    "lienAuteur": "https://www.youtube.com/channel/UCb9LSmnMAXQ6LtggV7pD_xw"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "5S13,s=3,n=1"
+                  }, {
+                    "slug": "5S13-1,s=1"
+                  }
+                ]
+              }, {
+                "reference": "5S14",
+                "titre": "Calculer la moyenne d’une série de données",
+                "rappelDuCoursHTML": "<p>Pour calculer une <strong>moyenne</strong>, on <strong>additionne toutes les valeurs</strong> (les nombres qui nous intéressent : par exemple si on veut calculer une moyenne de notes, les valeurs sont des notes ; si on veut calculer une moyenne de températures, les valeurs sont les températures etc.) puis on <strong>divise le résultat par l'effectif total</strong> (le nombre total de valeurs = combien il y en a).</p><p>Lorsqu'il y a des valeurs qui se répètent plusieurs fois, pour aller plus vite on peut faire des multiplications (par exemple si la valeur 7 apparaît 5 fois, au lieu de faire 7 + 7 + 7 + 7 + 7, on fait 7 × 5 -&gt; On dit que 5 est <strong>l'effectif</strong> de 7).<br>Dans ce cas, on dit que la <strong>moyenne</strong> est <strong>pondérée</strong> par les effectifs.</p>",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "23UG33y2Mic?start=12&end=110",
+                    "auteur": "Khan Academy",
+                    "lienAuteur": "http://www.khanacademy.org"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "5S14,s=1,n=1"
+                  }, {
+                    "slug": "5S14,s=3,n=1"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nom": "Géométrie",
+        "sousThemes": [
+          {
+            "nom": "Symétries",
+            "objectifs": [
+              {
+                "reference": "5G10",
+                "titre": "Transformer une figure par symétrie axiale",
+                "rappelDuCoursHTML": "Méthode pour construire le symétrique d'un point",
+                "rappelDuCoursImage": "methode_construction_symetrie_axiale.png",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "sxUHj4A3K-8",
+                    "auteur": "20/20",
+                    "lienAuteur": "https://www.youtube.com/channel/UCqjw7aREI90TYZXEg49H04Q"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "5G10-1,s=1,s2=1,n=1"
+                  },
+                  {
+                    "slug": "5G10-2,s=1,s2=1,n=1"
+                  }
+                ]
+              },
+              {
+                "reference": "5G13-1",
+                "titre": "Utiliser les propriétés de conservation du parallélisme, des longueurs et des angles",
+                "rappelDuCoursHTML": "La symétrie par rapport à une droite <strong>conserve</strong> le <strong>parallélisme</strong>, les <strong>longueurs</strong>, et les <strong>angles</strong>.",
+                "rappelDuCoursImage": "exemple_5G13-1.png",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "xv1lONmklBA?end=93",
+                    "auteur": "IDmaths",
+                    "lienAuteur": "https://www.youtube.com/channel/UCzzZOyjuJu0ePPMQFh_B2-A"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "5G13,s=1,s2=1,n=1"
+                  },
+                  {
+                    "slug": "5G13,s=1,s2=2,n=1"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nom": "Triangles",
+            "objectifs": [
+              {
+                "reference": "5G20",
+                "titre": "Construire des triangles connaissant des longueurs et/ou des angles",
+                "rappelDuCoursHTML": "<ul><li>Je commence par tracer le plus grand côté</li><li>Je mesure les autres longueurs mon compas et trace des arcs de cercle</li><li>Je mesure les angles avec le rapporteur et trace des demi-droites</li><li>Je trouve le troisième point à l'intersection des arcs de cercle (et des demi-droites dans le cas des angles)</li></ul>",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "Niveau 1 - Vert Clair",
+                    "slug": "-7UGauYeTdk",
+                    "auteur": "Yvan Monka",
+                    "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
+                  },
+                  {
+                    "titre": "Niveau 2 - Vert Foncé",
+                    "slug": "6mFBqacFzws",
+                    "auteur": "Yvan Monka",
+                    "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
+                  },
+                  {
+                    "titre": "",
+                    "slug": "tX-vhEtJJzY",
+                    "auteur": "Yvan Monka",
+                    "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "5G20-0,s=1,s2=true,n=1"
+                  }, {
+                    "slug": "5G20-2,s=false,n=1"
+                  }
+                ]
+              },{
+                "reference": "5G21",
+                "titre": "Connaître et utiliser l’inégalité triangulaire",
+                "rappelDuCoursHTML": "<p>Dans un triangle non aplati, la longueur de chaque côté est toujours inférieure (&lt;) à la somme (+) des longueurs des deux autres côtés.</p><p>Ça s’appelle l’<strong>inégalité triangulaire</strong></p><p>Ça veut dire qu’il est impossible qu’un côté d’un triangle soit plus grand que la somme des deux autres côtés.</p>",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "PZcC4Hkg-X8",
+                    "auteur": "Maths et Jeux",
+                    "lienAuteur": "https://www.youtube.com/channel/UCj5z973uER7e6ppaAEvYMHQ"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "5G21-1,s=1,n=1"
+                  }, {
+                    "slug": "5G21-1,s=2,n=1"
+                  }
+                ]
+              }, {
+                "reference": "5G22",
+                "titre": "Connaître et utiliser la définition de la médiatrice",
+                "rappelDuCoursHTML": "<p><strong>Définition :</strong><br>La médiatrice d'un segment est la droite qui coupe ce segment perpendiculairement en son milieu.</p><p><strong><strong>Propriété :</strong></strong><br>Si un point appartient à la médiatrice d’un segment, alors il est équidistant (= à la même distance) des deux extrémités de ce segment.</p><p><strong>Propriété :</strong><br>Si un point est équidistant des deux extrémités d’un segment, alors il appartient à la médiatrice de ce segment.</p>",
+                "rappelDuCoursImage": "mediatrice.png",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "41-nginyPbk",
+                    "auteur": "Séverine LEMAITRE",
+                    "lienAuteur": "https://www.youtube.com/channel/UCW4XcuJF3f6uuNGV2BAMX0A"
+                  },
+                  {
+                    "titre": "",
+                    "slug": "-HvUYDfhR0s",
+                    "auteur": "Séverine LEMAITRE",
+                    "lienAuteur": "https://www.youtube.com/channel/UCW4XcuJF3f6uuNGV2BAMX0A"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "5G22-1,s=3,s2=false,n=2"
                   }
                 ]
               }
@@ -94,17 +570,243 @@
                 "titre": "Effectuer des produits ou des quotients avec des nombres relatifs",
                 "rappelDuCoursHTML": "<strong>MÉMÉ</strong>, c'est la <strong>+</strong> vieille : deux fois le <strong>MÊME</strong> signe, ça fait <strong>+</strong>",
                 "rappelDuCoursImage": "",
-                "slugVideo": "-RHuYaV5eSI?end=353",
-                "auteurVideo": "Mathrix",
-                "lienAuteurVideo": "https://www.youtube.com/channel/UCdH4RLzP9UIxV299clvj1rg",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "-RHuYaV5eSI?end=353",
+                    "auteur": "Mathrix",
+                    "lienAuteur": "https://www.youtube.com/channel/UCdH4RLzP9UIxV299clvj1rg"
+                  }
+                ],
                 "exercices": [
                   {
-                    "couleur": "Vert Clair",
                     "slug": "4C10-3,s=10,s2=false,n=1,i=0&ex=4C10-4,s=true,n=1"
                   },
                   {
-                    "couleur": "Vert Foncé",
                     "slug": "4C10-1,s=3,n=1,i=0&ex=4C10-2,s=4,n=1"
+                  }
+                ]
+              }
+            ]
+          }, {
+            "nom": "Calcul littéral",
+            "objectifs": [
+              {
+                "reference": "4L10",
+                "titre": "Développer une expression littérale",
+                "rappelDuCoursHTML": "Développer, c’est transformer un produit en une somme ou une différence.<br><strong>k</strong>(a + b) = <strong>k</strong>a + <strong>k</strong>b<br><strong>k</strong>(a – b) = <strong>k</strong>a – <strong>k</strong>b",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "S_ckQpWzmG8",
+                    "auteur": "Yvan Monka",
+                    "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "4L10,s=1,s2=true,n=2"
+                  },
+                  {
+                    "slug": "4L10,s=3,s2=true,n=2"
+                  },
+                  {
+                    "slug": "3L11,s=2,n=2"
+                  }
+                ]
+              }, {
+                "reference": "4L11",
+                "titre": "Factoriser une expression littérale",
+                "rappelDuCoursHTML": "Factoriser, c’est transformer une somme ou une différence en un produit.<br><strong>k</strong>a + <strong>k</strong>b = <strong>k</strong>(a + b)<br><strong>k</strong>a – <strong>k</strong>b = <strong>k</strong>(a – b)",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "sr_vOR2ALhw",
+                    "auteur": "Yvan Monka",
+                    "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "4L11,s=1,n=2"
+                  },
+                  {
+                    "slug": "4L11,s=2,n=2"
+                  },
+                  {
+                    "slug": "4L11,s=3,n=2"
+                  }
+                ]
+              }, {
+                "reference": "4L16",
+                "titre": "Identifier la structure d’une expression littérale",
+                "rappelDuCoursHTML": "<p>La <strong>somme</strong> est le résultat d’une <strong>addition</strong>.<br>La <strong>différence</strong> est le résultat d’une <strong>soustraction</strong>.<br>Le <strong>produit</strong> est le résultat d’une <strong>multiplication</strong>.<br>Le <strong>quotient</strong> est le résultat d’une <strong>division</strong>.</p><p>La <strong>structure d’une expression</strong> est déterminée par l’<strong>opération</strong> qu’on réaliserait <strong>en dernier</strong> si on voulait faire les calculs.</p><p>Si vous ne savez plus dans quel ordre on fait les calculs, vous pouvez aller voir <a href='/objectif/5C12'>5C12 – Effectuer un enchaînement d’opérations en respectant les priorités opératoires.</a> et <a href='/objectif/5C11'>5C11 – Traduire un enchaînement d’opérations à l’aide d’une expression avec des parenthèses.</a></p>",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "NAPagHvwD04",
+                    "auteur": "Maths et Jeux",
+                    "lienAuteur": "https://www.youtube.com/channel/UCj5z973uER7e6ppaAEvYMHQ"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "4L16,s2=false,s3=2,n=2"
+                  },
+                  {
+                    "slug": "4L16,s2=false,s3=3,n=2"
+                  },
+                  {
+                    "slug": "4L16,s2=false,s3=4,n=2"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }, {
+        "nom": "Organisation et gestion de données, fonctions",
+        "sousThemes": [
+          {
+            "nom": "Statistiques",
+            "objectifs": [
+              {
+                "reference": "4S11",
+                "titre": "Calculer la médiane d’une série de données de petit effectif total",
+                "rappelDuCoursHTML": "<p>Pour calculer une <strong>médiane</strong> :</p><ul><li><strong>on commence par ranger les valeurs dans l'ordre croissant</strong>, puis on distingue deux cas :<ul><li>Si l'effectif total est <strong>impair</strong><ul><li>La médiane est le <strong>nombre du milieu</strong></li></ul></li></ul><ul><li>Si l'effectif total est <strong>pair</strong><ul><li>La médiane est la <strong>moyenne des deux nombres du milieu</strong></li></ul></li></ul></li></ul>",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "23UG33y2Mic?start=114&end=282",
+                    "auteur": "Khan Academy",
+                    "lienAuteur": "http://www.khanacademy.org"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "4S11,s=2,n=2"
+                  }
+                ]
+              }, {
+                "reference": "4S10",
+                "titre": "Représenter des données sous forme de diagramme circulaire",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "4S10-RDC.png",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "DI1hBhEekZ0",
+                    "auteur": "Mate tes Maths",
+                    "lienAuteur": "https://www.youtube.com/channel/UCedwzeKX8pd-l57Bs3pcy3Q"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "4S10,s=3,s2=2,s3=1,n=1"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }, {
+        "nom": "Espace et géométrie",
+        "sousThemes": [
+          {
+            "nom": "Théorème de Pythagore",
+            "objectifs": [
+              {
+                "reference": "4G20",
+                "titre": "Calculer une longueur avec le théorème de Pythagore",
+                "rappelDuCoursHTML": "<p>Si ABC est un triangle rectangle en A, alors d'après le théorème de Pythagore BC² = AB² + AC²</p><p>Remarque :<br>C'est l'hypoténuse (le plus grand côté) qui est toujours toute seule, peu importe que ce soit le côté qu'on cherche ou pas.</p>",
+                "rappelDuCoursImage": "4G20-RDC.png",
+                "videos": [
+                  {
+                    "titre": "Jaune",
+                    "slug": "h4sXOrqGhRE",
+                    "auteur": "*Mme Maths*",
+                    "lienAuteur": "https://www.youtube.com/channel/UCJm9gdUbZhS0m8xGPQySgzg"
+                  }, {
+                    "titre": "Vert Clair",
+                    "slug": "589aaCn3uIE",
+                    "auteur": "*Mme Maths*",
+                    "lienAuteur": "https://www.youtube.com/channel/UCJm9gdUbZhS0m8xGPQySgzg"
+                  }, {
+                    "titre": "Vert Foncé",
+                    "slug": "T04UI5tw3Ds",
+                    "auteur": "*Mme Maths*",
+                    "lienAuteur": "https://www.youtube.com/channel/UCJm9gdUbZhS0m8xGPQySgzg"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "4G20-1,s=1,n=1"
+                  }, {
+                    "slug": "4G20,n=1,s2=1"
+                  }, {
+                    "slug": "4G20,n=1,s2=2"
+                  }
+                ]
+              }, {
+                "reference": "4G22",
+                "titre": "Résoudre un problème géométrique en ayant recours au théorème de Pythagore",
+                "rappelDuCoursHTML": "<a href='/objectif/4G20'>4G20 : Calculer une longueur avec le théorème de Pythagore</a>",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "IfCFBqxEQWk",
+                    "auteur": "EXERCICES MATHS",
+                    "lienAuteur": "https://www.youtube.com/channel/UCL_2K3sFiaMQngZuvQhnRhQ"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "4G22,n=1,s=1"
+                  }
+                ]
+              }, {
+                "reference": "4G23",
+                "titre": "Connaître la définition de la racine carrée d’un nombre positif",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "4G23-RDC.png",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "XrSzQ02raSk?end=240",
+                    "auteur": "Khan Academy",
+                    "lienAuteur": "http://www.khanacademy.org"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "https://mathsmentales.net/old/index.html#cinqCarre?n=8&e=1&t=8&xc=1&a=1&tts=0&d=1&o=1 à 12&f=false&cd=cinqCarre"
+                  }, {
+                    "slug": "4G20-2,s=3,s2=1,n=2"
+                  }
+                ]
+              }, {
+                "reference": "4G24",
+                "titre": "Encadrer la racine carrée d’un nombre positif entre deux entiers",
+                "rappelDuCoursHTML": "<p>Pour encadrer une racine carrée, il suffit d’en déterminer une valeur approchée et d’encadrer cette dernière.<br>(Encadrer, c'est trouver un nombre plus petit et un nombre plus grand, par exemple on peut encadrer 2,7 par 2 et 3.<br>On écrit alors 2 &lt; 2,7 &lt; 3)</p><p>On peut aussi le faire de tête si on connaît les carrés parfaits&nbsp;!</p>",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "GNit9hrlbv4",
+                    "auteur": "jean-yves Labouche",
+                    "lienAuteur": "https://www.youtube.com/channel/UCA-i2IV5_F1ak53ZbED1u1w"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "4G20-6,s=2,n=1"
+                  }, {
+                    "slug": "4G20-6,s=1,n=3"
                   }
                 ]
               }
