@@ -43,16 +43,17 @@ export class ObjectifComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.recupereReference()
-    this.modificationDesAttributs()
+    this.observeChangementsDeRoute()  
   }
 
   /**
-   * Récupère la référence de l'objectif à partir de l'url
+   * Observe les changements de route,
+   * modifie ensuite les paramètres selon la référence
    */
-  recupereReference() {
+   observeChangementsDeRoute() {
     this.route.params.subscribe(params => {
       this.reference = params.ref
+      this.modificationDesAttributs()
     })
   }
 
