@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, isDevMode } from '@angular/core';
 
 interface Projet {
   id: number,
@@ -40,11 +40,26 @@ export class JeuxComponent implements OnInit {
   }
 
   recuperationDesProjets() {
-    this.http.get('/api/users/topmaths-fr/projects').subscribe((projets: any) => {
-      for (const projet of projets) {
-        this.projets.push(projet)
-      }
-    })
+    if(isDevMode()) {
+      this.http.get('/api/users/topmaths-fr/projects').subscribe((projets: any) => {
+        for (const projet of projets) {
+          this.projets.push(projet)
+        }
+        var theJSON = JSON.stringify(projets);
+        var uri = "data:application/json;charset=UTF-8," + encodeURIComponent(theJSON);
+  
+        var a = document.createElement('a');
+        a.href = uri;
+        a.innerHTML = "Right-click and choose 'save as...'";
+        document.body.appendChild(a);
+      })
+    } else {
+      this.http.get('assets/data/projetsScratch.json').subscribe((projets: any) => {
+        for (const projet of projets) {
+          this.projets.push(projet)
+        }
+        })
+    }
   }
 
   determinerLargeurJeu() {
