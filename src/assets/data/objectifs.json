@@ -192,7 +192,7 @@
               {
                 "reference": "5I13",
                 "titre": "Savoir construire une figure simple sur Geogebra",
-                "rappelDuCoursHTML": "<p>Il s'agit ici de faire la même chose que <a href='/objectif/5G20'>5G20 : Construire des triangles connaissant des longueurs et/ou des angles</a> mais sur <a href='https://www.geogebra.org/classic' target='_blank' rel='noopener noreferrer'>Geogebra</a>.</p>",
+                "rappelDuCoursHTML": "<p>Il s'agit ici de faire la même chose que <a href='https://topmaths.fr/objectif/5G20'>5G20 : Construire des triangles connaissant des longueurs et/ou des angles</a> mais sur <a href='https://www.geogebra.org/classic' target='_blank' rel='noopener noreferrer'>Geogebra</a>.</p>",
                 "rappelDuCoursImage": "",
                 "videos": [
                   {
@@ -642,7 +642,7 @@
               }, {
                 "reference": "4L16",
                 "titre": "Identifier la structure d’une expression littérale",
-                "rappelDuCoursHTML": "<p>La <strong>somme</strong> est le résultat d’une <strong>addition</strong>.<br>La <strong>différence</strong> est le résultat d’une <strong>soustraction</strong>.<br>Le <strong>produit</strong> est le résultat d’une <strong>multiplication</strong>.<br>Le <strong>quotient</strong> est le résultat d’une <strong>division</strong>.</p><p>La <strong>structure d’une expression</strong> est déterminée par l’<strong>opération</strong> qu’on réaliserait <strong>en dernier</strong> si on voulait faire les calculs.</p><p>Si vous ne savez plus dans quel ordre on fait les calculs, vous pouvez aller voir <a href='/objectif/5C12'>5C12 – Effectuer un enchaînement d’opérations en respectant les priorités opératoires.</a> et <a href='/objectif/5C11'>5C11 – Traduire un enchaînement d’opérations à l’aide d’une expression avec des parenthèses.</a></p>",
+                "rappelDuCoursHTML": "<p>La <strong>somme</strong> est le résultat d’une <strong>addition</strong>.<br>La <strong>différence</strong> est le résultat d’une <strong>soustraction</strong>.<br>Le <strong>produit</strong> est le résultat d’une <strong>multiplication</strong>.<br>Le <strong>quotient</strong> est le résultat d’une <strong>division</strong>.</p><p>La <strong>structure d’une expression</strong> est déterminée par l’<strong>opération</strong> qu’on réaliserait <strong>en dernier</strong> si on voulait faire les calculs.</p><p>Si vous ne savez plus dans quel ordre on fait les calculs, vous pouvez aller voir <a href='https://topmaths.fr/objectif/5C12'>5C12 – Effectuer un enchaînement d’opérations en respectant les priorités opératoires.</a> et <a href='https://topmaths.fr/objectif/5C11'>5C11 – Traduire un enchaînement d’opérations à l’aide d’une expression avec des parenthèses.</a></p>",
                 "rappelDuCoursImage": "",
                 "videos": [
                   {
@@ -754,7 +754,7 @@
               }, {
                 "reference": "4G22",
                 "titre": "Résoudre un problème géométrique en ayant recours au théorème de Pythagore",
-                "rappelDuCoursHTML": "<a href='/objectif/4G20'>4G20 : Calculer une longueur avec le théorème de Pythagore</a>",
+                "rappelDuCoursHTML": "<a href='https://topmaths.fr/objectif/4G20'>4G20 : Calculer une longueur avec le théorème de Pythagore</a>",
                 "rappelDuCoursImage": "",
                 "videos": [
                   {

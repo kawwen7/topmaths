@@ -15,7 +15,7 @@
         <h2 class="title is-3">Calcul Mental</h2>
         <div *ngIf="presenceCalculMental; else divPasDeCalculMental">
             <div *ngFor="let calculMental of calculsMentaux; index as i">
-                <p *ngIf="calculMental.pageExiste; else calculMentalSansLien">Dans cette séquence, le calcul mental porte sur :<br><a [href]="'/objectif/' + calculMental.reference" target="_blank" rel="noopener noreferrer">{{calculMental.reference}} : {{calculMental.titre}}</a></p>
+                <p *ngIf="calculMental.pageExiste; else calculMentalSansLien">Dans cette séquence, le calcul mental porte sur :<br><a [routerLink]="['/objectif',calculMental.reference]">{{calculMental.reference}} : {{calculMental.titre}}</a></p>
                 <ng-template #calculMentalSansLien><p>Dans cette séquence, le calcul mental porte sur :<br>{{calculMental.reference}} : {{calculMental.titre}}</p></ng-template>
                 <div><br></div>
                 <div *ngFor="let niveau of calculMental.niveaux; index as j">
@@ -36,7 +36,7 @@
             {{questionsFlash.length}} autres portent sur :</p>
         <div style="padding: 5px;">
             <div style="padding: 5px;" *ngFor="let questionFlash of questionsFlash; index as i">
-                <a *ngIf="questionFlash.pageExiste; else questionFlashSansLien" [href]="'/objectif/' + questionFlash.reference">{{questionFlash.reference}} : {{questionFlash.titre}}</a>
+                <a *ngIf="questionFlash.pageExiste; else questionFlashSansLien" [routerLink]="['/objectif',questionFlash.reference]">{{questionFlash.reference}} : {{questionFlash.titre}}</a>
                 <ng-template #questionFlashSansLien>{{questionFlash.reference}} : {{questionFlash.titre}}</ng-template>
             </div>
         </div>
