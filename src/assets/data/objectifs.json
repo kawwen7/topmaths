@@ -754,7 +754,7 @@
               }, {
                 "reference": "4G22",
                 "titre": "Résoudre un problème géométrique en ayant recours au théorème de Pythagore",
-                "rappelDuCoursHTML": "<a href='http://localhost:4200/#/objectif/4G20'>4G20 : Calculer une longueur avec le théorème de Pythagore</a>",
+                "rappelDuCoursHTML": "<a href='#/objectif/4G20'>4G20 : Calculer une longueur avec le théorème de Pythagore</a>",
                 "rappelDuCoursImage": "",
                 "videos": [
                   {
