@@ -36,8 +36,7 @@
             {{questionsFlash.length}} autres portent sur :</p>
         <div style="padding: 5px;">
             <div style="padding: 5px;" *ngFor="let questionFlash of questionsFlash; index as i">
-                <a *ngIf="questionFlash.pageExiste; else questionFlashSansLien" [href]="'/objectif/' + questionFlash.reference"
-                    target="_blank" rel="noopener noreferrer">{{questionFlash.reference}} : {{questionFlash.titre}}</a>
+                <a *ngIf="questionFlash.pageExiste; else questionFlashSansLien" [href]="'/objectif/' + questionFlash.reference">{{questionFlash.reference}} : {{questionFlash.titre}}</a>
                 <ng-template #questionFlashSansLien>{{questionFlash.reference}} : {{questionFlash.titre}}</ng-template>
             </div>
         </div>
