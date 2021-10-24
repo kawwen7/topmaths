@@ -116,7 +116,7 @@ export class ObjectifComponent implements OnInit {
         this.exercices.push({
           couleur: '',
           slug: exercice.slug,
-          lien: 'https://coopmaths.fr/exercice.html?ex=' + exercice.slug + 'i=0&v=e'
+          lien: 'https://coopmaths.fr/exercice.html?ex=' + exercice.slug + 'i=0&v=e&p=1.5'
         })
         if (exercice.slug.slice(0,4) == 'http'){
           this.exercices[this.exercices.length-1].lien = exercice.slug
