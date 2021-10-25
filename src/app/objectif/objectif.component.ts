@@ -114,10 +114,11 @@ export class ObjectifComponent implements OnInit {
     // Le nombre d'exercices varie selon la référence, on a donc quelque chose de dynamique
     for (const exercice of objectif.exercices) {
       if (exercice.slug != '') {
+        exercice.graine = Math.random().toString(16).substr(2, 4)
         this.exercices.push({
           couleur: '',
           slug: exercice.slug,
-          graine: Math.random().toString(16).substr(2, 4),
+          graine: exercice.graine,
           lien: `https://coopmaths.fr/exercice.html?ex=${exercice.slug},i=0&serie=${exercice.graine}&v=e&p=1.5`
         })
         if (exercice.slug.slice(0,4) == 'http'){
