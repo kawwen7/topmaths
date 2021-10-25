@@ -13,6 +13,7 @@ interface Video {
 interface Exercice {
   couleur: string,
   slug: string,
+  graine: string,
   lien: string
 }
 
@@ -116,7 +117,8 @@ export class ObjectifComponent implements OnInit {
         this.exercices.push({
           couleur: '',
           slug: exercice.slug,
-          lien: 'https://coopmaths.fr/exercice.html?ex=' + exercice.slug + 'i=0&v=e&p=1.5'
+          graine: Math.random().toString(16).substr(2, 4),
+          lien: `https://coopmaths.fr/exercice.html?ex=${exercice.slug},i=0&serie=${exercice.graine}&v=e&p=1.5`
         })
         if (exercice.slug.slice(0,4) == 'http'){
           this.exercices[this.exercices.length-1].lien = exercice.slug
@@ -142,6 +144,15 @@ export class ObjectifComponent implements OnInit {
           break;
       }
     }
+  }
+
+  /**
+   * Copie dans le presse papier le lien vers un exercice
+   * @param exercice 
+   */
+  copierLien(exercice: Exercice){
+    navigator.clipboard.writeText(exercice.lien);
+    alert('Le lien vers l\'exercice a été copié')
   }
 
   /**
