@@ -158,7 +158,9 @@ export class SequenceComponent implements OnInit {
                 // On en profite pour créer le lien pour s'entraîner aux questions flash
                 this.lienQuestionsFlash = 'https://coopmaths.fr/mathalea.html?'
                 for (const questionFlash of this.questionsFlash) {
-                  this.lienQuestionsFlash = this.lienQuestionsFlash.concat('ex=', questionFlash.slug, '&')
+                  if (questionFlash.slug != '') {
+                    this.lienQuestionsFlash = this.lienQuestionsFlash.concat('ex=', questionFlash.slug, '&')
+                  }
                   if (questionFlash.reference == JSONobjectif.reference) {
                     questionFlash.pageExiste = true
                   }
