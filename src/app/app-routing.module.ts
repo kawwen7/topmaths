@@ -19,7 +19,8 @@ const routes: Routes = [
   { path: 'sequence/:ref', component: SequenceComponent },
   { path: 'jeux', component: JeuxComponent },
   { path: '', component: AccueilComponent },
-  { path: ':ref', component: ObjectifComponent }
+  { path: ':ref', component: ObjectifComponent },
+  { path: '**', component: AccueilComponent }
 ];
 
 @NgModule({
