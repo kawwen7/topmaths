@@ -606,13 +606,13 @@
                 ],
                 "exercices": [
                   {
-                    "slug": "4L10,s=1,s2=true,n=2"
+                    "slug": "4L10,s=1,s2=true,n=1"
                   },
                   {
-                    "slug": "4L10,s=3,s2=true,n=2"
+                    "slug": "4L10,s=3,s2=true,n=1"
                   },
                   {
-                    "slug": "3L11,s=2,n=2"
+                    "slug": "3L11,s=2,n=1"
                   }
                 ]
               }, {
@@ -630,13 +630,13 @@
                 ],
                 "exercices": [
                   {
-                    "slug": "4L11,s=1,n=2"
+                    "slug": "4L11,s=1,n=1"
                   },
                   {
-                    "slug": "4L11,s=2,n=2"
+                    "slug": "4L11,s=2,n=1"
                   },
                   {
-                    "slug": "4L11,s=3,n=2"
+                    "slug": "4L11,s=3,n=1"
                   }
                 ]
               }, {
@@ -654,13 +654,13 @@
                 ],
                 "exercices": [
                   {
-                    "slug": "4L16,s2=false,s3=2,n=2"
+                    "slug": "4L16,s2=false,s3=2,n=1"
                   },
                   {
-                    "slug": "4L16,s2=false,s3=3,n=2"
+                    "slug": "4L16,s2=false,s3=3,n=1"
                   },
                   {
-                    "slug": "4L16,s2=false,s3=4,n=2"
+                    "slug": "4L16,s2=false,s3=4,n=1"
                   }
                 ]
               }
