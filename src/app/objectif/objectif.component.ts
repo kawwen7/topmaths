@@ -61,7 +61,7 @@ export class ObjectifComponent implements OnInit {
   /**
    * Ouvre objectifs.json,
    * cherche l'objectif qui a pour référence this.reference,
-   * une fois trouvé, lance this.recupereAttributsObjectif(objectif).
+   * une fois trouvé, lance this.recupereAttributsObjectif(objectif)
    */
   modificationDesAttributs() {
     // On cherche dans le json la bonne référence
