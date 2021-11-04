@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ObjectifComponent } from './objectif/objectif.component';
 import { AccueilComponent } from './accueil/accueil.component';
-import { SafePipe } from './safe.pipe';
+import { SafePipe } from './services/safe.pipe';
 import { ObjectifsComponent } from './objectifs/objectifs.component';
 import { SequencesComponent } from './sequences/sequences.component';
 import { SequenceComponent } from './sequence/sequence.component';
