@@ -14,7 +14,8 @@ interface Exercice {
   couleur: string,
   slug: string,
   graine: string,
-  lien: string
+  lien: string,
+  lienACopier?: string
 }
 
 @Component({
@@ -44,14 +45,31 @@ export class ObjectifComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.observeChangementsDeRoute()  
+    this.observeChangementsDeRoute()
+    this.ecouteMessagesPost()
   }
 
+  /**
+   * Ecoute les messages Post pour récupérer l'url et modifier le lien à copier des exercices
+   */
+  ecouteMessagesPost(){
+    window.addEventListener('message', (event) => {
+      const url: string = event.data.url;
+      if (typeof (url) != 'undefined') {
+        for (const exercice of this.exercices) {
+          if (typeof (exercice.lienACopier) != 'undefined') {
+            if (url.split('&serie=')[0].split(',i=')[0] == exercice.lienACopier.split('&serie=')[0].split(',i=')[0]) { // Lorsqu'un exercice n'est pas interactifReady, le ,i=0 est retiré de l'url
+              exercice.lienACopier = url
+            }
+          }
+        }
+      }
+    });}
   /**
    * Observe les changements de route,
    * modifie ensuite les paramètres selon la référence
    */
-   observeChangementsDeRoute() {
+  observeChangementsDeRoute() {
     this.route.params.subscribe(params => {
       this.reference = params.ref
       this.modificationDesAttributs()
@@ -119,10 +137,11 @@ export class ObjectifComponent implements OnInit {
           couleur: '',
           slug: exercice.slug,
           graine: exercice.graine,
-          lien: `https://coopmaths.fr/exercice.html?ex=${exercice.slug},i=0&serie=${exercice.graine}&v=e&p=1.5`
+          lien: `https://coopmaths.fr/mathalea.html?ex=${exercice.slug},i=0&serie=${exercice.graine}&v=embed&p=1.5`
         })
-        if (exercice.slug.slice(0,4) == 'http'){
-          this.exercices[this.exercices.length-1].lien = exercice.slug
+        this.exercices[this.exercices.length - 1].lienACopier = this.exercices[this.exercices.length - 1].lien
+        if (exercice.slug.slice(0, 4) == 'http') {
+          this.exercices[this.exercices.length - 1].lien = exercice.slug
         }
       }
       // On ajoute la couleur selon le nombre d'exercices
@@ -151,9 +170,11 @@ export class ObjectifComponent implements OnInit {
    * Copie dans le presse papier le lien vers un exercice
    * @param exercice 
    */
-  copierLien(exercice: Exercice){
-    navigator.clipboard.writeText(exercice.lien);
-    alert('Le lien vers l\'exercice a été copié')
+  copierLien(exercice: Exercice) {
+    if (typeof (exercice.lienACopier) != 'undefined') {
+      navigator.clipboard.writeText(exercice.lienACopier);
+      alert('Le lien vers l\'exercice a été copié')
+    }
   }
 
   /**
