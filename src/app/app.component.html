@@ -10,6 +10,15 @@
     <li [ngClass]="{'is-active': ongletActif == 'jeux'}"><a routerLink="/jeux" routerLinkActive="active"
         class="tabs-menu-link">Jeux</a></li>
   </ul>
+  <a *ngIf="dataService.user.identifiant != ''" routerLink="profil" routerLinkActive="active">
+    <i *ngIf="dataService.user.lienAvatar == ''" class="fas fa-user"></i>
+    <figure *ngIf="dataService.user.lienAvatar != ''" class="image is-32x32">
+      <img [src]="dataService.user.lienAvatar">
+    </figure>
+  </a>
+  <a *ngIf="dataService.user.identifiant == ''" routerLink="login" routerLinkActive="active">
+    <i class="far fa-user"></i>
+  </a>
 </div>
 <!-- Affichage principal -->
 <router-outlet></router-outlet>

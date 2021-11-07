@@ -1,0 +1,13 @@
+<div class="container is-max-desktop" style="text-align:center">
+  <div class="box">
+    <h1 class="title is-3">Connexion</h1>
+    <p>Entre ton identifiant pour pouvoir te connecter.</p><br>
+    <form [formGroup]="angForm" (ngSubmit)="login(angForm)" autocomplete="off">
+      <div class="form-group">
+        <input type="identifiant" name="identifiant" formControlName="identifiant" autocomplete="off" class="form-control input-sm"
+          placeholder="Identifiant" size="5">
+      </div><br>
+      <button type="submit" class="button is-success is-rounded">Se connecter</button>
+    </form>
+  </div>
+</div>

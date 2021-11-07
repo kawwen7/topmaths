@@ -1,0 +1,38 @@
+<div class="container" style="text-align: center">
+  <div>
+  <img [src]="lienAvatar" width="80px" />
+</div>
+  <button class="button is-link" (click)="ouvrirModal()">Modifier l'avatar</button>
+  <br><br>
+  <button class="button is-warning" (click)="appComponent.logout()">Se déconnecter</button>
+</div>
+
+<!-- Modale de création d'avatar -->
+<div id="myModal" class="modal" style="text-align: center">
+  <div class="modal-background" (click)="fermerModal()"></div>
+  <div><br><br><br></div>
+  <div class="modal-content" style="background-color: white;">
+    <!-- Avatar -->
+    <div><img [src]="lienAvatar" width="200px" /></div>
+    <!-- Boutons -->
+          <button (click)="fermerModal()" class="button is-danger">Annuler</button>
+          <i class="fas fa-2x fa-question is-large" (click)="avatarAleatoire()" style="padding-left: 50px; padding-right: 50px"></i>
+          <button (click)="enregistrerAvatar()" class="button is-success">Enregistrer</button>
+    <!-- Sliders -->
+    <ngx-slider [(value)]="yeux.value" [options]="yeux.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
+    <ngx-slider [(value)]="sourcils.value" [options]="sourcils.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
+    <ngx-slider [(value)]="bouche.value" [options]="bouche.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
+    <ngx-slider [(value)]="accessoire.value" [options]="accessoire.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
+    <ngx-slider [(value)]="cheveux.value" [options]="cheveux.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
+    <ngx-slider [(value)]="couleurPeau.value" [options]="couleurPeau.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
+    <ngx-slider [(value)]="couleurCheveux.value" [options]="couleurCheveux.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p style="text-decoration: white">Les avatars ont été dessinés par <a href="https://www.instagram.com/lischis_adventures/">Lisa Wischofsky</a> sous
+          licence CC BY 4.0.</p>
+      </div>
+    </footer>
+  </div>
+  <button class="modal-close is-large" aria-label="close" (click)="fermerModal()"></button>
+</div>
