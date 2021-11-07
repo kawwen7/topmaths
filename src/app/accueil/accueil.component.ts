@@ -6,9 +6,9 @@ import { Component, OnInit, HostListener } from '@angular/core';
   styleUrls: ['../../assets/css/mystyles.css']
 })
 export class AccueilComponent implements OnInit {
-  isPortrait : boolean
+  portrait : boolean
   constructor() {
-    this.isPortrait = true
+    this.portrait = true
     this.isPortraitUpdate()
   }
 
@@ -30,6 +30,6 @@ export class AccueilComponent implements OnInit {
     * et met à jour this.isPortrait
     */
    isPortraitUpdate() {
-    window.innerHeight > window.innerWidth ? this.isPortrait = true : this.isPortrait = false
+    window.innerHeight > window.innerWidth ? this.portrait = true : this.portrait = false
    }
 }
