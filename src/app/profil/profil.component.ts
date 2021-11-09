@@ -22,8 +22,9 @@ export class ProfilComponent implements OnInit {
   cheveux: Slider
   couleurPeau: Slider
   couleurCheveux: Slider
-  modal: any
+  modaleAvatar: any
   user: User
+  scoresActives : boolean
 
   constructor(public appComponent: AppComponent, private dataService: ApiService) {
     this.yeux = {
@@ -98,10 +99,31 @@ export class ProfilComponent implements OnInit {
     }
     this.user = dataService.recupereProfil()
     this.lienAvatar = this.user.lienAvatar
+    if (dataService.getToken('scores') == 'actives') {
+      this.scoresActives = true
+    } else {
+      this.scoresActives = false
+    }
   }
 
   ngOnInit(): void {
-    this.modal = document.getElementById("myModal")
+    this.modaleAvatar = document.getElementById("modaleAvatar")
+  }
+
+  /**
+   * Foncion servant à activer ou désactiver les scores en :
+   * modifiant le token ;
+   * modifiant la colonne dans la base de données (à coder)
+   * @param activer true pour activer les scores, false pour les désactiver
+   */
+  scores(activer: boolean) {
+    if (activer) {
+      this.dataService.setToken('scores', 'actives')
+      this.scoresActives = true
+    } else {
+      this.dataService.setToken('scores', 'desactives')
+      this.scoresActives = false
+    }
   }
 
   /**
@@ -145,7 +167,7 @@ export class ProfilComponent implements OnInit {
    */
   enregistrerAvatar(){
     this.dataService.majAvatar(this.lienAvatar)
-    this.modal.style.display = "none";
+    this.modaleAvatar.style.display = "none";
   }
 
   /**
@@ -237,20 +259,28 @@ export class ProfilComponent implements OnInit {
   }
 
   /**
-   * Ouvre la modale de création d'avatar
+   * Ouvre la modale
+   * @param type peut être avatar ou pseudo
    */
-  ouvrirModal() {
-    this.modal.style.display = "block"
+   ouvrirModale(type: string) {
+     if (type == 'avatar') {
+      this.modaleAvatar.style.display = "block"
+     }
   }
 
   /**
    * Ferme la modale
+   * @param type peut être avatar ou pseudo
    */
-  fermerModal() {
-    const lienAvatar = this.dataService.getToken('lienAvatar')
-    if (lienAvatar != null) this.user.lienAvatar = lienAvatar
-    this.lienAvatar = this.user.lienAvatar
-    this.modal.style.display = "none"
+  fermerModale(type: string) {
+    if (type == 'avatar'){
+      // fermerModale est utilisée pour quitter la création d'avatar sans enregistrer
+      // on récupère donc l'ancien avatar qui est stocké dans le token
+      const lienAvatar = this.dataService.getToken('lienAvatar')
+      if (lienAvatar != null) this.user.lienAvatar = lienAvatar
+      this.lienAvatar = this.user.lienAvatar
+      this.modaleAvatar.style.display = "none"
+    }
   }
 
 }

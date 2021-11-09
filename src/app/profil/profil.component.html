@@ -1,23 +1,36 @@
 <div class="container" style="text-align: center">
+  <!-- Avatar -->
   <div>
-  <img [src]="lienAvatar" width="80px" />
-</div>
-  <button class="button is-link" (click)="ouvrirModal()">Modifier l'avatar</button>
+    <img [src]="lienAvatar" width="80px" (click)="ouvrirModale('avatar')" />
+  </div>
+  <button class="button is-link" (click)="ouvrirModale('avatar')">Modifier l'avatar</button>
   <br><br>
+  <!-- Scores -->
+  <div class="columns is-centered">
+    <div class="column is-narrow">
+      <button *ngIf="!scoresActives" type="submit" id="activerScores" class="button is-success is-outlined" (click)="scores(true)">Activer les scores</button>
+      <button *ngIf="scoresActives" class="button is-success">Les scores sont activés</button>
+    </div>
+    <div class="column is-narrow">
+      <button *ngIf="scoresActives" type="submit" id="desactiverScores" class="button is-danger is-outlined" (click)="scores(false)">Désactiver les scores</button>
+      <button *ngIf="!scoresActives" class="button is-danger">Les scores sont désactivés</button>
+    </div>
+  </div>
+  <!-- Déconnexion -->
   <button class="button is-warning" (click)="appComponent.logout()">Se déconnecter</button>
 </div>
 
 <!-- Modale de création d'avatar -->
-<div id="myModal" class="modal" style="text-align: center">
-  <div class="modal-background" (click)="fermerModal()"></div>
+<div id="modaleAvatar" class="modal" style="text-align: center">
+  <div class="modal-background" (click)="fermerModale('avatar')"></div>
   <div><br><br><br></div>
   <div class="modal-content" style="background-color: white;">
     <!-- Avatar -->
     <div><img [src]="lienAvatar" width="200px" /></div>
     <!-- Boutons -->
-          <button (click)="fermerModal()" class="button is-danger">Annuler</button>
-          <i class="fas fa-2x fa-question is-large" (click)="avatarAleatoire()" style="padding-left: 50px; padding-right: 50px"></i>
-          <button (click)="enregistrerAvatar()" class="button is-success">Enregistrer</button>
+    <button (click)="fermerModale('avatar')" class="button is-danger">Annuler</button>
+    <i class="fas fa-2x fa-question is-large" (click)="avatarAleatoire()" style="padding-left: 50px; padding-right: 50px"></i>
+    <button (click)="enregistrerAvatar()" class="button is-success">Enregistrer</button>
     <!-- Sliders -->
     <ngx-slider [(value)]="yeux.value" [options]="yeux.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
     <ngx-slider [(value)]="sourcils.value" [options]="sourcils.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
@@ -26,13 +39,14 @@
     <ngx-slider [(value)]="cheveux.value" [options]="cheveux.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
     <ngx-slider [(value)]="couleurPeau.value" [options]="couleurPeau.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
     <ngx-slider [(value)]="couleurCheveux.value" [options]="couleurCheveux.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
-    <!-- Footer -->
+    <!-- Copyright -->
     <footer class="footer">
       <div class="content has-text-centered">
-        <p style="text-decoration: white">Les avatars ont été dessinés par <a href="https://www.instagram.com/lischis_adventures/">Lisa Wischofsky</a> sous
+        <p style="text-decoration: white">Les avatars ont été dessinés par <a
+            href="https://www.instagram.com/lischis_adventures/">Lisa Wischofsky</a> sous
           licence CC BY 4.0.</p>
       </div>
     </footer>
   </div>
-  <button class="modal-close is-large" aria-label="close" (click)="fermerModal()"></button>
+  <button class="modal-close is-large" aria-label="close" (click)="fermerModale('avatar')"></button>
 </div>
