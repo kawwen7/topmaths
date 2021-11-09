@@ -11,8 +11,7 @@
         class="tabs-menu-link">Jeux</a></li>
   </ul>
   <a *ngIf="dataService.user.identifiant != ''" routerLink="profil" routerLinkActive="active">
-    <i *ngIf="dataService.user.lienAvatar == ''" class="fas fa-user"></i>
-    <figure *ngIf="dataService.user.lienAvatar != ''" class="image is-32x32">
+    <figure class="image is-32x32">
       <img [src]="dataService.user.lienAvatar">
     </figure>
   </a>

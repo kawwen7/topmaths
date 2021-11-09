@@ -1,7 +1,7 @@
 import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationStart, Event as NavigationEvent } from '@angular/router';
 import { ApiService } from './services/api.service';
-import { User } from './services/user';
+import { LoginComponent } from './login/login.component';
 
 @Component({
   selector: 'app-root',
@@ -16,13 +16,22 @@ export class AppComponent implements OnDestroy {
   constructor(private router: Router, public dataService: ApiService) {
     this.ongletActif = 'accueil'
     this.recupereOngletActif()
-    this.surveilleChangementProfil()
+    this.recupereProfil()
   }
 
   ngOnDestroy() {
     this.event$.unsubscribe();
   }
 
+  /**
+   * Vérifie la présence d'un token de connexion et récupère le profil utilisateur le cas échéant
+   */
+  recupereProfil(){
+    const identifiant = this.dataService.getToken()
+    if ( identifiant != null) {
+      this.dataService.login(identifiant)
+    }
+  }
   /**
    * Récupère l'onglet actif à partir de l'url pour le mettre en surbrillance.
    */
@@ -38,24 +47,13 @@ export class AppComponent implements OnDestroy {
   }
 
   /**
-   * Écoute l'événement qui prévient d'une mise à jour du profil.
-   * Lance this.majProfil(user) en réponse à chaque événement.
-   */
-  private surveilleChangementProfil() {
-    this.dataService.majProfil.subscribe(user =>
-      this.dataService.user.lienAvatar = user.lienAvatar
-    );
-  }
-
-  /**
    * Supprime le token de clé 'identifiant' utilisé pour vérifier si l'utilisateur est connecté.
    * Supprime aussi le token de clé 'lienAvatar'
    * Toggle les profilbtn et loginbtn.
    * Renvoie vers l'accueil.
    */
   logout() {
-    this.dataService.deleteToken('identifiant');
-    this.dataService.deleteToken('lienAvatar');
+    this.dataService.deleteToken();
     this.dataService.user.identifiant = ''
     this.dataService.user.lienAvatar = ''
     this.router.navigate(['accueil'])
