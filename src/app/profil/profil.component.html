@@ -17,7 +17,7 @@
     </div>
   </div>
   <!-- Déconnexion -->
-  <div *ngIf="dataService.user.lastLogin != ''">
+  <div *ngIf="dataService.user.lastLogin != '' && derniereConnexion != 'undefined NaN undefined NaN à NaNhNaNmin'">
     <div><br></div>
     <p style="text-decoration:lightslategray; font-size: small;">Quelqu'un s'est connecté sur ce compte le {{derniereConnexion}}.<br>
     Si cette date ne te dit rien, c'est sûrement que ton identifiant est trop facile à deviner et que quelqu'un d'autre l'a utilisé !</p>
