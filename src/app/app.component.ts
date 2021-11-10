@@ -1,7 +1,6 @@
 import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationStart, Event as NavigationEvent } from '@angular/router';
 import { ApiService } from './services/api.service';
-import { LoginComponent } from './login/login.component';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +13,7 @@ export class AppComponent implements OnDestroy {
   event$: any
 
   constructor(private router: Router, public dataService: ApiService) {
+    this.redirectionHTTPS()
     this.ongletActif = 'accueil'
     this.recupereOngletActif()
     this.recupereProfil()
@@ -23,12 +23,18 @@ export class AppComponent implements OnDestroy {
     this.event$.unsubscribe();
   }
 
+  redirectionHTTPS(){
+    if (window.location.protocol == 'http:') {
+      window.location.href = window.location.href.replace('http:', 'https:');
+    }
+  }
+
   /**
    * Vérifie la présence d'un token de connexion et récupère le profil utilisateur le cas échéant
    */
-  recupereProfil(){
+  recupereProfil() {
     const identifiant = this.dataService.getToken()
-    if ( identifiant != null) {
+    if (identifiant != null) {
       this.dataService.login(identifiant)
     }
   }
