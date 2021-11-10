@@ -23,10 +23,9 @@ export class ProfilComponent implements OnInit {
   couleurPeau: Slider
   couleurCheveux: Slider
   modaleAvatar: any
-  user: User
-  scoresActives : boolean
+  derniereConnexion: string
 
-  constructor(public appComponent: AppComponent, private dataService: ApiService) {
+  constructor(public appComponent: AppComponent, public dataService: ApiService) {
     this.yeux = {
       value: 1,
       options: {
@@ -97,17 +96,43 @@ export class ProfilComponent implements OnInit {
         showTicks: true
       }
     }
-    this.user = dataService.recupereProfil()
-    this.lienAvatar = this.user.lienAvatar
-    if (dataService.getToken('scores') == 'actives') {
-      this.scoresActives = true
-    } else {
-      this.scoresActives = false
-    }
+    this.lienAvatar = this.dataService.user.lienAvatar
+    this.derniereConnexion = this.dateDeDerniereConnexion()
   }
 
   ngOnInit(): void {
     this.modaleAvatar = document.getElementById("modaleAvatar")
+  }
+
+  /**
+   * Récupère la date de connexion et la formate pour un affichage en français
+   * @returns string
+   */
+  dateDeDerniereConnexion() {
+    let date = new Date(this.dataService.user.lastLogin);
+    date.setMinutes(date.getMinutes() - date.getTimezoneOffset() - 60); //Le serveur mysql est en UTC + 1 ?
+    const jour = new Array(7);
+    jour[0] = 'Dimanche'
+    jour[1] = 'Lundi'
+    jour[2] = 'Mardi'
+    jour[3] = 'Mercredi'
+    jour[4] = 'Jeudi'
+    jour[5] = 'Vendredi'
+    jour[6] = 'Samedi'
+    const mois = new Array();
+    mois[0] = 'Janvier'
+    mois[1] = 'Février'
+    mois[2] = 'Mars'
+    mois[3] = 'Avril'
+    mois[4] = 'Mai'
+    mois[5] = 'Juin'
+    mois[6] = 'Juillet'
+    mois[7] = 'Août'
+    mois[8] = 'Septembre'
+    mois[9] = 'Octobre'
+    mois[10] = 'Novembre'
+    mois[11] = 'Décembre'
+    return `${jour[date.getDay()]} ${date.getDate()} ${mois[date.getMonth()]} ${date.getFullYear()} à ${date.getHours()}h${date.getMinutes()}min`
   }
 
   /**
@@ -118,18 +143,16 @@ export class ProfilComponent implements OnInit {
    */
   scores(activer: boolean) {
     if (activer) {
-      this.dataService.setToken('scores', 'actives')
-      this.scoresActives = true
+      this.dataService.majScores('actives')
     } else {
-      this.dataService.setToken('scores', 'desactives')
-      this.scoresActives = false
+      this.dataService.majScores('desactives')
     }
   }
 
   /**
    * Place les sliders aléatoirement pour créer un avatar aléatoire
    */
-  avatarAleatoire(){
+  avatarAleatoire() {
     let yeux = 1
     let sourcils = 1
     let bouche = 1
@@ -137,19 +160,19 @@ export class ProfilComponent implements OnInit {
     let cheveux = 1
     let couleurPeau = 1
     let couleurCheveux = 1
-    if (typeof(this.yeux.options.ceil) != 'undefined') yeux = Math.random()*this.yeux.options.ceil
+    if (typeof (this.yeux.options.ceil) != 'undefined') yeux = Math.random() * this.yeux.options.ceil
     this.yeux.value = yeux
-    if (typeof(this.sourcils.options.ceil) != 'undefined') sourcils = Math.random()*this.sourcils.options.ceil
+    if (typeof (this.sourcils.options.ceil) != 'undefined') sourcils = Math.random() * this.sourcils.options.ceil
     this.sourcils.value = sourcils
-    if (typeof(this.bouche.options.ceil) != 'undefined') bouche = Math.random()*this.bouche.options.ceil
+    if (typeof (this.bouche.options.ceil) != 'undefined') bouche = Math.random() * this.bouche.options.ceil
     this.bouche.value = bouche
-    if (typeof(this.accessoire.options.ceil) != 'undefined') accessoire = Math.random()*this.accessoire.options.ceil
+    if (typeof (this.accessoire.options.ceil) != 'undefined') accessoire = Math.random() * this.accessoire.options.ceil
     this.accessoire.value = accessoire
-    if (typeof(this.cheveux.options.ceil) != 'undefined') cheveux = Math.random()*this.cheveux.options.ceil
+    if (typeof (this.cheveux.options.ceil) != 'undefined') cheveux = Math.random() * this.cheveux.options.ceil
     this.cheveux.value = cheveux
-    if (typeof(this.couleurPeau.options.ceil) != 'undefined') couleurPeau = Math.random()*this.couleurPeau.options.ceil
+    if (typeof (this.couleurPeau.options.ceil) != 'undefined') couleurPeau = Math.random() * this.couleurPeau.options.ceil
     this.couleurPeau.value = couleurPeau
-    if (typeof(this.couleurCheveux.options.ceil) != 'undefined') couleurCheveux = Math.random()*this.couleurCheveux.options.ceil
+    if (typeof (this.couleurCheveux.options.ceil) != 'undefined') couleurCheveux = Math.random() * this.couleurCheveux.options.ceil
     this.couleurCheveux.value = couleurCheveux
     this.majLienAvatar()
   }
@@ -165,7 +188,7 @@ export class ProfilComponent implements OnInit {
   /**
    * Enregistre le lienAvatar dans le localStorage et ferme la modale
    */
-  enregistrerAvatar(){
+  enregistrerAvatar() {
     this.dataService.majAvatar(this.lienAvatar)
     this.modaleAvatar.style.display = "none";
   }
@@ -262,10 +285,10 @@ export class ProfilComponent implements OnInit {
    * Ouvre la modale
    * @param type peut être avatar ou pseudo
    */
-   ouvrirModale(type: string) {
-     if (type == 'avatar') {
+  ouvrirModale(type: string) {
+    if (type == 'avatar') {
       this.modaleAvatar.style.display = "block"
-     }
+    }
   }
 
   /**
@@ -273,12 +296,10 @@ export class ProfilComponent implements OnInit {
    * @param type peut être avatar ou pseudo
    */
   fermerModale(type: string) {
-    if (type == 'avatar'){
+    if (type == 'avatar') {
       // fermerModale est utilisée pour quitter la création d'avatar sans enregistrer
-      // on récupère donc l'ancien avatar qui est stocké dans le token
-      const lienAvatar = this.dataService.getToken('lienAvatar')
-      if (lienAvatar != null) this.user.lienAvatar = lienAvatar
-      this.lienAvatar = this.user.lienAvatar
+      // on récupère donc l'avatar de this.dataService.user
+      this.lienAvatar = this.dataService.user.lienAvatar
       this.modaleAvatar.style.display = "none"
     }
   }

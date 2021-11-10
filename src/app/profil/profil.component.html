@@ -8,15 +8,21 @@
   <!-- Scores -->
   <div class="columns is-centered">
     <div class="column is-narrow">
-      <button *ngIf="!scoresActives" type="submit" id="activerScores" class="button is-success is-outlined" (click)="scores(true)">Activer les scores</button>
-      <button *ngIf="scoresActives" class="button is-success">Les scores sont activés</button>
+      <button *ngIf="dataService.user.scores != 'actives'" type="submit" id="activerScores" class="button is-success is-outlined" (click)="scores(true)">Activer les scores</button>
+      <button *ngIf="dataService.user.scores == 'actives'" class="button is-success">Les scores sont activés</button>
     </div>
     <div class="column is-narrow">
-      <button *ngIf="scoresActives" type="submit" id="desactiverScores" class="button is-danger is-outlined" (click)="scores(false)">Désactiver les scores</button>
-      <button *ngIf="!scoresActives" class="button is-danger">Les scores sont désactivés</button>
+      <button *ngIf="dataService.user.scores == 'actives'" type="submit" id="desactiverScores" class="button is-danger is-outlined" (click)="scores(false)">Désactiver les scores</button>
+      <button *ngIf="dataService.user.scores != 'actives'" class="button is-danger">Les scores sont désactivés</button>
     </div>
   </div>
   <!-- Déconnexion -->
+  <div *ngIf="dataService.user.lastLogin != ''">
+    <div><br></div>
+    <p style="text-decoration:lightslategray; font-size: small;">Quelqu'un s'est connecté sur ce compte le {{derniereConnexion}}.<br>
+    Si cette date ne te dit rien, c'est sûrement que ton identifiant est trop facile à deviner et que quelqu'un d'autre l'a utilisé !</p>
+    <div><br></div>
+  </div>
   <button class="button is-warning" (click)="appComponent.logout()">Se déconnecter</button>
 </div>
 

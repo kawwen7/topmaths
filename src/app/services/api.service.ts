@@ -17,7 +17,9 @@ export class ApiService {
   constructor(private httpClient: HttpClient, private router: Router) {
     this.user = {
       identifiant: '',
-      lienAvatar: ''
+      lienAvatar: '',
+      scores: '',
+      lastLogin: ''
     }
   }
 
@@ -32,7 +34,9 @@ export class ApiService {
     if (isDevMode()) {
       this.user = {
         identifiant: 'X',
-        lienAvatar: 'https://avatars.dicebear.com/api/adventurer/DevMode.svg'
+        lienAvatar: 'https://avatars.dicebear.com/api/adventurer/DevMode.svg',
+        scores: 'desactives',
+        lastLogin: 'July 21, 1983 01:15:00'
       }
       this.setToken(this.user.identifiant);
       this.router.navigate(['profil'])
@@ -122,6 +126,8 @@ export class ApiService {
       .pipe(map(Users => {
         this.setToken(Users[0].identifiant);
         this.user = Users[0]
+        // Après avoir récupéré le profil utilisateur, on met à jour le lastLogin
+        this.majLastLogin()
         return Users;
       }));
   }
@@ -145,7 +151,41 @@ export class ApiService {
    */
   majAvatar(lienAvatar: string){
     this.user.lienAvatar = lienAvatar
-    this.updateAvatar()
+    this.update('lienAvatar')
+    .pipe(first())
+    .subscribe(
+      data => {
+        const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
+        this.router.navigate([redirect]);
+      },
+      error => {
+        console.log(error)
+      });
+  }
+
+  /**
+   * Modifie le token lienAvatar et le lienAvatar dans la bdd
+   * @param scores peut être 'actives' ou 'desactives'
+   */
+   majScores(scores: string){
+    this.user.scores = scores
+    this.update('scores')
+    .pipe(first())
+    .subscribe(
+      data => {
+        const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
+        this.router.navigate([redirect]);
+      },
+      error => {
+        console.log(error)
+      });
+  }
+
+  /**
+   * Modifie la date de dernière connexion
+   */
+   majLastLogin(){
+    this.update('lastLogin')
     .pipe(first())
     .subscribe(
       data => {
@@ -161,10 +201,9 @@ export class ApiService {
    * Modifie le lienAvatar lié à l'identifiant dans la base de données
    * @returns 
    */
-  updateAvatar(){
-    return this.httpClient.post<any>(this.baseUrl + '/edit.php', this.user)
+  update(column: string){
+    return this.httpClient.post<any>(this.baseUrl + `/update${column}.php`, this.user)
       .pipe(map(User => {
-        console.log(User)
         return User;
       }));
   }

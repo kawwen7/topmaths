@@ -61,7 +61,7 @@ export class ObjectifComponent implements OnInit {
           if (typeof (exercice.lienACopier) != 'undefined') {
             if (url.split('&serie=')[0].split(',i=')[0] == exercice.lienACopier.split('&serie=')[0].split(',i=')[0]) { // Lorsqu'un exercice n'est pas interactifReady, le ,i=0 est retiré de l'url
               exercice.graine = event.data.graine
-              if (this.dataService.getToken('scores') == 'actives') { // Si on est en interactif, on retire l'userId et on ajoute la graine
+              if (this.dataService.user.scores == 'actives') { // Si on est en interactif, on retire l'userId et on ajoute la graine
                 exercice.lienACopier = url.split('&userId=')[0] + '&serie=' + exercice.graine
               } else {
                 exercice.lienACopier = url
@@ -137,8 +137,8 @@ export class ObjectifComponent implements OnInit {
     this.exercices = [] // Au cas où l'attribut ne serait pas réinitialisé lors d'un changement de référence
     let userId = ''
     let i = 'i=0'
-    if (this.dataService.getToken('scores') == 'actives') {
-      userId = `&userId=VAL${this.dataService.getToken('identifiant')}`
+    if (this.dataService.user.scores == 'actives') {
+      userId = `&userId=VAL${this.dataService.user.identifiant}`
       i = 'i=1'
     }
     // Le nombre d'exercices varie selon la référence, on a donc quelque chose de dynamique

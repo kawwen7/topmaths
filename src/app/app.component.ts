@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, isDevMode, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationStart, Event as NavigationEvent } from '@angular/router';
 import { ApiService } from './services/api.service';
 
@@ -23,8 +23,11 @@ export class AppComponent implements OnDestroy {
     this.event$.unsubscribe();
   }
 
+  /**
+   * Redirige vers une version sécurisée du site si on n'est pas en mode développement
+   */
   redirectionHTTPS(){
-    if (window.location.protocol == 'http:') {
+    if (!isDevMode() && window.location.protocol == 'http:') {
       window.location.href = window.location.href.replace('http:', 'https:');
     }
   }
