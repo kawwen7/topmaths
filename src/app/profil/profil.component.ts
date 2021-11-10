@@ -132,7 +132,7 @@ export class ProfilComponent implements OnInit {
     mois[9] = 'Octobre'
     mois[10] = 'Novembre'
     mois[11] = 'Décembre'
-    return `${jour[date.getDay()]} ${date.getDate()} ${mois[date.getMonth()]} ${date.getFullYear()} à ${date.getHours()}h${date.getMinutes()}min`
+    return `${jour[date.getDay()]} ${date.getDate()} ${mois[date.getMonth()]} ${date.getFullYear()} à ${date.getHours()}h${this.nb2chiffres(date.getMinutes())}min`
   }
 
   /**

@@ -36,7 +36,7 @@ export class ApiService {
         identifiant: 'X',
         lienAvatar: 'https://avatars.dicebear.com/api/adventurer/DevMode.svg',
         scores: 'desactives',
-        lastLogin: 'July 21, 1983 01:15:00'
+        lastLogin: ''
       }
       this.setToken(this.user.identifiant);
       this.router.navigate(['profil'])
@@ -84,7 +84,7 @@ export class ApiService {
    * @param identifiant Données du formulaire transmises par la fonction de login
    */
   erreurLogin(identifiant: string) {
-    alert('Cet identifiant n\'existe pas, le créer ?')
+    console.log('identifiant non trouvé, on en crée un nouveau')
     this.registration(identifiant)
   }
 
@@ -99,7 +99,7 @@ export class ApiService {
     } else if (typeErreur == 'caracteres_speciaux') {
       alert('Erreur : tu ne dois utiliser que des chiffres et des lettres sans accent')
     } else if (typeErreur == 'userregistration') {
-      alert('Une erreur s\'est produite lors de l\'accès à la base de données. :' + erreur.toString())
+      alert('Une erreur s\'est produite lors de l\'accès à la base de données (peut-être que la connexion n\'est pas sécurisée ? (https)')
     } else {
       alert('Une erreur s\'est produite')
     }
