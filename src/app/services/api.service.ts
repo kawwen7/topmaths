@@ -30,7 +30,7 @@ export class ApiService {
    * Si pas connecté, on renvoie vers erreurLogin pour tenter de créer l'identifiant.
    * @param identifiant
    */
-   login(identifiant: string, redirect?: boolean) {
+   login(identifiant: string, redirige?: boolean) {
     if (isDevMode()) {
       this.user = {
         identifiant: 'X',
@@ -45,7 +45,7 @@ export class ApiService {
         .pipe(first())
         .subscribe(
           data => {
-            if (redirect) {
+            if (redirige) {
               const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
               this.router.navigate([redirect]);
             }
@@ -189,8 +189,6 @@ export class ApiService {
     .pipe(first())
     .subscribe(
       data => {
-        const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
-        this.router.navigate([redirect]);
       },
       error => {
         console.log(error)

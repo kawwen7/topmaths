@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 
@@ -33,8 +33,9 @@ export class ObjectifComponent implements OnInit {
   exercices: Exercice[]
   lienFiche: string
   lienAnki: string
+  portrait : boolean
 
-  constructor(public http: HttpClient, private route: ActivatedRoute, private dataService: ApiService) {
+  constructor(public http: HttpClient, private route: ActivatedRoute, public dataService: ApiService) {
     this.reference = ''
     this.titre = ''
     this.rappelDuCoursHTML = ''
@@ -43,12 +44,32 @@ export class ObjectifComponent implements OnInit {
     this.exercices = []
     this.lienFiche = ''
     this.lienAnki = ''
+    this.portrait = true
+    this.isPortraitUpdate()
   }
 
   ngOnInit(): void {
     this.observeChangementsDeRoute()
     this.ecouteMessagesPost()
   }
+
+  /**
+   * On détecte les changements de taille de fenêtre,
+   * et on ajuste la largeur des cartes en conséquence.
+   * @param event
+   */
+   @HostListener('window:resize', ['$event'])
+   onResize(event: any) {
+     this.isPortraitUpdate()
+   }
+
+   /**
+    * Vérifie si l'écran est en portrait ou en paysage
+    * et met à jour this.isPortrait
+    */
+   isPortraitUpdate() {
+    window.innerHeight > window.innerWidth ? this.portrait = true : this.portrait = false
+   }
 
   /**
    * Ecoute les messages Post pour récupérer l'url et modifier le lien à copier des exercices

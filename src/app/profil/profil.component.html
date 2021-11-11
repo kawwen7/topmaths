@@ -1,7 +1,7 @@
 <div class="container" style="text-align: center">
   <!-- Avatar -->
   <div>
-    <img [src]="lienAvatar" width="80px" (click)="ouvrirModale('avatar')" />
+    <img [src]="dataService.user.lienAvatar" width="80px" (click)="ouvrirModale('avatar')" />
   </div>
   <button class="button is-link" (click)="ouvrirModale('avatar')">Modifier l'avatar</button>
   <br><br>

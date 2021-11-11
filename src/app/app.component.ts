@@ -38,7 +38,7 @@ export class AppComponent implements OnDestroy {
   recupereProfil() {
     const identifiant = this.dataService.getToken()
     if (identifiant != null) {
-      this.dataService.login(identifiant)
+      this.dataService.login(identifiant, false)
     }
   }
   /**
