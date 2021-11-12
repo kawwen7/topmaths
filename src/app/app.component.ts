@@ -17,12 +17,27 @@ export class AppComponent implements OnDestroy {
     this.ongletActif = 'accueil'
     this.recupereOngletActif()
     this.recupereProfil()
+    this.observeChangementsDeRoute()
   }
 
   ngOnDestroy() {
     this.event$.unsubscribe();
   }
 
+  /**
+   * Observe les changements de route,
+   * met ensuite à jour le lastAction
+   */
+   observeChangementsDeRoute() {
+    this.event$ = this.router.events.subscribe((event: NavigationEvent) => {
+      if (event instanceof NavigationStart) {
+        if (!isDevMode() && this.dataService.isLoggedIn()){
+          this.dataService.majLastAction()
+        }
+        this.dataService.recupWhosOnline()
+      }
+    });
+  }
   /**
    * Redirige vers une version sécurisée du site si on n'est pas en mode développement
    */

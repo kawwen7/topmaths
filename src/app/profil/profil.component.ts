@@ -136,20 +136,6 @@ export class ProfilComponent implements OnInit {
   }
 
   /**
-   * Foncion servant à activer ou désactiver les scores en :
-   * modifiant le token ;
-   * modifiant la colonne dans la base de données (à coder)
-   * @param activer true pour activer les scores, false pour les désactiver
-   */
-  scores(activer: boolean) {
-    if (activer) {
-      this.dataService.majScores('actives')
-    } else {
-      this.dataService.majScores('desactives')
-    }
-  }
-
-  /**
    * Place les sliders aléatoirement pour créer un avatar aléatoire
    */
   avatarAleatoire() {

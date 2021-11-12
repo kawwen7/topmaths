@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfilComponent } from './profil/profil.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { WhosonlineComponent } from './whosonline/whosonline.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     SequenceComponent,
     JeuxComponent,
     LoginComponent,
-    ProfilComponent
+    ProfilComponent,
+    WhosonlineComponent
   ],
   imports: [
     BrowserModule,

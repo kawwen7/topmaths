@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-accueil',
@@ -7,7 +8,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 })
 export class AccueilComponent implements OnInit {
   portrait : boolean
-  constructor() {
+  constructor(public dataService: ApiService) {
     this.portrait = true
     this.isPortraitUpdate()
   }

@@ -1,29 +1,57 @@
-<div class="container" style="text-align: center">
-  <!-- Avatar -->
-  <div>
-    <img [src]="dataService.user.lienAvatar" width="80px" (click)="ouvrirModale('avatar')" />
-  </div>
-  <button class="button is-link" (click)="ouvrirModale('avatar')">Modifier l'avatar</button>
-  <br><br>
-  <!-- Scores -->
-  <div class="columns is-centered">
-    <div class="column is-narrow">
-      <button *ngIf="dataService.user.scores != 'actives'" type="submit" id="activerScores" class="button is-success is-outlined" (click)="scores(true)">Activer les scores</button>
-      <button *ngIf="dataService.user.scores == 'actives'" class="button is-success">Les scores sont activés</button>
+<div class="columns" style="text-align: center;">
+  <div class="column is-one-fifth"></div>
+  <div class="column is-three-fifths">
+    <!-- Avatar -->
+    <div>
+      <img [src]="dataService.user.lienAvatar" width="80px" (click)="ouvrirModale('avatar')" />
     </div>
-    <div class="column is-narrow">
-      <button *ngIf="dataService.user.scores == 'actives'" type="submit" id="desactiverScores" class="button is-danger is-outlined" (click)="scores(false)">Désactiver les scores</button>
-      <button *ngIf="dataService.user.scores != 'actives'" class="button is-danger">Les scores sont désactivés</button>
+    <button class="button is-link" (click)="ouvrirModale('avatar')">Modifier l'avatar</button>
+    <br><br>
+    <!-- Scores -->
+    <div class="columns is-centered">
+      <div class="column is-narrow">
+        <button *ngIf="dataService.user.scores == 'actives'" type="submit" class="button is-danger is-outlined"
+          (click)="dataService.majScores('desactives')">Désactiver les scores</button>
+        <button *ngIf="dataService.user.scores != 'actives'" class="button is-danger">Les scores sont
+          désactivés</button>
+      </div>
+      <div class="column is-narrow">
+        <button *ngIf="dataService.user.scores != 'actives'" type="submit" class="button is-success is-outlined"
+          (click)="dataService.majScores('actives')">Activer les scores</button>
+        <button *ngIf="dataService.user.scores == 'actives'" class="button is-success">Les scores sont
+          activés</button>
+      </div>
     </div>
+    <!-- Anonymat -->
+    <div class="columns is-centered">
+      <div class="column is-narrow">
+        <button *ngIf="dataService.user.visible == 'oui'" type="submit" class="button is-danger is-outlined"
+          (click)="dataService.majVisible('non')">Ne pas apparaître dans les personnes en ligne</button>
+        <button *ngIf="dataService.user.visible != 'oui'" class="button is-danger">Tu n'apparais pas dans les
+          personnes en ligne</button>
+      </div>
+      <div class="column is-narrow">
+        <button *ngIf="dataService.user.visible != 'oui'" type="submit" class="button is-success is-outlined"
+          (click)="dataService.majVisible('oui')">Apparaître dans les personnes en ligne</button>
+        <button *ngIf="dataService.user.visible == 'oui'" class="button is-success">Tu apparais dans les personnes en
+          ligne</button>
+      </div>
+    </div>
+    <!-- Déconnexion -->
+    <div *ngIf="dataService.user.lastLogin != '' && derniereConnexion != 'undefined NaN undefined NaN à NaNhNaNmin'">
+      <div><br></div>
+      <p style="text-decoration:lightslategray; font-size: small;">Quelqu'un s'est connecté sur ce compte le
+        {{derniereConnexion}}.<br>
+        Si cette date ne te dit rien, c'est sûrement que ton identifiant est trop facile à deviner et que quelqu'un
+        d'autre l'a utilisé !</p>
+      <div><br></div>
+    </div>
+    <button class="button is-warning" (click)="appComponent.logout()">Se déconnecter</button>
   </div>
-  <!-- Déconnexion -->
-  <div *ngIf="dataService.user.lastLogin != '' && derniereConnexion != 'undefined NaN undefined NaN à NaNhNaNmin'">
-    <div><br></div>
-    <p style="text-decoration:lightslategray; font-size: small;">Quelqu'un s'est connecté sur ce compte le {{derniereConnexion}}.<br>
-    Si cette date ne te dit rien, c'est sûrement que ton identifiant est trop facile à deviner et que quelqu'un d'autre l'a utilisé !</p>
-    <div><br></div>
+  <div class="column is-one-fifth">
+    <!-- Utilisateurs connectés -->
+    <app-whosonline></app-whosonline>
   </div>
-  <button class="button is-warning" (click)="appComponent.logout()">Se déconnecter</button>
 </div>
 
 <!-- Modale de création d'avatar -->
@@ -35,16 +63,23 @@
     <div><img [src]="lienAvatar" width="200px" /></div>
     <!-- Boutons -->
     <button (click)="fermerModale('avatar')" class="button is-danger">Annuler</button>
-    <i class="fas fa-2x fa-question is-large" (click)="avatarAleatoire()" style="padding-left: 50px; padding-right: 50px"></i>
+    <i class="fas fa-2x fa-question is-large" (click)="avatarAleatoire()"
+      style="padding-left: 50px; padding-right: 50px"></i>
     <button (click)="enregistrerAvatar()" class="button is-success">Enregistrer</button>
     <!-- Sliders -->
     <ngx-slider [(value)]="yeux.value" [options]="yeux.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
-    <ngx-slider [(value)]="sourcils.value" [options]="sourcils.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
-    <ngx-slider [(value)]="bouche.value" [options]="bouche.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
-    <ngx-slider [(value)]="accessoire.value" [options]="accessoire.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
-    <ngx-slider [(value)]="cheveux.value" [options]="cheveux.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
-    <ngx-slider [(value)]="couleurPeau.value" [options]="couleurPeau.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
-    <ngx-slider [(value)]="couleurCheveux.value" [options]="couleurCheveux.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
+    <ngx-slider [(value)]="sourcils.value" [options]="sourcils.options" (valueChange)="majLienAvatar($event)">
+    </ngx-slider>
+    <ngx-slider [(value)]="bouche.value" [options]="bouche.options" (valueChange)="majLienAvatar($event)">
+    </ngx-slider>
+    <ngx-slider [(value)]="accessoire.value" [options]="accessoire.options" (valueChange)="majLienAvatar($event)">
+    </ngx-slider>
+    <ngx-slider [(value)]="cheveux.value" [options]="cheveux.options" (valueChange)="majLienAvatar($event)">
+    </ngx-slider>
+    <ngx-slider [(value)]="couleurPeau.value" [options]="couleurPeau.options" (valueChange)="majLienAvatar($event)">
+    </ngx-slider>
+    <ngx-slider [(value)]="couleurCheveux.value" [options]="couleurCheveux.options"
+      (valueChange)="majLienAvatar($event)"></ngx-slider>
     <!-- Copyright -->
     <footer class="footer">
       <div class="content has-text-centered">

@@ -12,6 +12,8 @@ export class ApiService {
   redirectUrl: string = ''
   baseUrl: string = "https://beta.topmaths.fr/api";
   user: User
+  onlineUsers: User[]
+  nbInvisibles: number
 
   @Output() majProfil: EventEmitter<any> = new EventEmitter();
   constructor(private httpClient: HttpClient, private router: Router) {
@@ -19,10 +21,65 @@ export class ApiService {
       identifiant: '',
       lienAvatar: '',
       scores: '',
-      lastLogin: ''
+      lastLogin: '',
+      lastAction: '',
+      visible: ''
+    }
+    this.onlineUsers = []
+    this.nbInvisibles = 0
+  }
+
+  /**
+   * Récupère dans la base de données la liste des utilisateurs ayant été actifs au cours des 10 dernières minutes
+   * ainsi que le nombre d'utilisateurs désirant rester invisibles
+   */
+  recupWhosOnline() {
+    if (isDevMode()) {
+      this.onlineUsers = [
+        {
+          identifiant: 'id1',
+          lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id1.svg',
+          scores: '',
+          lastLogin: '',
+          lastAction: '',
+          visible: 'oui'
+        }, {
+          identifiant: 'id2',
+          lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id2.svg',
+          scores: '',
+          lastLogin: '',
+          lastAction: '',
+          visible: 'oui'
+        }
+      ]
+    } else {
+      this.whosonline().pipe(first()).subscribe(
+        data => {
+          this.onlineUsers = data
+          let i = 0
+          for (const onlineUser of this.onlineUsers) {
+            if (onlineUser.visible != 'oui') {
+              i++
+            }
+          }
+          this.nbInvisibles = i
+        },
+        error => {
+          console.log(error)
+        });
     }
   }
 
+  /**
+   * Récupère la liste des utilisateurs en ligne de la base de données.
+   * @returns liste des utilisateurs en ligne
+   */
+  public whosonline() {
+    return this.httpClient.post<any>(this.baseUrl + '/whosonline.php', { })
+      .pipe(map(Users => {
+        return Users;
+      }));
+  }
 
   /**
    * Passe l'identifiant à l'API pour tenter de se connecter.
@@ -30,29 +87,29 @@ export class ApiService {
    * Si pas connecté, on renvoie vers erreurLogin pour tenter de créer l'identifiant.
    * @param identifiant
    */
-   login(identifiant: string, redirige?: boolean) {
+  login(identifiant: string, redirige?: boolean) {
     if (isDevMode()) {
       this.user = {
         identifiant: 'X',
         lienAvatar: 'https://avatars.dicebear.com/api/adventurer/DevMode.svg',
         scores: 'desactives',
-        lastLogin: ''
+        lastLogin: '',
+        lastAction: '',
+        visible: ''
       }
       this.setToken(this.user.identifiant);
       this.router.navigate(['profil'])
     } else {
-      this.userlogin(identifiant)
-        .pipe(first())
-        .subscribe(
-          data => {
-            if (redirige) {
-              const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
-              this.router.navigate([redirect]);
-            }
-          },
-          error => {
-            this.erreurLogin(identifiant)
-          });
+      this.userlogin(identifiant).pipe(first()).subscribe(
+        data => {
+          if (redirige) {
+            const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
+            this.router.navigate([redirect]);
+          }
+        },
+        error => {
+          this.erreurLogin(identifiant)
+        });
     }
   }
 
@@ -67,15 +124,13 @@ export class ApiService {
     } else if (!this.onlyLettersAndNumbers(identifiant)) {
       this.erreurRegistration('caracteres_speciaux')
     } else {
-      this.userregistration(identifiant)
-        .pipe(first())
-        .subscribe(
-          data => {
-            this.login(identifiant, true)
-          },
-          error => {
-            this.erreurRegistration('userregistration', error)
-          });
+      this.userregistration(identifiant).pipe(first()).subscribe(
+        data => {
+          this.login(identifiant, true)
+        },
+        error => {
+          this.erreurRegistration('userregistration', error)
+        });
     }
   }
 
@@ -139,21 +194,19 @@ export class ApiService {
    * @returns User créé
    */
   public userregistration(identifiant: string) {
-    return this.httpClient.post<any>(this.baseUrl + '/register.php', { identifiant : identifiant, lienAvatar: `https://avatars.dicebear.com/api/adventurer/${identifiant}.svg` })
+    return this.httpClient.post<any>(this.baseUrl + '/register.php', { identifiant: identifiant, lienAvatar: `https://avatars.dicebear.com/api/adventurer/${identifiant}.svg` })
       .pipe(map(User => {
         return User;
       }));
   }
-  
+
   /**
    * Modifie le token lienAvatar et le lienAvatar dans la bdd
    * @param lienAvatar 
    */
-  majAvatar(lienAvatar: string){
+  majAvatar(lienAvatar: string) {
     this.user.lienAvatar = lienAvatar
-    this.update('lienAvatar')
-    .pipe(first())
-    .subscribe(
+    this.update('lienAvatar').pipe(first()).subscribe(
       data => {
         const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
         this.router.navigate([redirect]);
@@ -167,11 +220,9 @@ export class ApiService {
    * Modifie le token lienAvatar et le lienAvatar dans la bdd
    * @param scores peut être 'actives' ou 'desactives'
    */
-   majScores(scores: string){
+  majScores(scores: string) {
     this.user.scores = scores
-    this.update('scores')
-    .pipe(first())
-    .subscribe(
+    this.update('scores').pipe(first()).subscribe(
       data => {
         const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
         this.router.navigate([redirect]);
@@ -184,10 +235,33 @@ export class ApiService {
   /**
    * Modifie la date de dernière connexion
    */
-   majLastLogin(){
-    this.update('lastLogin')
-    .pipe(first())
-    .subscribe(
+  majLastLogin() {
+    this.update('lastLogin').pipe(first()).subscribe(
+      data => {
+      },
+      error => {
+        console.log(error)
+      });
+  }
+
+  /**
+   * Modifie la date de dernière action
+   */
+  majLastAction() {
+    this.update('lastAction').pipe(first()).subscribe(
+      data => {
+      },
+      error => {
+        console.log(error)
+      });
+  }
+
+  /**
+   * @param visible peut être 'oui' ou 'non'
+   */
+   majVisible(visible: string) {
+    this.user.visible = visible
+    this.update('visible').pipe(first()).subscribe(
       data => {
       },
       error => {
@@ -199,7 +273,7 @@ export class ApiService {
    * Modifie le lienAvatar lié à l'identifiant dans la base de données
    * @returns 
    */
-  update(column: string){
+  update(column: string) {
     return this.httpClient.post<any>(this.baseUrl + `/update${column}.php`, this.user)
       .pipe(map(User => {
         return User;

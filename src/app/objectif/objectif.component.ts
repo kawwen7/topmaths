@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, isDevMode } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 
@@ -91,6 +91,9 @@ export class ObjectifComponent implements OnInit {
           }
         }
       }
+      if (!isDevMode() && this.dataService.isLoggedIn()){
+        this.dataService.majLastAction()
+      }
     });}
   /**
    * Observe les changements de route,
@@ -159,7 +162,7 @@ export class ObjectifComponent implements OnInit {
     let userId = ''
     let i = 'i=0'
     if (this.dataService.user.scores == 'actives') {
-      userId = `&userId=VAL${this.dataService.user.identifiant}`
+      userId = `&userId=VAL${this.dataService.user.identifiant.toUpperCase()}`
       i = 'i=1'
     }
     // Le nombre d'exercices varie selon la référence, on a donc quelque chose de dynamique
