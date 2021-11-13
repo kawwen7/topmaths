@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   errGrandNbChar: boolean
   errPetitNbChar: boolean
   errSpChar: boolean
+  shake: boolean
 
   constructor(private fb: FormBuilder, public dataService: ApiService, private router: Router) {
     this.angForm = this.fb.group({
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
     this.errGrandNbChar = false
     this.errPetitNbChar = false
     this.errSpChar = false
+    this.shake = false
     this.surveilleChamp()
   }
 
@@ -30,6 +32,20 @@ export class LoginComponent implements OnInit {
     // On prépare les fichiers pour générer un pseudo en cas de création d'un nouveau compte
     if (this.dataService.listeMasculins == null) {
       this.dataService.recupereDonneesPseudos()
+    }
+  }
+
+  /**
+   * Secoue le champ si la saisie est incorrecte,
+   * se connecte sinon
+   * @param identifiant 
+   */
+  login(identifiant: string){
+    if (this.errPetitNbChar || this.errGrandNbChar || this.errSpChar) {
+      this.shake = true
+      setTimeout(() => this.shake = false, 500)
+    } else {
+      this.dataService.login(identifiant, true)
     }
   }
 

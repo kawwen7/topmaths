@@ -5,10 +5,10 @@
     <div class="columns is-centered">
       <div class="column is-narrow">
         <!-- Champ de connexion -->
-        <form [formGroup]="angForm" (ngSubmit)="dataService.login(angForm.value.identifiant, true)" autocomplete="off"
+        <form [formGroup]="angForm" (ngSubmit)="login(angForm.value.identifiant)" autocomplete="off"
           autocorrect="off" autocapitalize="off" spellcheck="false">
           <div class="field">
-            <div class="control has-icons-left has-icons-right">
+            <div [ngClass]="{'control has-icons-left has-icons-right': true, 'shake': shake}">
               <!-- Champ en lui-même -->
               <input
                 [ngClass]="{'input is-large': true, 'is-success': (!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut), 'is-danger': (errPetitNbChar || errGrandNbChar || errSpChar)}"
