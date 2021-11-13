@@ -1,42 +1,37 @@
 <div class="columns" style="text-align: center;">
   <div class="column is-one-fifth"></div>
   <div class="column is-three-fifths">
+    <!-- Pseudo -->
+    <div (click)="ouvrirModale('pseudo')">
+      <h1 class="title is-2 is-inline-block">{{dataService.user.pseudo}}</h1>&nbsp; <i class="far fa-edit"></i>
+    </div>
     <!-- Avatar -->
-    <div>
-      <img [src]="dataService.user.lienAvatar" width="80px" (click)="ouvrirModale('avatar')" />
+    <div (click)="ouvrirModale('avatar')">
+      <img [src]="dataService.user.lienAvatar" width="160px" /> <i class="far fa-edit"></i>
     </div>
-    <button class="button is-link" (click)="ouvrirModale('avatar')">Modifier l'avatar</button>
-    <br><br>
+    <br>
     <!-- Scores -->
-    <div class="columns is-centered">
-      <div class="column is-narrow">
-        <button *ngIf="dataService.user.scores == 'actives'" type="submit" class="button is-danger is-outlined"
-          (click)="dataService.majScores('desactives')">Désactiver les scores</button>
-        <button *ngIf="dataService.user.scores != 'actives'" class="button is-danger">Les scores sont
-          désactivés</button>
-      </div>
-      <div class="column is-narrow">
-        <button *ngIf="dataService.user.scores != 'actives'" type="submit" class="button is-success is-outlined"
-          (click)="dataService.majScores('actives')">Activer les scores</button>
-        <button *ngIf="dataService.user.scores == 'actives'" class="button is-success">Les scores sont
-          activés</button>
-      </div>
-    </div>
+    <button *ngIf="dataService.user.scores == 'actives'" type="submit" class="button is-danger is-outlined"
+      (click)="dataService.majScores('desactives')">Désactiver les scores</button>
+    <button *ngIf="dataService.user.scores != 'actives'" class="button is-danger">Les scores sont
+      désactivés</button>
+    &nbsp;
+    <button *ngIf="dataService.user.scores != 'actives'" type="submit" class="button is-success is-outlined"
+      (click)="dataService.majScores('actives')">Activer les scores</button>
+    <button *ngIf="dataService.user.scores == 'actives'" class="button is-success">Les scores sont
+      activés</button>
+    <br><br>
     <!-- Anonymat -->
-    <div class="columns is-centered">
-      <div class="column is-narrow">
-        <button *ngIf="dataService.user.visible == 'oui'" type="submit" class="button is-danger is-outlined"
-          (click)="dataService.majVisible('non')">Ne pas apparaître dans les personnes en ligne</button>
-        <button *ngIf="dataService.user.visible != 'oui'" class="button is-danger">Tu n'apparais pas dans les
-          personnes en ligne</button>
-      </div>
-      <div class="column is-narrow">
-        <button *ngIf="dataService.user.visible != 'oui'" type="submit" class="button is-success is-outlined"
-          (click)="dataService.majVisible('oui')">Apparaître dans les personnes en ligne</button>
-        <button *ngIf="dataService.user.visible == 'oui'" class="button is-success">Tu apparais dans les personnes en
-          ligne</button>
-      </div>
-    </div>
+    <button *ngIf="dataService.user.visible == 'oui'" type="submit" class="button is-danger is-outlined"
+      (click)="dataService.majVisible('non')">Ne pas apparaître dans les personnes en ligne</button>
+    <button *ngIf="dataService.user.visible != 'oui'" class="button is-danger">Tu n'apparais pas dans les
+      personnes en ligne</button>
+    &nbsp;
+    <button *ngIf="dataService.user.visible != 'oui'" type="submit" class="button is-success is-outlined"
+      (click)="dataService.majVisible('oui')">Apparaître dans les personnes en ligne</button>
+    <button *ngIf="dataService.user.visible == 'oui'" class="button is-success">Tu apparais dans les personnes en
+      ligne</button>
+    <br><br>
     <!-- Déconnexion -->
     <div *ngIf="dataService.user.lastLogin != '' && derniereConnexion != 'undefined NaN undefined NaN à NaNhNaNmin'">
       <div><br></div>
@@ -90,4 +85,32 @@
     </footer>
   </div>
   <button class="modal-close is-large" aria-label="close" (click)="fermerModale('avatar')"></button>
+</div>
+
+<!-- Modale de création de pseudo -->
+<div id="modalePseudo" class="modal" style="text-align: center">
+  <div class="modal-background" (click)="fermerModale('pseudo')"></div>
+  <div><br><br><br></div>
+  <div class="modal-content" style="background-color: white;">
+    <!-- Pseudo -->
+    <br><br>
+    <h1 class="title is-2">{{pseudo}}</h1>
+    <br><br>
+    <!-- Boutons -->
+    <button (click)="fermerModale('pseudo')" class="button is-danger">Annuler</button>
+    <i class="fas fa-2x fa-question is-large" (click)="pseudoAleatoire()"
+      style="padding-left: 50px; padding-right: 50px"></i>
+    <button (click)="enregistrerPseudo()" class="button is-success">Enregistrer</button>
+    <br><br><br>
+    <!-- Paramètres -->
+    <button *ngIf="dataService.feminin" type="submit" class="button is-info is-light" (click)="dataService.majFeminin(false)">Pseudo
+      masculin</button>
+    <button *ngIf="!dataService.feminin" class="button is-info">Pseudo masculin</button>
+    &nbsp;
+    <button *ngIf="!dataService.feminin" type="submit" class="button is-sponsor is-light" (click)="dataService.majFeminin(true)">Pseudo
+      féminin</button>
+    <button *ngIf="dataService.feminin" class="button is-sponsor">Pseudo féminin</button>
+    <br><br>
+  </div>
+  <button class="modal-close is-large" aria-label="close" (click)="fermerModale('pseudo')"></button>
 </div>

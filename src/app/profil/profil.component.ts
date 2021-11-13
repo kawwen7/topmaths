@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from '../app.component';
 import { Options } from '@angular-slider/ngx-slider';
-import { User } from '../services/user'
 import { ApiService } from '../services/api.service';
+import { HttpClient } from '@angular/common/http';
 interface Slider {
   value: number,
   options: Options
@@ -15,6 +15,7 @@ interface Slider {
 })
 export class ProfilComponent implements OnInit {
   lienAvatar: string
+  pseudo: string
   yeux: Slider
   sourcils: Slider
   bouche: Slider
@@ -24,8 +25,9 @@ export class ProfilComponent implements OnInit {
   couleurCheveux: Slider
   modaleAvatar: any
   derniereConnexion: string
+  modalePseudo: any
 
-  constructor(public appComponent: AppComponent, public dataService: ApiService) {
+  constructor(public http: HttpClient, public appComponent: AppComponent, public dataService: ApiService) {
     this.yeux = {
       value: 1,
       options: {
@@ -96,12 +98,14 @@ export class ProfilComponent implements OnInit {
         showTicks: true
       }
     }
+    this.pseudo = dataService.user.pseudo
     this.lienAvatar = this.dataService.user.lienAvatar
     this.derniereConnexion = this.dateDeDerniereConnexion()
   }
 
   ngOnInit(): void {
     this.modaleAvatar = document.getElementById("modaleAvatar")
+    this.modalePseudo = document.getElementById("modalePseudo")
   }
 
   /**
@@ -172,11 +176,19 @@ export class ProfilComponent implements OnInit {
   }
 
   /**
-   * Enregistre le lienAvatar dans le localStorage et ferme la modale
+   * Enregistre le lienAvatar dans la bdd et ferme la modale
    */
   enregistrerAvatar() {
     this.dataService.majAvatar(this.lienAvatar)
     this.modaleAvatar.style.display = "none";
+  }
+
+  /**
+   * Enregistre le pseudo dans la bdd et ferme la modale
+   */
+  enregistrerPseudo() {
+    this.dataService.majPseudo(this.pseudo)
+    this.modalePseudo.style.display = "none";
   }
 
   /**
@@ -186,86 +198,89 @@ export class ProfilComponent implements OnInit {
    */
   deconstruitLienAvatar() {
     const parametres = this.dataService.user.lienAvatar.split('&')
-    this.yeux.value = parseInt(parametres[1].split('variant')[1])
-    this.sourcils.value = parseInt(parametres[2].split('variant')[1])
-    this.bouche.value = parseInt(parametres[3].split('variant')[1])
-    switch (parametres[4].split('=')[1]) {
-      case 'sunglasses':
-        if (parametres[5].split('=')[1] == '0') this.accessoire.value = 1
-        else this.accessoire.value = 2
-        break;
-      case 'glasses':
-        this.accessoire.value = 3
-        break
-      case 'smallGlasses':
-        this.accessoire.value = 4
-        break
-      case 'mustache':
-        this.accessoire.value = 5
-        break
-      case 'blush':
-        this.accessoire.value = 6
-        break
-      case 'birthmark':
-        this.accessoire.value = 7
-        break
-      default:
-        this.accessoire.value = 1
-        break;
-    }
-    const longueurCheveux = parametres[6].split('=')[1].slice(0, parametres[6].split('=')[1].length - 2)
-    if (longueurCheveux == 'long') {
-      this.cheveux.value = parseInt(parametres[6].split('=')[1].slice(parametres[6].split('=')[1].length - 2))
-    } else {
-      this.cheveux.value = parseInt(parametres[6].split('=')[1].slice(parametres[6].split('=')[1].length - 2)) + 20
-    }
-    this.couleurPeau.value = parseInt(parametres[7].split('variant')[1])
-    switch (parametres[8].split('=')[1]) {
-      case 'red01':
-        this.couleurCheveux.value = 1
-        break
-      case 'red02':
-        this.couleurCheveux.value = 2
-        break
-      case 'red03':
-        this.couleurCheveux.value = 3
-        break
-      case 'blonde01':
-        this.couleurCheveux.value = 4
-        break
-      case 'blonde02':
-        this.couleurCheveux.value = 5
-        break
-      case 'blonde03':
-        this.couleurCheveux.value = 6
-        break
-      case 'brown01':
-        this.couleurCheveux.value = 7
-        break
-      case 'brown02':
-        this.couleurCheveux.value = 8
-        break
-      case 'black':
-        this.couleurCheveux.value = 9
-        break
-      case 'gray':
-        this.couleurCheveux.value = 10
-        break
-      case 'green':
-        this.couleurCheveux.value = 11
-        break
-      case 'blue':
-        this.couleurCheveux.value = 12
-        break
-      case 'pink':
-        this.couleurCheveux.value = 13
-        break
-      case 'purple':
-        this.couleurCheveux.value = 14
-        break
-      default:
-        this.couleurCheveux.value = 1
-        break
+    if (parametres[1] != null) {
+      this.yeux.value = parseInt(parametres[1].split('variant')[1])
+      this.sourcils.value = parseInt(parametres[2].split('variant')[1])
+      this.bouche.value = parseInt(parametres[3].split('variant')[1])
+      switch (parametres[4].split('=')[1]) {
+        case 'sunglasses':
+          if (parametres[5].split('=')[1] == '0') this.accessoire.value = 1
+          else this.accessoire.value = 2
+          break;
+        case 'glasses':
+          this.accessoire.value = 3
+          break
+        case 'smallGlasses':
+          this.accessoire.value = 4
+          break
+        case 'mustache':
+          this.accessoire.value = 5
+          break
+        case 'blush':
+          this.accessoire.value = 6
+          break
+        case 'birthmark':
+          this.accessoire.value = 7
+          break
+        default:
+          this.accessoire.value = 1
+          break;
+      }
+      const longueurCheveux = parametres[6].split('=')[1].slice(0, parametres[6].split('=')[1].length - 2)
+      if (longueurCheveux == 'long') {
+        this.cheveux.value = parseInt(parametres[6].split('=')[1].slice(parametres[6].split('=')[1].length - 2))
+      } else {
+        this.cheveux.value = parseInt(parametres[6].split('=')[1].slice(parametres[6].split('=')[1].length - 2)) + 20
+      }
+      this.couleurPeau.value = parseInt(parametres[7].split('variant')[1])
+      switch (parametres[8].split('=')[1]) {
+        case 'red01':
+          this.couleurCheveux.value = 1
+          break
+        case 'red02':
+          this.couleurCheveux.value = 2
+          break
+        case 'red03':
+          this.couleurCheveux.value = 3
+          break
+        case 'blonde01':
+          this.couleurCheveux.value = 4
+          break
+        case 'blonde02':
+          this.couleurCheveux.value = 5
+          break
+        case 'blonde03':
+          this.couleurCheveux.value = 6
+          break
+        case 'brown01':
+          this.couleurCheveux.value = 7
+          break
+        case 'brown02':
+          this.couleurCheveux.value = 8
+          break
+        case 'black':
+          this.couleurCheveux.value = 9
+          break
+        case 'gray':
+          this.couleurCheveux.value = 10
+          break
+        case 'green':
+          this.couleurCheveux.value = 11
+          break
+        case 'blue':
+          this.couleurCheveux.value = 12
+          break
+        case 'pink':
+          this.couleurCheveux.value = 13
+          break
+        case 'purple':
+          this.couleurCheveux.value = 14
+          break
+        default:
+          this.couleurCheveux.value = 1
+          break
+
+      }
     }
   }
 
@@ -358,6 +373,13 @@ export class ProfilComponent implements OnInit {
   }
 
   /**
+   * Met à jour la variable pseudo temporaire avec un nouveau pseudo aléatoire
+   */
+  pseudoAleatoire() {
+    this.pseudo = this.dataService.pseudoAleatoire()
+  }
+
+  /**
    * Ouvre la modale
    * @param type peut être avatar ou pseudo
    */
@@ -365,6 +387,12 @@ export class ProfilComponent implements OnInit {
     if (type == 'avatar') {
       this.deconstruitLienAvatar()
       this.modaleAvatar.style.display = "block"
+    } else if (type == 'pseudo') {
+      if (this.dataService.listeMasculins == null) {
+        this.dataService.recupereDonneesPseudos()
+      }
+      this.pseudo = this.dataService.user.pseudo
+      this.modalePseudo.style.display = "block"
     }
   }
 
@@ -378,6 +406,8 @@ export class ProfilComponent implements OnInit {
       // on récupère donc l'avatar de this.dataService.user
       this.lienAvatar = this.dataService.user.lienAvatar
       this.modaleAvatar.style.display = "none"
+    } else if (type == 'pseudo') {
+      this.modalePseudo.style.display = "none"
     }
   }
 

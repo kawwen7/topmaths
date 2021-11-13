@@ -27,6 +27,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    // On prépare les fichiers pour générer un pseudo en cas de création d'un nouveau compte
+    if (this.dataService.listeMasculins == null) {
+      this.dataService.recupereDonneesPseudos()
+    }
   }
 
   /**

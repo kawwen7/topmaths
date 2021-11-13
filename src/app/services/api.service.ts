@@ -3,6 +3,7 @@ import { first, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user';
 import { Router } from '@angular/router';
+import { LEADING_TRIVIA_CHARS } from '@angular/compiler/src/render3/view/template';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,10 @@ export class ApiService {
   user: User
   onlineUsers: User[]
   nbInvisibles: number
+  feminin: boolean
+  listeMasculins: any
+  listeFeminins: any
+  listeAdjectifs: any
 
   @Output() majProfil: EventEmitter<any> = new EventEmitter();
   constructor(private httpClient: HttpClient, private router: Router) {
@@ -23,10 +28,12 @@ export class ApiService {
       scores: '',
       lastLogin: '',
       lastAction: '',
-      visible: ''
+      visible: '',
+      pseudo: ''
     }
     this.onlineUsers = []
     this.nbInvisibles = 0
+    this.feminin = false
   }
 
   /**
@@ -42,14 +49,16 @@ export class ApiService {
           scores: '',
           lastLogin: '',
           lastAction: '',
-          visible: 'oui'
+          visible: 'oui',
+          pseudo: 'lapin bleu'
         }, {
           identifiant: 'id2',
           lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id2.svg',
           scores: '',
           lastLogin: '',
           lastAction: '',
-          visible: 'oui'
+          visible: 'oui',
+          pseudo: 'Pierre verte'
         }
       ]
     } else {
@@ -91,11 +100,12 @@ export class ApiService {
     if (isDevMode()) {
       this.user = {
         identifiant: 'X',
-        lienAvatar: 'https://avatars.dicebear.com/api/adventurer/DevMode.svg',
+        lienAvatar: 'https://avatars.dicebear.com/api/adventurer/topmaths.svg?scale=90&eyes=variant12&eyebrows=variant09&mouth=variant21&accessoires=glasses&accessoiresProbability=100&hair=long07&skinColor=variant03&hairColor=brown01',
         scores: 'desactives',
         lastLogin: '',
         lastAction: '',
-        visible: ''
+        visible: '',
+        pseudo: 'Cerf sauvage'
       }
       this.setToken(this.user.identifiant);
       this.router.navigate(['profil'])
@@ -124,7 +134,16 @@ export class ApiService {
     } else if (!this.onlyLettersAndNumbers(identifiant)) {
       this.erreurRegistration('caracteres_speciaux')
     } else {
-      this.userregistration(identifiant).pipe(first()).subscribe(
+      const user : User = {
+        identifiant: identifiant,
+        lienAvatar: `https://avatars.dicebear.com/api/adventurer/${identifiant}.svg`,
+        scores: '',
+        lastLogin: '',
+        lastAction: '',
+        visible: '',
+        pseudo: this.pseudoAleatoire()
+      }
+      this.userregistration(user).pipe(first()).subscribe(
         data => {
           this.login(identifiant, true)
         },
@@ -188,28 +207,84 @@ export class ApiService {
   }
 
   /**
-   * Envoie l'identifiant à register.php pour l'ajouter à la bdd
-   * Renvoie les informations de l'User créé
-   * @param identifiant à écrire dans la bdd
+   * Crée une nouvelle ligne user dans la bdd
+   * @param user à écrire dans la bdd
    * @returns User créé
    */
-  public userregistration(identifiant: string) {
-    return this.httpClient.post<any>(this.baseUrl + '/register.php', { identifiant: identifiant, lienAvatar: `https://avatars.dicebear.com/api/adventurer/${identifiant}.svg` })
+  public userregistration(user: User) {
+    return this.httpClient.post<any>(this.baseUrl + '/register.php', user)
       .pipe(map(User => {
         return User;
       }));
   }
 
   /**
-   * Modifie le token lienAvatar et le lienAvatar dans la bdd
+   * Met à jour this.feminin
+   * @param feminin boolean
+   */
+  majFeminin(feminin: boolean) {
+    this.feminin = feminin
+  }
+
+  /**
+   * Crée un pseudo aléatoire en mélangeant un nom et un adjectif au hasard
+   * @returns pseudo
+   */
+  pseudoAleatoire() {
+    if (this.feminin) {
+      const nom = this.listeFeminins[Math.floor(Math.random() * this.listeFeminins.length)].nom
+      const adjectif = this.listeAdjectifs[Math.floor(Math.random() * this.listeAdjectifs.length)].feminin
+      return nom + ' ' + adjectif
+    } else {
+      const nom = this.listeMasculins[Math.floor(Math.random() * this.listeMasculins.length)].nom
+      const adjectif = this.listeAdjectifs[Math.floor(Math.random() * this.listeAdjectifs.length)].masculin
+      return nom + ' ' + adjectif
+    }
+  }
+  
+  /**
+   * Récupère les listes de noms masculins, de noms féminins et d'adjectifs
+   */
+  recupereDonneesPseudos(){
+    this.httpClient.get('assets/data/nomsMasculins.json').subscribe(
+      (data: any) => {
+        this.listeMasculins = data
+      }
+    )
+    this.httpClient.get('assets/data/nomsFeminins.json').subscribe(
+      (data: any) => {
+        this.listeFeminins = data
+      }
+    )
+    this.httpClient.get('assets/data/adjectifs.json').subscribe(
+      (data: any) => {
+        this.listeAdjectifs = data
+      }
+    )
+  }
+
+  /**
+   * Modifie le lienAvatar dans la bdd
    * @param lienAvatar 
    */
   majAvatar(lienAvatar: string) {
     this.user.lienAvatar = lienAvatar
     this.update('lienAvatar').pipe(first()).subscribe(
       data => {
-        const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
-        this.router.navigate([redirect]);
+      },
+      error => {
+        console.log(error)
+      });
+  }
+
+  /**
+   * Modifie le pseudo dans la bdd
+   * @param pseudo 
+   */
+  majPseudo(pseudo: string) {
+    this.user.pseudo = pseudo
+    this.update('pseudo').pipe(first()).subscribe(
+      data => {
       },
       error => {
         console.log(error)
@@ -263,6 +338,7 @@ export class ApiService {
     this.user.visible = visible
     this.update('visible').pipe(first()).subscribe(
       data => {
+        this.recupWhosOnline()
       },
       error => {
         console.log(error)
