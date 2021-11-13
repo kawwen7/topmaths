@@ -136,7 +136,7 @@ export class ObjectifComponent implements OnInit {
             return sousTheme.objectifs.find((objectif: any) => {
               // Une fois qu'on l'a trouvée, on modifie les attributs
               if (objectif.reference == this.reference) {
-                this.recupereAttributsObjectif(objectif)
+                setTimeout(() => this.recupereAttributsObjectif(objectif), 2000)
               }
               return objectif.reference == this.reference;
             })
