@@ -1,21 +1,43 @@
 <!-- Nombre d'utilisateurs connectés -->
 <div class="columns">
   <div class="column" style="display: flex; align-items: center; justify-content: center;">
-    <h1 *ngIf="dataService.onlineUsers.length == 0">Pas d'utilisateur connecté</h1>
-    <h1 *ngIf="dataService.onlineUsers.length > 0">{{dataService.onlineUsers.length}}
+    <p *ngIf="dataService.onlineUsers.length == 0">Pas d'utilisateur connecté</p>
+    <p *ngIf="dataService.onlineUsers.length > 0">{{dataService.onlineUsers.length}}
       {{dataService.onlineUsers.length > 1 ? 'utilisateurs sont connectés' : 'utilisateur est connecté'}} dont
-      {{dataService.nbInvisibles}} {{dataService.nbInvisibles > 1 ? 'invisibles' : 'invisible'}}</h1>
+      {{dataService.nbInvisibles}} {{dataService.nbInvisibles > 1 ? 'invisibles' : 'invisible'}}</p>
   </div>
 </div>
 <!-- Liste des utilisateurs visibles -->
 <div *ngFor="let onlineUser of dataService.onlineUsers">
   <div *ngIf="onlineUser.visible == 'oui'">
     <div class="columns">
-      <div class="column" style="display: flex; align-items: center; justify-content: center;">
-        <figure class="image is-64x64 is-inline-block">
-          <img [src]="onlineUser.lienAvatar" />
-        </figure>
-        <div class="is-inline-block">{{onlineUser.identifiant}}</div>
+      <!-- On fait un tableau à une seule colonne pour que les contenus restent alignés en vue portrait -->
+      <div class="column" style="display: flex; align-items: center; justify-content: center;"><!-- L'affichage est cassé sans tous ces styles -->
+        <!-- Avatar -->
+        <div class="column" style="display: flex; align-items: center; justify-content: center;">
+          <figure class="image is-64x64 is-inline-block">
+            <img [src]="onlineUser.lienAvatar" />
+          </figure>
+        </div>
+        <!-- Pseudo -->
+        <div class="column" style="display: flex; align-items: center; justify-content: center;">
+          <div class="is-inline-block">{{onlineUser.identifiant}}</div>
+        </div>
+        <!-- Scores -->
+        <!-- <div class="column" style="display: flex; align-items: center; justify-content: center;">
+          <div class="dropdown is-right is-hoverable">
+            <div class="dropdown-trigger">
+              <span>44<br>7&nbsp;346</span>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                  <p>Score de la semaine<br>Score total</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
       </div>
     </div>
   </div>
