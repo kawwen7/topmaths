@@ -1,0 +1,31 @@
+<div class="container is-max-desktop" style="text-align: center">
+  <h1 class="title is-1">Classement</h1>
+  <div *ngFor="let user of dataService.classement">
+    <div class="columns">
+      <!-- On fait un tableau à une seule colonne pour que les contenus restent alignés en vue portrait -->
+      <div class="column" style="display: flex; align-items: center; justify-content: center;">
+        <!-- L'affichage est cassé sans tous ces styles -->
+        <!-- Avatar -->
+        <div class="column is-one-fifth" style="display: flex; align-items: center; justify-content: center;">
+          <figure *ngIf="user.visible" class="image is-48x48 is-inline-block">
+            <img [src]="user.lienAvatar" />
+          </figure>
+          <span *ngIf="!user.visible" class="icon fas fa-2x">
+            <i class="far fa-user"></i>
+          </span>
+        </div>
+        <!-- Pseudo -->
+        <div class="column is-three-fifths" style="display: flex; align-items: center; justify-content: center;">
+          <div *ngIf="user.visible" class="is-inline-block">{{user.pseudo}}</div>
+          <div *ngIf="!user.visible" class="is-inline-block">
+            < anonyme >
+          </div>
+        </div>
+        <!-- Scores -->
+        <div class="column is-one-fifth" style="display: flex; align-items: center; justify-content: center;">
+          {{user.score}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

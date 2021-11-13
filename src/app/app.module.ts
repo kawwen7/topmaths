@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProfilComponent } from './profil/profil.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { WhosonlineComponent } from './whosonline/whosonline.component';
+import { ClassementComponent } from './classement/classement.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { WhosonlineComponent } from './whosonline/whosonline.component';
     JeuxComponent,
     LoginComponent,
     ProfilComponent,
-    WhosonlineComponent
+    WhosonlineComponent,
+    ClassementComponent
   ],
   imports: [
     BrowserModule,

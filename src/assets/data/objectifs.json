@@ -23,13 +23,16 @@
                 ],
                 "exercices": [
                   {
-                    "slug": "5C11,s=1,s2=false,s3=true,s4=true,n=1"
+                    "slug": "5C11,s=1,s2=false,s3=true,s4=true,n=1",
+                    "score": "10"
                   },
                   {
-                    "slug": "5C12-1,s=2,s2=false,s3=true,s4=true,n=1"
+                    "slug": "5C12-1,s=2,s2=false,s3=true,s4=true,n=1",
+                    "score": "20"
                   },
                   {
-                    "slug": "5C12-1,s=3,s2=false,s3=true,s4=true,n=1"
+                    "slug": "5C12-1,s=3,s2=false,s3=true,s4=true,n=1",
+                    "score": "30"
                   }
                 ]
               },

@@ -10,6 +10,11 @@
       <img [src]="dataService.user.lienAvatar" width="160px" /> <i class="far fa-edit"></i>
     </div>
     <br>
+    <!-- Score -->
+    <div>
+      <h2 class="title">Mon score : {{dataService.user.score}}</h2>
+    </div>
+    <br>
     <!-- Scores -->
     <button *ngIf="dataService.user.scores == 'actives'" type="submit" class="button is-danger is-outlined"
       (click)="dataService.majScores('desactives')">Désactiver les scores</button>

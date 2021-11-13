@@ -6,8 +6,9 @@ export class User {
   public lastAction: string;
   public visible: string;
   public pseudo: string;
+  public score: string;
 
-  constructor(identifiant: string, lienAvatar: string, scores: string, lastLogin: string, lastAction: string, visible: string, pseudo: string) {
+  constructor(identifiant: string, lienAvatar: string, scores: string, lastLogin: string, lastAction: string, visible: string, pseudo: string, score: string) {
     this.identifiant = identifiant
     this.lienAvatar = lienAvatar
     this.scores = scores
@@ -15,5 +16,6 @@ export class User {
     this.lastAction = lastAction
     this.visible = visible
     this.pseudo = pseudo
+    this.score = score
   }
 }

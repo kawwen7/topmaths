@@ -9,6 +9,7 @@ import { JeuxComponent } from './jeux/jeux.component';
 import { LoginComponent } from './login/login.component';
 import { ProfilComponent } from './profil/profil.component';
 import { AuthguardGuard } from './services/auth.guard';
+import { ClassementComponent } from './classement/classement.component';
 
 const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'jeux', component: JeuxComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profil', component: ProfilComponent, canActivate: [AuthguardGuard] },
+  { path: 'classement', component: ClassementComponent },
   { path: '', component: AccueilComponent },
   { path: ':ref', component: ObjectifComponent },
   { path: '**', component: AccueilComponent }

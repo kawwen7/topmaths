@@ -16,7 +16,9 @@ interface Exercice {
   slug: string,
   graine: string,
   lien: string,
-  lienACopier?: string
+  score: string,
+  lienACopier?: string,
+  bonneReponse?: boolean
 }
 
 @Component({
@@ -33,7 +35,8 @@ export class ObjectifComponent implements OnInit {
   exercices: Exercice[]
   lienFiche: string
   lienAnki: string
-  portrait : boolean
+  portrait: boolean
+  messageScore: string
 
   constructor(public http: HttpClient, private route: ActivatedRoute, public dataService: ApiService) {
     this.reference = ''
@@ -45,6 +48,7 @@ export class ObjectifComponent implements OnInit {
     this.lienFiche = ''
     this.lienAnki = ''
     this.portrait = true
+    this.messageScore = ''
     this.isPortraitUpdate()
   }
 
@@ -58,29 +62,40 @@ export class ObjectifComponent implements OnInit {
    * et on ajuste la largeur des cartes en conséquence.
    * @param event
    */
-   @HostListener('window:resize', ['$event'])
-   onResize(event: any) {
-     this.isPortraitUpdate()
-   }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.isPortraitUpdate()
+  }
 
-   /**
-    * Vérifie si l'écran est en portrait ou en paysage
-    * et met à jour this.isPortrait
-    */
-   isPortraitUpdate() {
+  /**
+   * Vérifie si l'écran est en portrait ou en paysage
+   * et met à jour this.isPortrait
+   */
+  isPortraitUpdate() {
     window.innerHeight > window.innerWidth ? this.portrait = true : this.portrait = false
-   }
+  }
 
   /**
    * Ecoute les messages Post pour récupérer l'url et modifier le lien à copier des exercices
    */
-  ecouteMessagesPost(){
+  ecouteMessagesPost() {
     window.addEventListener('message', (event) => {
       const url: string = event.data.url;
       if (typeof (url) != 'undefined') {
+        // On cherche à quel exercice correspond ce message
         for (const exercice of this.exercices) {
           if (typeof (exercice.lienACopier) != 'undefined') {
             if (url.split('&serie=')[0].split(',i=')[0] == exercice.lienACopier.split('&serie=')[0].split(',i=')[0]) { // Lorsqu'un exercice n'est pas interactifReady, le ,i=0 est retiré de l'url
+              // On a trouvé à quel exercice correspond ce message
+              const reponseOK: boolean = event.data.reponseOK
+              if (typeof (reponseOK) != 'undefined') {
+                if (reponseOK) {
+                  this.dataService.majScore(exercice.score)
+                  this.messageScore = '+ ' + exercice.score
+                  exercice.bonneReponse = true
+                  setTimeout(() => exercice.bonneReponse = false, 2000)
+                }
+              }
               exercice.graine = event.data.graine
               if (this.dataService.user.scores == 'actives') { // Si on est en interactif, on retire l'userId et on ajoute la graine
                 exercice.lienACopier = url.split('&userId=')[0] + '&serie=' + exercice.graine
@@ -91,10 +106,11 @@ export class ObjectifComponent implements OnInit {
           }
         }
       }
-      if (!isDevMode() && this.dataService.isLoggedIn()){
+      if (!isDevMode() && this.dataService.isLoggedIn()) {
         this.dataService.majLastAction()
       }
-    });}
+    });
+  }
   /**
    * Observe les changements de route,
    * modifie ensuite les paramètres selon la référence
@@ -173,7 +189,8 @@ export class ObjectifComponent implements OnInit {
           couleur: '',
           slug: exercice.slug,
           graine: exercice.graine,
-          lien: `https://coopmaths.fr/mathalea.html?ex=${exercice.slug},${i}&serie=${exercice.graine}&v=embed&p=1.5${userId}`
+          lien: `https://coopmaths.fr/mathalea.html?ex=${exercice.slug},${i}&serie=${exercice.graine}&v=embed&p=1.5${userId}`,
+          score: exercice.score
         })
         this.exercices[this.exercices.length - 1].lienACopier = this.exercices[this.exercices.length - 1].lien
         if (exercice.slug.slice(0, 4) == 'http') {
@@ -251,4 +268,5 @@ export class ObjectifComponent implements OnInit {
       return true;
     }
   }
+  
 }

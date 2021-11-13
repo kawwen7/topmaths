@@ -3,7 +3,6 @@ import { first, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user';
 import { Router } from '@angular/router';
-import { LEADING_TRIVIA_CHARS } from '@angular/compiler/src/render3/view/template';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +13,7 @@ export class ApiService {
   baseUrl: string = "https://beta.topmaths.fr/api";
   user: User
   onlineUsers: User[]
+  classement: User[]
   nbInvisibles: number
   feminin: boolean
   listeMasculins: any
@@ -29,11 +29,50 @@ export class ApiService {
       lastLogin: '',
       lastAction: '',
       visible: '',
-      pseudo: ''
+      pseudo: '',
+      score: '0'
     }
     this.onlineUsers = []
+    this.classement = []
     this.nbInvisibles = 0
     this.feminin = false
+  }
+
+  /**
+   * Récupère dans les utilisateurs de la base de données par score décroissant
+   */
+  recupClassement() {
+    if (isDevMode()) {
+      this.classement = [
+        {
+          identifiant: 'id1',
+          lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id1.svg',
+          scores: '',
+          lastLogin: '',
+          lastAction: '',
+          visible: 'oui',
+          pseudo: 'lapin bleu',
+          score: '17'
+        }, {
+          identifiant: 'id2',
+          lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id2.svg',
+          scores: '',
+          lastLogin: '',
+          lastAction: '',
+          visible: 'oui',
+          pseudo: 'Pierre verte',
+          score: '38'
+        }
+      ]
+    } else {
+      this.pullClassement().pipe(first()).subscribe(
+        data => {
+          this.classement = data
+        },
+        error => {
+          console.log(error)
+        });
+    }
   }
 
   /**
@@ -50,7 +89,8 @@ export class ApiService {
           lastLogin: '',
           lastAction: '',
           visible: 'oui',
-          pseudo: 'lapin bleu'
+          pseudo: 'lapin bleu',
+          score: '17'
         }, {
           identifiant: 'id2',
           lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id2.svg',
@@ -58,7 +98,8 @@ export class ApiService {
           lastLogin: '',
           lastAction: '',
           visible: 'oui',
-          pseudo: 'Pierre verte'
+          pseudo: 'Pierre verte',
+          score: '38'
         }
       ]
     } else {
@@ -77,6 +118,17 @@ export class ApiService {
           console.log(error)
         });
     }
+  }
+
+  /**
+   * Récupère la liste des utilisateurs de la base de données.
+   * @returns liste des utilisateurs classés par score
+   */
+  public pullClassement() {
+    return this.httpClient.post<any>(this.baseUrl + '/classement.php', { })
+      .pipe(map(Users => {
+        return Users;
+      }));
   }
 
   /**
@@ -105,7 +157,8 @@ export class ApiService {
         lastLogin: '',
         lastAction: '',
         visible: '',
-        pseudo: 'Cerf sauvage'
+        pseudo: 'Cerf sauvage',
+        score: '196'
       }
       this.setToken(this.user.identifiant);
       this.router.navigate(['profil'])
@@ -141,7 +194,8 @@ export class ApiService {
         lastLogin: '',
         lastAction: '',
         visible: '',
-        pseudo: this.pseudoAleatoire()
+        pseudo: this.pseudoAleatoire(),
+        score: '0'
       }
       this.userregistration(user).pipe(first()).subscribe(
         data => {
@@ -284,6 +338,22 @@ export class ApiService {
   majPseudo(pseudo: string) {
     this.user.pseudo = pseudo
     this.update('pseudo').pipe(first()).subscribe(
+      data => {
+      },
+      error => {
+        console.log(error)
+      });
+  }
+
+  /**
+   * Modifie le score dans la bdd
+   * @param score à ajouter 
+   */
+  majScore(score: string) {
+    console.log(this.user.score)
+    this.user.score = (parseInt(this.user.score) + parseInt(score)).toString()
+    console.log(this.user.score)
+    this.update('score').pipe(first()).subscribe(
       data => {
       },
       error => {
