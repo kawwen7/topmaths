@@ -255,8 +255,10 @@ export class ApiService {
       .pipe(map(Users => {
         this.setToken(Users[0].identifiant);
         this.user = Users[0]
-        // Après avoir récupéré le profil utilisateur, on met à jour le lastLogin
+        // Après avoir récupéré le profil utilisateur, on met à jour le lastLogin et on récupère la liste des utilisateurs en ligne
         this.majLastLogin()
+        this.majLastAction()
+        this.recupWhosOnline()
         return Users;
       }));
   }
