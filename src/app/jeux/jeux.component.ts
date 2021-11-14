@@ -93,14 +93,14 @@ export class JeuxComponent implements OnInit {
   /**
    * Au lancement de la modale on détermine si on est en portrait ou en paysage,
    * en portrait, la modale prend toute la largeur,
-   * en paysage, la modale prend 60% de la largeur.
-   * @returns 'width: 100%;' ou 'width: 60%;'
+   * en paysage, la modale prend 95 % de la hauteur.
+   * @returns la largeur de la modale
    */
   determinerLargeurJeu() {
-    if (window.innerHeight > window.innerWidth) {
-      return 'width: 100%;'
+    if (window.innerHeight * 0.95 * 1.33 < window.innerWidth) {
+      return `width: ${Math.floor(window.innerHeight * 0.95 * 1.33).toString()}px;` //La fenêtre de jeu est en 4/3 et il y a 5% d'espace pour permettre de fermer la modale
     } else {
-      return 'width: 60%;'
+      return 'width: 100%;'
     }
   }
 

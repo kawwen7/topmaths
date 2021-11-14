@@ -30,7 +30,7 @@
 <div id="myModal" class="modal">
   <div class="modal-background" (click)="fermerModal()"></div>
   <div class="modal-content" [style]="determinerLargeurJeu()">
-    <div *ngIf="determinerLargeurJeu() == 'width: 100%;'"><br><br><br></div>
+    <div *ngIf="!paysage"><br><br><br></div>
     <!--Si mode portrait, on descend un peu pour que la croix ne soit pas sur le logo Scratch-->
     <div class="image is-4by3">
       <iframe class="has-ratio" [src]="srcModal | safe" allowfullscreen=""></iframe>
