@@ -632,6 +632,80 @@
               }
             ]
           }, {
+            "nom": "Arithmétique",
+            "objectifs": [
+              {
+                "reference": "4A10",
+                "titre": "Déterminer la liste des nombres premiers inférieurs à 100",
+                "rappelDuCoursHTML": "Un nombre premier est un nombre qui admet <strong>exactement</strong> deux diviseurs : 1 et lui-même",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "2Ib7SFTws0c",
+                    "auteur": "Hedacademy",
+                    "lienAuteur": "https://www.youtube.com/channel/UC8SRYHgGMqAYZehYdznaqvQ"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "4A10,s=1,s2=false",
+                    "score": "30"
+                  },
+                  {
+                    "slug": "4A10,s=2,s2=false",
+                    "score": "40"
+                  }
+                ]
+              }, {
+                "reference": "4A11",
+                "titre": "Décomposer un nombre entier en produit de facteurs premiers",
+                "rappelDuCoursHTML": "Pour décomposer un nombre en un produit de facteurs premiers, on le divise autant que possible par des nombres premiers",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "RBE2wPIKagI",
+                    "auteur": "Yvan Monka",
+                    "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "4A11-0,s=3,s2=false,s3=false,s4=false,n=2",
+                    "score": "40"
+                  },
+                  {
+                    "slug": "4A11-1,s=false,n=2",
+                    "score": "60"
+                  }
+                ]
+              }, {
+                "reference": "4A12",
+                "titre": "Modéliser et résoudre des problèmes simples mettant en jeu les notions de divisibilité et de nombre premier",
+                "rappelDuCoursHTML": "Voir <a href='#/objectif/4A11'>4A11 : Décomposer un nombre entier en produit de facteurs premiers</a>",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "Rr31lJ0OuZE",
+                    "auteur": "La galaxie de Manu",
+                    "lienAuteur": "https://www.youtube.com/channel/UC8OLHC9Bo9LsFjPdlobj_wA"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "4A12,s=1,n=1,cd=1",
+                    "score": "60"
+                  },
+                  {
+                    "slug": "4A12,s=2,n=1,cd=1",
+                    "score": "80"
+                  }
+                ]
+              }
+            ]
+          }, {
             "nom": "Calcul littéral",
             "objectifs": [
               {
