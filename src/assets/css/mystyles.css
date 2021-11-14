@@ -1,5 +1,11 @@
 .huge {
   font-size: 1000%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index:99;
 }
 
 .moveUp {
@@ -8,8 +14,8 @@
 }
 
 @keyframes moveUp {
-  0% { transform: translate(0px, 0%); }
-  100% { transform: translate(0px, -200%); }
+  0% { transform: translate(0px, 100%); }
+  100% { transform: translate(0px, 20%); }
 }
 .shake {
   /* Start the shake animation and make the animation last for 0.5 seconds */

@@ -17,6 +17,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { WhosonlineComponent } from './whosonline/whosonline.component';
 import { ClassementComponent } from './classement/classement.component';
+import { NgParticlesModule } from "ng-particles";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ClassementComponent } from './classement/classement.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxSliderModule
+    NgxSliderModule,
+    NgParticlesModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]

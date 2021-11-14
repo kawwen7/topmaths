@@ -350,11 +350,10 @@ export class ApiService {
    * @param score à ajouter 
    */
   majScore(score: string) {
-    console.log(this.user.score)
     this.user.score = (parseInt(this.user.score) + parseInt(score)).toString()
-    console.log(this.user.score)
     this.update('score').pipe(first()).subscribe(
       data => {
+        this.login(this.user.identifiant)
       },
       error => {
         console.log(error)

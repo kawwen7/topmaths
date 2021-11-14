@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, HostListener, isDevMode } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
+import { ConfettiService } from '../services/confetti.service';
 
 interface Video {
   titre: string,
@@ -38,7 +39,7 @@ export class ObjectifComponent implements OnInit {
   portrait: boolean
   messageScore: string
 
-  constructor(public http: HttpClient, private route: ActivatedRoute, public dataService: ApiService) {
+  constructor(public http: HttpClient, private route: ActivatedRoute, public dataService: ApiService, public confetti: ConfettiService) {
     this.reference = ''
     this.titre = ''
     this.rappelDuCoursHTML = ''
@@ -90,9 +91,11 @@ export class ObjectifComponent implements OnInit {
               const reponseOK: boolean = event.data.reponseOK
               if (typeof (reponseOK) != 'undefined') {
                 if (reponseOK) {
+                  console.log('bonne réponse')
                   this.dataService.majScore(exercice.score)
                   this.messageScore = '+ ' + exercice.score
                   exercice.bonneReponse = true
+                  this.confetti.lanceConfetti(this.portrait)
                   setTimeout(() => exercice.bonneReponse = false, 2000)
                 }
               }
