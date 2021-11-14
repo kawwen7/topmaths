@@ -1,5 +1,6 @@
-import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, isDevMode, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationStart, Event as NavigationEvent } from '@angular/router';
+import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +11,53 @@ import { Router, NavigationStart, Event as NavigationEvent } from '@angular/rout
 export class AppComponent implements OnDestroy {
   ongletActif: string
   event$: any
-  constructor(private router: Router) {
+
+  constructor(private router: Router, public dataService: ApiService) {
+    this.redirectionHTTPS()
     this.ongletActif = 'accueil'
     this.recupereOngletActif()
+    this.recupereProfil()
+    this.observeChangementsDeRoute()
   }
+
   ngOnDestroy() {
     this.event$.unsubscribe();
   }
 
   /**
-   * Récupère l'onglet actif à partir de l'url pour le mettre en surbrillance
+   * Observe les changements de route,
+   * met ensuite à jour le lastAction
+   */
+   observeChangementsDeRoute() {
+    this.event$ = this.router.events.subscribe((event: NavigationEvent) => {
+      if (event instanceof NavigationStart) {
+        if (!isDevMode() && this.dataService.isLoggedIn()){
+          this.dataService.majLastAction()
+        }
+        this.dataService.recupWhosOnline()
+      }
+    });
+  }
+  /**
+   * Redirige vers une version sécurisée du site si on n'est pas en mode développement
+   */
+  redirectionHTTPS(){
+    if (!isDevMode() && window.location.protocol == 'http:') {
+      window.location.href = window.location.href.replace('http:', 'https:');
+    }
+  }
+
+  /**
+   * Vérifie la présence d'un token de connexion et récupère le profil utilisateur le cas échéant
+   */
+  recupereProfil() {
+    const identifiant = this.dataService.getToken()
+    if (identifiant != null) {
+      this.dataService.login(identifiant, false)
+    }
+  }
+  /**
+   * Récupère l'onglet actif à partir de l'url pour le mettre en surbrillance.
    */
   recupereOngletActif() {
     this.event$ = this.router.events.subscribe((event: NavigationEvent) => {
@@ -30,5 +68,18 @@ export class AppComponent implements OnDestroy {
         }
       }
     });
+  }
+
+  /**
+   * Supprime le token de clé 'identifiant' utilisé pour vérifier si l'utilisateur est connecté.
+   * Supprime aussi le token de clé 'lienAvatar'
+   * Toggle les profilbtn et loginbtn.
+   * Renvoie vers l'accueil.
+   */
+  logout() {
+    this.dataService.deleteToken();
+    this.dataService.user.identifiant = ''
+    this.dataService.user.lienAvatar = ''
+    this.router.navigate(['accueil'])
   }
 }

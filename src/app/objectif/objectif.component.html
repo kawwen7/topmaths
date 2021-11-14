@@ -1,36 +1,53 @@
-<div class="container is-max-desktop" style="text-align:center">
-  <div class="box">
-    <h1 class="title is-2">{{ titre }}</h1>
-  </div>
-  <div class="box">
-    <h2 class="title is-3">Rappel du cours</h2>
-    <p [innerHTML]="rappelDuCoursHTML" style="text-align: left;"></p>
-    <p><img *ngIf="rappelDuCoursImage != ''" [src]="rappelDuCoursImage" /></p>
-  </div>
-  <h2 *ngIf="videos.length == 1; else plusieursVideos" class="title is-3">Vidéo d'explication</h2>
-  <ng-template #plusieursVideos><h2 class="title is-3">Vidéos d'explication</h2></ng-template>
-  <div *ngFor="let video of videos" class="box">
-    <h3 class="title is-4">{{video.titre}}</h3>
-    <div class="image is-16by9">
-      <iframe class="has-ratio" [src]="video.lienVideo| safe"></iframe>
-    </div>
-    <p><u>Vidéo de <a [href]="video.lienAuteur" target="_blank" rel="noopener noreferrer">{{ video.auteur }}</a></u></p>
-  </div>
-  <h2 class="title is-3">S'entraîner</h2>
-  <div *ngFor="let exercice of exercices; index as i">
+<div class="columns" style="text-align: center;">
+  <div class="column is-one-fifth"></div>
+  <div class="column is-three-fifths">
     <div class="box">
-      <h3 class="title is-4">Niveau {{ i + 1 }} - {{ exercice.couleur }} <i class="far fa-copy" (click)="copierLien(exercice)"></i></h3>
-      <div class="image is-16by9">
-        <iframe class="has-ratio" [src]="exercice.lien | safe"></iframe>
-      </div>
+      <h1 class="title is-2">{{ titre }}</h1>
     </div>
-    <div><br></div>
-  </div>
-  <div class="box">
-    <h2 class="title is-3">Téléchargements</h2>
-    <div style="padding: 5px;">
+    <div class="box">
+      <h2 class="title is-3">Rappel du cours</h2>
+      <p [innerHTML]="rappelDuCoursHTML" style="text-align: left;"></p>
+      <p><img *ngIf="rappelDuCoursImage != ''" [src]="rappelDuCoursImage" /></p>
+    </div>
+    <h2 *ngIf="videos.length == 1; else plusieursVideos" class="title is-3">Vidéo d'explication</h2>
+    <ng-template #plusieursVideos>
+      <h2 class="title is-3">Vidéos d'explication</h2>
+    </ng-template>
+    <div *ngFor="let video of videos" class="box">
+      <h3 class="title is-4">{{video.titre}}</h3>
+      <div class="image is-16by9">
+        <iframe class="has-ratio" [src]="video.lienVideo| safe"></iframe>
+      </div>
+      <p><u>Vidéo de <a [href]="video.lienAuteur" target="_blank" rel="noopener noreferrer">{{ video.auteur }}</a></u>
+      </p>
+    </div>
+    <h2 class="title is-3">S'entraîner</h2>
+    <div *ngFor="let exercice of exercices; index as i">
+      <div class="box">
+        <h3 class="title is-4 is-inline-block">Niveau {{ i + 1 }} - {{ exercice.couleur }} <i class="far fa-copy"
+            (click)="copierLien(exercice)"></i></h3>
+        <div
+          [ngClass]="{'image': true, 'is-16by9': !portrait, 'is-9by16': portrait && dataService.user.scores == 'actives', 'is-2by3': portrait && dataService.user.scores != 'actives'}">
+          <iframe class="has-ratio" [src]="exercice.lien | safe"></iframe>
+        </div>
+        <span *ngIf="exercice.bonneReponse">
+          <h3 [ngClass]="{'huge': true, 'moveUp': exercice.bonneReponse}">{{messageScore}}</h3>
+        </span>
+      </div>
+      <div><br></div>
+    </div>
+    <div class="box">
+      <h2 class="title is-3">Téléchargements</h2>
+      <div style="padding: 5px;">
         <div style="padding: 5px;"><a *ngIf="lienFiche != ''" [href]="lienFiche">Télécharger la fiche</a></div>
         <div style="padding: 5px;"><a *ngIf="lienAnki != ''" [href]="lienAnki">Télécharger le paquet Anki</a></div>
+      </div>
     </div>
+  </div>
+  <div class="column is-one-fifth">
+    <!-- Utilisateurs connectés -->
+    <app-whosonline></app-whosonline>
+  </div>
 </div>
-</div>
+<ng-particles [id]="confetti.id" [options]="confetti.particlesOptions" (particlesLoaded)="confetti.particlesLoaded($event)" (particlesInit)="confetti.particlesInit($event)"></ng-particles>
+<div id="tsparticles"></div>

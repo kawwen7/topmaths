@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-accueil',
@@ -6,9 +7,10 @@ import { Component, OnInit, HostListener } from '@angular/core';
   styleUrls: ['../../assets/css/mystyles.css']
 })
 export class AccueilComponent implements OnInit {
-  isPortrait : boolean
-  constructor() {
-    this.isPortrait = true
+  portrait: boolean
+
+  constructor(public dataService: ApiService) {
+    this.portrait = true
     this.isPortraitUpdate()
   }
 
@@ -20,16 +22,16 @@ export class AccueilComponent implements OnInit {
    * et on ajuste la largeur des cartes en conséquence.
    * @param event
    */
-   @HostListener('window:resize', ['$event'])
-   onResize(event: any) {
-     this.isPortraitUpdate()
-   }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.isPortraitUpdate()
+  }
 
-   /**
-    * Vérifie si l'écran est en portrait ou en paysage
-    * et met à jour this.isPortrait
-    */
-   isPortraitUpdate() {
-    window.innerHeight > window.innerWidth ? this.isPortrait = true : this.isPortrait = false
-   }
+  /**
+   * Vérifie si l'écran est en portrait ou en paysage
+   * et met à jour this.isPortrait
+   */
+  isPortraitUpdate() {
+    window.innerHeight > window.innerWidth ? this.portrait = true : this.portrait = false
+  }
 }

@@ -263,7 +263,7 @@ export class SequenceComponent implements OnInit {
         return 'six objectifs'
 
       default:
-        return '?'
+        return ''
     }
   }
 

@@ -1,3 +1,162 @@
+.huge {
+  font-size: 1000%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index:99;
+}
+
+.moveUp {
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: moveUp 2s;
+}
+
+@keyframes moveUp {
+  0% { transform: translate(0px, 100%); }
+  100% { transform: translate(0px, 20%); }
+}
+.shake {
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 0.5s;
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.button.is-sponsor {
+  background-color: #ea4aaa;
+  border-color: transparent;
+  color: #fff
+}
+
+.button.is-sponsor.is-hovered, .button.is-sponsor:hover {
+  background-color: #e93fa5;
+  border-color: transparent;
+  color: #fff
+}
+
+.button.is-sponsor.is-focused, .button.is-sponsor:focus {
+  border-color: transparent;
+  color: #fff
+}
+
+.button.is-sponsor.is-focused:not(:active), .button.is-sponsor:focus:not(:active) {
+  box-shadow: 0 0 0 .125em rgba(234, 74, 170, .25)
+}
+
+.button.is-sponsor.is-active, .button.is-sponsor:active {
+  background-color: #e7339f;
+  border-color: transparent;
+  color: #fff
+}
+
+.button.is-sponsor[disabled], fieldset[disabled] .button.is-sponsor {
+  background-color: #ea4aaa;
+  border-color: transparent;
+  box-shadow: none
+}
+
+.button.is-sponsor.is-inverted {
+  background-color: #fff;
+  color: #ea4aaa
+}
+
+.button.is-sponsor.is-inverted.is-hovered, .button.is-sponsor.is-inverted:hover {
+  background-color: #f2f2f2
+}
+
+.button.is-sponsor.is-inverted[disabled], fieldset[disabled] .button.is-sponsor.is-inverted {
+  background-color: #fff;
+  border-color: transparent;
+  box-shadow: none;
+  color: #ea4aaa
+}
+
+.button.is-sponsor.is-loading::after {
+  border-color: transparent transparent #fff #fff!important
+}
+
+.button.is-sponsor.is-outlined {
+  background-color: transparent;
+  border-color: #ea4aaa;
+  color: #ea4aaa
+}
+
+.button.is-sponsor.is-outlined.is-focused, .button.is-sponsor.is-outlined.is-hovered, .button.is-sponsor.is-outlined:focus, .button.is-sponsor.is-outlined:hover {
+  background-color: #ea4aaa;
+  border-color: #ea4aaa;
+  color: #fff
+}
+
+.button.is-sponsor.is-outlined.is-loading::after {
+  border-color: transparent transparent #ea4aaa #ea4aaa!important
+}
+
+.button.is-sponsor.is-outlined.is-loading.is-focused::after, .button.is-sponsor.is-outlined.is-loading.is-hovered::after, .button.is-sponsor.is-outlined.is-loading:focus::after, .button.is-sponsor.is-outlined.is-loading:hover::after {
+  border-color: transparent transparent #fff #fff!important
+}
+
+.button.is-sponsor.is-outlined[disabled], fieldset[disabled] .button.is-sponsor.is-outlined {
+  background-color: transparent;
+  border-color: #ea4aaa;
+  box-shadow: none;
+  color: #ea4aaa
+}
+
+.button.is-sponsor.is-inverted.is-outlined {
+  background-color: transparent;
+  border-color: #fff;
+  color: #fff
+}
+
+.button.is-sponsor.is-inverted.is-outlined.is-focused, .button.is-sponsor.is-inverted.is-outlined.is-hovered, .button.is-sponsor.is-inverted.is-outlined:focus, .button.is-sponsor.is-inverted.is-outlined:hover {
+  background-color: #fff;
+  color: #ea4aaa
+}
+
+.button.is-sponsor.is-inverted.is-outlined.is-loading.is-focused::after, .button.is-sponsor.is-inverted.is-outlined.is-loading.is-hovered::after, .button.is-sponsor.is-inverted.is-outlined.is-loading:focus::after, .button.is-sponsor.is-inverted.is-outlined.is-loading:hover::after {
+  border-color: transparent transparent #ea4aaa #ea4aaa!important
+}
+
+.button.is-sponsor.is-inverted.is-outlined[disabled], fieldset[disabled] .button.is-sponsor.is-inverted.is-outlined {
+  background-color: transparent;
+  border-color: #fff;
+  box-shadow: none;
+  color: #fff
+}
+
+.button.is-sponsor.is-light {
+  background-color: #fdedf6;
+  color: #c0167c
+}
+
+.button.is-sponsor.is-light.is-hovered, .button.is-sponsor.is-light:hover {
+  background-color: #fce1f1;
+  border-color: transparent;
+  color: #c0167c
+}
+
+.button.is-sponsor.is-light.is-active, .button.is-sponsor.is-light:active {
+  background-color: #fad6ec;
+  border-color: transparent;
+  color: #c0167c
+}
 /*! bulma.io v0.9.3 | MIT License | github.com/jgthms/bulma */
 /* Bulma Utilities */
 .button, .input, .textarea, .select select, .file-cta,

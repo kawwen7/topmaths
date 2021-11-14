@@ -11,6 +11,13 @@ import { SequencesComponent } from './sequences/sequences.component';
 import { SequenceComponent } from './sequence/sequence.component';
 import { JeuxComponent } from './jeux/jeux.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { LoginComponent } from './login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProfilComponent } from './profil/profil.component';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { WhosonlineComponent } from './whosonline/whosonline.component';
+import { ClassementComponent } from './classement/classement.component';
+import { NgParticlesModule } from "ng-particles";
 
 @NgModule({
   declarations: [
@@ -21,12 +28,20 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     ObjectifsComponent,
     SequencesComponent,
     SequenceComponent,
-    JeuxComponent
+    JeuxComponent,
+    LoginComponent,
+    ProfilComponent,
+    WhosonlineComponent,
+    ClassementComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgxSliderModule,
+    NgParticlesModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
