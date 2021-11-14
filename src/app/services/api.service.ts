@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 
 export class ApiService {
   redirectUrl: string = ''
-  baseUrl: string = "https://beta.topmaths.fr/api";
+  baseUrl: string = "https://topmaths.fr/api";
   user: User
   onlineUsers: User[]
   classement: User[]
@@ -20,7 +20,7 @@ export class ApiService {
   listeFeminins: any
   listeAdjectifs: any
 
-  @Output() majProfil: EventEmitter<any> = new EventEmitter();
+  @Output() profil: EventEmitter<any> = new EventEmitter();
   constructor(private httpClient: HttpClient, private router: Router) {
     this.user = {
       identifiant: '',
@@ -169,6 +169,7 @@ export class ApiService {
             const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
             this.router.navigate([redirect]);
           }
+          this.profil.emit({profilCharge: true})
         },
         error => {
           this.erreurLogin(identifiant)
@@ -346,18 +347,26 @@ export class ApiService {
   }
 
   /**
-   * Modifie le score dans la bdd
+   * Récupère le score actuel
+   * Ajoute le score de l'exercice
+   * Met à jour le score de la base de données
    * @param score à ajouter 
    */
   majScore(score: string) {
-    this.user.score = (parseInt(this.user.score) + parseInt(score)).toString()
-    this.update('score').pipe(first()).subscribe(
+    this.userlogin(this.user.identifiant).pipe(first()).subscribe(
       data => {
-        this.login(this.user.identifiant)
+        this.user.score = (parseInt(data[0].score) + parseInt(score)).toString()
+        this.update('score').pipe(first()).subscribe(
+          data => {
+          },
+          error => {
+            console.log(error)
+          });
       },
       error => {
         console.log(error)
       });
+    
   }
 
   /**

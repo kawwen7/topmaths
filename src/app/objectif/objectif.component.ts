@@ -38,6 +38,8 @@ export class ObjectifComponent implements OnInit {
   lienAnki: string
   portrait: boolean
   messageScore: string
+  ancienUrl: string
+  ancienneGraine: string
 
   constructor(public http: HttpClient, private route: ActivatedRoute, public dataService: ApiService, public confetti: ConfettiService) {
     this.reference = ''
@@ -50,6 +52,8 @@ export class ObjectifComponent implements OnInit {
     this.lienAnki = ''
     this.portrait = true
     this.messageScore = ''
+    this.ancienUrl = ''
+    this.ancienneGraine = ''
     this.isPortraitUpdate()
   }
 
@@ -91,12 +95,16 @@ export class ObjectifComponent implements OnInit {
               const reponseOK: boolean = event.data.reponseOK
               if (typeof (reponseOK) != 'undefined') {
                 if (reponseOK) {
-                  console.log('bonne réponse')
-                  this.dataService.majScore(exercice.score)
-                  this.messageScore = '+ ' + exercice.score
-                  exercice.bonneReponse = true
-                  this.confetti.lanceConfetti(this.portrait)
-                  setTimeout(() => exercice.bonneReponse = false, 2000)
+                  // On s'assure que les exercices soient différents pour ne pas ajouter plusieurs fois du score
+                  if (this.ancienUrl != exercice.lienACopier || this.ancienneGraine != exercice.graine) {
+                    this.ancienUrl = exercice.lienACopier
+                    this.ancienneGraine = exercice.graine
+                    this.dataService.majScore(exercice.score)
+                    this.messageScore = '+ ' + exercice.score
+                    exercice.bonneReponse = true
+                    this.confetti.lanceConfetti(this.portrait)
+                    setTimeout(() => exercice.bonneReponse = false, 2000)
+                  }
                 }
               }
               exercice.graine = event.data.graine
@@ -139,7 +147,7 @@ export class ObjectifComponent implements OnInit {
             return sousTheme.objectifs.find((objectif: any) => {
               // Une fois qu'on l'a trouvée, on modifie les attributs
               if (objectif.reference == this.reference) {
-                setTimeout(() => this.recupereAttributsObjectif(objectif), 2000)
+                this.recupereAttributsObjectif(objectif)
               }
               return objectif.reference == this.reference;
             })
