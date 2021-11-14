@@ -38,8 +38,10 @@ export class ObjectifComponent implements OnInit {
   lienAnki: string
   portrait: boolean
   messageScore: string
-  ancienUrl: string
-  ancienneGraine: string
+  derniereUrl: string
+  derniereGraine: string
+  dernierTitre: string
+  presenceVideo: boolean
 
   constructor(public http: HttpClient, private route: ActivatedRoute, public dataService: ApiService, public confetti: ConfettiService) {
     this.reference = ''
@@ -52,8 +54,10 @@ export class ObjectifComponent implements OnInit {
     this.lienAnki = ''
     this.portrait = true
     this.messageScore = ''
-    this.ancienUrl = ''
-    this.ancienneGraine = ''
+    this.derniereUrl = ''
+    this.derniereGraine = ''
+    this.dernierTitre = ''
+    this.presenceVideo = false
     this.isPortraitUpdate()
   }
 
@@ -92,20 +96,24 @@ export class ObjectifComponent implements OnInit {
           if (typeof (exercice.lienACopier) != 'undefined') {
             if (url.split('&serie=')[0].split(',i=')[0] == exercice.lienACopier.split('&serie=')[0].split(',i=')[0]) { // Lorsqu'un exercice n'est pas interactifReady, le ,i=0 est retiré de l'url
               // On a trouvé à quel exercice correspond ce message
-              const reponseOK: boolean = event.data.reponseOK
-              if (typeof (reponseOK) != 'undefined') {
-                if (reponseOK) {
+              const nbBonnesReponses: number = event.data.nbBonnesReponses
+              const nbMauvaisesReponses: number = event.data.nbMauvaisesReponses
+              const titre: string = event.data.titre
+              if (typeof (titre) != 'undefined') {
                   // On s'assure que les exercices soient différents pour ne pas ajouter plusieurs fois du score
-                  if (this.ancienUrl != exercice.lienACopier || this.ancienneGraine != exercice.graine) {
-                    this.ancienUrl = exercice.lienACopier
-                    this.ancienneGraine = exercice.graine
-                    this.dataService.majScore(exercice.score)
-                    this.messageScore = '+ ' + exercice.score
+                  if (this.derniereUrl != exercice.lienACopier || this.derniereGraine != exercice.graine || this.dernierTitre != titre) {
+                    this.derniereUrl = exercice.lienACopier
+                    this.derniereGraine = exercice.graine
+                    this.dernierTitre = titre
+                    const majScore: string = (parseInt(exercice.score) * nbBonnesReponses).toString()
+                    this.dataService.majScore(majScore)
+                    this.messageScore = '+ ' + majScore
                     exercice.bonneReponse = true
-                    this.confetti.lanceConfetti(this.portrait)
                     setTimeout(() => exercice.bonneReponse = false, 2000)
+                    if (nbMauvaisesReponses == 0) {
+                      this.confetti.lanceConfetti(this.portrait)
+                    }
                   }
-                }
               }
               exercice.graine = event.data.graine
               if (this.dataService.user.scores == 'actives') { // Si on est en interactif, on retire l'userId et on ajoute la graine
@@ -176,6 +184,7 @@ export class ObjectifComponent implements OnInit {
     // Le nombre de vidéos varie selon la référence, on a donc quelque chose de dynamique
     for (const video of objectif.videos) {
       if (video.slug != '') {
+        this.presenceVideo = true
         this.videos.push({
           titre: video.titre,
           slug: video.slug,
@@ -203,10 +212,11 @@ export class ObjectifComponent implements OnInit {
           lien: `https://coopmaths.fr/mathalea.html?ex=${exercice.slug},${i}&serie=${exercice.graine}&v=embed&p=1.5${userId}`,
           score: exercice.score
         })
-        this.exercices[this.exercices.length - 1].lienACopier = this.exercices[this.exercices.length - 1].lien
+        this.exercices[this.exercices.length - 1].lien = this.exercices[this.exercices.length - 1].lien.replace('&ex=', ',' + i + '&ex=') // dans le cas où il y aurait plusieurs exercices dans le même slug
         if (exercice.slug.slice(0, 4) == 'http') {
           this.exercices[this.exercices.length - 1].lien = exercice.slug
         }
+        this.exercices[this.exercices.length - 1].lienACopier = this.exercices[this.exercices.length - 1].lien
       }
       // On ajoute la couleur selon le nombre d'exercices
       this.exercices[this.exercices.length - 1].couleur = "Vert Foncé"

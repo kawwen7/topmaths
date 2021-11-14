@@ -167,13 +167,13 @@
                 "exercices": [
                   {
                     "slug": "5R21,s=20,s2=false,n=4",
-                    "score": "40"
+                    "score": "10"
                   }, {
                     "slug": "5R22-2,s=20,n=4",
-                    "score": "60"
+                    "score": "15"
                   }, {
                     "slug": "5R22,s=20,s2=false,n=2",
-                    "score": "60"
+                    "score": "30"
                   }
                 ]
               }, {
@@ -260,7 +260,7 @@
                 "exercices": [
                   {
                     "slug": "6P10,s=1-2-3-4,n=4",
-                    "score": "40"
+                    "score": "10"
                   }
                 ]
               }, {
@@ -587,7 +587,7 @@
                 "exercices": [
                   {
                     "slug": "5G22-1,s=3,s2=false,n=2",
-                    "score": "60"
+                    "score": "30"
                   }
                 ]
               }
@@ -621,12 +621,12 @@
                 ],
                 "exercices": [
                   {
-                    "slug": "4C10-3,s=10,s2=false,n=1,i=0&ex=4C10-4,s=true,n=1",
-                    "score": "20"
+                    "slug": "4C10-3,s=10,s2=false,n=1&ex=4C10-4,s=true,n=1",
+                    "score": "10"
                   },
                   {
-                    "slug": "4C10-1,s=3,n=1,i=0&ex=4C10-2,s=4,n=1",
-                    "score": "20"
+                    "slug": "4C10-1,s=3,n=1&ex=4C10-2,s=4,n=1",
+                    "score": "10"
                   }
                 ]
               }
@@ -673,11 +673,11 @@
                 "exercices": [
                   {
                     "slug": "4A11-0,s=3,s2=false,s3=false,s4=false,n=2",
-                    "score": "40"
+                    "score": "20"
                   },
                   {
                     "slug": "4A11-1,s=false,n=2",
-                    "score": "60"
+                    "score": "30"
                   }
                 ]
               }, {
@@ -815,7 +815,7 @@
                 "exercices": [
                   {
                     "slug": "4S11,s=2,n=2",
-                    "score": "30"
+                    "score": "15"
                   }
                 ]
               }, {
@@ -879,7 +879,7 @@
                     "score": "30"
                   }, {
                     "slug": "4G20,n=1,s2=2",
-                    "score": "50"
+                    "score": "25"
                   }
                 ]
               }, {
@@ -920,7 +920,7 @@
                     "score": "40"
                   }, {
                     "slug": "4G20-2,s=3,s2=1,n=2",
-                    "score": "20"
+                    "score": "10"
                   }
                 ]
               }, {
@@ -942,7 +942,297 @@
                     "score": "40"
                   }, {
                     "slug": "4G20-6,s=1,n=3",
-                    "score": "50"
+                    "score": "15"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }, {
+    "niveau": "3e",
+    "themes": [
+      {
+        "nom": "Nombres et Calculs",
+        "sousThemes": [
+          {
+            "nom": "Calcul Littéral",
+            "objectifs": [
+              {
+                "reference": "3L10",
+                "titre": "Déterminer l’opposé d’une expression littérale",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "",
+                    "auteur": "",
+                    "lienAuteur": ""
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "3L10,n=2",
+                    "score": "5"
+                  },
+                  {
+                    "slug": "3L10-1,n=2",
+                    "score": "10"
+                  }
+                ]
+              }, {
+                "reference": "3L11-1",
+                "titre": "Réduire des expressions algébriques simples",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "",
+                    "auteur": "",
+                    "lienAuteur": ""
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "3L11-2,n=4",
+                    "score": "10"
+                  }
+                ]
+              }, {
+                "reference": "3L11-2",
+                "titre": "Développer par simple et double distributivités",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "",
+                    "auteur": "",
+                    "lienAuteur": ""
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "3L11,s=1,n=2",
+                    "score": "10"
+                  },
+                  {
+                    "slug": "3L11,s=2,n=2",
+                    "score": "15"
+                  },
+                  {
+                    "slug": "3L11-1,s=3,n=2",
+                    "score": "20"
+                  }
+                ]
+              }, {
+                "reference": "3L11-3",
+                "titre": "Factoriser à l'aide d'un facteur commun",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "",
+                    "auteur": "",
+                    "lienAuteur": ""
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "3L11-4,s=1,n=2",
+                    "score": "10"
+                  },
+                  {
+                    "slug": "3L11-4,s=2,n=2",
+                    "score": "15"
+                  },
+                  {
+                    "slug": "3L11-4,s=3,n=2",
+                    "score": "20"
+                  }
+                ]
+              }, {
+                "reference": "3L13",
+                "titre": "Résoudre algébriquement des équations du 1er degré",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "",
+                    "auteur": "",
+                    "lienAuteur": ""
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "3L13-0,s=true,s2=4,n=5,cd=1",
+                    "score": "10"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nom": "Organisation et gestion de données, fonctions",
+        "sousThemes": [
+          {
+            "nom": "Généralités sur les fonctions",
+            "objectifs": [
+              {
+                "reference": "3F10",
+                "titre": "Utiliser les notations et le vocabulaire fonctionnels",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "",
+                    "auteur": "",
+                    "lienAuteur": ""
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "3F10-1,s=2,n=5,cd=0",
+                    "score": "10"
+                  }
+                ]
+              },
+              {
+                "reference": "3F11",
+                "titre": "Passer d’un mode de représentation d’une fonction à un autre",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "",
+                    "auteur": "",
+                    "lienAuteur": ""
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "",
+                    "score": ""
+                  }
+                ]
+              },
+              {
+                "reference": "3F12",
+                "titre": "Déterminer l’image d’un nombre par une fonction à partir de tous les modes de représentation",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "",
+                    "auteur": "",
+                    "lienAuteur": ""
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "3F10",
+                    "score": "5"
+                  },
+                  {
+                    "slug": "3F12-2,s=5,n=4",
+                    "score": "10"
+                  },
+                  {
+                    "slug": "3F12-4,s=3",
+                    "score": "15"
+                  }
+                ]
+              },
+              {
+                "reference": "3F13",
+                "titre": "Déterminer un antécédent à partir d’une représentation graphique ou d’un tableau de valeurs",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "",
+                    "auteur": "",
+                    "lienAuteur": ""
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "3F10",
+                    "score": "5"
+                  },
+                  {
+                    "slug": "3F13,s=2",
+                    "score": "10"
+                  },
+                  {
+                    "slug": "3F13-1",
+                    "score": "15"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nom": "Statistiques",
+            "objectifs": [
+              {
+                "reference": "3S11",
+                "titre": "Calculer et interpréter l'étendue d'une série de données",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "",
+                    "auteur": "",
+                    "lienAuteur": ""
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "3S15,s=1,n=1",
+                    "score": "10"
+                  },
+                  {
+                    "slug": "3S15,s=2,n=1",
+                    "score": "15"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nom": "Probabilités",
+            "objectifs": [
+              {
+                "reference": "3S11",
+                "titre": "Calculer des probabilités pour des expériences aléatoires simples à une ou deux épreuves à partir de dénombrements",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "",
+                    "auteur": "",
+                    "lienAuteur": ""
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "3S20,s=1,n=1",
+                    "score": "10"
                   }
                 ]
               }

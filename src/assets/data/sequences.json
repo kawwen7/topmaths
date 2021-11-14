@@ -459,5 +459,229 @@
         ]
       }
     ]
+  }, {
+    "niveau": "3e",
+    "sequences": [
+      {
+        "reference": "S3S1",
+        "titre": "Probabilités",
+        "objectifs": [
+          {
+            "reference": "3S20"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "",
+            "titre": "",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": ""
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "",
+            "titre": "",
+            "slug": ""
+          }
+        ]
+      },
+      {
+        "reference": "S3S2",
+        "titre": "Calcul littéral 1",
+        "objectifs": [
+          {
+            "reference": "3L11-1"
+          },
+          {
+            "reference": "3L13"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "",
+            "titre": "",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": ""
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "",
+            "titre": "",
+            "slug": ""
+          }
+        ]
+      },
+      {
+        "reference": "S3S3",
+        "titre": "Statistiques 1",
+        "objectifs": [
+          {
+            "reference": "5S14"
+          },
+          {
+            "reference": "4S11"
+          },
+          {
+            "reference": "3S11"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "",
+            "titre": "",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": ""
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "",
+            "titre": "",
+            "slug": ""
+          }
+        ]
+      },
+      {
+        "reference": "S3S4",
+        "titre": "Proportionnalité en géométrie 1",
+        "objectifs": [
+          {
+            "reference": "3G20"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "",
+            "titre": "",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": ""
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "",
+            "titre": "",
+            "slug": ""
+          }
+        ]
+      },
+      {
+        "reference": "S3S5",
+        "titre": "Calcul littéral 2",
+        "objectifs": [
+          {
+            "reference": "3L11-2"
+          },
+          {
+            "reference": "3L11-3"
+          },
+          {
+            "reference": "3L10"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "",
+            "titre": "",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": ""
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "",
+            "titre": "",
+            "slug": ""
+          }
+        ]
+      },
+      {
+        "reference": "S3S6",
+        "titre": "Notion de fonction",
+        "objectifs": [
+          {
+            "reference": "3F10"
+          },
+          {
+            "reference": "3F11"
+          },
+          {
+            "reference": "3F12"
+          },
+          {
+            "reference": "3F13"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "",
+            "titre": "",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": ""
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "",
+            "titre": "",
+            "slug": ""
+          }
+        ]
+      },
+      {
+        "reference": "S3S7",
+        "titre": "Calcul littéral 3",
+        "objectifs": [
+          {
+            "reference": "3L12"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "",
+            "titre": "",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": ""
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "",
+            "titre": "",
+            "slug": ""
+          }
+        ]
+      }
+    ]
   }
 ]
