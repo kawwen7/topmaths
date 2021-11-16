@@ -59,6 +59,7 @@ export class ObjectifComponent implements OnInit {
     this.dernierTitre = ''
     this.presenceVideo = false
     this.isPortraitUpdate()
+    setTimeout(() => this.confetti.stop(), 3000) // Sinon un reliquat reste apparent
   }
 
   ngOnInit(): void {
