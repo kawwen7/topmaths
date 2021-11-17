@@ -104,10 +104,10 @@
                 "exercices": [
                   {
                     "slug": "5R11,s=1,n=1",
-                    "score": "30"
+                    "score": "5"
                   }, {
                     "slug": "5R11-2,s=1,n=1",
-                    "score": "50"
+                    "score": "20"
                   }
                 ]
               }, {
@@ -320,10 +320,10 @@
                 "exercices": [
                   {
                     "slug": "6P11,s=false,n=1",
-                    "score": "30"
+                    "score": "15"
                   }, {
                     "slug": "6P12,s=false,n=1",
-                    "score": "40"
+                    "score": "20"
                   }
                 ]
               }
@@ -366,7 +366,7 @@
                 "exercices": [
                   {
                     "slug": "5S11,s=3,s2=2",
-                    "score": "40"
+                    "score": "5"
                   }
                 ]
               }, {
@@ -696,11 +696,11 @@
                 "exercices": [
                   {
                     "slug": "4A12,s=1,n=1,cd=1",
-                    "score": "60"
+                    "score": "20"
                   },
                   {
                     "slug": "4A12,s=2,n=1,cd=1",
-                    "score": "80"
+                    "score": "50"
                   }
                 ]
               }
@@ -939,10 +939,10 @@
                 "exercices": [
                   {
                     "slug": "4G20-6,s=2,n=1",
-                    "score": "40"
+                    "score": "10"
                   }, {
                     "slug": "4G20-6,s=1,n=3",
-                    "score": "15"
+                    "score": "10"
                   }
                 ]
               }
@@ -999,7 +999,7 @@
                 "exercices": [
                   {
                     "slug": "3L11-2,n=4",
-                    "score": "10"
+                    "score": "5"
                   }
                 ]
               }, {
@@ -1173,12 +1173,8 @@
                     "score": "5"
                   },
                   {
-                    "slug": "3F13,s=2",
-                    "score": "10"
-                  },
-                  {
                     "slug": "3F13-1",
-                    "score": "15"
+                    "score": "5"
                   }
                 ]
               }
@@ -1217,7 +1213,7 @@
             "nom": "Probabilités",
             "objectifs": [
               {
-                "reference": "3S11",
+                "reference": "3S20",
                 "titre": "Calculer des probabilités pour des expériences aléatoires simples à une ou deux épreuves à partir de dénombrements",
                 "rappelDuCoursHTML": "",
                 "rappelDuCoursImage": "",
