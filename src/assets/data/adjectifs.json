@@ -164,5 +164,20 @@
   }, {
     "masculin":"légendaire",
     "feminin":"légendaire"
+  }, {
+    "masculin":"enchanté",
+    "feminin":"enchantée"
+  }, {
+    "masculin":"audacieux",
+    "feminin":"audacieuse"
+  }, {
+    "masculin":"sérieux",
+    "feminin":"sérieuse"
+  }, {
+    "masculin":"microscopique",
+    "feminin":"microscopique"
+  }, {
+    "masculin":"joyeux",
+    "feminin":"joyeuse"
   }
 ]
