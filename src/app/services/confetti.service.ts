@@ -10,11 +10,58 @@ export class ConfettiService {
   particlesOptions: any
   id : string
   emetteurs : any
-
+  
   constructor() {
     this.id =  "tsparticles"
     this.confetti = new Container('tsparticles')
     this.isPortrait = true
+    this.majParametres()
+  }
+
+  /**
+   * Arrête tsparticles et libère les ressources
+   * (si le processus n'est pas arrêté il y a un bug graphique en changeant d'onglet)
+   */
+  public stop() {
+    this.confetti.stop()
+  }
+
+  /**
+   * Ajoute un certain nombre d'émetteurs selon que l'on soit en portrait ou en paysage
+   * Met à jour les paramètres
+   * Lance les confetti
+   * Je voulais avoir plus de confetti en paysage et moins en portrait mais je n'y arrive pas mes modifications de paramètres sont ignorées
+   * En attendant, il y en a aussi peu en paysage qu'on portrait :(
+   * @param isPortrait 
+   */
+  public lanceConfetti(isPortrait: boolean) {
+    this.isPortrait = isPortrait
+    this.majParametres()
+    this.confetti.actualOptions.emitters = this.emetteurs
+    this.confetti.refresh()
+    this.confetti.play()
+  }
+
+  /**
+   * Récupère le container des particules et le met dans la variable this.confetti
+   * @param container 
+   */
+  particlesLoaded(container: Container): void {
+    this.confetti = container
+  }
+
+  /**
+   * Ne fait rien à l'initialisation
+   * @param main 
+   */
+  particlesInit(main: Main): void {
+  }
+
+  /**
+   * Crée une liste d'emetteurs différents selon que l'on soit en portrait ou en paysage
+   * Les ajoute aux autres paramètres de this.particlesOptions
+   */
+  majParametres(){
     if (this.isPortrait) {
       this.emetteurs = [ // the confetti emitters, the will bring confetti to life
         {
@@ -239,18 +286,5 @@ export class ConfettiService {
       },
       emitters: this.emetteurs
     }
-  }
-
-  public lanceConfetti(isPortrait: boolean) {
-    this.isPortrait = isPortrait
-    this.confetti.refresh()
-    this.confetti.play()
-  }
-
-  particlesLoaded(container: Container): void {
-    this.confetti = container
-  }
-
-  particlesInit(main: Main): void {
   }
 }
