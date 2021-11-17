@@ -180,7 +180,7 @@ export class SequenceComponent implements OnInit {
         this.lienEval = 'https://coopmaths.fr/mathalea.html?'
         for (const thisObjectif of this.objectifs) {
           for (const slug of thisObjectif.slugs) {
-            if (slug.slice(0, 4) != 'http') {
+            if (slug.slice(0, 4) != 'http' && slug != '') {
               this.lienEval = this.lienEval.concat('ex=', slug, '&')
             }
           }
