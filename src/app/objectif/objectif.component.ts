@@ -95,6 +95,9 @@ export class ObjectifComponent implements OnInit {
         // On cherche à quel exercice correspond ce message
         for (const exercice of this.exercices) {
           if (typeof (exercice.lienACopier) != 'undefined') {
+            /* A décommenter pour débugger lorsqu'il n'y a pas de confettis et que le score ne se met pas à jour
+            console.log('lienACopier ' + exercice.lienACopier)
+            console.log('url ' + url) */
             if (url.split('&serie=')[0].split(',i=')[0] == exercice.lienACopier.split('&serie=')[0].split(',i=')[0]) { // Lorsqu'un exercice n'est pas interactifReady, le ,i=0 est retiré de l'url
               // On a trouvé à quel exercice correspond ce message
               const nbBonnesReponses: number = event.data.nbBonnesReponses
@@ -112,7 +115,7 @@ export class ObjectifComponent implements OnInit {
                     exercice.bonneReponse = true
                     setTimeout(() => exercice.bonneReponse = false, 2000)
                     if (nbMauvaisesReponses == 0) {
-                      this.confetti.lanceConfetti(this.portrait)
+                      this.confetti.lanceConfetti()
                     }
                   }
               }

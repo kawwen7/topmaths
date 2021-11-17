@@ -153,7 +153,7 @@ export class ApiService {
       this.user = {
         identifiant: 'X',
         lienAvatar: 'https://avatars.dicebear.com/api/adventurer/topmaths.svg?scale=90&eyes=variant12&eyebrows=variant09&mouth=variant21&accessoires=glasses&accessoiresProbability=100&hair=long07&skinColor=variant03&hairColor=brown01',
-        scores: 'desactives',
+        scores: 'actives',
         lastLogin: '',
         lastAction: '',
         visible: '',
@@ -161,7 +161,6 @@ export class ApiService {
         score: '196'
       }
       this.setToken(this.user.identifiant);
-      this.router.navigate(['profil'])
     } else {
       this.userlogin(identifiant).pipe(first()).subscribe(
         data => {

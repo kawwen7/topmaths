@@ -147,7 +147,7 @@
                 ],
                 "exercices": [
                   {
-                    "slug": "5R20,s=20,s2=false,n=1",
+                    "slug": "5R20,s=20,s2=false,s3=false,n=1",
                     "score": "10"
                   }
                 ]
@@ -166,7 +166,7 @@
                 ],
                 "exercices": [
                   {
-                    "slug": "5R21,s=20,s2=false,n=4",
+                    "slug": "5R21,s=20,s2=false,n=4,cd=1",
                     "score": "10"
                   }, {
                     "slug": "5R22-2,s=20,n=4",
@@ -191,7 +191,7 @@
                 ],
                 "exercices": [
                   {
-                    "slug": "5R20,s=20,s2=true,n=1",
+                    "slug": "5R20,s=20,s2=true,s3=false,n=1",
                     "score": "10"
                   }
                 ]
@@ -419,8 +419,8 @@
                     "slug": "5S13,s=3,n=1",
                     "score": "20"
                   }, {
-                    "slug": "5S13-1,s=1",
-                    "score": "40"
+                    "slug": "5S13-1,s=1,video=https%3A%2F%2Fyoutu.be%2FGWDDay-mdVA",
+                    "score": "5"
                   }
                 ]
               }, {
@@ -872,13 +872,13 @@
                 ],
                 "exercices": [
                   {
-                    "slug": "4G20-1,s=1,n=1",
+                    "slug": "4G20-1,s=1,s2=3,n=1,video=M9sceJ8gzNc",
                     "score": "10"
                   }, {
-                    "slug": "4G20,n=1,s2=1",
+                    "slug": "4G20,s2=1,n=1,video=M9sceJ8gzNc",
                     "score": "30"
                   }, {
-                    "slug": "4G20,n=1,s2=2",
+                    "slug": "4G20,s2=2,n=1,video=M9sceJ8gzNc",
                     "score": "25"
                   }
                 ]

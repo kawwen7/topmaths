@@ -6,15 +6,12 @@ import { Container, Main } from 'tsparticles';
 })
 export class ConfettiService {
   confetti: Container
-  isPortrait: boolean
   particlesOptions: any
   id : string
-  emetteurs : any
   
   constructor() {
     this.id =  "tsparticles"
     this.confetti = new Container('tsparticles')
-    this.isPortrait = true
     this.majParametres()
   }
 
@@ -27,17 +24,9 @@ export class ConfettiService {
   }
 
   /**
-   * Ajoute un certain nombre d'émetteurs selon que l'on soit en portrait ou en paysage
-   * Met à jour les paramètres
    * Lance les confetti
-   * Je voulais avoir plus de confetti en paysage et moins en portrait mais je n'y arrive pas mes modifications de paramètres sont ignorées
-   * En attendant, il y en a aussi peu en paysage qu'on portrait :(
-   * @param isPortrait 
    */
-  public lanceConfetti(isPortrait: boolean) {
-    this.isPortrait = isPortrait
-    this.majParametres()
-    this.confetti.actualOptions.emitters = this.emetteurs
+  public lanceConfetti() {
     this.confetti.refresh()
     this.confetti.play()
   }
@@ -62,117 +51,6 @@ export class ConfettiService {
    * Les ajoute aux autres paramètres de this.particlesOptions
    */
   majParametres(){
-    if (this.isPortrait) {
-      this.emetteurs = [ // the confetti emitters, the will bring confetti to life
-        {
-          life: {
-            count: 1,
-            duration: 0.5
-          },
-          rate: {
-            delay: 0.05, // this is the delay in seconds for every confetti emission (10 confettis will spawn every 0.1 seconds)
-            quantity: 10 // how many confettis must spawn ad every delay
-          },
-          position: { // the emitter position (values are in canvas %)
-            x: 50,
-            y: 60
-          },
-          size: { // the emitter size, if > 0 you'll have a spawn area instead of a point
-            width: 0,
-            height: 0
-          }
-        }
-      ]
-    } else {
-      this.emetteurs = [ // the confetti emitters, the will bring confetti to life
-        {
-          life: {
-            count: 1,
-            duration: 0.5
-          },
-          rate: {
-            delay: 0.05, // this is the delay in seconds for every confetti emission (10 confettis will spawn every 0.1 seconds)
-            quantity: 10 // how many confettis must spawn ad every delay
-          },
-          position: { // the emitter position (values are in canvas %)
-            x: 50,
-            y: 60
-          },
-          size: { // the emitter size, if > 0 you'll have a spawn area instead of a point
-            width: 0,
-            height: 0
-          }
-        }, {
-          life: {
-            count: 1,
-            duration: 0.5
-          },
-          rate: {
-            delay: 0.05, // this is the delay in seconds for every confetti emission (10 confettis will spawn every 0.1 seconds)
-            quantity: 15 // how many confettis must spawn ad every delay
-          },
-          position: { // the emitter position (values are in canvas %)
-            x: 0,
-            y: 100
-          },
-          size: { // the emitter size, if > 0 you'll have a spawn area instead of a point
-            width: 0,
-            height: 0
-          }
-        }, {
-          life: {
-            count: 1,
-            duration: 0.5
-          },
-          rate: {
-            delay: 0.05, // this is the delay in seconds for every confetti emission (10 confettis will spawn every 0.1 seconds)
-            quantity: 15 // how many confettis must spawn ad every delay
-          },
-          position: { // the emitter position (values are in canvas %)
-            x: 100,
-            y: 100
-          },
-          size: { // the emitter size, if > 0 you'll have a spawn area instead of a point
-            width: 0,
-            height: 0
-          }
-        }, {
-          life: {
-            count: 1,
-            duration: 0.5
-          },
-          rate: {
-            delay: 0.05, // this is the delay in seconds for every confetti emission (10 confettis will spawn every 0.1 seconds)
-            quantity: 10 // how many confettis must spawn ad every delay
-          },
-          position: { // the emitter position (values are in canvas %)
-            x: 50,
-            y: 100
-          },
-          size: { // the emitter size, if > 0 you'll have a spawn area instead of a point
-            width: 0,
-            height: 0
-          }
-        }, {
-          life: {
-            count: 1,
-            duration: 0.5
-          },
-          rate: {
-            delay: 0.05, // this is the delay in seconds for every confetti emission (10 confettis will spawn every 0.1 seconds)
-            quantity: 10 // how many confettis must spawn ad every delay
-          },
-          position: { // the emitter position (values are in canvas %)
-            x: 50,
-            y: 120
-          },
-          size: { // the emitter size, if > 0 you'll have a spawn area instead of a point
-            width: 0,
-            height: 0
-          }
-        }
-      ]
-    }
     this.particlesOptions = {
       autoPlay: false,
       fullScreen: {
@@ -284,7 +162,26 @@ export class ConfettiService {
       background: {
         //color: "#FFFFFF" // set the canvas background, it will set the style property
       },
-      emitters: this.emetteurs
+      emitters: [ // the confetti emitters, the will bring confetti to life
+        {
+          life: {
+            count: 1,
+            duration: 0.5
+          },
+          rate: {
+            delay: 0.05, // this is the delay in seconds for every confetti emission (10 confettis will spawn every 0.1 seconds)
+            quantity: 10 // how many confettis must spawn ad every delay
+          },
+          position: { // the emitter position (values are in canvas %)
+            x: 50,
+            y: 60
+          },
+          size: { // the emitter size, if > 0 you'll have a spawn area instead of a point
+            width: 0,
+            height: 0
+          }
+        }
+      ]
     }
   }
 }
