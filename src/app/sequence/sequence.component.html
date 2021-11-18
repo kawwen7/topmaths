@@ -14,21 +14,29 @@
         </div>
       </div>
     </div>
-    <div class="box" *ngIf="calculsMentaux[0].reference != ''">
-      <h2 class="title is-3">Calcul Mental</h2>
+    <div class="box" *ngIf="calculsMentaux[0] != null && calculsMentaux[0].reference != ''">
+      <h2 class="title is-3">Calcul Mental
+        <i *ngIf="calculsMentaux[0] != null && calculsMentaux.length == 1 && calculsMentaux[0].niveaux.length == 1" class="far fa-copy" (click)="copierLien(calculsMentaux[0].niveaux[0])"></i>
+      </h2>
       <div *ngIf="presenceCalculMental; else divPasDeCalculMental">
         <div *ngFor="let calculMental of calculsMentaux; index as i">
           <p *ngIf="calculMental.pageExiste; else calculMentalSansLien">Dans cette séquence, le calcul
-            mental porte sur :<br><a [routerLink]="['/objectif',calculMental.reference]">{{calculMental.reference}} :
-              {{calculMental.titre}}</a></p>
+            mental porte sur :<br>
+            <a [routerLink]="['/objectif',calculMental.reference]">{{calculMental.reference}} : {{calculMental.titre}}</a> &nbsp;
+            <i *ngIf="calculsMentaux[0] != null && calculsMentaux.length > 1 && calculsMentaux[0].niveaux.length == 1" class="far fa-copy" (click)="copierLien(calculsMentaux[0].niveaux[0])"></i>
+          </p>
           <ng-template #calculMentalSansLien>
-            <p>Dans cette séquence, le calcul mental porte sur :<br>{{calculMental.reference}} :
-              {{calculMental.titre}}</p>
+            <p>Dans cette séquence, le calcul mental porte sur :<br>
+              {{calculMental.reference}} : {{calculMental.titre}} &nbsp;
+              <i *ngIf="calculsMentaux[0] != null && calculsMentaux.length > 1 && calculsMentaux[0].niveaux.length == 1" class="far fa-copy" (click)="copierLien(calculsMentaux[0].niveaux[0])"></i>
+            </p>
           </ng-template>
           <div><br></div>
           <div *ngFor="let niveau of calculMental.niveaux; index as j">
             <div><br></div>
-            <h3 class="title is-4" *ngIf="calculMental.niveaux.length > 1">Niveau {{j + 1}}</h3>
+            <h3 class="title is-4" *ngIf="calculMental.niveaux.length > 1">Niveau {{j + 1}}
+              <i class="far fa-copy" (click)="copierLien(niveau)"></i>
+            </h3>
             <p>{{niveau.commentaire}}</p>
             <div class="image is-16by9">
               <iframe class="has-ratio" [src]="niveau.lien | safe" allowfullscreen=""></iframe>
@@ -38,7 +46,7 @@
       </div>
       <ng-template #divPasDeCalculMental><br>{{messagePasDeCalculMental}}</ng-template>
     </div>
-    <div class="box" *ngIf="questionsFlash[0].slug != ''">
+    <div class="box" *ngIf="questionsFlash[0] != null && questionsFlash[0].slug != ''">
       <h2 class="title is-3">Questions Flash</h2>
       <p>Dans cette séquence, une question flash porte sur l’un des objectifs ci-dessus et les
         {{questionsFlash.length}} autres portent sur :</p>

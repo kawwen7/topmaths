@@ -290,6 +290,17 @@ export class SequenceComponent implements OnInit {
   }
 
   /**
+   * Copie dans le presse-papier le lien vers un certain niveau d'un calcul mental
+   * @param niveau 
+   */
+  copierLien(niveau: any) {
+    if (typeof (niveau.lien) != 'undefined') {
+      navigator.clipboard.writeText(niveau.lien);
+      alert('Le lien vers l\'exercice a été copié')
+    }
+  }
+
+  /**
    * Vérifie si un fichier existe ou pas
    * @param urlToFile url du fichier
    * @returns true s'il existe, false sinon

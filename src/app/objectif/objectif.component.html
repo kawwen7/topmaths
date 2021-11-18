@@ -25,8 +25,9 @@
   <h2 class="title is-3">S'entraîner</h2>
   <div *ngFor="let exercice of exercices; index as i">
     <div class="box">
-      <h3 class="title is-4 is-inline-block">Niveau {{ i + 1 }} - {{ exercice.couleur }} <i class="far fa-copy"
-          (click)="copierLien(exercice)"></i></h3>
+      <h3 class="title is-4 is-inline-block">Niveau {{ i + 1 }} - {{ exercice.couleur }}
+        <i class="far fa-copy" (click)="copierLien(exercice)"></i>
+      </h3>
       <div
         [ngClass]="{'image': true, 'is-16by9': !portrait, 'is-9by16': portrait && dataService.user.scores == 'actives', 'is-2by3': portrait && dataService.user.scores != 'actives'}">
         <iframe class="has-ratio" [src]="exercice.lien | safe"></iframe>
