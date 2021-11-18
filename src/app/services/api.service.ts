@@ -411,6 +411,18 @@ export class ApiService {
   }
 
   /**
+   * Modifie la date de dernière action
+   */
+   majLogout() {
+    this.update('logout').pipe(first()).subscribe(
+      data => {
+      },
+      error => {
+        console.log(error)
+      });
+  }
+
+  /**
    * @param visible peut être 'oui' ou 'non'
    */
    majVisible(visible: string) {

@@ -77,7 +77,8 @@ export class AppComponent implements OnDestroy {
    * Renvoie vers l'accueil.
    */
   logout() {
-    this.dataService.deleteToken();
+    this.dataService.majLogout()
+    this.dataService.deleteToken()
     this.dataService.user.identifiant = ''
     this.dataService.user.lienAvatar = ''
     this.router.navigate(['accueil'])
