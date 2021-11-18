@@ -110,12 +110,14 @@ export class ObjectifComponent implements OnInit {
                     this.derniereGraine = exercice.graine
                     this.dernierTitre = titre
                     const majScore: string = (parseInt(exercice.score) * nbBonnesReponses).toString()
-                    this.dataService.majScore(majScore)
-                    this.messageScore = '+ ' + majScore
-                    exercice.bonneReponse = true
-                    setTimeout(() => exercice.bonneReponse = false, 2000)
-                    if (nbMauvaisesReponses == 0) {
-                      this.confetti.lanceConfetti()
+                    if(parseInt(majScore) > 0) {
+                      this.dataService.majScore(majScore)
+                      this.messageScore = '+ ' + majScore
+                      exercice.bonneReponse = true
+                      setTimeout(() => exercice.bonneReponse = false, 2000)
+                      if (nbMauvaisesReponses == 0) {
+                        this.confetti.lanceConfetti()
+                      }
                     }
                   }
               }
