@@ -49,7 +49,7 @@
     <div class="box" *ngIf="questionsFlash[0] != null && questionsFlash[0].slug != ''">
       <h2 class="title is-3">Questions Flash</h2>
       <p>Dans cette séquence, une question flash porte sur l’un des objectifs ci-dessus et les
-        {{questionsFlash.length}} autres portent sur :</p>
+        deux autres portent sur :</p>
       <div style="padding: 5px;">
         <div style="padding: 5px;" *ngFor="let questionFlash of questionsFlash; index as i">
           <a *ngIf="questionFlash.pageExiste; else questionFlashSansLien"

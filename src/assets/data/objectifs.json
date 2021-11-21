@@ -632,6 +632,57 @@
               }
             ]
           }, {
+            "nom": "Puissances",
+            "objectifs": [
+              {
+                "reference": "4C33",
+                "titre": "Utiliser les puissances d’exposants strictement positifs d’un nombre pour simplifier l’écriture des produits",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "UL5cgbvDvNQ",
+                    "auteur": "Hedacademy",
+                    "lienAuteur": "https://www.youtube.com/channel/UC8SRYHgGMqAYZehYdznaqvQ"
+                  }, {
+                    "titre": "",
+                    "slug": "4CEYTrvUP0I",
+                    "auteur": "Yvan Monka",
+                    "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "4C33-0,s=1,s2=1,n=4",
+                    "score": "10"
+                  }, {
+                    "slug": "4C33-0,s=2,s2=1,n=4",
+                    "score": "10"
+                  }
+                ]
+              }, {
+                "reference": "4C34",
+                "titre": "Calculs utilisant les priorités opératoires et les puissances",
+                "rappelDuCoursHTML": "Priorités de calculs (<strong>PEMDAS</strong>)<br>1) <strong>P</strong>arenthèses<br>2) <strong>E</strong>xposants (puissances)<br>3) <strong>M</strong>ultiplications, <strong>D</strong>ivisions<br>4) <strong>A</strong>dditions, <strong>S</strong>oustractions",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "87S4-an3mgI",
+                    "auteur": "Yves le Coadou",
+                    "lienAuteur": "https://www.youtube.com/channel/UCT0wZd0o4uFVKvSi2rE_sKQ"
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "4C34,n=8,video=https%3A%2F%2Fyoutu.be%2F0G9xWLl-0zg",
+                    "score": "10"
+                  }
+                ]
+              }
+            ]
+          }, {
             "nom": "Arithmétique",
             "objectifs": [
               {

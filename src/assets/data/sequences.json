@@ -457,6 +457,96 @@
             "slug": "4L11,s=2,n=1"
           }
         ]
+      }, {
+        "reference": "S4S6",
+        "titre": "Puissances 1",
+        "objectifs": [
+          {
+            "reference": "4C33"
+          }, {
+            "reference": "4C34"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "4C21",
+            "titre": "Additionner ou soustraire des nombres relatifs en écriture fractionnaire",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=false_i=5NC7~o=2~q=2.0,1~p=~t=25~n=4_i=5NC8~o=3~q=3.0,1~p=~t=25~n=4"
+              }, {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=false_i=5NC8~o=5~q=5.0,1~p=~t=25~n=4_i=5NC7~o=4~q=4.0,1~p=~t=25~n=4"
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "4G20",
+            "titre": "Écrire l'égalité de Pythagore",
+            "slug": "4G20-1,s=1,n=1"
+          }, {
+            "reference": "4G20",
+            "titre": "Calculer une longueur avec le théorème de Pythagore",
+            "slug": "4G20,n=1,s2=1"
+          }, {
+            "reference": "5P12",
+            "titre": "Partager une quantité en deux parts selon un ratio donné",
+            "slug": "5P12,s=1,n=1,cd=1"
+          }, {
+            "reference": "5P12",
+            "titre": "Partager une quantité en trois parts selon un ratio donné",
+            "slug": "5P12,s=2,n=1,cd=1"
+          }
+        ]
+      }, {
+        "reference": "S4S11",
+        "titre": "Nombres premiers",
+        "objectifs": [
+          {
+            "reference": "4A10"
+          }, {
+            "reference": "4A11"
+          }, {
+            "reference": "4A12"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "4C21",
+            "titre": "Additionner ou soustraire des nombres relatifs en écriture fractionnaire",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=false_i=5NC7~o=2~q=2.0,1~p=~t=25~n=4_i=5NC8~o=3~q=3.0,1~p=~t=25~n=4"
+              }, {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/index.html?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=false_i=5NC8~o=5~q=5.0,1~p=~t=25~n=4_i=5NC7~o=4~q=4.0,1~p=~t=25~n=4"
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "4G20",
+            "titre": "Écrire l'égalité de Pythagore",
+            "slug": "4G20-1,s=1,n=1"
+          }, {
+            "reference": "4G20",
+            "titre": "Calculer une longueur avec le théorème de Pythagore",
+            "slug": "4G20,n=1,s2=1"
+          }, {
+            "reference": "5P12",
+            "titre": "Partager une quantité en deux parts selon un ratio donné",
+            "slug": "5P12,s=1,n=1,cd=1"
+          }, {
+            "reference": "5P12",
+            "titre": "Partager une quantité en trois parts selon un ratio donné",
+            "slug": "5P12,s=2,n=1,cd=1"
+          }
+        ]
       }
     ]
   }, {
