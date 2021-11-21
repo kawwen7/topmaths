@@ -637,7 +637,7 @@
               {
                 "reference": "4C33",
                 "titre": "Utiliser les puissances d’exposants strictement positifs d’un nombre pour simplifier l’écriture des produits",
-                "rappelDuCoursHTML": "",
+                "rappelDuCoursHTML": "<center>$a^n = \\underbrace{a \\times a \\times a \\times ... \\times a}_{\\text{Le } a \\text{ apparaît } n \\text{ fois}}$</center>",
                 "rappelDuCoursImage": "",
                 "videos": [
                   {
@@ -676,7 +676,7 @@
                 ],
                 "exercices": [
                   {
-                    "slug": "4C34,n=8,video=https%3A%2F%2Fyoutu.be%2F0G9xWLl-0zg",
+                    "slug": "4C34,n=4,video=https%3A%2F%2Fyoutu.be%2F0G9xWLl-0zg",
                     "score": "10"
                   }
                 ]

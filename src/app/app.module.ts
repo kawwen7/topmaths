@@ -18,6 +18,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { WhosonlineComponent } from './whosonline/whosonline.component';
 import { ClassementComponent } from './classement/classement.component';
 import { NgParticlesModule } from "ng-particles";
+import { MathjaxModule } from 'mathjax-angular';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import { NgParticlesModule } from "ng-particles";
     FormsModule,
     ReactiveFormsModule,
     NgxSliderModule,
-    NgParticlesModule
+    NgParticlesModule,
+    MathjaxModule.forRoot(/*Optional Config, check https://github.com/sajivkumar/mathjax-angular */),
+    MathjaxModule.forChild()
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
