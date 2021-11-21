@@ -48,8 +48,7 @@
     </div>
     <div class="box" *ngIf="questionsFlash[0] != null && questionsFlash[0].slug != ''">
       <h2 class="title is-3">Questions Flash</h2>
-      <p>Dans cette séquence, une question flash porte sur l’un des objectifs ci-dessus et les
-        deux autres portent sur :</p>
+      <p>Dans cette séquence, une question flash porte sur l’un des objectifs ci-dessus et les deux autres portent sur :</p>
       <div style="padding: 5px;">
         <div style="padding: 5px;" *ngFor="let questionFlash of questionsFlash; index as i">
           <a *ngIf="questionFlash.pageExiste; else questionFlashSansLien"
@@ -60,8 +59,7 @@
         </div>
       </div>
       <div style="padding-top: 20px; padding-bottom: 5px;">
-        <a [href]="lienQuestionsFlash" target="_blank" rel="noopener noreferrer">S'entraîner pour les
-          Questions Flash</a>
+        <a [href]="lienQuestionsFlash" target="_blank" rel="noopener noreferrer">S'entraîner pour les Questions Flash</a>
       </div>
     </div>
     <div class="box">
@@ -75,12 +73,9 @@
         </div>
         <div style="padding: 5px;"><a *ngIf="lienResume != ''" [href]="lienResume">Télécharger le résumé</a>
         </div>
-        <div style="padding: 5px;"><a *ngIf="lienMission != ''" [href]="lienMission">Télécharger la
-            mission</a>
+        <div style="padding: 5px;"><a *ngIf="lienMission != ''" [href]="lienMission">Télécharger la mission</a>
         </div>
-        <div style="padding: 5px;"><a *ngIf="lienAnki != ''" [href]="lienAnki">Télécharger le paquet Anki de
-            la
-            séquence</a></div>
+        <div style="padding: 5px;"><a *ngIf="lienAnki != ''" [href]="lienAnki">Télécharger le paquet Anki de la séquence</a></div>
       </div>
     </div>
   </div>

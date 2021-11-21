@@ -38,7 +38,7 @@
     </div>
     <div><br></div>
   </div>
-  <div class="box" *ngIf="lienFiche != '' && lienAnki != ''">
+  <div class="box" *ngIf="lienFiche != '' || lienAnki != ''">
     <h2 class="title is-3">Téléchargements</h2>
     <div style="padding: 5px;">
       <div style="padding: 5px;"><a *ngIf="lienFiche != ''" [href]="lienFiche">Télécharger la fiche</a></div>
