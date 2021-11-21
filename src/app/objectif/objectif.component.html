@@ -4,7 +4,7 @@
   </div>
   <div class="box" *ngIf="rappelDuCoursHTML != '' || rappelDuCoursImage != ''">
     <h2 class="title is-3">Rappel du cours</h2>
-    <p [innerHTML]="rappelDuCoursHTML" style="text-align: left;"></p>
+    <p [mathjax]="rappelDuCoursHTML" style="text-align: left;"></p>
     <p><img *ngIf="rappelDuCoursImage != ''" [src]="rappelDuCoursImage" /></p>
   </div>
   <div *ngIf="presenceVideo">

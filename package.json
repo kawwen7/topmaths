@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^12.2.11",
     "@angular/router": "^12.2.11",
     "bulma": "^0.9.3",
+    "mathjax-angular": "^1.4.2",
     "ng-particles": "^2.20.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
