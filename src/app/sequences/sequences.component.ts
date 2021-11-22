@@ -68,13 +68,10 @@ export class SequencesComponent implements OnInit {
     this.http.get('assets/data/sequences.json').subscribe(
       (data: any) => {
         this.lignes = [] // va contenir toutes les lignes à afficher.
-        let numeroDeSequence: number
         for (const niveau of data) {
           this.lignes.push({ niveau: niveau.niveau })
-          numeroDeSequence = 1
           for (const sequence of niveau.sequences) {
-            this.lignes.push({ niveau: niveau.niveau, reference: sequence.reference, titre: sequence.titre, numero: numeroDeSequence })
-            numeroDeSequence++
+            this.lignes.push({ niveau: niveau.niveau, reference: sequence.reference, titre: sequence.titre, numero: sequence.reference.slice(3) })
           }
         }
       }
