@@ -12,6 +12,7 @@
       </ul>
     </div>
     <div class="container is-max-desktop">
+      <h1 *ngIf="filtre.niveau == 'tout'" class="title is-3" style="text-align:center;">Séquences particulières</h1>
       <span *ngFor="let ligne of lignes; index as i">
         <h1
           *ngIf="ligne.niveau != null && ligne.reference == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau)"
@@ -19,7 +20,7 @@
         <p *ngIf="ligne.reference != null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau)"
           style="text-align:center; padding: 5px;">
           <a routerLink="/sequence/{{ligne.reference}}" routerLinkActive="active">
-            Séquence {{ligne.numero}} : {{ligne.titre}}<br>
+            {{ligne.numero == 0 ? '' : 'Séquence ' + ligne.numero + ' : '}}{{ligne.titre}}<br>
           </a>
         </p>
       </span>

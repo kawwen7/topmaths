@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { ProfilComponent } from './profil/profil.component';
 import { AuthguardGuard } from './services/auth.guard';
 import { ClassementComponent } from './classement/classement.component';
+import { SPS1Component } from './sequencesParticulieres/sps1/sps1.component';
 
 const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'objectifs', redirectTo: 'objectifs/tout' },
   { path: 'sequences/:niveau', component: SequencesComponent },
   { path: 'sequences', redirectTo: 'sequences/tout' },
+  { path: 'sequence/SPS1', component: SPS1Component },
   { path: 'sequence/:ref', component: SequenceComponent },
   { path: 'jeux', component: JeuxComponent },
   { path: 'login', component: LoginComponent },

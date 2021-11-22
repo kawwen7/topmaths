@@ -19,6 +19,7 @@ import { WhosonlineComponent } from './whosonline/whosonline.component';
 import { ClassementComponent } from './classement/classement.component';
 import { NgParticlesModule } from "ng-particles";
 import { MathjaxModule } from 'mathjax-angular';
+import { SPS1Component } from './sequencesParticulieres/sps1/sps1.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MathjaxModule } from 'mathjax-angular';
     LoginComponent,
     ProfilComponent,
     WhosonlineComponent,
-    ClassementComponent
+    ClassementComponent,
+    SPS1Component
   ],
   imports: [
     BrowserModule,

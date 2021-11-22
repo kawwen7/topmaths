@@ -65,9 +65,16 @@ export class SequencesComponent implements OnInit {
    * Récupère les niveaux, thèmes, sous-thèmes et références de objectifs.json et les ajoute à this.lignes pour pouvoir les afficher
    */
   recupereContenuLignesAAfficher() {
+    this.lignes = [] // va contenir toutes les lignes à afficher.
+    this.http.get('assets/data/sequencesParticulieres.json').subscribe(
+      (data: any) => {
+        for (const sequence of data) {
+          this.lignes.push({ niveau: 'Séquences particulières', reference: sequence.reference, titre: sequence.titre, numero: 0 })
+        }
+      }
+    )
     this.http.get('assets/data/sequences.json').subscribe(
       (data: any) => {
-        this.lignes = [] // va contenir toutes les lignes à afficher.
         for (const niveau of data) {
           this.lignes.push({ niveau: niveau.niveau })
           for (const sequence of niveau.sequences) {

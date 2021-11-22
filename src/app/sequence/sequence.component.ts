@@ -73,7 +73,7 @@ export class SequenceComponent implements OnInit {
    * Observe les changements de route,
    * modifie ensuite les paramètres selon la référence
    */
-   observeChangementsDeRoute() {
+  observeChangementsDeRoute() {
     this.route.params.subscribe(params => {
       this.reference = params.ref
       this.modificationDesAttributs()
