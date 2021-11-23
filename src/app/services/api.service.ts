@@ -20,7 +20,7 @@ export class ApiService {
   listeFeminins: any
   listeAdjectifs: any
 
-  @Output() profil: EventEmitter<any> = new EventEmitter();
+  @Output() majProfil: EventEmitter<any> = new EventEmitter();
   constructor(private httpClient: HttpClient, private router: Router) {
     this.user = {
       identifiant: '',
@@ -168,7 +168,7 @@ export class ApiService {
             const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
             this.router.navigate([redirect]);
           }
-          this.profil.emit({profilCharge: true})
+          this.majProfil.emit({profilCharge: true})
         },
         error => {
           this.erreurLogin(identifiant)
