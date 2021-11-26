@@ -1286,6 +1286,39 @@
             ]
           }
         ]
+      }, {
+        "nom": "Géométrie",
+        "sousThemes": [
+          {
+            "nom": "Théorème de Thalès",
+            "objectifs": [
+              {
+                "reference": "3G20",
+                "titre": "Calculer une longueur avec le théorème de Thalès",
+                "rappelDuCoursHTML": "",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "",
+                    "auteur": "",
+                    "lienAuteur": ""
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "3G20,s=1,n=1,video=j_zZOpLLl9k,cd=1",
+                    "score": "10"
+                  },
+                  {
+                    "slug": "3G20,s=2,n=1,video=j_zZOpLLl9k,cd=1",
+                    "score": "15"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       }
     ]
   }
