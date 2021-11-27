@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-trophees',
@@ -8,23 +9,29 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./trophees.component.css']
 })
 export class TropheesComponent implements OnInit {
-  reference: string
+  codeTrophee: string
   totalEleves: number
   annee: string
   stats: any
   eleves: any
   eleve: any
   lignes: any[]
+  modal: any
+  texteModale: string
+  sujetEval: string
 
-  constructor(public http: HttpClient, private route: ActivatedRoute) {
-    this.reference = ''
+  constructor(public http: HttpClient, private route: ActivatedRoute, private dataService: ApiService) {
+    this.codeTrophee = ''
     this.totalEleves = 0
     this.annee = ''
     this.lignes = []
+    this.texteModale = ''
+    this.sujetEval = ''
   }
 
   ngOnInit(): void {
     this.observeChangementsDeRoute()
+    this.modal = document.getElementById("modaleRefaireEvaluation")
   }
 
   /**
@@ -33,7 +40,7 @@ export class TropheesComponent implements OnInit {
    */
   observeChangementsDeRoute() {
     this.route.params.subscribe(params => {
-      this.reference = params.ref
+      this.codeTrophee = params.ref
       this.modificationDesAttributs()
     })
   }
@@ -47,7 +54,7 @@ export class TropheesComponent implements OnInit {
       for (const key in object) {
         if (Object.prototype.hasOwnProperty.call(object, key)) {
           const eleve = object[key]
-          if (eleve.reference == this.reference) {
+          if (eleve.reference == this.codeTrophee) {
             this.eleve = eleve
             this.eleves = object
             this.annee = '5ème'
@@ -61,7 +68,7 @@ export class TropheesComponent implements OnInit {
       for (const key in object) {
         if (Object.prototype.hasOwnProperty.call(object, key)) {
           const eleve = object[key]
-          if (eleve.reference == this.reference) {
+          if (eleve.reference == this.codeTrophee) {
             this.eleve = eleve
             this.eleves = object
             this.annee = '4ème'
@@ -307,6 +314,7 @@ export class TropheesComponent implements OnInit {
          }
          trophee['nb'] = nb
          trophee['tooltip'] = this.tooltip(trophee)
+         trophee['refaire'] = this.refaire(trophee)
        }
       }
     }
@@ -334,6 +342,7 @@ export class TropheesComponent implements OnInit {
       lien: lien,
       description: this.description(categorie, nbVertsMin),
       cle: cle,
+      categorie: categorie,
       nbVertsMin: nbVertsMin
     }
   }
@@ -383,22 +392,21 @@ export class TropheesComponent implements OnInit {
     const pourcent = Math.floor(parseInt(trophee['nb']) / this.totalEleves * 100)
     let texte: string
     if (pourcent === 0) {
-      texte = 'Personne n\'a encore obtenu ce trophée, '
+      texte = 'Personne n\'a déjà obtenu ce trophée,<br>'
     } else {
-      texte = `${pourcent}% des élèves ont obtenu ce trophée, `
+      texte = `${pourcent}% des élèves ont obtenu ce trophée,<br>`
     }
     if (nbVertsMin > 0) {
       if (nbVerts >= nbVertsMin) {
         texte += 'et tu en fais partie !'
       } else {
-        let vert
+        let vert, premier
         nbVertsMin - nbVerts > 1 ? vert = 'verts' : vert = 'vert'
-        let premier
         pourcent === 0 ? premier = 'être le premier' : premier = 'l\'obtenir'
         texte += `pour ${premier}, il te manque ${nbVertsMin - nbVerts} ${vert} !`
       }
     } else {
-      if (nbVerts >= 1) {
+      if (nbVerts > 0) {
         texte += 'et tu en fais partie !'
       } else {
         if (pourcent === 0) {
@@ -410,4 +418,61 @@ export class TropheesComponent implements OnInit {
     }
     return texte
   }
+
+  /**
+   * Renvoie le texte avec un lien éventuel pour refaire l'évaluation
+   * @param trophee 
+   * @returns 
+   */
+  refaire(trophee: any) {
+    const nbVertsMin = parseInt(trophee['nbVertsMin'])
+    const nbVerts = parseInt(this.eleve[trophee['cle']])
+    const nb = parseInt(trophee['nb'])
+    let texte: string = ''
+    if (nb > 0 && trophee['cle'] !== 'nombreDeVerts' && ((nbVerts < nbVertsMin) || (typeof(trophee['nbVertsMin']) == 'undefined' && nbVerts === 0))) {
+      texte =  '<a>Demander à refaire l\'évaluation</a>'
+    }
+    return texte
+  }
+
+  /**
+   * Modifie le texte de la modale d'envoi d'un message pour refaire l'évaluation,
+   * Ouvre la modale
+   * @param trophee 
+   */
+  refaireEvaluation(trophee: any){
+    const nbVertsMin = parseInt(trophee['nbVertsMin'])
+    const nbVerts = parseInt(this.eleve[trophee['cle']])
+    const nb = parseInt(trophee['nb'])
+    if (nb > 0 && ((nbVerts < nbVertsMin) || (typeof(trophee['nbVertsMin']) == 'undefined' && nbVerts === 0))) {
+      this.texteModale = `
+      Est-ce que tu veux envoyer un message à M. Valmont pour lui prévenir
+      que tu veux refaire l'évaluation sur "${trophee['categorie']}" ?`
+      this.sujetEval = trophee['categorie']
+      this.ouvrirModal()
+    }
+  }
+
+  /**
+   * Envoie un message au propriétaire du site pour lui prévenir qu'on veut refaire une évaluation
+   */
+  envoiMessage(){
+    this.fermerModal()
+    this.dataService.envoiMailEval(this.codeTrophee, this.sujetEval)
+  }
+
+  /**
+   * Ouvre la modale avec le jeu scratch
+   */
+   ouvrirModal() {
+    this.modal.style.display = "block";
+  }
+
+  /**
+   * Ferme la modale
+   */
+  fermerModal() {
+    this.modal.style.display = "none";
+  }
+
 }

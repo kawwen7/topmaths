@@ -9,8 +9,9 @@
           </div>
           <div *ngIf="trophee.tooltip != ''" class="dropdown-menu" role="menu">
             <div class="dropdown-content" style="width: 145px;">
-              <div class="dropdown-item">
-                <p>{{ trophee.tooltip }}</p>
+              <div class="dropdown-item" style="font-size: small">
+                <p [innerHTML]="trophee.tooltip"></p>
+                <p (click)="refaireEvaluation(trophee)" [innerHTML]="trophee.refaire"></p>
               </div>
             </div>
           </div>
@@ -24,5 +25,27 @@
   </div>
 </div>
 <div><br><br><br></div>
-<div class="has-text-centered">Contrairement au reste du site, les images des trophées ne sont pas sous licence libre.<br>
+<div class="has-text-centered" style="font-size: small">Contrairement au reste du site, les images des trophées ne sont pas sous licence libre.<br>
 Si vous souhaitez les réutiliser, vous pouvez regarder <a href="https://www.shutterstock.com/g/babysofja" target="_blank" rel="noopener noreferrer">ici</a>.</div>
+
+
+<!-- Modale de confirmation refaire l'évaluation -->
+<div id="modaleRefaireEvaluation" class="modal">
+  <div class="modal-background" (click)="fermerModal()"></div>
+  <div class="modal-content">
+    <br><br><br><br>
+    <div style="background-color: white; padding: 50px; text-align: center;">
+      <p [innerHTML]="texteModale"></p>
+      <br><br>
+      <div class="columns">
+        <div class="column">
+          <button class="button is-danger" style="padding-left: 50px; padding-right: 50px;" (click)="fermerModal()">Non</button>
+        </div>
+        <div class="column">
+          <button class="button is-success" style="padding-left: 50px; padding-right: 50px;" (click)="envoiMessage()">Oui</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close" (click)="fermerModal()"></button>
+</div>

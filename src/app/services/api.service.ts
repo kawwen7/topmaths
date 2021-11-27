@@ -202,7 +202,7 @@ export class ApiService {
           this.login(identifiant, true)
         },
         error => {
-          this.erreurRegistration('userregistration', error)
+          this.erreurRegistration('userregistration', error['message'])
         });
     }
   }
@@ -227,7 +227,7 @@ export class ApiService {
     } else if (typeErreur == 'caracteres_speciaux') {
       alert('Erreur : tu ne dois utiliser que des chiffres et des lettres sans accent')
     } else if (typeErreur == 'userregistration') {
-      alert('Une erreur s\'est produite lors de l\'accès à la base de données (peut-être que la connexion n\'est pas sécurisée ? (https)')
+      alert('Une erreur s\'est produite lors de l\'accès à la base de données (peut-être que la connexion n\'est pas sécurisée ? (https)\n\nLe message d\'erreur est le suivant :\n' + erreur)
     } else {
       alert('Une erreur s\'est produite')
     }
@@ -432,6 +432,25 @@ export class ApiService {
         this.recupWhosOnline()
       },
       error => {
+        console.log(error)
+      });
+  }
+
+  /**
+   * Envoie un mail au propriétaire du site
+   * @param message
+   */
+  envoiMailEval(codeTrophee: string, sujetEval: string) {
+    this.httpClient.post<any>(this.baseUrl + `/envoiMailEval.php`, {codeTrophee: codeTrophee, sujetEval: sujetEval}).pipe(first()).subscribe(
+      data => {
+        if (data['message'] == 'mail envoye') {
+          alert('Ton message a bien été envoyé !\nM. Valmont t\'enverra un message sur Pronote pour te dire quoi réviser.')
+        } else {
+          alert('Il semble que le mail ait été envoyé')
+        }
+      },
+      error => {
+        alert('Une erreur s\'est produite')
         console.log(error)
       });
   }
