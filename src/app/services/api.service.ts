@@ -19,6 +19,8 @@ export class ApiService {
   listeMasculins: any
   listeFeminins: any
   listeAdjectifs: any
+  pseudoClique: string
+  ancienPseudoClique: string
 
   @Output() majProfil: EventEmitter<any> = new EventEmitter();
   constructor(private httpClient: HttpClient, private router: Router) {
@@ -38,6 +40,8 @@ export class ApiService {
     this.classement = []
     this.nbInvisibles = 0
     this.feminin = false
+    this.pseudoClique = ''
+    this.ancienPseudoClique = ''
   }
 
   /**

@@ -20,7 +20,7 @@ export class TropheesComponent implements OnInit {
   texteModale: string
   sujetEval: string
 
-  constructor(public http: HttpClient, private route: ActivatedRoute, private dataService: ApiService) {
+  constructor(public http: HttpClient, private route: ActivatedRoute, public dataService: ApiService) {
     this.codeTrophee = ''
     this.totalEleves = 0
     this.annee = ''

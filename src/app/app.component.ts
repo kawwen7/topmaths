@@ -28,20 +28,35 @@ export class AppComponent implements OnDestroy {
    * Observe les changements de route,
    * met ensuite à jour le lastAction
    */
-   observeChangementsDeRoute() {
+  observeChangementsDeRoute() {
     this.event$ = this.router.events.subscribe((event: NavigationEvent) => {
       if (event instanceof NavigationStart) {
-        if (!isDevMode() && this.dataService.isLoggedIn()){
+        this.majPseudoClique()
+        if (!isDevMode() && this.dataService.isLoggedIn()) {
           this.dataService.majLastAction()
         }
         this.dataService.recupWhosOnline()
       }
     });
   }
+
+  /**
+   * Fait en sorte que le pseudoClique ne soit conservé qu'une seule navigation
+   */
+  majPseudoClique() {
+    if (this.dataService.pseudoClique != '') {
+      if (this.dataService.pseudoClique === this.dataService.ancienPseudoClique) {
+        this.dataService.pseudoClique = ''
+        this.dataService.ancienPseudoClique = ''
+      } else {
+        this.dataService.ancienPseudoClique = this.dataService.pseudoClique
+      }
+    }
+  }
   /**
    * Redirige vers une version sécurisée du site si on n'est pas en mode développement
    */
-  redirectionHTTPS(){
+  redirectionHTTPS() {
     if (!isDevMode() && window.location.protocol == 'http:') {
       window.location.href = window.location.href.replace('http:', 'https:');
     }

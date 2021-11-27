@@ -23,10 +23,11 @@ export class WhosonlineComponent implements OnInit {
   }
 
   /**
-   * Envoie l'utilisateur sur la page de trophées et affiche que ce sont les trophées de user.pseudo
+   * Envoie l'utilisateur sur la page de trophées et indique que ce sont les trophées de user.pseudo
    * @param user 
    */
   voirTropheesPerso(user: User) {
+    this.dataService.pseudoClique = user.pseudo
     this.router.navigate(['trophees', user.codeTrophees])
   }
 }

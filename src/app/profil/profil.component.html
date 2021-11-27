@@ -17,7 +17,7 @@
     <br>
     <!-- Trophées -->
     <div>
-      <a [routerLink]="['/trophees/' + dataService.user.codeTrophees]">
+      <a (click)="voirTropheesPerso()">
         <button *ngIf="dataService.user.codeTrophees != ''" class="button is-success is-large">Lien vers les
           trophées</button>
       </a>

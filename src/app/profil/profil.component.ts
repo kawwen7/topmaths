@@ -4,6 +4,7 @@ import { Options } from '@angular-slider/ngx-slider';
 import { ApiService } from '../services/api.service';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 interface Slider {
   value: number,
   options: Options
@@ -35,7 +36,7 @@ export class ProfilComponent implements OnInit {
   derniereConnexion: string
   modalePseudo: any
 
-  constructor(private fb: FormBuilder, public http: HttpClient, public appComponent: AppComponent, public dataService: ApiService) {
+  constructor(private fb: FormBuilder, public http: HttpClient, public appComponent: AppComponent, public dataService: ApiService, private router: Router) {
     this.angForm = this.fb.group({
       codeTrophee: ['', [Validators.required, Validators.minLength(6), Validators.minLength(6)]]
     });
@@ -463,6 +464,15 @@ export class ProfilComponent implements OnInit {
   supprimerLienTrophees() {
     this.dataService.user.codeTrophees = ''
     this.dataService.majLienTrophees('')
+  }
+
+  /**
+   * Envoie l'utilisateur sur la page de trophées et indique que ce sont les trophées de user.pseudo
+   * @param user 
+   */
+  voirTropheesPerso() {
+    this.dataService.pseudoClique = this.dataService.user.pseudo
+    this.router.navigate(['trophees', this.dataService.user.codeTrophees])
   }
 
   /**
