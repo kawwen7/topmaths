@@ -20,6 +20,7 @@ import { ClassementComponent } from './classement/classement.component';
 import { NgParticlesModule } from "ng-particles";
 import { MathjaxModule } from 'mathjax-angular';
 import { SPS1Component } from './sequencesParticulieres/sps1/sps1.component';
+import { TropheesComponent } from './trophees/trophees.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SPS1Component } from './sequencesParticulieres/sps1/sps1.component';
     ProfilComponent,
     WhosonlineComponent,
     ClassementComponent,
-    SPS1Component
+    SPS1Component,
+    TropheesComponent
   ],
   imports: [
     BrowserModule,

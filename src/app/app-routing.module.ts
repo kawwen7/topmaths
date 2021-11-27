@@ -11,6 +11,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { AuthguardGuard } from './services/auth.guard';
 import { ClassementComponent } from './classement/classement.component';
 import { SPS1Component } from './sequencesParticulieres/sps1/sps1.component';
+import { TropheesComponent } from './trophees/trophees.component';
 
 const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'sequences', redirectTo: 'sequences/tout' },
   { path: 'sequence/SPS1', component: SPS1Component },
   { path: 'sequence/:ref', component: SequenceComponent },
+  { path: 'trophees/:ref', component: TropheesComponent },
   { path: 'jeux', component: JeuxComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profil', component: ProfilComponent, canActivate: [AuthguardGuard] },

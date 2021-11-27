@@ -1,0 +1,28 @@
+<h1 class="title is-1 has-text-centered" *ngIf="annee != ''" >Trophées de l'année de {{ annee }}</h1>
+<div *ngFor="let ligne of lignes" class="columns is-centered" style="text-align: center;">
+  <div *ngFor="let groupe of ligne" class="column is-narrow" style="display: flex; align-items: center; justify-content: center;">
+    <div *ngFor="let trophee of groupe" class="card" style="width: 150px;">
+      <div class="card-image dropdown is-hoverable">
+        <div class="dropdown is-hoverable">
+          <div class="dropdown-trigger">
+            <img [src]="trophee.lien" />
+          </div>
+          <div *ngIf="trophee.tooltip != ''" class="dropdown-menu" role="menu">
+            <div class="dropdown-content" style="width: 145px;">
+              <div class="dropdown-item">
+                <p>{{ trophee.tooltip }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="card-footer">
+        <span class="card-footer-item dropdown is-hoverable" style="font-size: small" [innerHTML]="trophee.description">
+        </span>
+      </footer>
+    </div>
+  </div>
+</div>
+<div><br><br><br></div>
+<div class="has-text-centered">Contrairement au reste du site, les images des trophées ne sont pas sous licence libre.<br>
+Si vous souhaitez les réutiliser, vous pouvez regarder <a href="https://www.shutterstock.com/g/babysofja" target="_blank" rel="noopener noreferrer">ici</a>.</div>
