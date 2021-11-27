@@ -15,6 +15,15 @@
       <h2 class="title">Mon score : {{dataService.user.score}}</h2>
     </div>
     <br>
+    <!-- Trophées -->
+    <div>
+      <a [routerLink]="['/trophees/' + dataService.user.codeTrophees]">
+        <button *ngIf="dataService.user.codeTrophees != ''" class="button is-success is-large">Lien vers les trophées</button>
+      </a>
+    </div>
+    <br>
+    <!-- Paramètres -->
+    <br><br>
     <!-- Scores -->
     <button *ngIf="dataService.user.scores == 'actives'" type="submit" class="button is-danger is-outlined"
       (click)="dataService.majScores('desactives')">Désactiver les scores</button>
@@ -36,6 +45,69 @@
       (click)="dataService.majVisible('oui')">Apparaître dans les personnes en ligne</button>
     <button *ngIf="dataService.user.visible == 'oui'" class="button is-success">Tu apparais dans les personnes en
       ligne</button>
+    <br><br>
+    <!-- Trophées -->
+    <div class="columns is-centered">
+      <div class="column is-narrow">
+        <!-- Créer le lien -->
+        <div *ngIf="dataService.user.codeTrophees == ''" class="dropdown is-hoverable">
+          <div class="dropdown-trigger">
+            <!-- Champ de connexion -->
+            <form [formGroup]="angForm" (ngSubmit)="lierTrophees(angForm.value.codeTrophee)" autocomplete="off"
+              autocorrect="off" autocapitalize="off" spellcheck="false">
+              <div class="field is-inline-block" style="width: 190px;">
+                <div [ngClass]="{'control has-icons-left has-icons-right': true, 'shake': shake}">
+                  <!-- Champ en lui-même -->
+                  <input
+                    [ngClass]="{'input': true, 'is-success': (!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut && !errCodeIncorrect), 'is-danger': (errPetitNbChar || errGrandNbChar || errSpChar || errCodeIncorrect)}"
+                    type="codeTrophee" name="codeTrophee" formControlName="codeTrophee" autocomplete="off"
+                    autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control input-sm"
+                    placeholder="Code Trophées" size="5">
+                  <!-- icônes de part et d'autre du champ -->
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-trophy"></i>
+                  </span>
+                  <span *ngIf="(!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut)"
+                    class="icon is-small is-right">
+                    <i class="fas fa-check"></i>
+                  </span>
+                  <span *ngIf="(errPetitNbChar || errGrandNbChar || errSpChar)" class="icon is-small is-right">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </span>
+                </div>
+                <!-- Indications sous le champ -->
+                <div *ngIf="(!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut && !errCodeIncorrect)"
+                  style="color: hsl(141, 53%, 53%);">
+                  Ça a l'air bon !</div>
+                <div *ngIf="errPetitNbChar" style="color: hsl(348, 100%, 61%);">C'est trop court !</div>
+                <div *ngIf="errGrandNbChar" style="color: hsl(348, 100%, 61%);">C'est trop long !</div>
+                <div *ngIf="errSpChar" style="color: hsl(348, 100%, 61%);">Il ne faut que des lettres en minuscule !
+                </div>
+                <div *ngIf="errCodeIncorrect" style="color: hsl(348, 100%, 61%);">Code incorrect</div>
+              </div>
+              &nbsp;
+              <!-- Bouton d'envoi -->
+              <button type="submit" class="button is-success is-inline-block">Créer le lien</button>
+            </form>
+          </div>
+          <div class="dropdown-menu">
+            <div class="dropdown-content">
+              <div class="dropdown-item" style="font-size: small">
+                <p>Si tu es un élève d'une 5ème ou d'une 4ème de M. Valmont, il t'a donné un code permettant d'accéder à
+                  ta liste de trophées.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Supprimer le lien -->
+    <form *ngIf="dataService.user.codeTrophees != ''" [formGroup]="angForm" (ngSubmit)="supprimerLienTrophees()"
+      autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+      <br>
+      <!-- Bouton d'envoi -->
+      <button type="submit" class="button is-danger">Supprimer le lien vers les trophées</button>
+    </form>
     <br><br>
     <!-- Déconnexion -->
     <div *ngIf="dataService.user.lastLogin != '' && derniereConnexion != 'undefined NaN undefined NaN à NaNhNaNmin'">
@@ -108,11 +180,13 @@
     <button (click)="enregistrerPseudo()" class="button is-success">Enregistrer</button>
     <br><br><br>
     <!-- Paramètres -->
-    <button *ngIf="dataService.feminin" type="submit" class="button is-info is-light" (click)="dataService.majFeminin(false)">Pseudo
+    <button *ngIf="dataService.feminin" type="submit" class="button is-info is-light"
+      (click)="dataService.majFeminin(false)">Pseudo
       masculin</button>
     <button *ngIf="!dataService.feminin" class="button is-info">Pseudo masculin</button>
     &nbsp;
-    <button *ngIf="!dataService.feminin" type="submit" class="button is-sponsor is-light" (click)="dataService.majFeminin(true)">Pseudo
+    <button *ngIf="!dataService.feminin" type="submit" class="button is-sponsor is-light"
+      (click)="dataService.majFeminin(true)">Pseudo
       féminin</button>
     <button *ngIf="dataService.feminin" class="button is-sponsor">Pseudo féminin</button>
     <br><br>

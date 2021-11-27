@@ -30,7 +30,8 @@ export class ApiService {
       lastAction: '',
       visible: '',
       pseudo: '',
-      score: '0'
+      score: '0',
+      codeTrophees: ''
     }
     this.onlineUsers = []
     this.classement = []
@@ -52,7 +53,8 @@ export class ApiService {
           lastAction: '',
           visible: 'oui',
           pseudo: 'lapin bleu',
-          score: '17'
+          score: '17',
+          codeTrophees: ''
         }, {
           identifiant: 'id2',
           lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id2.svg',
@@ -61,7 +63,8 @@ export class ApiService {
           lastAction: '',
           visible: 'oui',
           pseudo: 'Pierre verte',
-          score: '38'
+          score: '38',
+          codeTrophees: ''
         }
       ]
     } else {
@@ -90,7 +93,8 @@ export class ApiService {
           lastAction: '',
           visible: 'oui',
           pseudo: 'lapin bleu',
-          score: '17'
+          score: '17',
+          codeTrophees: ''
         }, {
           identifiant: 'id2',
           lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id2.svg',
@@ -99,7 +103,8 @@ export class ApiService {
           lastAction: '',
           visible: 'oui',
           pseudo: 'Pierre verte',
-          score: '38'
+          score: '38',
+          codeTrophees: ''
         }
       ]
     } else {
@@ -158,7 +163,8 @@ export class ApiService {
         lastAction: '',
         visible: '',
         pseudo: 'Cerf sauvage',
-        score: '196'
+        score: '196',
+        codeTrophees: 'tuoocj'
       }
       this.setToken(this.user.identifiant);
     } else {
@@ -195,7 +201,8 @@ export class ApiService {
         lastAction: '',
         visible: '',
         pseudo: this.pseudoAleatoire(),
-        score: '0'
+        score: '0',
+        codeTrophees: ''
       }
       this.userregistration(user).pipe(first()).subscribe(
         data => {
@@ -430,6 +437,20 @@ export class ApiService {
     this.update('visible').pipe(first()).subscribe(
       data => {
         this.recupWhosOnline()
+      },
+      error => {
+        console.log(error)
+      });
+  }
+
+  /**
+   * Met à jour le codeTrophees du profil local et de celui de la bdd
+   * @param codeTrophees
+   */
+   majLienTrophees(codeTrophees: string) {
+    this.user.codeTrophees = codeTrophees
+    this.update('codeTrophees').pipe(first()).subscribe(
+      data => {
       },
       error => {
         console.log(error)

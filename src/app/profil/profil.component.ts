@@ -3,6 +3,7 @@ import { AppComponent } from '../app.component';
 import { Options } from '@angular-slider/ngx-slider';
 import { ApiService } from '../services/api.service';
 import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 interface Slider {
   value: number,
   options: Options
@@ -14,6 +15,13 @@ interface Slider {
   styleUrls: ['./profil.component.css']
 })
 export class ProfilComponent implements OnInit {
+  angForm: FormGroup
+  defaut: boolean
+  errGrandNbChar: boolean
+  errPetitNbChar: boolean
+  errSpChar: boolean
+  errCodeIncorrect: boolean
+  shake: boolean
   lienAvatar: string
   pseudo: string
   yeux: Slider
@@ -27,7 +35,17 @@ export class ProfilComponent implements OnInit {
   derniereConnexion: string
   modalePseudo: any
 
-  constructor(public http: HttpClient, public appComponent: AppComponent, public dataService: ApiService) {
+  constructor(private fb: FormBuilder, public http: HttpClient, public appComponent: AppComponent, public dataService: ApiService) {
+    this.angForm = this.fb.group({
+      codeTrophee: ['', [Validators.required, Validators.minLength(6), Validators.minLength(6)]]
+    });
+    this.defaut = true
+    this.errGrandNbChar = false
+    this.errPetitNbChar = false
+    this.errSpChar = false
+    this.errCodeIncorrect = false
+    this.shake = false
+    this.surveilleChamp()
     this.yeux = {
       value: 1,
       options: {
@@ -377,6 +395,74 @@ export class ProfilComponent implements OnInit {
    */
   pseudoAleatoire() {
     this.pseudo = this.dataService.pseudoAleatoire()
+  }
+
+  /**
+   * Surveille le champ de connexion,
+   * actualise les booléens sur lesquels s'appuie le formatage du champ
+   */
+  surveilleChamp() {
+    this.angForm.valueChanges.subscribe(x => {
+      const str = x.codeTrophee
+      this.defaut = true
+      this.errSpChar = false
+      this.errPetitNbChar = false
+      this.errGrandNbChar = false
+      this.errCodeIncorrect = false
+      if (str.length != 0) this.defaut = false
+      if (str.length < 6 && str.length != 0) this.errPetitNbChar = true
+      if (str.length > 6) this.errGrandNbChar = true
+      if (!/^[a-z]*$/.test(str)) this.errSpChar = true
+    })
+  }
+
+  /**
+   * Vérifie si le codeTrophee saisi se trouve dans les trophees.json
+   * Met à jour le codeTrophees dans le profil local et de la bdd si c'est le cas
+   * Affiche un message d'erreur sinon
+   * @param codeTrophee 
+   */
+  lierTrophees(codeTrophee: string) {
+    this.shake = true
+    this.errCodeIncorrect = true
+    this.dataService.user.codeTrophees = ''
+    this.http.get('assets/data/trophees5e.json').subscribe((object: any) => {
+      for (const key in object) {
+        if (Object.prototype.hasOwnProperty.call(object, key)) {
+          const eleve = object[key]
+          if (eleve.reference == codeTrophee) {
+            this.shake = false
+            this.errCodeIncorrect = false
+            this.dataService.majLienTrophees(codeTrophee)
+            return eleve
+          }
+        }
+      }
+    })
+    this.http.get('assets/data/trophees4e.json').subscribe((object: any) => {
+      for (const key in object) {
+        if (Object.prototype.hasOwnProperty.call(object, key)) {
+          const eleve = object[key]
+          if (eleve.reference == codeTrophee) {
+            this.shake = false
+            this.errCodeIncorrect = false
+            this.dataService.majLienTrophees(codeTrophee)
+            return eleve
+          }
+        }
+      }
+    })
+    setTimeout(() => {
+      this.shake = false
+    }, 1000);
+  }
+
+  /**
+   * Supprime le codeTrophees local et de la bdd
+   */
+  supprimerLienTrophees() {
+    this.dataService.user.codeTrophees = ''
+    this.dataService.majLienTrophees('')
   }
 
   /**
