@@ -20,7 +20,23 @@
         </div>
         <!-- Pseudo -->
         <div class="column is-two-fifths" style="display: flex; align-items: center; justify-content: center;">
-          <div *ngIf="user.visible" class="is-inline-block">{{user.pseudo}}</div>
+          <div *ngIf="user.visible" class="is-inline-block">
+            <div class="column is-three-fifths" style="display: flex; align-items: center; justify-content: center;">
+              <div *ngIf="user.tropheesVisibles == 'oui'" class="dropdown is-right is-hoverable is-inline-block">
+                <div class="dropdown-trigger">
+                  <a (click)="voirTropheesPerso(user)">{{user.pseudo}}</a>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                  <div class="dropdown-content">
+                    <div class="dropdown-item">
+                      <p>Afficher ses trophées</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="user.tropheesVisibles != 'oui'" class="is-inline-block">{{user.pseudo}}</div>
+            </div>
+          </div>
           <div *ngIf="!user.visible" class="is-inline-block">
             < anonyme >
           </div>
