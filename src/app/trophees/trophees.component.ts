@@ -40,7 +40,7 @@ export class TropheesComponent implements OnInit {
    */
   observeChangementsDeRoute() {
     this.route.params.subscribe(params => {
-      this.codeTrophee = params.ref
+      params.ref == 'autre' ? this.codeTrophee = this.dataService.codeTropheesClique : this.codeTrophee = params.ref
       this.modificationDesAttributs()
     })
   }
@@ -429,7 +429,7 @@ export class TropheesComponent implements OnInit {
     const nbVerts = parseInt(this.eleve[trophee['cle']])
     const nb = parseInt(trophee['nb'])
     let texte: string = ''
-    if (nb > 0 && trophee['cle'] !== 'nombreDeVerts' && ((nbVerts < nbVertsMin) || (typeof(trophee['nbVertsMin']) == 'undefined' && nbVerts === 0))) {
+    if (nb > 0 && (this.codeTrophee == this.dataService.user.codeTrophees) && trophee['cle'] !== 'nombreDeVerts' && ((nbVerts < nbVertsMin) || (typeof(trophee['nbVertsMin']) == 'undefined' && nbVerts === 0))) {
       texte =  '<a>Demander à refaire l\'évaluation</a>'
     }
     return texte
@@ -444,7 +444,7 @@ export class TropheesComponent implements OnInit {
     const nbVertsMin = parseInt(trophee['nbVertsMin'])
     const nbVerts = parseInt(this.eleve[trophee['cle']])
     const nb = parseInt(trophee['nb'])
-    if (nb > 0 && ((nbVerts < nbVertsMin) || (typeof(trophee['nbVertsMin']) == 'undefined' && nbVerts === 0))) {
+    if (nb > 0 && (this.codeTrophee == this.dataService.user.codeTrophees) && ((nbVerts < nbVertsMin) || (typeof(trophee['nbVertsMin']) == 'undefined' && nbVerts === 0))) {
       this.texteModale = `
       Est-ce que tu veux envoyer un message à M. Valmont pour lui prévenir
       que tu veux refaire l'évaluation sur "${trophee['categorie']}" ?`

@@ -28,6 +28,7 @@ export class WhosonlineComponent implements OnInit {
    */
   voirTropheesPerso(user: User) {
     this.dataService.pseudoClique = user.pseudo
-    this.router.navigate(['trophees', user.codeTrophees])
+    this.dataService.codeTropheesClique = user.codeTrophees
+    this.router.navigate(['trophees', 'autre'])
   }
 }
