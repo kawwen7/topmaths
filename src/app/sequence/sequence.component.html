@@ -1,86 +1,88 @@
-<div class="columns" style="text-align: center;">
-  <div class="column is-one-fifth"></div>
-  <div class="column is-three-fifths">
-    <div class="box">
-      <h1 [innerHTML]="titre" class="title is-2"></h1>
-    </div>
-    <div class="box">
-      <h2 class="title is-3">Objectifs</h2>
-      <p> Cette séquence a {{nombreObjectifs(objectifs.length)}} :</p>
-      <div style="padding: 5px;">
-        <div *ngFor="let objectif of objectifs" style="padding: 5px;">
-          <a [routerLink]="['/objectif',objectif.reference]">{{objectif.reference}} :
-            {{objectif.titre}}</a>
-        </div>
+<div class="container is-widescreen" style="text-align: center;">
+  <div class="box">
+    <h1 [innerHTML]="titre" class="title is-2"></h1>
+  </div>
+  <div class="box">
+    <h2 class="title is-3">Objectifs</h2>
+    <p> Cette séquence a {{nombreObjectifs(objectifs.length)}} :</p>
+    <div style="padding: 5px;">
+      <div *ngFor="let objectif of objectifs" style="padding: 5px;">
+        <a [routerLink]="['/objectif',objectif.reference]">{{objectif.reference}} :
+          {{objectif.titre}}</a>
       </div>
     </div>
-    <div class="box" *ngIf="calculsMentaux[0] != null && calculsMentaux[0].reference != ''">
-      <h2 class="title is-3">Calcul Mental
-        <i *ngIf="calculsMentaux[0] != null && calculsMentaux.length == 1 && calculsMentaux[0].niveaux.length == 1" class="far fa-copy" (click)="copierLien(calculsMentaux[0].niveaux[0])"></i>
-      </h2>
-      <div *ngIf="presenceCalculMental; else divPasDeCalculMental">
-        <div *ngFor="let calculMental of calculsMentaux; index as i">
-          <p *ngIf="calculMental.pageExiste; else calculMentalSansLien">Dans cette séquence, le calcul
-            mental porte sur :<br>
-            <a [routerLink]="['/objectif',calculMental.reference]">{{calculMental.reference}} : {{calculMental.titre}}</a> &nbsp;
-            <i *ngIf="calculsMentaux[0] != null && calculsMentaux.length > 1 && calculsMentaux[0].niveaux.length == 1" class="far fa-copy" (click)="copierLien(calculsMentaux[0].niveaux[0])"></i>
+  </div>
+  <div class="box" *ngIf="calculsMentaux[0] != null && calculsMentaux[0].reference != ''">
+    <h2 class="title is-3">Calcul Mental
+      <i *ngIf="calculsMentaux[0] != null && calculsMentaux.length == 1 && calculsMentaux[0].niveaux.length == 1"
+        class="far fa-copy" (click)="copierLien(calculsMentaux[0].niveaux[0])"></i>
+    </h2>
+    <div *ngIf="presenceCalculMental; else divPasDeCalculMental">
+      <div *ngFor="let calculMental of calculsMentaux; index as i">
+        <p *ngIf="calculMental.pageExiste; else calculMentalSansLien">Dans cette séquence, le calcul
+          mental porte sur :<br>
+          <a [routerLink]="['/objectif',calculMental.reference]">{{calculMental.reference}} : {{calculMental.titre}}</a>
+          &nbsp;
+          <i *ngIf="calculsMentaux[0] != null && calculsMentaux.length > 1 && calculsMentaux[0].niveaux.length == 1"
+            class="far fa-copy" (click)="copierLien(calculsMentaux[0].niveaux[0])"></i>
+        </p>
+        <ng-template #calculMentalSansLien>
+          <p>Dans cette séquence, le calcul mental porte sur :<br>
+            {{calculMental.reference}} : {{calculMental.titre}} &nbsp;
+            <i *ngIf="calculsMentaux[0] != null && calculsMentaux.length > 1 && calculsMentaux[0].niveaux.length == 1"
+              class="far fa-copy" (click)="copierLien(calculsMentaux[0].niveaux[0])"></i>
           </p>
-          <ng-template #calculMentalSansLien>
-            <p>Dans cette séquence, le calcul mental porte sur :<br>
-              {{calculMental.reference}} : {{calculMental.titre}} &nbsp;
-              <i *ngIf="calculsMentaux[0] != null && calculsMentaux.length > 1 && calculsMentaux[0].niveaux.length == 1" class="far fa-copy" (click)="copierLien(calculsMentaux[0].niveaux[0])"></i>
-            </p>
-          </ng-template>
+        </ng-template>
+        <div><br></div>
+        <div *ngFor="let niveau of calculMental.niveaux; index as j">
           <div><br></div>
-          <div *ngFor="let niveau of calculMental.niveaux; index as j">
-            <div><br></div>
-            <h3 class="title is-4" *ngIf="calculMental.niveaux.length > 1">Niveau {{j + 1}}
-              <i class="far fa-copy" (click)="copierLien(niveau)"></i>
-            </h3>
-            <p>{{niveau.commentaire}}</p>
-            <div class="image is-16by9">
-              <iframe class="has-ratio" [src]="niveau.lien | safe" allowfullscreen=""></iframe>
-            </div>
+          <h3 class="title is-4" *ngIf="calculMental.niveaux.length > 1">Niveau {{j + 1}}
+            <i class="far fa-copy" (click)="copierLien(niveau)"></i>
+          </h3>
+          <p>{{niveau.commentaire}}</p>
+          <div class="image is-16by9">
+            <iframe class="has-ratio" [src]="niveau.lien | safe" allowfullscreen=""></iframe>
           </div>
         </div>
       </div>
-      <ng-template #divPasDeCalculMental><br>{{messagePasDeCalculMental}}</ng-template>
     </div>
-    <div class="box" *ngIf="questionsFlash[0] != null && questionsFlash[0].slug != ''">
-      <h2 class="title is-3">Questions Flash</h2>
-      <p>Dans cette séquence, une question flash porte sur l’un des objectifs ci-dessus et les deux autres portent sur :</p>
-      <div style="padding: 5px;">
-        <div style="padding: 5px;" *ngFor="let questionFlash of questionsFlash; index as i">
-          <a *ngIf="questionFlash.pageExiste; else questionFlashSansLien"
-            [routerLink]="['/objectif',questionFlash.reference]">{{questionFlash.reference}} :
-            {{questionFlash.titre}}</a>
-          <ng-template #questionFlashSansLien>{{questionFlash.reference}} : {{questionFlash.titre}}
-          </ng-template>
-        </div>
-      </div>
-      <div style="padding-top: 20px; padding-bottom: 5px;">
-        <a [href]="lienQuestionsFlash" target="_blank" rel="noopener noreferrer">S'entraîner pour les Questions Flash</a>
+    <ng-template #divPasDeCalculMental><br>{{messagePasDeCalculMental}}</ng-template>
+  </div>
+  <div class="box" *ngIf="questionsFlash[0] != null && questionsFlash[0].slug != ''">
+    <h2 class="title is-3">Questions Flash</h2>
+    <p>Dans cette séquence, une question flash porte sur l’un des objectifs ci-dessus et les deux autres portent sur :
+    </p>
+    <div style="padding: 5px;">
+      <div style="padding: 5px;" *ngFor="let questionFlash of questionsFlash; index as i">
+        <a *ngIf="questionFlash.pageExiste; else questionFlashSansLien"
+          [routerLink]="['/objectif',questionFlash.reference]">{{questionFlash.reference}} :
+          {{questionFlash.titre}}</a>
+        <ng-template #questionFlashSansLien>{{questionFlash.reference}} : {{questionFlash.titre}}
+        </ng-template>
       </div>
     </div>
-    <div class="box">
-      <h2 class="title is-3">Évaluation</h2>
-      <a [href]="lienEval" target="_blank" rel="noopener noreferrer">S'entraîner pour l'évaluation</a>
-    </div>
-    <div class="box">
-      <h2 class="title is-3" *ngIf="lienCours != '' || lienResume != '' || lienMission != '' || lienAnki != ''">Téléchargements</h2>
-      <div style="padding: 5px;">
-        <div style="padding: 5px;"><a *ngIf="lienCours != ''" [href]="lienCours">Télécharger le cours</a>
-        </div>
-        <div style="padding: 5px;"><a *ngIf="lienResume != ''" [href]="lienResume">Télécharger le résumé</a>
-        </div>
-        <div style="padding: 5px;"><a *ngIf="lienMission != ''" [href]="lienMission">Télécharger la mission</a>
-        </div>
-        <div style="padding: 5px;"><a *ngIf="lienAnki != ''" [href]="lienAnki">Télécharger le paquet Anki de la séquence</a></div>
-      </div>
+    <div style="padding-top: 20px; padding-bottom: 5px;">
+      <a [href]="lienQuestionsFlash" target="_blank" rel="noopener noreferrer">S'entraîner pour les Questions Flash</a>
     </div>
   </div>
-  <div class="column is-one-fifth">
-    <!-- Utilisateurs connectés -->
-    <app-whosonline></app-whosonline>
+  <div class="box">
+    <h2 class="title is-3">Évaluation</h2>
+    <a [href]="lienEval" target="_blank" rel="noopener noreferrer">S'entraîner pour l'évaluation</a>
   </div>
+  <div class="box">
+    <h2 class="title is-3" *ngIf="lienCours != '' || lienResume != '' || lienMission != '' || lienAnki != ''">
+      Téléchargements</h2>
+    <div style="padding: 5px;">
+      <div style="padding: 5px;"><a *ngIf="lienCours != ''" [href]="lienCours">Télécharger le cours</a>
+      </div>
+      <div style="padding: 5px;"><a *ngIf="lienResume != ''" [href]="lienResume">Télécharger le résumé</a>
+      </div>
+      <div style="padding: 5px;"><a *ngIf="lienMission != ''" [href]="lienMission">Télécharger la mission</a>
+      </div>
+      <div style="padding: 5px;"><a *ngIf="lienAnki != ''" [href]="lienAnki">Télécharger le paquet Anki de la
+          séquence</a></div>
+    </div>
+  </div>
+  <!-- Utilisateurs connectés -->
+  <app-whosonline></app-whosonline>
 </div>
