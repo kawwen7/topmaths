@@ -18,7 +18,8 @@
     <!-- Trophées -->
     <div>
       <a [routerLink]="['/trophees/' + dataService.user.codeTrophees]">
-        <button *ngIf="dataService.user.codeTrophees != ''" class="button is-success is-large">Lien vers les trophées</button>
+        <button *ngIf="dataService.user.codeTrophees != ''" class="button is-success is-large">Lien vers les
+          trophées</button>
       </a>
     </div>
     <br>
@@ -47,9 +48,17 @@
       ligne</button>
     <br><br>
     <!-- Trophées -->
+    <button *ngIf="dataService.user.tropheesVisibles == 'oui'" type="submit" class="button is-danger is-outlined"
+      (click)="dataService.majTropheesVisibles('non')">Cacher ses trophées aux autres utilisateurs</button>
+    <button *ngIf="dataService.user.tropheesVisibles != 'oui'" class="button is-danger">Tes trophées sont cachés aux autres utilisateurs</button>
+    &nbsp;
+    <button *ngIf="dataService.user.tropheesVisibles != 'oui'" type="submit" class="button is-success is-outlined"
+      (click)="dataService.majTropheesVisibles('oui')">Montrer ses trophées aux autres utilisateurs</button>
+    <button *ngIf="dataService.user.tropheesVisibles == 'oui'" class="button is-success">Tes trophées sont visibles par les autres utilisateurs</button>
+    <br><br>
+    <!-- Créer le lien vers les trophées -->
     <div class="columns is-centered">
       <div class="column is-narrow">
-        <!-- Créer le lien -->
         <div *ngIf="dataService.user.codeTrophees == ''" class="dropdown is-hoverable">
           <div class="dropdown-trigger">
             <!-- Champ de connexion -->

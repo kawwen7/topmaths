@@ -13,7 +13,7 @@
       <div class="dropdown-menu" id="dropdown-menu4" role="menu">
         <div class="dropdown-content">
           <div class="dropdown-item">
-            <p>Afficher le classement !</p>
+            <p>Afficher le classement</p>
           </div>
         </div>
       </div>
@@ -35,18 +35,30 @@
         </div>
         <!-- Pseudo -->
         <div class="column is-three-fifths" style="display: flex; align-items: center; justify-content: center;">
-          <div class="is-inline-block">{{onlineUser.pseudo}}</div>
+          <div *ngIf="onlineUser.tropheesVisibles == 'oui'" class="dropdown is-right is-hoverable is-inline-block">
+            <div class="dropdown-trigger">
+              <a (click)="voirTropheesPerso(onlineUser)">{{onlineUser.pseudo}}</a>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                  <p>Afficher ses trophées</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="onlineUser.tropheesVisibles != 'oui'" class="is-inline-block">{{onlineUser.pseudo}}</div>
         </div>
         <!-- Scores -->
         <div class="column is-one-fifth" style="display: flex; align-items: center; justify-content: center;">
           <div class="dropdown is-right is-hoverable">
             <div class="dropdown-trigger">
-              {{onlineUser.score}}
+              <a (click)="voirClassementPerso(onlineUser)">{{onlineUser.score}}</a>
             </div>
             <div class="dropdown-menu" id="dropdown-menu4" role="menu">
               <div class="dropdown-content">
                 <div class="dropdown-item">
-                  <p>Score</p>
+                  <p>Afficher son classement</p>
                 </div>
               </div>
             </div>

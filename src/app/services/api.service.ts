@@ -31,7 +31,8 @@ export class ApiService {
       visible: '',
       pseudo: '',
       score: '0',
-      codeTrophees: ''
+      codeTrophees: '',
+      tropheesVisibles: ''
     }
     this.onlineUsers = []
     this.classement = []
@@ -54,7 +55,8 @@ export class ApiService {
           visible: 'oui',
           pseudo: 'lapin bleu',
           score: '17',
-          codeTrophees: ''
+          codeTrophees: '',
+          tropheesVisibles: 'oui'
         }, {
           identifiant: 'id2',
           lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id2.svg',
@@ -64,7 +66,8 @@ export class ApiService {
           visible: 'oui',
           pseudo: 'Pierre verte',
           score: '38',
-          codeTrophees: ''
+          codeTrophees: '',
+          tropheesVisibles: ''
         }
       ]
     } else {
@@ -94,7 +97,8 @@ export class ApiService {
           visible: 'oui',
           pseudo: 'lapin bleu',
           score: '17',
-          codeTrophees: ''
+          codeTrophees: '',
+          tropheesVisibles: ''
         }, {
           identifiant: 'id2',
           lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id2.svg',
@@ -104,7 +108,8 @@ export class ApiService {
           visible: 'oui',
           pseudo: 'Pierre verte',
           score: '38',
-          codeTrophees: ''
+          codeTrophees: '',
+          tropheesVisibles: ''
         }
       ]
     } else {
@@ -164,7 +169,8 @@ export class ApiService {
         visible: '',
         pseudo: 'Cerf sauvage',
         score: '196',
-        codeTrophees: 'tuoocj'
+        codeTrophees: 'tuoocj',
+        tropheesVisibles: ''
       }
       this.setToken(this.user.identifiant);
     } else {
@@ -202,7 +208,8 @@ export class ApiService {
         visible: '',
         pseudo: this.pseudoAleatoire(),
         score: '0',
-        codeTrophees: ''
+        codeTrophees: '',
+        tropheesVisibles: ''
       }
       this.userregistration(user).pipe(first()).subscribe(
         data => {
@@ -435,6 +442,20 @@ export class ApiService {
    majVisible(visible: string) {
     this.user.visible = visible
     this.update('visible').pipe(first()).subscribe(
+      data => {
+        this.recupWhosOnline()
+      },
+      error => {
+        console.log(error)
+      });
+  }
+
+  /**
+   * @param visible peut être 'oui' ou 'non'
+   */
+   majTropheesVisibles(visible: string) {
+    this.user.tropheesVisibles = visible
+    this.update('tropheesVisibles').pipe(first()).subscribe(
       data => {
         this.recupWhosOnline()
       },
