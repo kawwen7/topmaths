@@ -16,7 +16,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "fpqFXBis5nQ",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=fpqFXBis5nQ&vignette=https://i.ytimg.com/vi/fpqFXBis5nQ/hqdefault.jpg&debut=0&fin=340&largeur=200&hauteur=113",
                     "auteur": "*Mme Maths*",
                     "lienAuteur": "https://www.youtube.com/channel/UCJm9gdUbZhS0m8xGPQySgzg"
                   }
@@ -44,7 +44,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "OUMnDWhgf5w",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=OUMnDWhgf5w&vignette=https://i.ytimg.com/vi/OUMnDWhgf5w/hqdefault.jpg&debut=0&fin=258&largeur=200&hauteur=113",
                     "auteur": "Khan Academy",
                     "lienAuteur": "http://www.khanacademy.org"
                   }
@@ -77,7 +77,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "HKuJUkDbb_w?start=21",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=HKuJUkDbb_w&vignette=https://i.ytimg.com/vi/HKuJUkDbb_w/hqdefault.jpg&debut=0&fin=241&largeur=200&hauteur=113",
                     "auteur": "Matich Fastich",
                     "lienAuteur": "https://www.youtube.com/channel/UCcPFyq0PJn0NHlreVBkyZsA"
                   }
@@ -96,7 +96,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "SImiMoRB0vU",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=SImiMoRB0vU&vignette=https://i.ytimg.com/vi/SImiMoRB0vU/hqdefault.jpg&debut=0&fin=310&largeur=200&hauteur=113",
                     "auteur": "Yvan Monka",
                     "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
                   }
@@ -118,7 +118,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "-S-TZ1eJNKQ",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=-S-TZ1eJNKQ&vignette=https://i.ytimg.com/vi/-S-TZ1eJNKQ/hqdefault.jpg&debut=0&fin=249&largeur=200&hauteur=113",
                     "auteur": "Yves Le Coadou",
                     "lienAuteur": "https://www.youtube.com/channel/UCT0wZd0o4uFVKvSi2rE_sKQ"
                   }
@@ -140,7 +140,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "B3-1p4c_XYQ",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=B3-1p4c_XYQ&vignette=https://i.ytimg.com/vi/B3-1p4c_XYQ/hqdefault.jpg&debut=0&fin=544&largeur=200&hauteur=113",
                     "auteur": "elisabeth thomas",
                     "lienAuteur": "https://www.youtube.com/channel/UClUpV7RoSKPmRx2EBQhapuA"
                   }
@@ -159,7 +159,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "ZUuNBh_YJl0",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=ZUuNBh_YJl0&vignette=https://i.ytimg.com/vi/ZUuNBh_YJl0/hqdefault.jpg&debut=0&fin=187&largeur=200&hauteur=113",
                     "auteur": "maths sonic",
                     "lienAuteur": "https://www.youtube.com/channel/UCcsHDx0cHCPcS7MFVJ_bxsA"
                   }
@@ -184,7 +184,7 @@
                 "videos": [
                   {
                     "titre": "(autre méthode)",
-                    "slug": "9L4lz1NMPoY",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=9L4lz1NMPoY&vignette=https://i.ytimg.com/vi/9L4lz1NMPoY/hqdefault.jpg&debut=0&fin=527&largeur=200&hauteur=113",
                     "auteur": "Yvan Monka",
                     "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
                   }
@@ -213,12 +213,12 @@
                 "videos": [
                   {
                     "titre": "Niveau 1 - Vert Clair",
-                    "slug": "ptMRvQozNv8",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=ptMRvQozNv8&vignette=https://i.ytimg.com/vi/ptMRvQozNv8/hqdefault.jpg&debut=0&fin=238&largeur=200&hauteur=150",
                     "auteur": "jean-yves Labouche",
                     "lienAuteur": "https://www.youtube.com/channel/UCA-i2IV5_F1ak53ZbED1u1w"
                   }, {
                     "titre": "Niveau 2 - Vert Foncé",
-                    "slug": "9vGH_inS8aQ",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=9vGH_inS8aQ&vignette=https://i.ytimg.com/vi/9vGH_inS8aQ/hqdefault.jpg&debut=0&fin=494&largeur=200&hauteur=113",
                     "auteur": "MINUTESMATHS",
                     "lienAuteur": "https://www.youtube.com/channel/UCsD5NwzkIrKs-ySUmeSsEwg"
                   }
@@ -252,7 +252,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "B_S57F69GCE",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=B_S57F69GCE&vignette=https://i.ytimg.com/vi/B_S57F69GCE/hqdefault.jpg&debut=0&fin=323&largeur=200&hauteur=150",
                     "auteur": "jean-yves Labouche",
                     "lienAuteur": "https://www.youtube.com/channel/UCA-i2IV5_F1ak53ZbED1u1w"
                   }
@@ -271,7 +271,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "oNruk3vyMHQ",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=oNruk3vyMHQ&vignette=https://i.ytimg.com/vi/oNruk3vyMHQ/hqdefault.jpg&debut=0&fin=294&largeur=200&hauteur=150",
                     "auteur": "jean-yves Labouche",
                     "lienAuteur": "https://www.youtube.com/channel/UCA-i2IV5_F1ak53ZbED1u1w"
                   }
@@ -290,7 +290,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "r4CYLxVhnhE",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=r4CYLxVhnhE&vignette=https://i.ytimg.com/vi/r4CYLxVhnhE/hqdefault.jpg&debut=0&fin=257&largeur=200&hauteur=113",
                     "auteur": "Maths en pause",
                     "lienAuteur": "https://www.youtube.com/channel/UCA4wk8mKv6tiOwAcOBRo9rA"
                   }
@@ -312,7 +312,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "r4CYLxVhnhE",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=r4CYLxVhnhE&vignette=https://i.ytimg.com/vi/r4CYLxVhnhE/hqdefault.jpg&debut=0&fin=257&largeur=200&hauteur=113",
                     "auteur": "Maths en pause",
                     "lienAuteur": "https://www.youtube.com/channel/UCA4wk8mKv6tiOwAcOBRo9rA"
                   }
@@ -339,7 +339,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "gvIZ3bt6gw8",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=gvIZ3bt6gw8&vignette=https://i.ytimg.com/vi/gvIZ3bt6gw8/hqdefault.jpg&debut=0&fin=217&largeur=200&hauteur=113",
                     "auteur": "Math Coaching",
                     "lienAuteur": "https://www.youtube.com/channel/UCGqY72r3_uGP4VWw8GLSNsQ"
                   }
@@ -358,7 +358,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "CR4lSAfho5A",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=CR4lSAfho5A&vignette=https://i.ytimg.com/vi/CR4lSAfho5A/hqdefault.jpg&debut=0&fin=399&largeur=200&hauteur=113",
                     "auteur": "Yvan Monka",
                     "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
                   }
@@ -377,17 +377,17 @@
                 "videos": [
                   {
                     "titre": "Construction à la main",
-                    "slug": "NZnhF5VDy04",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=NZnhF5VDy04&vignette=https://i.ytimg.com/vi/NZnhF5VDy04/hqdefault.jpg&debut=0&fin=275&largeur=200&hauteur=113",
                     "auteur": "Yvan Monka",
                     "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
                   }, {
                     "titre": "",
-                    "slug": "Qla9YSL99oQ",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=Qla9YSL99oQ&vignette=https://i.ytimg.com/vi/Qla9YSL99oQ/hqdefault.jpg&debut=0&fin=150&largeur=200&hauteur=113",
                     "auteur": "Jeremy Navarro",
                     "lienAuteur": "https://www.youtube.com/channel/UCAD9yVxeKupFV-XftTiSeZw"
                   }, {
                     "titre": "Construction à l'aide de Libre Office Calc",
-                    "slug": "8JvLWkXPQKI",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=8JvLWkXPQKI&vignette=https://i.ytimg.com/vi/8JvLWkXPQKI/hqdefault.jpg&debut=0&fin=114&largeur=200&hauteur=113",
                     "auteur": "Professeur ROOKY",
                     "lienAuteur": "https://www.youtube.com/channel/UC-cePs9J43U6FEfwFY0rMdQ"
                   }
@@ -409,7 +409,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "4u1DAOPdKV0",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=4u1DAOPdKV0&vignette=https://i.ytimg.com/vi/4u1DAOPdKV0/hqdefault.jpg&debut=0&fin=351&largeur=200&hauteur=113",
                     "auteur": "Maths&Méthodes",
                     "lienAuteur": "https://www.youtube.com/channel/UCb9LSmnMAXQ6LtggV7pD_xw"
                   }
@@ -431,7 +431,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "23UG33y2Mic?start=12&end=110",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=23UG33y2Mic&vignette=https://i.ytimg.com/vi/23UG33y2Mic/hqdefault.jpg&debut=12&fin=110&largeur=200&hauteur=113",
                     "auteur": "Khan Academy",
                     "lienAuteur": "http://www.khanacademy.org"
                   }
@@ -464,7 +464,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "sxUHj4A3K-8",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=sxUHj4A3K-8&vignette=https://i.ytimg.com/vi/sxUHj4A3K-8/hqdefault.jpg&debut=0&fin=162&largeur=200&hauteur=113",
                     "auteur": "20/20",
                     "lienAuteur": "https://www.youtube.com/channel/UCqjw7aREI90TYZXEg49H04Q"
                   }
@@ -488,7 +488,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "xv1lONmklBA?end=93",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=xv1lONmklBA&vignette=https://i.ytimg.com/vi/xv1lONmklBA/hqdefault.jpg&debut=0&fin=93&largeur=200&hauteur=113",
                     "auteur": "IDmaths",
                     "lienAuteur": "https://www.youtube.com/channel/UCzzZOyjuJu0ePPMQFh_B2-A"
                   }
@@ -517,19 +517,19 @@
                 "videos": [
                   {
                     "titre": "Niveau 1 - Vert Clair",
-                    "slug": "-7UGauYeTdk",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=-7UGauYeTdk&vignette=https://i.ytimg.com/vi/-7UGauYeTdk/hqdefault.jpg&debut=0&fin=159&largeur=200&hauteur=113",
                     "auteur": "Yvan Monka",
                     "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
                   },
                   {
                     "titre": "Niveau 2 - Vert Foncé",
-                    "slug": "6mFBqacFzws",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=6mFBqacFzws&vignette=https://i.ytimg.com/vi/6mFBqacFzws/hqdefault.jpg&debut=0&fin=223&largeur=200&hauteur=113",
                     "auteur": "Yvan Monka",
                     "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
                   },
                   {
                     "titre": "",
-                    "slug": "tX-vhEtJJzY",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=tX-vhEtJJzY&vignette=https://i.ytimg.com/vi/tX-vhEtJJzY/hqdefault.jpg&debut=0&fin=281&largeur=200&hauteur=113",
                     "auteur": "Yvan Monka",
                     "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
                   }
@@ -551,7 +551,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "PZcC4Hkg-X8",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=PZcC4Hkg-X8&vignette=https://i.ytimg.com/vi/PZcC4Hkg-X8/hqdefault.jpg&debut=0&fin=469&largeur=200&hauteur=113",
                     "auteur": "Maths et Jeux",
                     "lienAuteur": "https://www.youtube.com/channel/UCj5z973uER7e6ppaAEvYMHQ"
                   }
@@ -573,13 +573,13 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "41-nginyPbk",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=41-nginyPbk&vignette=https://i.ytimg.com/vi/41-nginyPbk/hqdefault.jpg&debut=0&fin=224&largeur=200&hauteur=113",
                     "auteur": "Séverine LEMAITRE",
                     "lienAuteur": "https://www.youtube.com/channel/UCW4XcuJF3f6uuNGV2BAMX0A"
                   },
                   {
                     "titre": "",
-                    "slug": "-HvUYDfhR0s",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=-HvUYDfhR0s&vignette=https://i.ytimg.com/vi/-HvUYDfhR0s/hqdefault.jpg&debut=0&fin=290&largeur=200&hauteur=113",
                     "auteur": "Séverine LEMAITRE",
                     "lienAuteur": "https://www.youtube.com/channel/UCW4XcuJF3f6uuNGV2BAMX0A"
                   }
@@ -614,7 +614,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "-RHuYaV5eSI?end=353",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=-RHuYaV5eSI&vignette=https://i.ytimg.com/vi/-RHuYaV5eSI/hqdefault.jpg&debut=0&fin=353&largeur=200&hauteur=113",
                     "auteur": "Mathrix",
                     "lienAuteur": "https://www.youtube.com/channel/UCdH4RLzP9UIxV299clvj1rg"
                   }
@@ -642,12 +642,12 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "UL5cgbvDvNQ",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=UL5cgbvDvNQ&vignette=https://i.ytimg.com/vi/UL5cgbvDvNQ/hqdefault.jpg&debut=0&fin=493&largeur=200&hauteur=113",
                     "auteur": "Hedacademy",
                     "lienAuteur": "https://www.youtube.com/channel/UC8SRYHgGMqAYZehYdznaqvQ"
                   }, {
                     "titre": "",
-                    "slug": "4CEYTrvUP0I",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=4CEYTrvUP0I&vignette=https://i.ytimg.com/vi/4CEYTrvUP0I/hqdefault.jpg&debut=0&fin=336&largeur=200&hauteur=113",
                     "auteur": "Yvan Monka",
                     "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
                   }
@@ -669,7 +669,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "87S4-an3mgI",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=87S4-an3mgI&vignette=https://i.ytimg.com/vi/87S4-an3mgI/hqdefault.jpg&debut=0&fin=126&largeur=200&hauteur=113",
                     "auteur": "Yves le Coadou",
                     "lienAuteur": "https://www.youtube.com/channel/UCT0wZd0o4uFVKvSi2rE_sKQ"
                   }
@@ -693,7 +693,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "2Ib7SFTws0c",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=2Ib7SFTws0c&vignette=https://i.ytimg.com/vi/2Ib7SFTws0c/hqdefault.jpg&debut=0&fin=922&largeur=200&hauteur=113",
                     "auteur": "Hedacademy",
                     "lienAuteur": "https://www.youtube.com/channel/UC8SRYHgGMqAYZehYdznaqvQ"
                   }
@@ -716,7 +716,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "RBE2wPIKagI",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=RBE2wPIKagI&vignette=https://i.ytimg.com/vi/RBE2wPIKagI/hqdefault.jpg&debut=0&fin=541&largeur=200&hauteur=113",
                     "auteur": "Yvan Monka",
                     "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
                   }
@@ -739,7 +739,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "Rr31lJ0OuZE",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=Rr31lJ0OuZE&vignette=https://i.ytimg.com/vi/Rr31lJ0OuZE/hqdefault.jpg&debut=0&fin=498&largeur=200&hauteur=113",
                     "auteur": "La galaxie de Manu",
                     "lienAuteur": "https://www.youtube.com/channel/UC8OLHC9Bo9LsFjPdlobj_wA"
                   }
@@ -767,7 +767,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "S_ckQpWzmG8",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=S_ckQpWzmG8&vignette=https://i.ytimg.com/vi/S_ckQpWzmG8/hqdefault.jpg&debut=0&fin=412&largeur=200&hauteur=113",
                     "auteur": "Yvan Monka",
                     "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
                   }
@@ -794,7 +794,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "sr_vOR2ALhw",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=sr_vOR2ALhw&vignette=https://i.ytimg.com/vi/sr_vOR2ALhw/hqdefault.jpg&debut=0&fin=472&largeur=200&hauteur=113",
                     "auteur": "Yvan Monka",
                     "lienAuteur": "https://www.youtube.com/channel/UCaDqmzanCq4ZYhdEm0Df9Qg"
                   }
@@ -821,7 +821,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "NAPagHvwD04",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=NAPagHvwD04&vignette=https://i.ytimg.com/vi/NAPagHvwD04/hqdefault.jpg&debut=0&fin=542&largeur=200&hauteur=113",
                     "auteur": "Maths et Jeux",
                     "lienAuteur": "https://www.youtube.com/channel/UCj5z973uER7e6ppaAEvYMHQ"
                   }
@@ -858,7 +858,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "23UG33y2Mic?start=114&end=282",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=23UG33y2Mic&vignette=https://i.ytimg.com/vi/23UG33y2Mic/hqdefault.jpg&debut=114&fin=282&largeur=200&hauteur=113",
                     "auteur": "Khan Academy",
                     "lienAuteur": "http://www.khanacademy.org"
                   }
@@ -877,7 +877,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "DI1hBhEekZ0",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=DI1hBhEekZ0&vignette=https://i.ytimg.com/vi/DI1hBhEekZ0/hqdefault.jpg&debut=0&fin=221&largeur=200&hauteur=113",
                     "auteur": "Mate tes Maths",
                     "lienAuteur": "https://www.youtube.com/channel/UCedwzeKX8pd-l57Bs3pcy3Q"
                   }
@@ -906,17 +906,17 @@
                 "videos": [
                   {
                     "titre": "Niveau 1 - Jaune",
-                    "slug": "h4sXOrqGhRE",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=h4sXOrqGhRE&vignette=https://i.ytimg.com/vi/h4sXOrqGhRE/hqdefault.jpg&debut=0&fin=237&largeur=200&hauteur=113",
                     "auteur": "*Mme Maths*",
                     "lienAuteur": "https://www.youtube.com/channel/UCJm9gdUbZhS0m8xGPQySgzg"
                   }, {
                     "titre": "Niveau 2 - Vert Clair",
-                    "slug": "589aaCn3uIE",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=589aaCn3uIE&vignette=https://i.ytimg.com/vi/589aaCn3uIE/hqdefault.jpg&debut=0&fin=242&largeur=200&hauteur=113",
                     "auteur": "*Mme Maths*",
                     "lienAuteur": "https://www.youtube.com/channel/UCJm9gdUbZhS0m8xGPQySgzg"
                   }, {
                     "titre": "Niveau 3 - Vert Foncé",
-                    "slug": "T04UI5tw3Ds",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=T04UI5tw3Ds&vignette=https://i.ytimg.com/vi/T04UI5tw3Ds/hqdefault.jpg&debut=0&fin=287&largeur=200&hauteur=113",
                     "auteur": "*Mme Maths*",
                     "lienAuteur": "https://www.youtube.com/channel/UCJm9gdUbZhS0m8xGPQySgzg"
                   }
@@ -941,7 +941,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "IfCFBqxEQWk",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=IfCFBqxEQWk&vignette=https://i.ytimg.com/vi/IfCFBqxEQWk/hqdefault.jpg&debut=0&fin=171&largeur=200&hauteur=150",
                     "auteur": "EXERCICES MATHS",
                     "lienAuteur": "https://www.youtube.com/channel/UCL_2K3sFiaMQngZuvQhnRhQ"
                   }
@@ -960,7 +960,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "XrSzQ02raSk?end=240",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=XrSzQ02raSk&vignette=https://i.ytimg.com/vi/XrSzQ02raSk/hqdefault.jpg&debut=0&fin=240&largeur=200&hauteur=113",
                     "auteur": "Khan Academy",
                     "lienAuteur": "http://www.khanacademy.org"
                   }
@@ -982,7 +982,7 @@
                 "videos": [
                   {
                     "titre": "",
-                    "slug": "GNit9hrlbv4",
+                    "slug": "https://ladigitale.dev/digiplay/inc/video.php?videoId=GNit9hrlbv4&vignette=https://i.ytimg.com/vi/GNit9hrlbv4/hqdefault.jpg&debut=0&fin=276&largeur=200&hauteur=150",
                     "auteur": "jean-yves Labouche",
                     "lienAuteur": "https://www.youtube.com/channel/UCA-i2IV5_F1ak53ZbED1u1w"
                   }

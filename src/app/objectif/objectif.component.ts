@@ -195,12 +195,14 @@ export class ObjectifComponent implements OnInit {
     for (const video of objectif.videos) {
       if (video.slug != '') {
         this.presenceVideo = true
+        let lienVideo: string
+        video.slug.slice(0, 4) === 'http' ? lienVideo = video.slug : lienVideo = "https://www.youtube.com/embed/" + video.slug
         this.videos.push({
           titre: video.titre,
           slug: video.slug,
           auteur: video.auteur,
           lienAuteur: video.lienAuteur,
-          lienVideo: "https://www.youtube.com/embed/" + video.slug
+          lienVideo: lienVideo
         })
       }
     }
