@@ -267,7 +267,7 @@ export class SequenceComponent implements OnInit {
       for (const niveau of calculMental.niveaux) {
         niveauxTemp.push({
           commentaire: niveau.commentaire,
-          lien: niveau.lien,
+          lien: niveau.lien + '&embed=https://topmaths.fr',
           score: niveau.score,
           lienACopier: niveau.lien
         })

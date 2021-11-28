@@ -30,7 +30,7 @@
       </h3>
       <div
         [ngClass]="{'image': true, 'is-16by9': !portrait, 'is-9by16': portrait && dataService.user.scores == 'actives', 'is-2by3': portrait && dataService.user.scores != 'actives'}">
-        <iframe class="has-ratio" [src]="exercice.lien | safe"></iframe>
+        <iframe class="has-ratio" [src]="exercice.lien | safe" allowfullscreen></iframe>
       </div>
       <span *ngIf="exercice.bonneReponse">
         <h3 [ngClass]="{'huge': true, 'moveUp': exercice.bonneReponse}">{{messageScore}}</h3>

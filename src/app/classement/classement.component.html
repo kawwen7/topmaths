@@ -11,18 +11,18 @@
         </div>
         <!-- Avatar -->
         <div class="column is-one-fifth" style="display: flex; align-items: center; justify-content: center;">
-          <figure *ngIf="user.visible" class="image is-48x48 is-inline-block">
+          <figure *ngIf="user.pseudo != 'anonyme'" class="image is-48x48 is-inline-block">
             <img [src]="user.lienAvatar" />
           </figure>
-          <span *ngIf="!user.visible" class="icon fas fa-2x">
+          <span *ngIf="user.pseudo == 'anonyme'" class="icon fas fa-2x">
             <i class="far fa-user"></i>
           </span>
         </div>
         <!-- Pseudo -->
         <div class="column is-two-fifths" style="display: flex; align-items: center; justify-content: center;">
-          <div *ngIf="user.visible" class="is-inline-block">
+          <div *ngIf="user.pseudo != 'anonyme'" class="is-inline-block">
             <div class="column is-three-fifths" style="display: flex; align-items: center; justify-content: center;">
-              <div *ngIf="user.tropheesVisibles == 'oui'" class="dropdown is-right is-hoverable is-inline-block">
+              <div *ngIf="user.codeTrophees != ''" class="dropdown is-right is-hoverable is-inline-block">
                 <div class="dropdown-trigger">
                   <a (click)="voirTropheesPerso(user)">{{user.pseudo}}</a>
                 </div>
@@ -34,10 +34,10 @@
                   </div>
                 </div>
               </div>
-              <div *ngIf="user.tropheesVisibles != 'oui'" class="is-inline-block">{{user.pseudo}}</div>
+              <div *ngIf="user.codeTrophees == ''" class="is-inline-block">{{user.pseudo}}</div>
             </div>
           </div>
-          <div *ngIf="!user.visible" class="is-inline-block">
+          <div *ngIf="user.pseudo == 'anonyme'" class="is-inline-block">
             < anonyme >
           </div>
         </div>

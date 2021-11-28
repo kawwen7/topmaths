@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
-import { User } from '../services/user';
+import { UserSimplifie } from '../services/user';
 
 @Component({
   selector: 'app-whosonline',
@@ -18,7 +18,7 @@ export class WhosonlineComponent implements OnInit {
    * Envoie l'utilisateur sur la page de classement et l'ancre correspondant au pseudo cliqué
    * @param user 
    */
-  voirClassementPerso(user: User){
+  voirClassementPerso(user: UserSimplifie){
     this.router.navigate(['classement'], { fragment: user.pseudo })
   }
 
@@ -26,7 +26,7 @@ export class WhosonlineComponent implements OnInit {
    * Envoie l'utilisateur sur la page de trophées et indique que ce sont les trophées de user.pseudo
    * @param user 
    */
-  voirTropheesPerso(user: User) {
+  voirTropheesPerso(user: UserSimplifie) {
     this.dataService.pseudoClique = user.pseudo
     this.dataService.codeTropheesClique = user.codeTrophees
     this.router.navigate(['trophees', 'autre'])

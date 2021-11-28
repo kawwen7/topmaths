@@ -23,3 +23,16 @@ export class User {
     this.tropheesVisibles = tropheesVisibles
   }
 }
+export class UserSimplifie {
+  public pseudo: string;
+  public lienAvatar: string;
+  public score: string;
+  public codeTrophees: string;
+
+  constructor(lienAvatar: string, pseudo: string, score: string, codeTrophees: string) {
+    this.pseudo = pseudo
+    this.lienAvatar = lienAvatar
+    this.score = score
+    this.codeTrophees = codeTrophees
+  }
+}

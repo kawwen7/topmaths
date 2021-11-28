@@ -4,10 +4,11 @@
     <div class="dropdown is-right is-hoverable">
       <div class="dropdown-trigger">
         <a routerLink="/classement" routerLinkActive="active">
-          <p *ngIf="dataService.onlineUsers.length == 0">Pas d'utilisateur connecté</p>
-          <p *ngIf="dataService.onlineUsers.length > 0">{{dataService.onlineUsers.length}}
-            {{dataService.onlineUsers.length > 1 ? 'utilisateurs sont connectés' : 'utilisateur est connecté'}} dont
-            {{dataService.nbInvisibles}} {{dataService.nbInvisibles > 1 ? 'invisibles' : 'invisible'}}</p>
+          <p *ngIf="dataService.onlineNb == 0">Pas d'utilisateur connecté</p>
+          <p *ngIf="dataService.onlineNb > 0">{{dataService.onlineNb}}
+            {{dataService.onlineNb > 1 ? 'utilisateurs sont connectés' : 'utilisateur est connecté'}} dont
+            {{dataService.onlineNb - dataService.onlineUsers.length}}
+            {{dataService.onlineNb - dataService.onlineUsers.length > 1 ? 'invisibles' : 'invisible'}}</p>
         </a>
       </div>
       <div class="dropdown-menu" id="dropdown-menu4" role="menu">
@@ -22,44 +23,42 @@
 </div>
 <!-- Liste des utilisateurs visibles -->
 <div *ngFor="let onlineUser of dataService.onlineUsers">
-  <div *ngIf="onlineUser.visible == 'oui'">
-    <div class="columns">
-      <!-- On fait un tableau à une seule colonne pour que les contenus restent alignés en vue portrait -->
-      <div class="column" style="display: flex; align-items: center; justify-content: center;">
-        <!-- L'affichage est cassé sans tous ces styles -->
-        <!-- Avatar -->
-        <div class="column is-one-fifth" style="display: flex; align-items: center; justify-content: center;">
-          <figure class="image is-48x48 is-inline-block">
-            <img [src]="onlineUser.lienAvatar" />
-          </figure>
-        </div>
-        <!-- Pseudo -->
-        <div class="column is-three-fifths" style="display: flex; align-items: center; justify-content: center;">
-          <div *ngIf="onlineUser.tropheesVisibles == 'oui'" class="dropdown is-right is-hoverable is-inline-block">
-            <div class="dropdown-trigger">
-              <a (click)="voirTropheesPerso(onlineUser)">{{onlineUser.pseudo}}</a>
-            </div>
-            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
-              <div class="dropdown-content">
-                <div class="dropdown-item">
-                  <p>Afficher ses trophées</p>
-                </div>
+  <div class="columns">
+    <!-- On fait un tableau à une seule colonne pour que les contenus restent alignés en vue portrait -->
+    <div class="column" style="display: flex; align-items: center; justify-content: center;">
+      <!-- L'affichage est cassé sans tous ces styles -->
+      <!-- Avatar -->
+      <div class="column is-one-fifth" style="display: flex; align-items: center; justify-content: center;">
+        <figure class="image is-48x48 is-inline-block">
+          <img [src]="onlineUser.lienAvatar" />
+        </figure>
+      </div>
+      <!-- Pseudo -->
+      <div class="column is-three-fifths" style="display: flex; align-items: center; justify-content: center;">
+        <div *ngIf="onlineUser.codeTrophees != ''" class="dropdown is-right is-hoverable is-inline-block">
+          <div class="dropdown-trigger">
+            <a (click)="voirTropheesPerso(onlineUser)">{{onlineUser.pseudo}}</a>
+          </div>
+          <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+            <div class="dropdown-content">
+              <div class="dropdown-item">
+                <p>Afficher ses trophées</p>
               </div>
             </div>
           </div>
-          <div *ngIf="onlineUser.tropheesVisibles != 'oui'" class="is-inline-block">{{onlineUser.pseudo}}</div>
         </div>
-        <!-- Scores -->
-        <div class="column is-one-fifth" style="display: flex; align-items: center; justify-content: center;">
-          <div class="dropdown is-right is-hoverable">
-            <div class="dropdown-trigger">
-              <a (click)="voirClassementPerso(onlineUser)">{{onlineUser.score}}</a>
-            </div>
-            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
-              <div class="dropdown-content">
-                <div class="dropdown-item">
-                  <p>Afficher son classement</p>
-                </div>
+        <div *ngIf="onlineUser.codeTrophees == ''" class="is-inline-block">{{onlineUser.pseudo}}</div>
+      </div>
+      <!-- Scores -->
+      <div class="column is-one-fifth" style="display: flex; align-items: center; justify-content: center;">
+        <div class="dropdown is-right is-hoverable">
+          <div class="dropdown-trigger">
+            <a (click)="voirClassementPerso(onlineUser)">{{onlineUser.score}}</a>
+          </div>
+          <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+            <div class="dropdown-content">
+              <div class="dropdown-item">
+                <p>Afficher son classement</p>
               </div>
             </div>
           </div>

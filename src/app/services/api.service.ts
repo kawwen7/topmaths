@@ -1,7 +1,7 @@
 import { Injectable, Output, EventEmitter, isDevMode } from '@angular/core';
 import { first, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { User } from './user';
+import { User, UserSimplifie } from './user';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -12,9 +12,9 @@ export class ApiService {
   redirectUrl: string = ''
   baseUrl: string = "https://topmaths.fr/api";
   user: User
-  onlineUsers: User[]
-  classement: User[]
-  nbInvisibles: number
+  onlineUsers: UserSimplifie[]
+  classement: UserSimplifie[]
+  onlineNb: number
   feminin: boolean
   listeMasculins: any
   listeFeminins: any
@@ -39,7 +39,7 @@ export class ApiService {
     }
     this.onlineUsers = []
     this.classement = []
-    this.nbInvisibles = 0
+    this.onlineNb = 0
     this.feminin = false
     this.pseudoClique = ''
     this.ancienPseudoClique = ''
@@ -53,27 +53,15 @@ export class ApiService {
     if (isDevMode()) {
       this.classement = [
         {
-          identifiant: 'id1',
           lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id1.svg',
-          scores: '',
-          lastLogin: '',
-          lastAction: '',
-          visible: 'oui',
           pseudo: 'lapin bleu',
           score: '17',
-          codeTrophees: '',
-          tropheesVisibles: 'oui'
+          codeTrophees: ''
         }, {
-          identifiant: 'id2',
           lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id2.svg',
-          scores: '',
-          lastLogin: '',
-          lastAction: '',
-          visible: 'oui',
           pseudo: 'Pierre verte',
           score: '38',
-          codeTrophees: '',
-          tropheesVisibles: ''
+          codeTrophees: ''
         }
       ]
     } else {
@@ -95,40 +83,22 @@ export class ApiService {
     if (isDevMode()) {
       this.onlineUsers = [
         {
-          identifiant: 'id1',
           lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id1.svg',
-          scores: '',
-          lastLogin: '',
-          lastAction: '',
-          visible: 'oui',
           pseudo: 'lapin bleu',
           score: '17',
-          codeTrophees: '',
-          tropheesVisibles: ''
+          codeTrophees: ''
         }, {
-          identifiant: 'id2',
           lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id2.svg',
-          scores: '',
-          lastLogin: '',
-          lastAction: '',
-          visible: 'oui',
           pseudo: 'Pierre verte',
           score: '38',
-          codeTrophees: '',
-          tropheesVisibles: ''
+          codeTrophees: ''
         }
       ]
     } else {
+      this.recupOnlineNb()
       this.whosonline().pipe(first()).subscribe(
-        data => {
-          this.onlineUsers = data
-          let i = 0
-          for (const onlineUser of this.onlineUsers) {
-            if (onlineUser.visible != 'oui') {
-              i++
-            }
-          }
-          this.nbInvisibles = i
+        UsersSimplifies => {
+          this.onlineUsers = UsersSimplifies
         },
         error => {
           console.log(error)
@@ -141,9 +111,9 @@ export class ApiService {
    * @returns liste des utilisateurs classés par score
    */
   public pullClassement() {
-    return this.httpClient.post<any>(this.baseUrl + '/classement.php', { })
-      .pipe(map(Users => {
-        return Users;
+    return this.httpClient.post<any>(this.baseUrl + '/classement.php', {})
+      .pipe(map(UsersSimplifies => {
+        return UsersSimplifies;
       }));
   }
 
@@ -152,9 +122,9 @@ export class ApiService {
    * @returns liste des utilisateurs en ligne
    */
   public whosonline() {
-    return this.httpClient.post<any>(this.baseUrl + '/whosonline.php', { })
-      .pipe(map(Users => {
-        return Users;
+    return this.httpClient.post<any>(this.baseUrl + '/whosonline.php', {})
+      .pipe(map(UsersSimplifies => {
+        return UsersSimplifies
       }));
   }
 
@@ -186,7 +156,7 @@ export class ApiService {
             const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
             this.router.navigate([redirect]);
           }
-          this.majProfil.emit({profilCharge: true})
+          this.majProfil.emit({ profilCharge: true })
         },
         error => {
           this.erreurLogin(identifiant)
@@ -205,7 +175,7 @@ export class ApiService {
     } else if (!this.onlyLettersAndNumbers(identifiant)) {
       this.erreurRegistration('caracteres_speciaux')
     } else {
-      const user : User = {
+      const user: User = {
         identifiant: identifiant,
         lienAvatar: `https://avatars.dicebear.com/api/adventurer/${identifiant}.svg`,
         scores: '',
@@ -317,26 +287,29 @@ export class ApiService {
       return nom + ' ' + adjectif
     }
   }
-  
+
+  /**
+   * Récupère le nombre de personnes ayant effectué une action au cours des 10 dernières minutes (changement de page ou clic que Nouvelles Données)
+   */
+  recupOnlineNb() {
+    this.httpClient.get(this.baseUrl + '/onlineNb.php').subscribe((data: any) => {
+      this.onlineNb = parseInt(data.onlineNb)
+    })
+  }
+
   /**
    * Récupère les listes de noms masculins, de noms féminins et d'adjectifs
    */
-  recupereDonneesPseudos(){
-    this.httpClient.get('assets/data/nomsMasculins.json').subscribe(
-      (data: any) => {
-        this.listeMasculins = data
-      }
-    )
-    this.httpClient.get('assets/data/nomsFeminins.json').subscribe(
-      (data: any) => {
-        this.listeFeminins = data
-      }
-    )
-    this.httpClient.get('assets/data/adjectifs.json').subscribe(
-      (data: any) => {
-        this.listeAdjectifs = data
-      }
-    )
+  recupereDonneesPseudos() {
+    this.httpClient.get('assets/data/nomsMasculins.json').subscribe((data: any) => {
+      this.listeMasculins = data
+    })
+    this.httpClient.get('assets/data/nomsFeminins.json').subscribe((data: any) => {
+      this.listeFeminins = data
+    })
+    this.httpClient.get('assets/data/adjectifs.json').subscribe((data: any) => {
+      this.listeAdjectifs = data
+    })
   }
 
   /**
@@ -387,7 +360,7 @@ export class ApiService {
       error => {
         console.log(error)
       });
-    
+
   }
 
   /**
@@ -433,7 +406,7 @@ export class ApiService {
   /**
    * Modifie la date de dernière action
    */
-   majLogout() {
+  majLogout() {
     this.update('logout').pipe(first()).subscribe(
       data => {
       },
@@ -445,7 +418,7 @@ export class ApiService {
   /**
    * @param visible peut être 'oui' ou 'non'
    */
-   majVisible(visible: string) {
+  majVisible(visible: string) {
     this.user.visible = visible
     this.update('visible').pipe(first()).subscribe(
       data => {
@@ -459,7 +432,7 @@ export class ApiService {
   /**
    * @param visible peut être 'oui' ou 'non'
    */
-   majTropheesVisibles(visible: string) {
+  majTropheesVisibles(visible: string) {
     this.user.tropheesVisibles = visible
     this.update('tropheesVisibles').pipe(first()).subscribe(
       data => {
@@ -474,7 +447,7 @@ export class ApiService {
    * Met à jour le codeTrophees du profil local et de celui de la bdd
    * @param codeTrophees
    */
-   majLienTrophees(codeTrophees: string) {
+  majLienTrophees(codeTrophees: string) {
     this.user.codeTrophees = codeTrophees
     this.update('codeTrophees').pipe(first()).subscribe(
       data => {
@@ -489,7 +462,7 @@ export class ApiService {
    * @param message
    */
   envoiMailEval(codeTrophee: string, sujetEval: string) {
-    this.httpClient.post<any>(this.baseUrl + `/envoiMailEval.php`, {codeTrophee: codeTrophee, sujetEval: sujetEval}).pipe(first()).subscribe(
+    this.httpClient.post<any>(this.baseUrl + `/envoiMailEval.php`, { codeTrophee: codeTrophee, sujetEval: sujetEval }).pipe(first()).subscribe(
       data => {
         if (data['message'] == 'mail envoye') {
           alert('Ton message a bien été envoyé !\nM. Valmont t\'enverra un message sur Pronote pour te dire quoi réviser.')
