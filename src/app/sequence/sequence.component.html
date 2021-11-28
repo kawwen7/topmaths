@@ -43,6 +43,9 @@
           <div class="image is-16by9">
             <iframe class="has-ratio" [src]="niveau.lien | safe" allowfullscreen=""></iframe>
           </div>
+          <span *ngIf="niveau.bonneReponse">
+            <h3 [ngClass]="{'huge': true, 'moveUp': niveau.bonneReponse}">{{messageScore}}</h3>
+          </span>
         </div>
       </div>
     </div>
@@ -86,3 +89,6 @@
   <!-- Utilisateurs connectés -->
   <app-whosonline></app-whosonline>
 </div>
+<ng-particles [id]="confetti.id" [options]="confetti.particlesOptions"
+  (particlesLoaded)="confetti.particlesLoaded($event)" (particlesInit)="confetti.particlesInit($event)"></ng-particles>
+<div id="tsparticles"></div>

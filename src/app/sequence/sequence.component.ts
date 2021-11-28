@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, isDevMode, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../services/api.service';
+import { ConfettiService } from '../services/confetti.service';
 
 interface Objectif {
   reference: string
@@ -11,6 +13,11 @@ interface Objectif {
 interface Niveau {
   commentaire: string
   lien: string
+  score: string
+  lienACopier: string
+  graine?: string
+  bonneReponse?: boolean
+  slider?: number
 }
 
 interface CalculMental {
@@ -47,8 +54,13 @@ export class SequenceComponent implements OnInit {
   lienAnki: string
   presenceCalculMental: boolean
   messagePasDeCalculMental: string
+  derniereUrl: string
+  derniereGraine: string
+  dernierSlider: number
+  messageScore: string
+  
 
-  constructor(public http: HttpClient, private route: ActivatedRoute) {
+  constructor(public http: HttpClient, private route: ActivatedRoute, private dataService: ApiService, public confetti: ConfettiService) {
     this.reference = ''
     this.numero = 0
     this.titre = ''
@@ -63,10 +75,16 @@ export class SequenceComponent implements OnInit {
     this.lienAnki = ''
     this.presenceCalculMental = true
     this.messagePasDeCalculMental = ''
+    this.derniereUrl = ''
+    this.derniereGraine = ''
+    this.dernierSlider = 0
+    this.messageScore = ''
+    setTimeout(() => this.confetti.stop(), 3000) // Sinon un reliquat reste apparent
   }
 
   ngOnInit(): void {
     this.observeChangementsDeRoute()
+    this.ecouteMessagesPost()
   }
 
   /**
@@ -78,6 +96,53 @@ export class SequenceComponent implements OnInit {
       this.reference = params.ref
       this.modificationDesAttributs()
     })
+  }
+
+  /**
+   * Ecoute les messages Post pour récupérer l'url et modifier le lien à copier des exercices
+   */
+  ecouteMessagesPost() {
+    window.addEventListener('message', (event) => {
+      const url: string = event.data.url;
+      if (typeof (url) != 'undefined') {
+        // On cherche à quel exercice correspond ce message
+        for (const calculMental of this.calculsMentaux) {
+          for (const niveau of calculMental.niveaux) {
+            if (typeof (niveau.lien) != 'undefined') {
+              if (url == niveau.lien) {
+                // On a trouvé à quel exercice correspond ce message
+                const nbBonnesReponses: number = event.data.nbBonnesReponses
+                const nbMauvaisesReponses: number = event.data.nbMauvaisesReponses
+                const slider: number = event.data.slider
+                if (typeof (slider) != 'undefined') {
+                  // On s'assure que les exercices soient différents pour ne pas ajouter plusieurs fois du score
+                  if (this.derniereUrl != niveau.lien || this.derniereGraine != niveau.graine || this.dernierSlider != niveau.slider) {
+                    this.derniereUrl = niveau.lien
+                    if (typeof(niveau.graine) != 'undefined') this.derniereGraine = niveau.graine
+                    if (typeof(niveau.slider) != 'undefined') this.dernierSlider = niveau.slider
+                    const majScore: string = (parseInt(niveau.score) * nbBonnesReponses).toString()
+                    if (parseInt(majScore) > 0) {
+                      this.dataService.majScore(majScore)
+                      this.messageScore = '+ ' + majScore
+                      niveau.bonneReponse = true
+                      setTimeout(() => niveau.bonneReponse = false, 2000)
+                      if (nbMauvaisesReponses == 0) {
+                        this.confetti.lanceConfetti()
+                      }
+                    }
+                  }
+                }
+                niveau.graine = event.data.graine
+                niveau.lienACopier = `${url.split(',a=')[0]},a=${niveau.graine}${url.split(',a=')[1]}`
+              }
+            }
+          }
+        }
+      }
+      if (!isDevMode() && this.dataService.isLoggedIn()) {
+        this.dataService.majLastAction()
+      }
+    });
   }
 
   /**
@@ -202,7 +267,9 @@ export class SequenceComponent implements OnInit {
       for (const niveau of calculMental.niveaux) {
         niveauxTemp.push({
           commentaire: niveau.commentaire,
-          lien: niveau.lien
+          lien: niveau.lien,
+          score: niveau.score,
+          lienACopier: niveau.lien
         })
       }
       this.calculsMentaux.push({
@@ -294,8 +361,8 @@ export class SequenceComponent implements OnInit {
    * @param niveau 
    */
   copierLien(niveau: any) {
-    if (typeof (niveau.lien) != 'undefined') {
-      navigator.clipboard.writeText(niveau.lien);
+    if (typeof (niveau.lienACopier) != 'undefined') {
+      navigator.clipboard.writeText(niveau.lienACopier);
       alert('Le lien vers l\'exercice a été copié')
     }
   }

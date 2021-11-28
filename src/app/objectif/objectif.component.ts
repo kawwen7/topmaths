@@ -139,6 +139,7 @@ export class ObjectifComponent implements OnInit {
       }
     });
   }
+  
   /**
    * Observe les changements de route,
    * modifie ensuite les paramètres selon la référence
