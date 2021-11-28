@@ -40,7 +40,7 @@ Si vous souhaitez les réutiliser, vous pouvez regarder <a href="https://www.shu
 
 <!-- Modale de confirmation refaire l'évaluation -->
 <div id="modaleRefaireEvaluation" class="modal">
-  <div class="modal-background" (click)="fermerModal()"></div>
+  <div class="modal-background" (click)="fermerModal('confirmation')"></div>
   <div class="modal-content">
     <br><br><br><br>
     <div style="background-color: white; padding: 50px; text-align: center;">
@@ -48,13 +48,37 @@ Si vous souhaitez les réutiliser, vous pouvez regarder <a href="https://www.shu
       <br><br>
       <div class="columns">
         <div class="column">
-          <button class="button is-danger" style="padding-left: 50px; padding-right: 50px;" (click)="fermerModal()">Non</button>
+          <button class="button is-danger" style="padding-left: 50px; padding-right: 50px;" (click)="fermerModal('confirmation')">Non</button>
         </div>
         <div class="column">
-          <button class="button is-success" style="padding-left: 50px; padding-right: 50px;" (click)="envoiMessage()">Oui</button>
+          <button class="button is-success" style="padding-left: 50px; padding-right: 50px;" (click)="envoiConfirmation()">Oui</button>
         </div>
       </div>
     </div>
   </div>
-  <button class="modal-close is-large" aria-label="close" (click)="fermerModal()"></button>
+  <button class="modal-close is-large" aria-label="close" (click)="fermerModal('confirmation')"></button>
+</div>
+
+<!-- Modale de choix de codeTrophee -->
+<div id="modaleChoixCodeTrophee" class="modal">
+  <div class="modal-background" (click)="fermerModal('choix')"></div>
+  <div class="modal-content">
+    <br><br><br><br>
+    <div style="background-color: white; padding: 50px; text-align: center;">
+      <p [innerHTML]="texteModaleChoix"></p>
+      <br><br>
+      <div class="columns">
+        <div class="column">
+          <button class="button is-info" style="padding-left: 50px; padding-right: 50px;" (click)="envoiChoix(codeTrophee)">{{ codeTrophee }}</button>
+        </div>
+        <div class="column">
+          <button class="button is-danger" style="padding-left: 50px; padding-right: 50px;" (click)="fermerModal('choix')">Annuler</button>
+        </div>
+        <div class="column">
+          <button class="button is-info" style="padding-left: 50px; padding-right: 50px;" (click)="envoiChoix(dataService.user.codeTrophees)">{{ dataService.user.codeTrophees }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close" (click)="fermerModal('choix')"></button>
 </div>

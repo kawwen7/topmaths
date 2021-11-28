@@ -17,8 +17,11 @@ export class TropheesComponent implements OnInit {
   eleve: any
   lignes: any[]
   modal: any
+  modalChoix: any
   texteModale: string
+  texteModaleChoix: string
   sujetEval: string
+  peutDemanderRefaireEval: boolean
 
   constructor(public http: HttpClient, private route: ActivatedRoute, public dataService: ApiService) {
     this.codeTrophee = ''
@@ -26,12 +29,15 @@ export class TropheesComponent implements OnInit {
     this.annee = ''
     this.lignes = []
     this.texteModale = ''
+    this.texteModaleChoix = ''
     this.sujetEval = ''
+    this.peutDemanderRefaireEval = false
   }
 
   ngOnInit(): void {
     this.observeChangementsDeRoute()
     this.modal = document.getElementById("modaleRefaireEvaluation")
+    this.modalChoix = document.getElementById("modaleChoixCodeTrophee")
   }
 
   /**
@@ -40,7 +46,13 @@ export class TropheesComponent implements OnInit {
    */
   observeChangementsDeRoute() {
     this.route.params.subscribe(params => {
-      params.ref == 'autre' ? this.codeTrophee = this.dataService.codeTropheesClique : this.codeTrophee = params.ref
+      if (params.ref == 'autre') {
+        this.codeTrophee = this.dataService.codeTropheesClique
+        this.peutDemanderRefaireEval = false
+      } else {
+        this.codeTrophee = params.ref
+        this.peutDemanderRefaireEval = true
+      }
       this.modificationDesAttributs()
     })
   }
@@ -301,21 +313,21 @@ export class TropheesComponent implements OnInit {
     }
     for (const ligne of this.lignes) {
       for (const groupe of ligne) {
-       for (const trophee of groupe) {
-         let nb : number = 0
-         for (const eleve in this.eleves) {
-           if (Object.prototype.hasOwnProperty.call(this.eleves, eleve)) {
-             if (trophee['nbVertsMin']) {
-              if (parseInt(this.eleves[eleve][trophee['cle']]) >= trophee['nbVertsMin']) nb++
-             } else {
-              if (parseInt(this.eleves[eleve][trophee['cle']]) >= 1) nb++
-             }
-           }
-         }
-         trophee['nb'] = nb
-         trophee['tooltip'] = this.tooltip(trophee)
-         trophee['refaire'] = this.refaire(trophee)
-       }
+        for (const trophee of groupe) {
+          let nb: number = 0
+          for (const eleve in this.eleves) {
+            if (Object.prototype.hasOwnProperty.call(this.eleves, eleve)) {
+              if (trophee['nbVertsMin']) {
+                if (parseInt(this.eleves[eleve][trophee['cle']]) >= trophee['nbVertsMin']) nb++
+              } else {
+                if (parseInt(this.eleves[eleve][trophee['cle']]) >= 1) nb++
+              }
+            }
+          }
+          trophee['nb'] = nb
+          trophee['tooltip'] = this.tooltip(trophee)
+          trophee['refaire'] = this.refaire(trophee)
+        }
       }
     }
   }
@@ -429,8 +441,8 @@ export class TropheesComponent implements OnInit {
     const nbVerts = parseInt(this.eleve[trophee['cle']])
     const nb = parseInt(trophee['nb'])
     let texte: string = ''
-    if (nb > 0 && (this.codeTrophee == this.dataService.user.codeTrophees) && trophee['cle'] !== 'nombreDeVerts' && ((nbVerts < nbVertsMin) || (typeof(trophee['nbVertsMin']) == 'undefined' && nbVerts === 0))) {
-      texte =  '<a>Demander à refaire l\'évaluation</a>'
+    if (nb > 0 && this.peutDemanderRefaireEval && trophee['cle'] !== 'nombreDeVerts' && ((nbVerts < nbVertsMin) || (typeof (trophee['nbVertsMin']) == 'undefined' && nbVerts === 0))) {
+      texte = '<a>Demander à refaire l\'évaluation</a>'
     }
     return texte
   }
@@ -440,39 +452,77 @@ export class TropheesComponent implements OnInit {
    * Ouvre la modale
    * @param trophee 
    */
-  refaireEvaluation(trophee: any){
+  refaireEvaluation(trophee: any) {
     const nbVertsMin = parseInt(trophee['nbVertsMin'])
     const nbVerts = parseInt(this.eleve[trophee['cle']])
     const nb = parseInt(trophee['nb'])
-    if (nb > 0 && (this.codeTrophee == this.dataService.user.codeTrophees) && ((nbVerts < nbVertsMin) || (typeof(trophee['nbVertsMin']) == 'undefined' && nbVerts === 0))) {
+    if (nb > 0 && ((nbVerts < nbVertsMin) || (typeof (trophee['nbVertsMin']) == 'undefined' && nbVerts === 0))) {
       this.texteModale = `
       Est-ce que tu veux envoyer un message à M. Valmont pour lui prévenir
       que tu veux refaire l'évaluation sur "${trophee['categorie']}" ?`
       this.sujetEval = trophee['categorie']
-      this.ouvrirModal()
+      this.ouvrirModal('confirmation')
     }
   }
 
   /**
-   * Envoie un message au propriétaire du site pour lui prévenir qu'on veut refaire une évaluation
+   * Vérifie si les codes trophées collent
+   * Si oui, envoie un message au propriétaire du site pour lui prévenir qu'on veut refaire une évaluation
+   * Si non, demande à l'utilisateur de faire un choix
    */
-  envoiMessage(){
-    this.fermerModal()
-    this.dataService.envoiMailEval(this.codeTrophee, this.sujetEval)
+  envoiConfirmation() {
+    this.fermerModal('confirmation')
+    if (this.codeTrophee != this.dataService.user.codeTrophees && this.dataService.user.codeTrophees != '') {
+      this.texteModaleChoix = `
+      Tu est sur la page de trophées de code "${this.codeTrophee}" mais dans ton profil tu as fait le lien avec le code trophées "${this.dataService.user.codeTrophees}".<br>
+      Lequel est le code trophées de l'élève qui veut refaire l'évaluation ?`
+      this.ouvrirModal('choix')
+    } else {
+      this.dataService.envoiMailEval(this.codeTrophee, this.sujetEval)
+    }
   }
 
   /**
-   * Ouvre la modale avec le jeu scratch
+   * Envoie un message au propriétaire du site et ferme la modale Choix
+   * @param codeTrophee 
    */
-   ouvrirModal() {
-    this.modal.style.display = "block";
+  envoiChoix(codeTrophee: string) {
+    this.fermerModal('choix')
+    this.dataService.envoiMailEval(codeTrophee, this.sujetEval)
+  }
+
+  /**
+   * Ouvre la modale
+   * @param type peut être 'choix' ou 'refaire'
+   */
+  ouvrirModal(type: string) {
+    switch (type) {
+      case 'confirmation':
+        this.modal.style.display = "block";
+        break;
+      case 'choix':
+        this.modalChoix.style.display = "block";
+        break;
+      default:
+        break;
+    }
   }
 
   /**
    * Ferme la modale
+   * @param type peut être 'choix' ou 'refaire'
    */
-  fermerModal() {
-    this.modal.style.display = "none";
+  fermerModal(type: string) {
+    switch (type) {
+      case 'confirmation':
+        this.modal.style.display = "none";
+        break;
+      case 'choix':
+        this.modalChoix.style.display = "none";
+        break;
+      default:
+        break;
+    }
   }
 
 }
