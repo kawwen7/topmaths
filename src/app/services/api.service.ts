@@ -4,6 +4,19 @@ import { HttpClient } from '@angular/common/http';
 import { User, UserSimplifie } from './user';
 import { Router } from '@angular/router';
 
+interface Message {
+  message: string
+}
+
+interface Nom {
+  nom: string
+}
+
+interface Adjectif {
+  masculin: string,
+  feminin: string
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,19 +24,20 @@ import { Router } from '@angular/router';
 export class ApiService {
   redirectUrl: string = ''
   baseUrl: string = "https://topmaths.fr/api";
+  isloggedIn: boolean
   user: User
   onlineUsers: UserSimplifie[]
   classement: UserSimplifie[]
   onlineNb: number
   feminin: boolean
-  listeMasculins: any
-  listeFeminins: any
-  listeAdjectifs: any
+  listeMasculins: Nom[]
+  listeFeminins: Nom[]
+  listeAdjectifs: Adjectif[]
   pseudoClique: string
   ancienPseudoClique: string
   codeTropheesClique: string
 
-  @Output() majProfil: EventEmitter<any> = new EventEmitter();
+  @Output() profilModifie: EventEmitter<any> = new EventEmitter();
   constructor(private httpClient: HttpClient, private router: Router) {
     this.user = {
       identifiant: '',
@@ -44,6 +58,22 @@ export class ApiService {
     this.pseudoClique = ''
     this.ancienPseudoClique = ''
     this.codeTropheesClique = ''
+    this.listeMasculins = []
+    this.listeFeminins = []
+    this.listeAdjectifs = []
+    this.isloggedIn = false
+    this.surveilleModificationsDuProfil()
+  }
+
+  /**
+   * Surveille les modifications du profil
+   * À chaque modification du profil :
+   * - Met à jour la dernière action
+   */
+  surveilleModificationsDuProfil() {
+    this.profilModifie.subscribe(response => {
+      this.majLastAction()
+    })
   }
 
   /**
@@ -65,13 +95,11 @@ export class ApiService {
         }
       ]
     } else {
-      this.pullClassement().pipe(first()).subscribe(
-        data => {
-          this.classement = data
-        },
-        error => {
-          console.log(error)
-        });
+      this.httpClient.get<UserSimplifie[]>(this.baseUrl + '/classement.php').subscribe(usersSimplifies => {
+        this.classement = usersSimplifies
+      }, error => {
+        console.log(error)
+      })
     }
   }
 
@@ -95,44 +123,25 @@ export class ApiService {
         }
       ]
     } else {
-      this.recupOnlineNb()
-      this.whosonline().pipe(first()).subscribe(
-        UsersSimplifies => {
-          this.onlineUsers = UsersSimplifies
-        },
-        error => {
-          console.log(error)
-        });
+      this.httpClient.get<UserSimplifie[]>(this.baseUrl + '/whosonline.php').subscribe(userSimplifies => {
+        const infos = userSimplifies.pop() // Le dernier usersSimplifie n'en est pas un mais sert juste à récupérer des infos comme le nombre de personnes en ligne
+        if (typeof (infos) != 'undefined') this.onlineNb = parseInt(infos.pseudo)
+        this.onlineUsers = userSimplifies
+      }, error => {
+        console.log(error)
+      })
     }
   }
 
   /**
-   * Récupère la liste des utilisateurs de la base de données.
-   * @returns liste des utilisateurs classés par score
-   */
-  public pullClassement() {
-    return this.httpClient.post<any>(this.baseUrl + '/classement.php', {})
-      .pipe(map(UsersSimplifies => {
-        return UsersSimplifies;
-      }));
-  }
-
-  /**
-   * Récupère la liste des utilisateurs en ligne de la base de données.
-   * @returns liste des utilisateurs en ligne
-   */
-  public whosonline() {
-    return this.httpClient.post<any>(this.baseUrl + '/whosonline.php', {})
-      .pipe(map(UsersSimplifies => {
-        return UsersSimplifies
-      }));
-  }
-
-  /**
-   * Passe l'identifiant à l'API pour tenter de se connecter.
-   * Si connecté, on redirige vers la page qu'on a voulu accéder ou vers la page profil.
+   * Envoie l'identifiant par message post à login.php pour s'identifier
    * Si pas connecté, on renvoie vers erreurLogin pour tenter de créer l'identifiant.
-   * @param identifiant
+   * Si connecté :
+   * - Met à jour le lastLogin
+   * - Crée/modifie un token dans le localstorage avec l'identifiant du premier utilisateur correspondant dans la bdd
+   * - Fire un event pour prévenir de la connexion
+   * - Redirige vers la page qu'on a voulu accéder ou vers la page profil.
+   * @param identifiant identifiant à chercher dans la bdd
    */
   login(identifiant: string, redirige?: boolean) {
     if (isDevMode()) {
@@ -150,14 +159,16 @@ export class ApiService {
       }
       this.setToken(this.user.identifiant);
     } else {
-      this.userlogin(identifiant).pipe(first()).subscribe(
-        data => {
-          if (redirige) {
-            const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
-            this.router.navigate([redirect]);
-          }
-          this.majProfil.emit({ profilCharge: true })
-        },
+      this.httpClient.post<User[]>(this.baseUrl + '/login.php', { identifiant }).subscribe(users => {
+        this.isloggedIn = true
+        this.setToken(users[0].identifiant);
+        this.user = users[0]
+        this.profilModifie.emit(true)
+        if (redirige) {
+          const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
+          this.router.navigate([redirect]);
+        }
+      },
         error => {
           this.erreurLogin(identifiant)
         });
@@ -187,13 +198,13 @@ export class ApiService {
         codeTrophees: '',
         tropheesVisibles: ''
       }
-      this.userregistration(user).pipe(first()).subscribe(
-        data => {
-          this.login(identifiant, true)
-        },
-        error => {
-          this.erreurRegistration('userregistration', error['message'])
-        });
+      this.httpClient.post<User[]>(this.baseUrl + '/register.php', user).subscribe(users => {
+        this.setToken(users[0].identifiant);
+        this.user = users[0]
+        this.router.navigate(['/profil'])
+      }, error => {
+        this.erreurRegistration('userregistration', error['message'])
+      });
     }
   }
 
@@ -231,38 +242,6 @@ export class ApiService {
   onlyLettersAndNumbers(str: string) {
     return /^[A-Za-z0-9]*$/.test(str);
   }
-  /**
-   * Envoie l'identifiant par message post à login.php pour s'identifier
-   * Crée/modifie un token dans le localstorage avec l'identifiant du premier utilisateur correspondant dans la bdd
-   * Fire un event pour prévenir de la connexion
-   * Renvoie l'array des utilisateurs trouvés
-   * @param identifiant identifiant à chercher dans la bdd
-   * @returns User[] correspondants dans la bdd
-   */
-  public userlogin(identifiant: string) {
-    return this.httpClient.post<any>(this.baseUrl + '/login.php', { identifiant })
-      .pipe(map(Users => {
-        this.setToken(Users[0].identifiant);
-        this.user = Users[0]
-        // Après avoir récupéré le profil utilisateur, on met à jour le lastLogin et on récupère la liste des utilisateurs en ligne
-        this.majLastLogin()
-        this.majLastAction()
-        this.recupWhosOnline()
-        return Users;
-      }));
-  }
-
-  /**
-   * Crée une nouvelle ligne user dans la bdd
-   * @param user à écrire dans la bdd
-   * @returns User créé
-   */
-  public userregistration(user: User) {
-    return this.httpClient.post<any>(this.baseUrl + '/register.php', user)
-      .pipe(map(User => {
-        return User;
-      }));
-  }
 
   /**
    * Met à jour this.feminin
@@ -289,26 +268,17 @@ export class ApiService {
   }
 
   /**
-   * Récupère le nombre de personnes ayant effectué une action au cours des 10 dernières minutes (changement de page ou clic que Nouvelles Données)
-   */
-  recupOnlineNb() {
-    this.httpClient.get(this.baseUrl + '/onlineNb.php').subscribe((data: any) => {
-      this.onlineNb = parseInt(data.onlineNb)
-    })
-  }
-
-  /**
    * Récupère les listes de noms masculins, de noms féminins et d'adjectifs
    */
   recupereDonneesPseudos() {
-    this.httpClient.get('assets/data/nomsMasculins.json').subscribe((data: any) => {
-      this.listeMasculins = data
+    this.httpClient.get<Nom[]>('assets/data/nomsMasculins.json').subscribe(noms => {
+      this.listeMasculins = noms
     })
-    this.httpClient.get('assets/data/nomsFeminins.json').subscribe((data: any) => {
-      this.listeFeminins = data
+    this.httpClient.get<Nom[]>('assets/data/nomsFeminins.json').subscribe(noms => {
+      this.listeFeminins = noms
     })
-    this.httpClient.get('assets/data/adjectifs.json').subscribe((data: any) => {
-      this.listeAdjectifs = data
+    this.httpClient.get<Adjectif[]>('assets/data/adjectifs.json').subscribe(adjectifs => {
+      this.listeAdjectifs = adjectifs
     })
   }
 
@@ -318,12 +288,7 @@ export class ApiService {
    */
   majAvatar(lienAvatar: string) {
     this.user.lienAvatar = lienAvatar
-    this.update('lienAvatar').pipe(first()).subscribe(
-      data => {
-      },
-      error => {
-        console.log(error)
-      });
+    this.majProfil()
   }
 
   /**
@@ -332,12 +297,7 @@ export class ApiService {
    */
   majPseudo(pseudo: string) {
     this.user.pseudo = pseudo
-    this.update('pseudo').pipe(first()).subscribe(
-      data => {
-      },
-      error => {
-        console.log(error)
-      });
+    this.majProfil()
   }
 
   /**
@@ -347,20 +307,8 @@ export class ApiService {
    * @param score à ajouter 
    */
   majScore(score: string) {
-    this.userlogin(this.user.identifiant).pipe(first()).subscribe(
-      data => {
-        this.user.score = (parseInt(data[0].score) + parseInt(score)).toString()
-        this.update('score').pipe(first()).subscribe(
-          data => {
-          },
-          error => {
-            console.log(error)
-          });
-      },
-      error => {
-        console.log(error)
-      });
-
+    this.user.score = (parseInt(this.user.score) + parseInt(score)).toString()
+    this.majProfil()
   }
 
   /**
@@ -369,46 +317,58 @@ export class ApiService {
    */
   majScores(scores: string) {
     this.user.scores = scores
-    this.update('scores').pipe(first()).subscribe(
-      data => {
-        const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
-        this.router.navigate([redirect]);
-      },
-      error => {
-        console.log(error)
-      });
-  }
-
-  /**
-   * Modifie la date de dernière connexion
-   */
-  majLastLogin() {
-    this.update('lastLogin').pipe(first()).subscribe(
-      data => {
-      },
-      error => {
-        console.log(error)
-      });
+    this.majProfil()
   }
 
   /**
    * Modifie la date de dernière action
+   * Met à jour la liste d'utilisateurs en ligne et leur nombre
    */
   majLastAction() {
-    this.update('lastAction').pipe(first()).subscribe(
-      data => {
-      },
-      error => {
-        console.log(error)
-      });
+    if (isDevMode()) {
+      this.onlineNb = 2
+      this.onlineUsers = [
+        {
+          lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id1.svg',
+          pseudo: 'lapin bleu',
+          score: '17',
+          codeTrophees: ''
+        }, {
+          lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id2.svg',
+          pseudo: 'Pierre verte',
+          score: '38',
+          codeTrophees: ''
+        }
+      ]
+    } else {
+      if (typeof (this.user.identifiant) != 'undefined' && this.user.identifiant != '') {
+        this.httpClient.post<UserSimplifie[]>(this.baseUrl + `/actionUtilisateur.php`, { identifiant: this.user.identifiant }).subscribe(userSimplifies => {
+          const infos = userSimplifies.pop() // Le dernier usersSimplifie n'en est pas un mais sert juste à récupérer des infos comme le nombre de personnes en ligne
+          if (typeof (infos) != 'undefined') this.onlineNb = parseInt(infos.pseudo)
+          this.onlineUsers = userSimplifies
+        },
+          error => {
+            console.log(error)
+          });
+      }
+    }
   }
 
+
   /**
-   * Modifie la date de dernière action
+   * Supprime le token de clé 'identifiant' utilisé pour vérifier si l'utilisateur est connecté.
+   * Supprime aussi le token de clé 'lienAvatar'
+   * Toggle les profilbtn et loginbtn.
+   * Renvoie vers l'accueil.
    */
-  majLogout() {
-    this.update('logout').pipe(first()).subscribe(
+  logout() {
+    this.httpClient.post(this.baseUrl + `/logout.php`, this.user).subscribe(
       data => {
+        this.deleteToken()
+        this.user.identifiant = ''
+        this.user.lienAvatar = ''
+        this.isloggedIn = false
+        this.router.navigate(['accueil'])
       },
       error => {
         console.log(error)
@@ -420,13 +380,7 @@ export class ApiService {
    */
   majVisible(visible: string) {
     this.user.visible = visible
-    this.update('visible').pipe(first()).subscribe(
-      data => {
-        this.recupWhosOnline()
-      },
-      error => {
-        console.log(error)
-      });
+    this.majProfil()
   }
 
   /**
@@ -434,13 +388,7 @@ export class ApiService {
    */
   majTropheesVisibles(visible: string) {
     this.user.tropheesVisibles = visible
-    this.update('tropheesVisibles').pipe(first()).subscribe(
-      data => {
-        this.recupWhosOnline()
-      },
-      error => {
-        console.log(error)
-      });
+    this.majProfil()
   }
 
   /**
@@ -449,12 +397,7 @@ export class ApiService {
    */
   majLienTrophees(codeTrophees: string) {
     this.user.codeTrophees = codeTrophees
-    this.update('codeTrophees').pipe(first()).subscribe(
-      data => {
-      },
-      error => {
-        console.log(error)
-      });
+    this.majProfil()
   }
 
   /**
@@ -462,9 +405,9 @@ export class ApiService {
    * @param message
    */
   envoiMailEval(codeTrophee: string, sujetEval: string) {
-    this.httpClient.post<any>(this.baseUrl + `/envoiMailEval.php`, { codeTrophee: codeTrophee, sujetEval: sujetEval }).pipe(first()).subscribe(
-      data => {
-        if (data['message'] == 'mail envoye') {
+    this.httpClient.post<Message>(this.baseUrl + `/envoiMailEval.php`, { codeTrophee: codeTrophee, sujetEval: sujetEval }).pipe(first()).subscribe(
+      message => {
+        if (message.message == 'mail envoye') {
           alert('Ton message a bien été envoyé !\nM. Valmont t\'enverra un message sur Pronote pour te dire quoi réviser.')
         } else {
           alert('Il semble que le mail ait été envoyé')
@@ -477,14 +420,17 @@ export class ApiService {
   }
 
   /**
-   * Modifie le lienAvatar lié à l'identifiant dans la base de données
-   * @returns 
+   * Met à jour le profil de l'utilisateur
    */
-  update(column: string) {
-    return this.httpClient.post<any>(this.baseUrl + `/update${column}.php`, this.user)
-      .pipe(map(User => {
-        return User;
-      }));
+  majProfil() {
+    this.httpClient.post<User[]>(this.baseUrl + `/majProfil.php`, this.user).subscribe(
+      users => {
+        this.user = users[0]
+        this.profilModifie.emit(true)
+      },
+      error => {
+        console.log(error)
+      });
   }
 
   /**
@@ -516,11 +462,12 @@ export class ApiService {
    * Sinon, renvoie false
    * @returns boolean
    */
-  isLoggedIn() {
+  checkLoggedIn() {
     const usertoken = this.getToken();
     if (usertoken != null) {
-      return true
+      this.isloggedIn = true
+    } else {
+      this.isloggedIn = false
     }
-    return false;
   }
 }

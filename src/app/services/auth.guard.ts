@@ -29,7 +29,7 @@ export class AuthguardGuard implements CanActivate {
    * @returns vrai s'il a le droit de l'emprunter, faux sinon
    */
   isLogin(routeurl: string) {
-    if (this.dataService.isLoggedIn()) {
+    if (this.dataService.isloggedIn) {
       return true;
     }
     this.dataService.redirectUrl = routeurl;

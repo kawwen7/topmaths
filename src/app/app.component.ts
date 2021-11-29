@@ -32,10 +32,11 @@ export class AppComponent implements OnDestroy {
     this.event$ = this.router.events.subscribe((event: NavigationEvent) => {
       if (event instanceof NavigationStart) {
         this.majPseudoClique()
-        if (!isDevMode() && this.dataService.isLoggedIn()) {
-          this.dataService.majLastAction()
+        if (this.dataService.isloggedIn) {
+          this.dataService.majLastAction() // le whosOnline est compris dans le majLastAction
+        } else {
+          this.dataService.recupWhosOnline()
         }
-        this.dataService.recupWhosOnline()
       }
     });
   }
@@ -83,19 +84,5 @@ export class AppComponent implements OnDestroy {
         }
       }
     });
-  }
-
-  /**
-   * Supprime le token de clé 'identifiant' utilisé pour vérifier si l'utilisateur est connecté.
-   * Supprime aussi le token de clé 'lienAvatar'
-   * Toggle les profilbtn et loginbtn.
-   * Renvoie vers l'accueil.
-   */
-  logout() {
-    this.dataService.majLogout()
-    this.dataService.deleteToken()
-    this.dataService.user.identifiant = ''
-    this.dataService.user.lienAvatar = ''
-    this.router.navigate(['accueil'])
   }
 }
