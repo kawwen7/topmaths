@@ -425,7 +425,7 @@ export class ApiService {
   majProfil() {
     this.httpClient.post<User[]>(this.baseUrl + `/majProfil.php`, this.user).subscribe(
       users => {
-        this.user = users[0]
+        console.log(users[0])
         this.profilModifie.emit(true)
       },
       error => {
