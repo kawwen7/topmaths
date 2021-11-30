@@ -1,6 +1,6 @@
 <h1 class="title is-1 has-text-centered" *ngIf="annee != '' && dataService.pseudoClique == ''" >Trophées de l'année de {{ annee }}</h1>
 <h1 class="title is-1 has-text-centered" *ngIf="dataService.pseudoClique != ''" >Trophées de {{ dataService.pseudoClique }}</h1>
-<div *ngIf="annee == ''" class="has-text-centered">
+<div *ngIf="annee == '' && timeoutExpire" class="has-text-centered">
   <h1 class="title is-1">Cette page n'est plus disponible</h1>
   <a [routerLink]="['/accueil']">
     <button class="button is-large is-info is-outlined" style="padding: 50px;">
@@ -34,7 +34,7 @@
   </div>
 </div>
 <div><br><br><br></div>
-<div class="has-text-centered" style="font-size: small">Contrairement au reste du site, les images des trophées ne sont pas sous licence libre.<br>
+<div *ngIf="annee != ''" class="has-text-centered" style="font-size: small">Contrairement au reste du site, les images des trophées ne sont pas sous licence libre.<br>
 Si vous souhaitez les réutiliser, vous pouvez regarder <a href="https://www.shutterstock.com/g/babysofja" target="_blank" rel="noopener noreferrer">ici</a>.</div>
 
 

@@ -22,6 +22,7 @@ export class TropheesComponent implements OnInit {
   texteModaleChoix: string
   sujetEval: string
   peutDemanderRefaireEval: boolean
+  timeoutExpire: boolean
 
   constructor(public http: HttpClient, private route: ActivatedRoute, public dataService: ApiService) {
     this.codeTrophee = ''
@@ -32,12 +33,16 @@ export class TropheesComponent implements OnInit {
     this.texteModaleChoix = ''
     this.sujetEval = ''
     this.peutDemanderRefaireEval = false
+    this.timeoutExpire = false
   }
 
   ngOnInit(): void {
     this.observeChangementsDeRoute()
     this.modal = document.getElementById("modaleRefaireEvaluation")
     this.modalChoix = document.getElementById("modaleChoixCodeTrophee")
+    setTimeout(() => {
+      this.timeoutExpire = true
+    }, 3000);
   }
 
   /**
