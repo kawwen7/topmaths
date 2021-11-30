@@ -12,12 +12,12 @@
       </div>
     </div>
   </div>
-  <div class="box" *ngIf="calculsMentaux[0] != null && calculsMentaux[0].reference != ''">
+  <div class="box" *ngIf="calculsMentaux[0] != null && calculsMentaux[0].reference != ''; else divPasDeCalculMental">
     <h2 class="title is-3">Calcul Mental
       <i *ngIf="calculsMentaux[0] != null && calculsMentaux.length == 1 && calculsMentaux[0].niveaux.length == 1"
         class="far fa-copy" (click)="copierLien(calculsMentaux[0].niveaux[0])"></i>
     </h2>
-    <div *ngIf="presenceCalculMental; else divPasDeCalculMental">
+    <div *ngIf="presenceCalculMental">
       <div *ngFor="let calculMental of calculsMentaux; index as i">
         <p *ngIf="calculMental.pageExiste; else calculMentalSansLien">Dans cette séquence, le calcul
           mental porte sur :<br>
@@ -49,8 +49,14 @@
         </div>
       </div>
     </div>
-    <ng-template #divPasDeCalculMental><br>{{messagePasDeCalculMental}}</ng-template>
   </div>
+  <ng-template #divPasDeCalculMental>
+    <div *ngIf="calculsMentaux[0].niveaux[0].commentaire != ''" class="box">
+      <h2 class="title is-3">Calcul Mental</h2>
+      <br>
+      {{calculsMentaux[0].niveaux[0].commentaire}}
+    </div>
+  </ng-template>
   <div class="box" *ngIf="questionsFlash[0] != null && questionsFlash[0].slug != ''">
     <h2 class="title is-3">Questions Flash</h2>
     <p>Dans cette séquence, une question flash porte sur l’un des objectifs ci-dessus et les deux autres portent sur :
