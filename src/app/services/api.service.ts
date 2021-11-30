@@ -37,7 +37,7 @@ export class ApiService {
   ancienPseudoClique: string
   codeTropheesClique: string
 
-  @Output() profilModifie: EventEmitter<any> = new EventEmitter();
+  @Output() profilModifie: EventEmitter<string[]> = new EventEmitter();
   constructor(private httpClient: HttpClient, private router: Router) {
     this.user = {
       identifiant: '',
@@ -71,7 +71,7 @@ export class ApiService {
    * - Met à jour la dernière action
    */
   surveilleModificationsDuProfil() {
-    this.profilModifie.subscribe(response => {
+    this.profilModifie.subscribe(valeursModifiees => {
       this.majLastAction()
     })
   }
@@ -159,13 +159,33 @@ export class ApiService {
       }
       this.setToken(this.user.identifiant);
       this.isloggedIn = true
-      this.profilModifie.emit(true)
+      this.profilModifie.emit([
+        'identifiant',
+        'lienAvatar',
+        'scores',
+        'lastLogin',
+        'lastAction',
+        'visible',
+        'pseudo',
+        'score',
+        'codeTrophees',
+        'tropheesVisibles'])
     } else {
       this.httpClient.post<User[]>(this.baseUrl + '/login.php', { identifiant }).subscribe(users => {
         this.isloggedIn = true
         this.setToken(users[0].identifiant);
         this.user = users[0]
-        this.profilModifie.emit(true)
+        this.profilModifie.emit([
+          'identifiant',
+          'lienAvatar',
+          'scores',
+          'lastLogin',
+          'lastAction',
+          'visible',
+          'pseudo',
+          'score',
+          'codeTrophees',
+          'tropheesVisibles'])
         if (redirige) {
           const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
           this.router.navigate([redirect]);
@@ -290,7 +310,7 @@ export class ApiService {
    */
   majAvatar(lienAvatar: string) {
     this.user.lienAvatar = lienAvatar
-    this.majProfil()
+    this.majProfil(['lienAvatar'])
   }
 
   /**
@@ -299,7 +319,7 @@ export class ApiService {
    */
   majPseudo(pseudo: string) {
     this.user.pseudo = pseudo
-    this.majProfil()
+    this.majProfil(['pseudo'])
   }
 
   /**
@@ -310,7 +330,7 @@ export class ApiService {
    */
   majScore(score: string) {
     this.user.score = (parseInt(this.user.score) + parseInt(score)).toString()
-    this.majProfil()
+    this.majProfil(['score'])
   }
 
   /**
@@ -319,7 +339,7 @@ export class ApiService {
    */
   majScores(scores: string) {
     this.user.scores = scores
-    this.majProfil()
+    this.majProfil(['scores'])
   }
 
   /**
@@ -382,15 +402,15 @@ export class ApiService {
    */
   majVisible(visible: string) {
     this.user.visible = visible
-    this.majProfil()
+    this.majProfil(['visible'])
   }
 
   /**
-   * @param visible peut être 'oui' ou 'non'
+   * @param tropheesVisibles peut être 'oui' ou 'non'
    */
-  majTropheesVisibles(visible: string) {
-    this.user.tropheesVisibles = visible
-    this.majProfil()
+  majTropheesVisibles(tropheesVisibles: string) {
+    this.user.tropheesVisibles = tropheesVisibles
+    this.majProfil(['tropheesVisibles'])
   }
 
   /**
@@ -399,7 +419,7 @@ export class ApiService {
    */
   majLienTrophees(codeTrophees: string) {
     this.user.codeTrophees = codeTrophees
-    this.majProfil()
+    this.majProfil(['codeTrophees'])
   }
 
   /**
@@ -424,14 +444,14 @@ export class ApiService {
   /**
    * Met à jour le profil de l'utilisateur
    */
-  majProfil() {
+  majProfil(valeursModifiees: string[]) {
     if (isDevMode()) {
-      this.profilModifie.emit(true)
+      this.profilModifie.emit(valeursModifiees)
     } else {
       this.httpClient.post<User[]>(this.baseUrl + `/majProfil.php`, this.user).subscribe(
         users => {
           console.log(users[0])
-          this.profilModifie.emit(true)
+          this.profilModifie.emit(valeursModifiees)
         },
         error => {
           console.log(error)

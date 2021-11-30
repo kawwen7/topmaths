@@ -124,9 +124,11 @@ export class ProfilComponent implements OnInit {
     this.derniereConnexion = this.dateDeDerniereConnexion()
     this.enCoursDeModif = ''
     this.modifTerminee = ''
-    this.dataService.profilModifie.subscribe(response => {
-      this.modifTerminee = this.enCoursDeModif
-      this.enCoursDeModif = ''
+    this.dataService.profilModifie.subscribe(valeursModifiees => {
+      if (valeursModifiees.includes('scores') || valeursModifiees.includes('visible') || valeursModifiees.includes('tropheesVisibles')) {
+        this.modifTerminee = this.enCoursDeModif
+        this.enCoursDeModif = ''
+      }
     })
   }
 

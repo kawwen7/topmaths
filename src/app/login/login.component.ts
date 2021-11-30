@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit {
     this.errSpChar = false
     this.shake = false
     this.surveilleChamp()
-    this.dataService.profilModifie.subscribe(response => {
-      this.router.navigate(['/profil'])
+    this.dataService.profilModifie.subscribe(valeursModifiees => {
+      if(valeursModifiees.includes('identifiant')) this.router.navigate(['/profil'])
     })
   }
 
