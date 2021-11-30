@@ -4,7 +4,7 @@ import { ApiService } from '../services/api.service';
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.component.html',
-  styleUrls: ['../../assets/css/mystyles.css']
+  styleUrls: ['../../assets/css/bulma.css']
 })
 export class AccueilComponent implements OnInit {
   portrait: boolean

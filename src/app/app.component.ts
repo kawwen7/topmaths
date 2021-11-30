@@ -5,7 +5,7 @@ import { ApiService } from './services/api.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['../assets/css/mystyles.css'],
+  styleUrls: ['../assets/css/bulma.css', '../assets/css/topmaths.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnDestroy {

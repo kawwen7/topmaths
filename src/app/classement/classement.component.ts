@@ -6,7 +6,7 @@ import { UserSimplifie } from '../services/user';
 @Component({
   selector: 'app-classement',
   templateUrl: './classement.component.html',
-  styleUrls: ['../../assets/css/mystyles.css']
+  styleUrls: ['../../assets/css/bulma.css']
 })
 export class ClassementComponent implements OnInit {
 

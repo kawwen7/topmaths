@@ -37,7 +37,7 @@ interface QuestionFlash {
 @Component({
   selector: 'app-sequence',
   templateUrl: './sequence.component.html',
-  styleUrls: ['../../assets/css/mystyles.css']
+  styleUrls: ['../../assets/css/bulma.css']
 })
 export class SequenceComponent implements OnInit {
   reference: string

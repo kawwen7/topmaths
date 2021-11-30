@@ -6,7 +6,7 @@ import { UserSimplifie } from '../services/user';
 @Component({
   selector: 'app-whosonline',
   templateUrl: './whosonline.component.html',
-  styleUrls: ['../../assets/css/mystyles.css']
+  styleUrls: ['../../assets/css/bulma.css']
 })
 export class WhosonlineComponent implements OnInit {
 

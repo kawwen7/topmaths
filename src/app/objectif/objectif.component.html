@@ -33,7 +33,7 @@
         <iframe class="has-ratio" [src]="exercice.lien | safe" allowfullscreen></iframe>
       </div>
       <span *ngIf="exercice.bonneReponse">
-        <h3 [ngClass]="{'huge': true, 'moveUp': exercice.bonneReponse}">{{messageScore}}</h3>
+        <h3 [ngClass]="{'pleinEcran': true, 'moveUp': exercice.bonneReponse}" style="font-size: 1000%;">{{messageScore}}</h3>
       </span>
     </div>
     <div><br></div>
