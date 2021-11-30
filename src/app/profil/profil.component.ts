@@ -35,6 +35,8 @@ export class ProfilComponent implements OnInit {
   modaleAvatar: any
   derniereConnexion: string
   modalePseudo: any
+  enCoursDeModif: string
+  modifTerminee: string
 
   constructor(private fb: FormBuilder, public http: HttpClient, public appComponent: AppComponent, public dataService: ApiService, private router: Router) {
     this.angForm = this.fb.group({
@@ -120,6 +122,12 @@ export class ProfilComponent implements OnInit {
     this.pseudo = dataService.user.pseudo
     this.lienAvatar = this.dataService.user.lienAvatar
     this.derniereConnexion = this.dateDeDerniereConnexion()
+    this.enCoursDeModif = ''
+    this.modifTerminee = ''
+    this.dataService.profilModifie.subscribe(response => {
+      this.modifTerminee = this.enCoursDeModif
+      this.enCoursDeModif = ''
+    })
   }
 
   ngOnInit(): void {

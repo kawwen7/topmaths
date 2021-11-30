@@ -158,6 +158,8 @@ export class ApiService {
         tropheesVisibles: ''
       }
       this.setToken(this.user.identifiant);
+      this.isloggedIn = true
+      this.profilModifie.emit(true)
     } else {
       this.httpClient.post<User[]>(this.baseUrl + '/login.php', { identifiant }).subscribe(users => {
         this.isloggedIn = true
@@ -423,14 +425,18 @@ export class ApiService {
    * Met à jour le profil de l'utilisateur
    */
   majProfil() {
-    this.httpClient.post<User[]>(this.baseUrl + `/majProfil.php`, this.user).subscribe(
-      users => {
-        console.log(users[0])
-        this.profilModifie.emit(true)
-      },
-      error => {
-        console.log(error)
-      });
+    if (isDevMode()) {
+      this.profilModifie.emit(true)
+    } else {
+      this.httpClient.post<User[]>(this.baseUrl + `/majProfil.php`, this.user).subscribe(
+        users => {
+          console.log(users[0])
+          this.profilModifie.emit(true)
+        },
+        error => {
+          console.log(error)
+        });
+    }
   }
 
   /**

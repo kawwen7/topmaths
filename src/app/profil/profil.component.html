@@ -27,34 +27,71 @@
     <br><br>
     <!-- Scores -->
     <button *ngIf="dataService.user.scores == 'actives'" type="submit" class="button is-danger is-outlined"
-      (click)="dataService.majScores('desactives')">Désactiver les scores</button>
-    <button *ngIf="dataService.user.scores != 'actives'" class="button is-danger">Les scores sont
-      désactivés</button>
+      (click)="dataService.majScores('desactives'); enCoursDeModif = 'scores'; modifTerminee = ''">
+      Désactiver les scores
+    </button>
+    <button *ngIf="dataService.user.scores != 'actives'" class="button is-danger">
+      Les scores sont désactivés
+    </button>
     &nbsp;
     <button *ngIf="dataService.user.scores != 'actives'" type="submit" class="button is-success is-outlined"
-      (click)="dataService.majScores('actives')">Activer les scores</button>
-    <button *ngIf="dataService.user.scores == 'actives'" class="button is-success">Les scores sont
-      activés</button>
+      (click)="dataService.majScores('actives'); enCoursDeModif = 'scores'; modifTerminee = ''">Activer les scores</button>
+    <button *ngIf="dataService.user.scores == 'actives'" class="button is-success">
+      Les scores sont activés
+    </button>
+    &nbsp;
+    <figure *ngIf="enCoursDeModif == 'scores'" class="image is-32x32 is-inline-block">
+      <img [src]="'assets/img/Loading.gif'">
+    </figure>
+    <figure *ngIf="modifTerminee == 'scores'" class="image is-32x32 is-inline-block">
+      <i class="fas fa-2x fa-check"></i>
+    </figure>
     <br><br>
     <!-- Anonymat -->
     <button *ngIf="dataService.user.visible == 'oui'" type="submit" class="button is-danger is-outlined"
-      (click)="dataService.majVisible('non')">Ne pas apparaître dans les personnes en ligne</button>
-    <button *ngIf="dataService.user.visible != 'oui'" class="button is-danger">Tu n'apparais pas dans les
-      personnes en ligne</button>
+      (click)="dataService.majVisible('non'); enCoursDeModif = 'visible'; modifTerminee = ''">Ne pas apparaître dans les personnes en ligne</button>
+    <button *ngIf="dataService.user.visible != 'oui'" class="button is-danger">
+      Tu n'apparais pas dans les personnes en ligne
+    </button>
     &nbsp;
     <button *ngIf="dataService.user.visible != 'oui'" type="submit" class="button is-success is-outlined"
-      (click)="dataService.majVisible('oui')">Apparaître dans les personnes en ligne</button>
-    <button *ngIf="dataService.user.visible == 'oui'" class="button is-success">Tu apparais dans les personnes en
-      ligne</button>
+      (click)="dataService.majVisible('oui'); enCoursDeModif = 'visible'; modifTerminee = ''">
+      Apparaître dans les personnes en ligne
+    </button>
+    <button *ngIf="dataService.user.visible == 'oui'" class="button is-success">
+      Tu apparais dans les personnes en ligne
+    </button>
+    &nbsp;
+    <figure *ngIf="enCoursDeModif == 'visible'" class="image is-32x32 is-inline-block">
+      <img [src]="'assets/img/Loading.gif'">
+    </figure>
+    <figure *ngIf="modifTerminee == 'visible'" class="image is-32x32 is-inline-block">
+      <i class="fas fa-2x fa-check"></i>
+    </figure>
     <br><br>
     <!-- Trophées -->
     <button *ngIf="dataService.user.tropheesVisibles == 'oui'" type="submit" class="button is-danger is-outlined"
-      (click)="dataService.majTropheesVisibles('non')">Cacher ses trophées aux autres utilisateurs</button>
-    <button *ngIf="dataService.user.tropheesVisibles != 'oui'" class="button is-danger">Tes trophées sont cachés aux autres utilisateurs</button>
+      (click)="dataService.majTropheesVisibles('non'); enCoursDeModif = 'trophees'; modifTerminee = ''">
+      Cacher ses trophées aux autres utilisateurs
+    </button>
+    <button *ngIf="dataService.user.tropheesVisibles != 'oui'" class="button is-danger">
+      Tes trophées sont cachés aux autres utilisateurs
+    </button>
     &nbsp;
     <button *ngIf="dataService.user.tropheesVisibles != 'oui'" type="submit" class="button is-success is-outlined"
-      (click)="dataService.majTropheesVisibles('oui')">Montrer ses trophées aux autres utilisateurs</button>
-    <button *ngIf="dataService.user.tropheesVisibles == 'oui'" class="button is-success">Tes trophées sont visibles par les autres utilisateurs</button>
+      (click)="dataService.majTropheesVisibles('oui'); enCoursDeModif = 'trophees'; modifTerminee = ''">
+      Montrer ses trophées aux autres utilisateurs
+    </button>
+    <button *ngIf="dataService.user.tropheesVisibles == 'oui'" class="button is-success">
+      Tes trophées sont visibles par les autres utilisateurs
+    </button>
+    &nbsp;
+    <figure *ngIf="enCoursDeModif == 'trophees'" class="image is-32x32 is-inline-block">
+      <img [src]="'assets/img/Loading.gif'">
+    </figure>
+    <figure *ngIf="modifTerminee == 'trophees'" class="image is-32x32 is-inline-block">
+      <i class="fas fa-2x fa-check"></i>
+    </figure>
     <br><br>
     <!-- Créer le lien vers les trophées -->
     <div class="columns is-centered">
