@@ -3,24 +3,7 @@ import { Component, OnInit, HostListener, isDevMode } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { ConfettiService } from '../services/confetti.service';
-
-interface Video {
-  titre: string,
-  slug: string,
-  auteur: string,
-  lienAuteur: string,
-  lienVideo: string
-}
-
-interface Exercice {
-  couleur: string,
-  slug: string,
-  graine: string,
-  lien: string,
-  score: string,
-  lienACopier?: string,
-  bonneReponse?: boolean
-}
+import { Niveau, Objectif, Video, Exercice } from '../services/objectifs';
 
 @Component({
   selector: 'app-objectif',
@@ -158,11 +141,11 @@ export class ObjectifComponent implements OnInit {
    */
   modificationDesAttributs() {
     // On cherche dans le json la bonne référence
-    this.http.get('assets/data/objectifs.json').subscribe((data: any) => {
-      data.find((niveau: any) => {
-        return niveau.themes.find((theme: any) => {
-          return theme.sousThemes.find((sousTheme: any) => {
-            return sousTheme.objectifs.find((objectif: any) => {
+    this.http.get<Niveau[]>('assets/data/objectifs.json').subscribe(niveaux => {
+      niveaux.find(niveau => {
+        return niveau.themes.find(theme => {
+          return theme.sousThemes.find(sousTheme => {
+            return sousTheme.objectifs.find(objectif => {
               // Une fois qu'on l'a trouvée, on modifie les attributs
               if (objectif.reference == this.reference) {
                 this.recupereAttributsObjectif(objectif)
@@ -182,7 +165,7 @@ export class ObjectifComponent implements OnInit {
    * Copie tous les objectif.attribut dans les this.attribut en les travaillant un peu éventuellement
    * @param objectif 
    */
-  recupereAttributsObjectif(objectif: any) {
+  recupereAttributsObjectif(objectif: Objectif) {
     this.titre = `${objectif.reference} : ${objectif.titre}`
     this.rappelDuCoursHTML = objectif.rappelDuCoursHTML
     if (objectif.rappelDuCoursImage == '') {

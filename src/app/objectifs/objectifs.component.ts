@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationStart, Event as NavigationEvent } from '@angular/router';
+import { Niveau } from '../services/objectifs';
 
 /**
  * Type d'objet de toutes les lignes qui seront affichées
@@ -68,17 +69,16 @@ export class ObjectifsComponent implements OnInit {
    * Récupère les niveaux, thèmes, sous-thèmes et références de objectifs.json et les ajoute à this.lignes pour pouvoir les afficher
    */
   recupereContenuLignesAAfficher(){
-    this.http.get('assets/data/objectifs.json').subscribe(
-      (data: any) => {
+    this.http.get<Niveau[]>('assets/data/objectifs.json').subscribe(niveaux => {
         this.lignes = [] // va contenir toutes les lignes à afficher.
-        for (const niveau of data) {
-          this.lignes.push({ niveau: niveau.niveau })
+        for (const niveau of niveaux) {
+          this.lignes.push({ niveau: niveau.nom })
           for (const theme of niveau.themes) {
-            this.lignes.push({ niveau: niveau.niveau, theme: theme.nom })
+            this.lignes.push({ niveau: niveau.nom, theme: theme.nom })
             for (const sousTheme of theme.sousThemes) {
-              this.lignes.push({ niveau: niveau.niveau, theme: theme.nom, sousTheme: sousTheme.nom })
+              this.lignes.push({ niveau: niveau.nom, theme: theme.nom, sousTheme: sousTheme.nom })
               for (const objectif of sousTheme.objectifs) {
-                this.lignes.push({niveau: niveau.niveau, theme: theme.nom, sousTheme: sousTheme.nom, reference: objectif.reference, titre: objectif.titre})
+                this.lignes.push({niveau: niveau.nom, theme: theme.nom, sousTheme: sousTheme.nom, reference: objectif.reference, titre: objectif.titre})
               }
             }
           }

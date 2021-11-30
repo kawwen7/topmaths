@@ -10,7 +10,51 @@ interface Projet {
   title: string,
   description: string,
   instructions: string,
-  image: string
+  visibility: string,
+  public: boolean,
+  comments_allowed: boolean,
+  is_published: boolean,
+  author: {
+    id: number,
+    scratchteam: boolean,
+    history: {
+      joined: string
+    },
+    profile: {
+      id: number,
+      images: {
+        "90x90": string,
+        "60x60": string,
+        "55x55": string,
+        "50x50": string,
+        "32x32": string,
+      }
+    }
+  },
+  image: string,
+  images: {
+    "282x218": string,
+    "216x163": string,
+    "200x200": string,
+    "144x108": string,
+    "135x102": string,
+    "100x80": string
+  },
+  history: {
+    created: string,
+    modified: string,
+    shared: string
+  },
+  stats: {
+    views: number,
+    loves: number,
+    favorites: number,
+    remixes: number
+  },
+  remix: {
+    parent: number,
+    root: number
+  }
 }
 
 @Component({
@@ -19,7 +63,7 @@ interface Projet {
   styleUrls: ['../../assets/css/mystyles.css']
 })
 export class JeuxComponent implements OnInit {
-  modal: any
+  modal!: HTMLElement;
   srcModal: string
   projets: Projet[]
   largeurCarte: string
@@ -33,7 +77,12 @@ export class JeuxComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.modal = document.getElementById("myModal")
+    let modale = document.getElementById("myModal")
+    if (modale != null) {
+      this.modal = modale
+    } else {
+      console.log('élément HTML myModal n\'a pas été trouvé')
+    }
     this.recuperationDesProjets()
     this.redimensionneLesCartes()
   }
@@ -52,7 +101,7 @@ export class JeuxComponent implements OnInit {
    * En paysage, on affiche des vignettes de largeur 250px,
    * En portrait, on affiche des vignettes de 100% de la largeur.
    */
-  redimensionneLesCartes(){
+  redimensionneLesCartes() {
     if (innerWidth > innerHeight && !this.paysage) {
       this.largeurCarte = '220px'
       this.paysage = true
@@ -69,7 +118,7 @@ export class JeuxComponent implements OnInit {
    */
   recuperationDesProjets() {
     if (isDevMode()) {
-      this.http.get('/api/users/topmaths-fr/projects').subscribe((projets: any) => {
+      this.http.get<Projet[]>('/api/users/topmaths-fr/projects').subscribe(projets => {
         for (const projet of projets) {
           this.projets.push(projet)
         }
@@ -82,7 +131,7 @@ export class JeuxComponent implements OnInit {
         document.body.appendChild(a);
       })
     } else {
-      this.http.get('assets/data/projetsScratch.json').subscribe((projets: any) => {
+      this.http.get<Projet[]>('assets/data/projetsScratch.json').subscribe(projets => {
         for (const projet of projets) {
           this.projets.push(projet)
         }

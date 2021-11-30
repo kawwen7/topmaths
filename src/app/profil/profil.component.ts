@@ -5,6 +5,7 @@ import { ApiService } from '../services/api.service';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Trophee4e, Trophee5e } from '../services/trophees';
 interface Slider {
   value: number,
   options: Options
@@ -32,9 +33,9 @@ export class ProfilComponent implements OnInit {
   cheveux: Slider
   couleurPeau: Slider
   couleurCheveux: Slider
-  modaleAvatar: any
+  modaleAvatar!: HTMLElement
   derniereConnexion: string
-  modalePseudo: any
+  modalePseudo!: HTMLElement
   enCoursDeModif: string
   modifTerminee: string
 
@@ -133,8 +134,18 @@ export class ProfilComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.modaleAvatar = document.getElementById("modaleAvatar")
-    this.modalePseudo = document.getElementById("modalePseudo")
+    let modale = document.getElementById("modaleAvatar")
+    if (modale != null) {
+      this.modaleAvatar = modale
+    } else {
+      console.log('modaleAvatar non trouvée')
+    }
+    modale = document.getElementById("modalePseudo")
+    if (modale != null) {
+      this.modalePseudo = modale
+    } else {
+      console.log('modalePseudo non trouvée')
+    }
   }
 
   /**
@@ -437,28 +448,28 @@ export class ProfilComponent implements OnInit {
     this.shake = true
     this.errCodeIncorrect = true
     this.dataService.user.codeTrophees = ''
-    this.http.get('assets/data/trophees5e.json').subscribe((object: any) => {
-      for (const key in object) {
-        if (Object.prototype.hasOwnProperty.call(object, key)) {
-          const eleve = object[key]
+    this.http.get<Trophee5e[]>('assets/data/trophees5e.json').subscribe(trophees5e => {
+      for (const key in trophees5e) {
+        if (Object.prototype.hasOwnProperty.call(trophees5e, key)) {
+          const eleve = trophees5e[key]
           if (eleve.reference == codeTrophee) {
             this.shake = false
             this.errCodeIncorrect = false
             this.dataService.majLienTrophees(codeTrophee)
-            return eleve
+            break
           }
         }
       }
     })
-    this.http.get('assets/data/trophees4e.json').subscribe((object: any) => {
-      for (const key in object) {
-        if (Object.prototype.hasOwnProperty.call(object, key)) {
-          const eleve = object[key]
+    this.http.get<Trophee4e[]>('assets/data/trophees4e.json').subscribe(trophees4e => {
+      for (const key in trophees4e) {
+        if (Object.prototype.hasOwnProperty.call(trophees4e, key)) {
+          const eleve = trophees4e[key]
           if (eleve.reference == codeTrophee) {
             this.shake = false
             this.errCodeIncorrect = false
             this.dataService.majLienTrophees(codeTrophee)
-            return eleve
+            break
           }
         }
       }
