@@ -26,6 +26,9 @@ export class LoginComponent implements OnInit {
     this.errSpChar = false
     this.shake = false
     this.surveilleChamp()
+    this.dataService.profilModifie.subscribe(response => {
+      this.router.navigate(['/profil'])
+    })
   }
 
   ngOnInit() {
