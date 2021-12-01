@@ -103,3 +103,25 @@ export class Trophee4e {
     this.obtenirSonBrevetDeTuteur = obtenirSonBrevetDeTuteur
   }
 }
+
+export class Trophee {
+  lien: string
+  description: string
+  cle: string
+  categorie: string
+  nbVertsMin: number
+  nb: number
+  tooltip: string
+  refaire: string
+
+  constructor (lien: string, description: string, cle: string, categorie: string, nbVertsMin: number, nb: number = 0, tooltip: string, refaire: string) {
+    this.lien = lien
+    this.description = description
+    this.cle = cle
+    this.categorie = categorie
+    this.nbVertsMin = nbVertsMin
+    this.nb = nb
+    this.tooltip = tooltip
+    this.refaire = refaire
+  }
+}

@@ -1,6 +1,6 @@
 [
   {
-    "niveau": "5e",
+    "nom": "5e",
     "sequences": [
       {
         "reference": "S5S1",
@@ -284,7 +284,7 @@
       }
     ]
   }, {
-    "niveau": "4e",
+    "nom": "4e",
     "sequences": [
       {
         "reference": "S4S1",
@@ -566,7 +566,7 @@
       }
     ]
   }, {
-    "niveau": "3e",
+    "nom": "3e",
     "sequences": [
       {
         "reference": "S3S1",

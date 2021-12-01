@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
+import { Trophee, Trophee4e, Trophee5e } from '../services/trophees';
+
 
 @Component({
   selector: 'app-trophees',
@@ -12,12 +14,11 @@ export class TropheesComponent implements OnInit {
   codeTrophee: string
   totalEleves: number
   annee: string
-  stats: any
-  eleves: any
-  eleve: any
-  lignes: any[]
-  modal: any
-  modalChoix: any
+  eleves!: Trophee4e[] | Trophee5e[]
+  eleve!: Trophee4e | Trophee5e
+  lignes!: Trophee[][][]
+  modal!: HTMLElement
+  modalChoix!: HTMLElement
   texteModale: string
   texteModaleChoix: string
   sujetEval: string
@@ -28,7 +29,6 @@ export class TropheesComponent implements OnInit {
     this.codeTrophee = ''
     this.totalEleves = 0
     this.annee = ''
-    this.lignes = []
     this.texteModale = ''
     this.texteModaleChoix = ''
     this.sujetEval = ''
@@ -38,8 +38,18 @@ export class TropheesComponent implements OnInit {
 
   ngOnInit(): void {
     this.observeChangementsDeRoute()
-    this.modal = document.getElementById("modaleRefaireEvaluation")
-    this.modalChoix = document.getElementById("modaleChoixCodeTrophee")
+    let modale = document.getElementById("modaleRefaireEvaluation")
+    if (modale != null) {
+      this.modal = modale
+    } else {
+      console.log('élément HTML modaleRefaireEvaluation n\'a pas été trouvé')
+    }
+    modale = document.getElementById("modaleChoixCodeTrophee")
+    if (modale != null) {
+      this.modalChoix = modale
+    } else {
+      console.log('élément HTML modaleChoixCodeTrophee n\'a pas été trouvé')
+    }
     setTimeout(() => {
       this.timeoutExpire = true
     }, 3000);
@@ -67,30 +77,28 @@ export class TropheesComponent implements OnInit {
    * Une fois la référence trouvée, lance la construction de la liste des trophées à afficher
    */
   modificationDesAttributs() {
-    this.http.get('assets/data/trophees5e.json').subscribe((object: any) => {
-      for (const key in object) {
-        if (Object.prototype.hasOwnProperty.call(object, key)) {
-          const eleve = object[key]
+    this.http.get<Trophee5e[]>('assets/data/trophees5e.json').subscribe(trophees5e => {
+      for (const key in trophees5e) {
+        if (Object.prototype.hasOwnProperty.call(trophees5e, key)) {
+          const eleve = trophees5e[key]
           if (eleve.reference == this.codeTrophee) {
             this.eleve = eleve
-            this.eleves = object
+            this.eleves = trophees5e
             this.annee = '5ème'
             this.recupereTrophees5e()
-            return eleve
           }
         }
       }
     })
-    this.http.get('assets/data/trophees4e.json').subscribe((object: any) => {
-      for (const key in object) {
-        if (Object.prototype.hasOwnProperty.call(object, key)) {
-          const eleve = object[key]
+    this.http.get<Trophee4e[]>('assets/data/trophees4e.json').subscribe(trophees4e => {
+      for (const key in trophees4e) {
+        if (Object.prototype.hasOwnProperty.call(trophees4e, key)) {
+          const eleve = trophees4e[key]
           if (eleve.reference == this.codeTrophee) {
             this.eleve = eleve
-            this.eleves = object
+            this.eleves = trophees4e
             this.annee = '4ème'
             this.recupereTrophees4e()
-            return eleve
           }
         }
       }
@@ -322,16 +330,24 @@ export class TropheesComponent implements OnInit {
           let nb: number = 0
           for (const eleve in this.eleves) {
             if (Object.prototype.hasOwnProperty.call(this.eleves, eleve)) {
-              if (trophee['nbVertsMin']) {
-                if (parseInt(this.eleves[eleve][trophee['cle']]) >= trophee['nbVertsMin']) nb++
-              } else {
-                if (parseInt(this.eleves[eleve][trophee['cle']]) >= 1) nb++
+              const cle = trophee.cle
+              if (this.hasKey(this.eleves[eleve], cle)) {
+                let nbVerts : number = 0
+                if (this.hasKey(this.eleves[eleve], cle)) {
+                  const nombreVerts = this.eleves[eleve][cle]
+                  typeof(nombreVerts) == 'string' ? nbVerts = parseInt(nombreVerts) : nbVerts = nombreVerts
+                }
+                if (trophee.nbVertsMin > 0) {
+                  if (nbVerts >= trophee.nbVertsMin) nb++
+                } else {
+                  if (nbVerts >= 1) nb++
+                }
               }
             }
           }
-          trophee['nb'] = nb
-          trophee['tooltip'] = this.tooltip(trophee)
-          trophee['refaire'] = this.refaire(trophee)
+          trophee.nb = nb
+          trophee.tooltip = this.tooltip(trophee)
+          trophee.refaire = this.refaire(trophee)
         }
       }
     }
@@ -344,7 +360,7 @@ export class TropheesComponent implements OnInit {
    * @param nbVertsMin 
    * @returns 
    */
-  trophee(niveau: string, cle: string, categorie: string, nbVertsMin?: number) {
+  trophee(niveau: string, cle: string, categorie: string, nbVertsMin: number = 0) {
     const base = `assets/img/trophees/${niveau}/`
     let nomImage
     let lien
@@ -355,13 +371,7 @@ export class TropheesComponent implements OnInit {
       nomImage = cle
       lien = base + this.obtenuOuPas(cle, 1) + nomImage + '.png'
     }
-    return {
-      lien: lien,
-      description: this.description(categorie, nbVertsMin),
-      cle: cle,
-      categorie: categorie,
-      nbVertsMin: nbVertsMin
-    }
+    return new Trophee(lien, this.description(categorie, nbVertsMin), cle, categorie, nbVertsMin, 0, '', '')
   }
 
   /**
@@ -372,11 +382,16 @@ export class TropheesComponent implements OnInit {
    * @returns dossier d'images de trophées correspondant
    */
   obtenuOuPas(cle: string, nbVertsMin: number) {
-    if (parseInt(this.eleve[cle]) >= nbVertsMin) {
-      return 'obtenus/'
+    if (this.hasKey(this.eleve, cle)) {
+      if (this.eleve[cle] >= nbVertsMin) {
+        return 'obtenus/'
+      } else {
+        return 'vierges/'
+      }
     } else {
-      return 'vierges/'
+      return 'erreurCleTrophee/'
     }
+
   }
 
   /**
@@ -403,10 +418,14 @@ export class TropheesComponent implements OnInit {
    * @param trophee
    * @returns tooltip signalant le nombre de verts manquants pour obtenir le trophée
    */
-  tooltip(trophee: any) {
-    const nbVertsMin = parseInt(trophee['nbVertsMin'])
-    const nbVerts = parseInt(this.eleve[trophee['cle']])
-    const pourcent = Math.floor(parseInt(trophee['nb']) / this.totalEleves * 100)
+  tooltip(trophee: Trophee) {
+    const nbVertsMin = trophee.nbVertsMin
+    let nbVerts : number = 0
+    if (this.hasKey(this.eleve, trophee.cle)) {
+      const nombreVerts = this.eleve[trophee.cle]
+      typeof(nombreVerts) == 'string' ? nbVerts = parseInt(nombreVerts) : nbVerts = nombreVerts
+    }
+    const pourcent = Math.floor(trophee.nb / this.totalEleves * 100)
     let texte: string
     if (pourcent === 0) {
       texte = 'Personne n\'a déjà obtenu ce trophée,<br>'
@@ -441,10 +460,14 @@ export class TropheesComponent implements OnInit {
    * @param trophee 
    * @returns 
    */
-  refaire(trophee: any) {
-    const nbVertsMin = parseInt(trophee['nbVertsMin'])
-    const nbVerts = parseInt(this.eleve[trophee['cle']])
-    const nb = parseInt(trophee['nb'])
+  refaire(trophee: Trophee) {
+    const nbVertsMin = trophee.nbVertsMin
+    let nbVerts : number = 0
+    if (this.hasKey(this.eleve, trophee.cle)) {
+      const nombreVerts = this.eleve[trophee.cle]
+      typeof(nombreVerts) == 'string' ? nbVerts = parseInt(nombreVerts) : nbVerts = nombreVerts
+    }
+    const nb = trophee.nb
     let texte: string = ''
     if (nb > 0 && this.peutDemanderRefaireEval && trophee['cle'] !== 'nombreDeVerts' && ((nbVerts < nbVertsMin) || (typeof (trophee['nbVertsMin']) == 'undefined' && nbVerts === 0))) {
       texte = '<a>Demander à refaire l\'évaluation</a>'
@@ -457,10 +480,14 @@ export class TropheesComponent implements OnInit {
    * Ouvre la modale
    * @param trophee 
    */
-  refaireEvaluation(trophee: any) {
-    const nbVertsMin = parseInt(trophee['nbVertsMin'])
-    const nbVerts = parseInt(this.eleve[trophee['cle']])
-    const nb = parseInt(trophee['nb'])
+  refaireEvaluation(trophee: Trophee) {
+    const nbVertsMin = trophee.nbVertsMin
+    let nbVerts : number = 0
+    if (this.hasKey(this.eleve, trophee.cle)) {
+      const nombreVerts = this.eleve[trophee.cle]
+      typeof(nombreVerts) == 'string' ? nbVerts = parseInt(nombreVerts) : nbVerts = nombreVerts
+    }
+    const nb = trophee.nb
     if (nb > 0 && ((nbVerts < nbVertsMin) || (typeof (trophee['nbVertsMin']) == 'undefined' && nbVerts === 0))) {
       this.texteModale = `
       Est-ce que tu veux envoyer un message à M. Valmont pour lui prévenir
@@ -530,4 +557,10 @@ export class TropheesComponent implements OnInit {
     }
   }
 
+  // `PropertyKey` is short for "string | number | symbol"
+  // since an object key can be any of those types, our key can too
+  // in TS 3.0+, putting just "string" raises an error
+  hasKey<O>(obj: O, key: PropertyKey): key is keyof O {
+    return key in obj
+  }
 }

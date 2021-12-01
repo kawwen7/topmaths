@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationStart, Event as NavigationEvent } from '@angular/router';
+import { Niveau, SequenceParticuliere } from '../services/sequences';
 
 /**
  * Type d'objet de toutes les lignes qui seront affichées
@@ -66,19 +67,17 @@ export class SequencesComponent implements OnInit {
    */
   recupereContenuLignesAAfficher() {
     this.lignes = [] // va contenir toutes les lignes à afficher.
-    this.http.get('assets/data/sequencesParticulieres.json').subscribe(
-      (data: any) => {
-        for (const sequence of data) {
+    this.http.get<SequenceParticuliere[]>('assets/data/sequencesParticulieres.json').subscribe(sequencesParticulieres => {
+        for (const sequence of sequencesParticulieres) {
           this.lignes.push({ niveau: 'Séquences particulières', reference: sequence.reference, titre: sequence.titre, numero: 0 })
         }
       }
     )
-    this.http.get('assets/data/sequences.json').subscribe(
-      (data: any) => {
-        for (const niveau of data) {
-          this.lignes.push({ niveau: niveau.niveau })
+    this.http.get<Niveau[]>('assets/data/sequences.json').subscribe(niveaux => {
+        for (const niveau of niveaux) {
+          this.lignes.push({ niveau: niveau.nom })
           for (const sequence of niveau.sequences) {
-            this.lignes.push({ niveau: niveau.niveau, reference: sequence.reference, titre: sequence.titre, numero: sequence.reference.slice(3) })
+            this.lignes.push({ niveau: niveau.nom, reference: sequence.reference, titre: sequence.titre, numero: parseInt(sequence.reference.slice(3)) })
           }
         }
       }

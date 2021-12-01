@@ -275,7 +275,7 @@ export class ObjectifComponent implements OnInit {
    */
   doesFileExist(urlToFile: string) {
     var xhr = new XMLHttpRequest();
-    xhr.open('HEAD', urlToFile, false);
+    xhr.open('HEAD', urlToFile, true);
     xhr.send();
 
     if (xhr.status == 404) {

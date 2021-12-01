@@ -38,7 +38,7 @@ export class ApiService {
   codeTropheesClique: string
 
   @Output() profilModifie: EventEmitter<string[]> = new EventEmitter();
-  constructor(private httpClient: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router) {
     this.user = {
       identifiant: '',
       lienAvatar: '',
@@ -96,7 +96,7 @@ export class ApiService {
         }
       ]
     } else {
-      this.httpClient.get<UserSimplifie[]>(this.baseUrl + '/classement.php').subscribe(usersSimplifies => {
+      this.http.get<UserSimplifie[]>(this.baseUrl + '/classement.php').subscribe(usersSimplifies => {
         this.classement = usersSimplifies
       }, error => {
         console.log(error)
@@ -124,7 +124,7 @@ export class ApiService {
         }
       ]
     } else {
-      this.httpClient.get<UserSimplifie[]>(this.baseUrl + '/whosonline.php').subscribe(userSimplifies => {
+      this.http.get<UserSimplifie[]>(this.baseUrl + '/whosonline.php').subscribe(userSimplifies => {
         const infos = userSimplifies.pop() // Le dernier usersSimplifie n'en est pas un mais sert juste à récupérer des infos comme le nombre de personnes en ligne
         if (typeof (infos) != 'undefined') this.onlineNb = parseInt(infos.pseudo)
         this.onlineUsers = userSimplifies
@@ -172,7 +172,7 @@ export class ApiService {
         'codeTrophees',
         'tropheesVisibles'])
     } else {
-      this.httpClient.post<User[]>(this.baseUrl + '/login.php', { identifiant }).subscribe(users => {
+      this.http.post<User[]>(this.baseUrl + '/login.php', { identifiant }).subscribe(users => {
         if (users[0].identifiant == 'personne') {
           console.log('identifiant non trouvé, on en crée un nouveau')
           this.registration(identifiant)
@@ -226,7 +226,7 @@ export class ApiService {
         codeTrophees: '',
         tropheesVisibles: ''
       }
-      this.httpClient.post<User[]>(this.baseUrl + '/register.php', user).subscribe(users => {
+      this.http.post<User[]>(this.baseUrl + '/register.php', user).subscribe(users => {
         this.isloggedIn = true
         this.setToken(users[0].identifiant);
         this.user = users[0]
@@ -302,13 +302,13 @@ export class ApiService {
    * Récupère les listes de noms masculins, de noms féminins et d'adjectifs
    */
   recupereDonneesPseudos() {
-    this.httpClient.get<Nom[]>('assets/data/nomsMasculins.json').subscribe(noms => {
+    this.http.get<Nom[]>('assets/data/nomsMasculins.json').subscribe(noms => {
       this.listeMasculins = noms
     })
-    this.httpClient.get<Nom[]>('assets/data/nomsFeminins.json').subscribe(noms => {
+    this.http.get<Nom[]>('assets/data/nomsFeminins.json').subscribe(noms => {
       this.listeFeminins = noms
     })
-    this.httpClient.get<Adjectif[]>('assets/data/adjectifs.json').subscribe(adjectifs => {
+    this.http.get<Adjectif[]>('assets/data/adjectifs.json').subscribe(adjectifs => {
       this.listeAdjectifs = adjectifs
     })
   }
@@ -373,7 +373,7 @@ export class ApiService {
       ]
     } else {
       if (typeof (this.user.identifiant) != 'undefined' && this.user.identifiant != '') {
-        this.httpClient.post<UserSimplifie[]>(this.baseUrl + `/actionUtilisateur.php`, { identifiant: this.user.identifiant }).subscribe(userSimplifies => {
+        this.http.post<UserSimplifie[]>(this.baseUrl + `/actionUtilisateur.php`, { identifiant: this.user.identifiant }).subscribe(userSimplifies => {
           const infos = userSimplifies.pop() // Le dernier usersSimplifie n'en est pas un mais sert juste à récupérer des infos comme le nombre de personnes en ligne
           if (typeof (infos) != 'undefined') this.onlineNb = parseInt(infos.pseudo)
           this.onlineUsers = userSimplifies
@@ -393,7 +393,7 @@ export class ApiService {
    * Renvoie vers l'accueil.
    */
   logout() {
-    this.httpClient.post(this.baseUrl + `/logout.php`, this.user).subscribe(
+    this.http.post(this.baseUrl + `/logout.php`, this.user).subscribe(
       data => {
         this.deleteToken()
         this.user.identifiant = ''
@@ -436,7 +436,7 @@ export class ApiService {
    * @param message
    */
   envoiMailEval(codeTrophee: string, sujetEval: string) {
-    this.httpClient.post<Message>(this.baseUrl + `/envoiMailEval.php`, { codeTrophee: codeTrophee, sujetEval: sujetEval }).pipe(first()).subscribe(
+    this.http.post<Message>(this.baseUrl + `/envoiMailEval.php`, { codeTrophee: codeTrophee, sujetEval: sujetEval }).pipe(first()).subscribe(
       message => {
         if (message.message == 'mail envoye') {
           alert('Ton message a bien été envoyé !\nM. Valmont t\'enverra un message sur Pronote pour te dire quoi réviser.')
@@ -457,7 +457,7 @@ export class ApiService {
     if (isDevMode()) {
       this.profilModifie.emit(valeursModifiees)
     } else {
-      this.httpClient.post<User[]>(this.baseUrl + `/majProfil.php`, this.user).subscribe(
+      this.http.post<User[]>(this.baseUrl + `/majProfil.php`, this.user).subscribe(
         users => {
           console.log(users[0])
           this.profilModifie.emit(valeursModifiees)

@@ -1,38 +1,12 @@
+import { sequence } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import { Component, isDevMode, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { ConfettiService } from '../services/confetti.service';
+import { CalculMental, Niveau, NiveauCM, Objectif, QuestionFlash, Sequence } from '../services/sequences';
+import { Niveau as NiveauObjectif } from '../services/objectifs';
 
-interface Objectif {
-  reference: string
-  titre?: string
-  slugs: string[]
-}
-
-interface Niveau {
-  commentaire: string
-  lien: string
-  score: string
-  lienACopier: string
-  graine?: string
-  bonneReponse?: boolean
-  slider?: number
-}
-
-interface CalculMental {
-  reference: string
-  titre: string
-  niveaux: Niveau[]
-  pageExiste: boolean
-}
-
-interface QuestionFlash {
-  reference: string
-  titre: string
-  slug: string
-  pageExiste: boolean
-}
 
 @Component({
   selector: 'app-sequence',
@@ -58,14 +32,14 @@ export class SequenceComponent implements OnInit {
   derniereGraine: string
   dernierSlider: number
   messageScore: string
-  
+
 
   constructor(public http: HttpClient, private route: ActivatedRoute, private dataService: ApiService, public confetti: ConfettiService) {
     this.reference = ''
     this.numero = 0
     this.titre = ''
     this.objectifs = []
-    this.calculsMentaux = []
+    this.calculsMentaux = [new CalculMental('', '', [new NiveauCM('', '', '', '', '', false, 0)], false)]
     this.questionsFlash = []
     this.lienQuestionsFlash = ''
     this.lienEval = ''
@@ -118,8 +92,8 @@ export class SequenceComponent implements OnInit {
                   // On s'assure que les exercices soient différents pour ne pas ajouter plusieurs fois du score
                   if (this.derniereUrl != niveau.lien || this.derniereGraine != niveau.graine || this.dernierSlider != niveau.slider) {
                     this.derniereUrl = niveau.lien
-                    if (typeof(niveau.graine) != 'undefined') this.derniereGraine = niveau.graine
-                    if (typeof(niveau.slider) != 'undefined') this.dernierSlider = niveau.slider
+                    if (typeof (niveau.graine) != 'undefined') this.derniereGraine = niveau.graine
+                    if (typeof (niveau.slider) != 'undefined') this.dernierSlider = niveau.slider
                     const majScore: string = (parseInt(niveau.score) * nbBonnesReponses).toString()
                     if (parseInt(majScore) > 0) {
                       this.dataService.majScore(majScore)
@@ -151,9 +125,9 @@ export class SequenceComponent implements OnInit {
    * une fois trouvé, lance this.recupereAttributsSequence(sequence)
    */
   modificationDesAttributs() {
-    this.http.get('assets/data/sequences.json').subscribe((data: any) => {
-      data.find((niveau: any) => {
-        return niveau.sequences.find((sequence: any) => {
+    this.http.get<Niveau[]>('assets/data/sequences.json').subscribe(niveaux => {
+      niveaux.find(niveau => {
+        return niveau.sequences.find(sequence => {
           if (sequence.reference == this.reference) {
             this.recupereAttributsSequence(niveau, sequence)
           }
@@ -168,8 +142,8 @@ export class SequenceComponent implements OnInit {
    * @param niveau 
    * @param sequence 
    */
-  recupereAttributsSequence(niveau: any, sequence: any) {
-    this.numero = niveau.sequences.findIndex((sequence: any) => { return sequence.reference == this.reference; }) + 1
+  recupereAttributsSequence(niveau: Niveau, sequence: Sequence) {
+    this.numero = niveau.sequences.findIndex(sequence => { return sequence.reference == this.reference; }) + 1
     this.titre = `Séquence ${this.numero} :<br>${sequence.titre}`
     this.recupereObjectifsSequence(sequence)
     this.recupereQuestionsFlash(sequence)
@@ -186,7 +160,7 @@ export class SequenceComponent implements OnInit {
    * les push à this.objectifs
    * @param sequence 
    */
-  recupereObjectifsSequence(sequence: any) {
+  recupereObjectifsSequence(sequence: Sequence) {
     this.objectifs = []
     for (const objectif of sequence.objectifs) {
       if (objectif.reference != '') {
@@ -204,54 +178,53 @@ export class SequenceComponent implements OnInit {
    * Modifie les this.objectifs.titre, les this.objectifs.slugs et le this.lienEval
    */
   recupereDetailsObjectifs() {
-    this.http.get('assets/data/objectifs.json').subscribe(
-      (data: any) => {
-        for (const niveau of data) {
-          for (const theme of niveau.themes) {
-            for (const sousTheme of theme.sousThemes) {
-              for (const JSONobjectif of sousTheme.objectifs) {
-                //On complète le titre et les slugs des objectifs de la séquence
-                for (const thisObjectif of this.objectifs) {
-                  if (thisObjectif.reference == JSONobjectif.reference) {
-                    thisObjectif.titre = JSONobjectif.titre
-                    for (const exercice of JSONobjectif.exercices) {
-                      thisObjectif.slugs.push(exercice.slug)
-                    }
+    this.http.get<NiveauObjectif[]>('assets/data/objectifs.json').subscribe(niveaux => {
+      for (const niveau of niveaux) {
+        for (const theme of niveau.themes) {
+          for (const sousTheme of theme.sousThemes) {
+            for (const JSONobjectif of sousTheme.objectifs) {
+              //On complète le titre et les slugs des objectifs de la séquence
+              for (const thisObjectif of this.objectifs) {
+                if (thisObjectif.reference == JSONobjectif.reference) {
+                  thisObjectif.titre = JSONobjectif.titre
+                  for (const exercice of JSONobjectif.exercices) {
+                    thisObjectif.slugs.push(exercice.slug)
                   }
                 }
-                // On vérifie si la page existe pour les objectifs des questions flash
-                // On en profite pour créer le lien pour s'entraîner aux questions flash
-                this.lienQuestionsFlash = 'https://coopmaths.fr/mathalea.html?'
-                for (const questionFlash of this.questionsFlash) {
-                  if (questionFlash.slug != '') {
-                    this.lienQuestionsFlash = this.lienQuestionsFlash.concat('ex=', questionFlash.slug, '&')
-                  }
-                  if (questionFlash.reference == JSONobjectif.reference) {
-                    questionFlash.pageExiste = true
-                  }
+              }
+              // On vérifie si la page existe pour les objectifs des questions flash
+              // On en profite pour créer le lien pour s'entraîner aux questions flash
+              this.lienQuestionsFlash = 'https://coopmaths.fr/mathalea.html?'
+              for (const questionFlash of this.questionsFlash) {
+                if (questionFlash.slug != '') {
+                  this.lienQuestionsFlash = this.lienQuestionsFlash.concat('ex=', questionFlash.slug, '&')
                 }
-                this.lienQuestionsFlash = this.lienQuestionsFlash.concat('v=e')
-                // On vérifie si la page existe pour les objectifs des calculs mentaux
-                for (const calculMental of this.calculsMentaux) {
-                  if (calculMental.reference == JSONobjectif.reference) {
-                    calculMental.pageExiste = true
-                  }
+                if (questionFlash.reference == JSONobjectif.reference) {
+                  questionFlash.pageExiste = true
+                }
+              }
+              this.lienQuestionsFlash = this.lienQuestionsFlash.concat('v=e')
+              // On vérifie si la page existe pour les objectifs des calculs mentaux
+              for (const calculMental of this.calculsMentaux) {
+                if (calculMental.reference == JSONobjectif.reference) {
+                  calculMental.pageExiste = true
                 }
               }
             }
           }
         }
-        // On crée le lien pour s'entraîner pour l'évaluation
-        this.lienEval = 'https://coopmaths.fr/mathalea.html?'
-        for (const thisObjectif of this.objectifs) {
-          for (const slug of thisObjectif.slugs) {
-            if (slug.slice(0, 4) != 'http' && slug != '') {
-              this.lienEval = this.lienEval.concat('ex=', slug, '&')
-            }
+      }
+      // On crée le lien pour s'entraîner pour l'évaluation
+      this.lienEval = 'https://coopmaths.fr/mathalea.html?'
+      for (const thisObjectif of this.objectifs) {
+        for (const slug of thisObjectif.slugs) {
+          if (slug.slice(0, 4) != 'http' && slug != '') {
+            this.lienEval = this.lienEval.concat('ex=', slug, '&')
           }
         }
-        this.lienEval = this.lienEval.concat('v=e')
       }
+      this.lienEval = this.lienEval.concat('v=e')
+    }
     )
   }
 
@@ -260,7 +233,7 @@ export class SequenceComponent implements OnInit {
    * les push à this.calculsMentaux
    * @param sequence 
    */
-  recupereCalculsMentaux(sequence: any) {
+  recupereCalculsMentaux(sequence: Sequence) {
     this.calculsMentaux = []
     for (const calculMental of sequence.calculsMentaux) {
       let niveauxTemp = []
@@ -290,10 +263,10 @@ export class SequenceComponent implements OnInit {
    * les push à this.questionsFlash
    * @param sequence 
    */
-  recupereQuestionsFlash(sequence: any) {
+  recupereQuestionsFlash(sequence: Sequence) {
     this.questionsFlash = [] // Au cas où l'attribut ne serait pas réinitialisé lors d'un changement de référence
     for (const questionFlash of sequence.questionsFlash) {
-      if (questionFlash.objectif != '') {
+      if (questionFlash.reference != '') {
         this.questionsFlash.push({
           reference: questionFlash.reference,
           titre: questionFlash.titre,
@@ -360,7 +333,7 @@ export class SequenceComponent implements OnInit {
    * Copie dans le presse-papier le lien vers un certain niveau d'un calcul mental
    * @param niveau 
    */
-  copierLien(niveau: any) {
+  copierLien(niveau: NiveauCM) {
     if (typeof (niveau.lienACopier) != 'undefined') {
       navigator.clipboard.writeText(niveau.lienACopier);
       alert('Le lien vers l\'exercice a été copié')
@@ -374,7 +347,7 @@ export class SequenceComponent implements OnInit {
    */
   doesFileExist(urlToFile: string) {
     var xhr = new XMLHttpRequest();
-    xhr.open('HEAD', urlToFile, false);
+    xhr.open('HEAD', urlToFile, true);
     xhr.send();
 
     if (xhr.status == 404) {
