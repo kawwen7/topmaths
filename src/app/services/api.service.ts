@@ -1,5 +1,5 @@
 import { Injectable, Output, EventEmitter, isDevMode } from '@angular/core';
-import { first, map } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { User, UserSimplifie } from './user';
 import { Router } from '@angular/router';
@@ -63,6 +63,7 @@ export class ApiService {
     this.listeAdjectifs = []
     this.isloggedIn = false
     this.surveilleModificationsDuProfil()
+    this.recupereDonneesPseudos() // En cas de création d'un nouveau compte
   }
 
   /**
@@ -172,27 +173,32 @@ export class ApiService {
         'tropheesVisibles'])
     } else {
       this.httpClient.post<User[]>(this.baseUrl + '/login.php', { identifiant }).subscribe(users => {
-        this.isloggedIn = true
-        this.setToken(users[0].identifiant);
-        this.user = users[0]
-        this.profilModifie.emit([
-          'identifiant',
-          'lienAvatar',
-          'scores',
-          'lastLogin',
-          'lastAction',
-          'visible',
-          'pseudo',
-          'score',
-          'codeTrophees',
-          'tropheesVisibles'])
-        if (redirige) {
-          const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
-          this.router.navigate([redirect]);
+        if (users[0].identifiant == 'personne') {
+          console.log('identifiant non trouvé, on en crée un nouveau')
+          this.registration(identifiant)
+        } else {
+          this.isloggedIn = true
+          this.setToken(users[0].identifiant);
+          this.user = users[0]
+          this.profilModifie.emit([
+            'identifiant',
+            'lienAvatar',
+            'scores',
+            'lastLogin',
+            'lastAction',
+            'visible',
+            'pseudo',
+            'score',
+            'codeTrophees',
+            'tropheesVisibles'])
+          if (redirige) {
+            const redirect = this.redirectUrl ? this.redirectUrl : 'profil';
+            this.router.navigate([redirect]);
+          }
         }
       },
         error => {
-          this.erreurLogin(identifiant)
+          console.log(error)
         });
     }
   }
@@ -221,22 +227,25 @@ export class ApiService {
         tropheesVisibles: ''
       }
       this.httpClient.post<User[]>(this.baseUrl + '/register.php', user).subscribe(users => {
+        this.isloggedIn = true
         this.setToken(users[0].identifiant);
         this.user = users[0]
-        this.router.navigate(['/profil'])
+        this.profilModifie.emit([
+          'identifiant',
+          'lienAvatar',
+          'scores',
+          'lastLogin',
+          'lastAction',
+          'visible',
+          'pseudo',
+          'score',
+          'codeTrophees',
+          'tropheesVisibles'])
+          this.router.navigate(['profil'])
       }, error => {
         this.erreurRegistration('userregistration', error['message'])
       });
     }
-  }
-
-  /**
-   * Prévient que l'identifiant n'existe pas et redirige vers la création d'un nouveau
-   * @param identifiant Données du formulaire transmises par la fonction de login
-   */
-  erreurLogin(identifiant: string) {
-    console.log('identifiant non trouvé, on en crée un nouveau')
-    this.registration(identifiant)
   }
 
   /**

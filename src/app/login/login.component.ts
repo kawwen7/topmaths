@@ -8,7 +8,7 @@ import { ApiService } from '../services/api.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   angForm: FormGroup
   defaut: boolean
   errGrandNbChar: boolean
@@ -29,13 +29,6 @@ export class LoginComponent implements OnInit {
     this.dataService.profilModifie.subscribe(valeursModifiees => {
       if(valeursModifiees.includes('identifiant')) this.router.navigate(['/profil'])
     })
-  }
-
-  ngOnInit() {
-    // On prépare les fichiers pour générer un pseudo en cas de création d'un nouveau compte
-    if (this.dataService.listeMasculins == null) {
-      this.dataService.recupereDonneesPseudos()
-    }
   }
 
   /**

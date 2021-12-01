@@ -505,7 +505,6 @@ export class ProfilComponent implements OnInit {
       this.deconstruitLienAvatar()
       this.modaleAvatar.style.display = "block"
     } else if (type == 'pseudo') {
-      this.dataService.recupereDonneesPseudos()
       this.pseudo = this.dataService.user.pseudo
       this.modalePseudo.style.display = "block"
     }
