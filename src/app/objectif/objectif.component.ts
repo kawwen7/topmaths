@@ -25,6 +25,7 @@ export class ObjectifComponent implements OnInit {
   derniereGraine: string
   dernierTitre: string
   presenceVideo: boolean
+  dateDerniereReponse: Date
 
   constructor(public http: HttpClient, private route: ActivatedRoute, public dataService: ApiService, public confetti: ConfettiService) {
     this.reference = ''
@@ -41,6 +42,7 @@ export class ObjectifComponent implements OnInit {
     this.derniereGraine = ''
     this.dernierTitre = ''
     this.presenceVideo = false
+    this.dateDerniereReponse = new Date()
     this.isPortraitUpdate()
     dataService.profilModifie.subscribe(valeursModifiees => {
       if (valeursModifiees.includes('scores')) this.modificationDesAttributs()
@@ -76,6 +78,8 @@ export class ObjectifComponent implements OnInit {
    */
   ecouteMessagesPost() {
     window.addEventListener('message', (event) => {
+      const dateNouvelleReponse = new Date()
+      if (dateNouvelleReponse.getTime() - this.dateDerniereReponse.getTime() > 3000) {
       const url: string = event.data.url;
       if (typeof (url) != 'undefined') {
         // On cherche à quel exercice correspond ce message
@@ -95,6 +99,7 @@ export class ObjectifComponent implements OnInit {
                     this.derniereUrl = exercice.lienACopier
                     this.derniereGraine = exercice.graine
                     this.dernierTitre = titre
+                    this.dateDerniereReponse = new Date()
                     const majScore: string = (parseInt(exercice.score) * nbBonnesReponses).toString()
                     if(parseInt(majScore) > 0) {
                       this.dataService.majScore(majScore)
@@ -117,6 +122,8 @@ export class ObjectifComponent implements OnInit {
           }
         }
       }
+        
+    }
       if (!isDevMode() && this.dataService.isloggedIn) {
         this.dataService.majLastAction()
       }
