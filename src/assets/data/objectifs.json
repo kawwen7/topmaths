@@ -24,7 +24,7 @@
                 "exercices": [
                   {
                     "slug": "5C11,s=1,s2=false,s3=true,s4=true,n=1",
-                    "score": "10"
+                    "score": "0"
                   },
                   {
                     "slug": "5C12-1,s=2,s2=false,s3=true,s4=true,n=1",
@@ -85,7 +85,7 @@
                 "exercices": [
                   {
                     "slug": "5R10-0,s=2,n=1",
-                    "score": "5"
+                    "score": ""
                   }
                 ]
               },
@@ -129,11 +129,11 @@
                 "exercices": [
                   {
                     "slug": "5R12,s=1,s2=true",
-                    "score": "40"
+                    "score": "0"
                   },
                   {
                     "slug": "5R12-2,s=1,s2=true",
-                    "score": "60"
+                    "score": "0"
                   }
                 ]
               },
@@ -177,7 +177,7 @@
                   },
                   {
                     "slug": "5R22-2,s=20,n=4",
-                    "score": "15"
+                    "score": "0"
                   },
                   {
                     "slug": "5R22,s=20,s2=false,n=2",
@@ -237,11 +237,11 @@
                 "exercices": [
                   {
                     "slug": "5G20-0,s=1,s2=true,n=1",
-                    "score": "30"
+                    "score": "0"
                   },
                   {
                     "slug": "5G20-2,s=false,n=1",
-                    "score": "50"
+                    "score": "0"
                   }
                 ]
               }
@@ -364,7 +364,7 @@
                 "exercices": [
                   {
                     "slug": "5S10,s=false,s2=4",
-                    "score": "100"
+                    "score": "0"
                   }
                 ]
               },
@@ -416,11 +416,11 @@
                 "exercices": [
                   {
                     "slug": "5S12,s=3,s2=1,s3=3",
-                    "score": "50"
+                    "score": "0"
                   },
                   {
                     "slug": "5S12,s=3,s2=1,s3=4",
-                    "score": "60"
+                    "score": "0"
                   }
                 ]
               },
@@ -440,7 +440,7 @@
                 "exercices": [
                   {
                     "slug": "5S13,s=3,n=1",
-                    "score": "20"
+                    "score": "0"
                   },
                   {
                     "slug": "5S13-1,s=1,video=https%3A%2F%2Fyoutu.be%2FGWDDay-mdVA",
@@ -464,11 +464,11 @@
                 "exercices": [
                   {
                     "slug": "5S14,s=1,n=1",
-                    "score": "20"
+                    "score": "0"
                   },
                   {
                     "slug": "5S14,s=3,n=1",
-                    "score": "30"
+                    "score": "0"
                   }
                 ]
               }
@@ -498,11 +498,11 @@
                 "exercices": [
                   {
                     "slug": "5G10-1,s=1,s2=1,n=1",
-                    "score": "30"
+                    "score": "0"
                   },
                   {
                     "slug": "5G10-2,s=1,s2=1,n=1",
-                    "score": "50"
+                    "score": "0"
                   }
                 ]
               },
@@ -522,11 +522,11 @@
                 "exercices": [
                   {
                     "slug": "5G13,s=1,s2=1,n=1",
-                    "score": "30"
+                    "score": "0"
                   },
                   {
                     "slug": "5G13,s=1,s2=2,n=1",
-                    "score": "50"
+                    "score": "0"
                   }
                 ]
               }
@@ -563,11 +563,11 @@
                 "exercices": [
                   {
                     "slug": "5G20-0,s=1,s2=true,n=1",
-                    "score": "30"
+                    "score": "0"
                   },
                   {
                     "slug": "5G20-2,s=false,n=1",
-                    "score": "50"
+                    "score": "0"
                   }
                 ]
               },
@@ -587,11 +587,11 @@
                 "exercices": [
                   {
                     "slug": "5G21-1,s=1,n=1",
-                    "score": "20"
+                    "score": "0"
                   },
                   {
                     "slug": "5G21-1,s=2,n=1",
-                    "score": "40"
+                    "score": "0"
                   }
                 ]
               },
@@ -617,7 +617,7 @@
                 "exercices": [
                   {
                     "slug": "5G22-1,s=3,s2=false,n=2",
-                    "score": "30"
+                    "score": "0"
                   }
                 ]
               }
@@ -869,15 +869,15 @@
                 "exercices": [
                   {
                     "slug": "4L16,s2=false,s3=2,n=1",
-                    "score": "10"
+                    "score": "0"
                   },
                   {
                     "slug": "4L16,s2=false,s3=3,n=1",
-                    "score": "20"
+                    "score": "0"
                   },
                   {
                     "slug": "4L16,s2=false,s3=4,n=1",
-                    "score": "30"
+                    "score": "0"
                   }
                 ]
               }
@@ -927,7 +927,7 @@
                 "exercices": [
                   {
                     "slug": "4S10,s=3,s2=2,s3=1,n=1",
-                    "score": "50"
+                    "score": "0"
                   }
                 ]
               }
@@ -997,7 +997,7 @@
                 "exercices": [
                   {
                     "slug": "4G22,n=1,s=1",
-                    "score": "70"
+                    "score": "0"
                   }
                 ]
               },
@@ -1080,11 +1080,11 @@
                 "exercices": [
                   {
                     "slug": "3L10,n=2",
-                    "score": "5"
+                    "score": "0"
                   },
                   {
                     "slug": "3L10-1,n=2",
-                    "score": "10"
+                    "score": "0"
                   }
                 ]
               },
@@ -1336,7 +1336,7 @@
                 "exercices": [
                   {
                     "slug": "3S20,s=1,n=1",
-                    "score": "10"
+                    "score": "0"
                   }
                 ]
               }
