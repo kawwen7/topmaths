@@ -193,7 +193,7 @@ export class ObjectifComponent implements OnInit {
     let userId = ''
     let i = 'i=0'
     if (this.dataService.user.scores == 'actives') {
-      userId = `&userId=VAL${this.dataService.user.identifiant.toUpperCase()}`
+      //userId = `&userId=VAL${this.dataService.user.identifiant.toUpperCase()}`
       i = 'i=1'
     }
     // Le nombre d'exercices varie selon la référence, on a donc quelque chose de dynamique
