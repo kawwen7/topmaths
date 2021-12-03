@@ -49,7 +49,8 @@ export class ApiService {
       pseudo: '',
       score: '0',
       codeTrophees: '',
-      tropheesVisibles: ''
+      tropheesVisibles: '',
+      cleScore: ''
     }
     this.onlineUsers = []
     this.classement = []
@@ -156,7 +157,8 @@ export class ApiService {
         pseudo: 'Cerf sauvage',
         score: '196',
         codeTrophees: 'tuoocj',
-        tropheesVisibles: ''
+        tropheesVisibles: '',
+        cleScore: 'abc'
       }
       this.setToken(this.user.identifiant);
       this.isloggedIn = true
@@ -224,7 +226,8 @@ export class ApiService {
         pseudo: this.pseudoAleatoire(),
         score: '0',
         codeTrophees: '',
-        tropheesVisibles: ''
+        tropheesVisibles: '',
+        cleScore: ''
       }
       this.http.post<User[]>(this.baseUrl + '/register.php', user).subscribe(users => {
         this.isloggedIn = true
@@ -339,7 +342,19 @@ export class ApiService {
    */
   majScore(score: string) {
     this.user.score = (parseInt(this.user.score) + parseInt(score)).toString()
-    this.majProfil(['score'])
+    if (isDevMode()) {
+      this.profilModifie.emit(['score'])
+    } else {
+      this.http.post<User[]>(this.baseUrl + `/majScore.php`, {identifiant: this.user.identifiant, score: this.user.score, cleScore: this.user.cleScore}).subscribe(
+        users => {
+          console.log(users[0])
+          this.user.cleScore = users[0].cleScore
+          this.profilModifie.emit(['score'])
+        },
+        error => {
+          console.log(error)
+        });
+    }
   }
 
   /**

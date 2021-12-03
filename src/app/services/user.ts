@@ -9,8 +9,10 @@ export class User {
   public score: string;
   public codeTrophees: string;
   public tropheesVisibles: string;
+  public cleScore: string
 
-  constructor(identifiant: string, lienAvatar: string, scores: string, lastLogin: string, lastAction: string, visible: string, pseudo: string, score: string, codeTrophees: string, tropheesVisibles: string) {
+  constructor(identifiant: string, lienAvatar: string, scores: string, lastLogin: string, lastAction: string, visible: string, pseudo: string, score: string,
+        codeTrophees: string, tropheesVisibles: string, cleScore: string) {
     this.identifiant = identifiant
     this.lienAvatar = lienAvatar
     this.scores = scores
@@ -21,6 +23,7 @@ export class User {
     this.score = score
     this.codeTrophees = codeTrophees
     this.tropheesVisibles = tropheesVisibles
+    this.cleScore = cleScore
   }
 }
 export class UserSimplifie {
