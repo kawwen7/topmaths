@@ -339,15 +339,21 @@ export class ApiService {
    * Ajoute le score de l'exercice
    * Met à jour le score de la base de données
    * @param score à ajouter 
+   * @param url de l'exercice en question
    */
-  majScore(score: string) {
-    this.user.score = (parseInt(this.user.score) + parseInt(score)).toString()
+  majScore(score: string, url: string) {
     if (isDevMode()) {
       this.profilModifie.emit(['score'])
     } else {
-      this.http.post<User[]>(this.baseUrl + `/majScore.php`, {identifiant: this.user.identifiant, score: this.user.score, cleScore: this.user.cleScore}).subscribe(
+      this.http.post<User[]>(this.baseUrl + `/majScore.php`, {
+        identifiant: this.user.identifiant,
+        score: (parseInt(this.user.score) + parseInt(score)).toString(),
+        cleScore: this.user.cleScore,
+        url: url
+      }).subscribe(
         users => {
           console.log(users[0])
+          this.user.score = users[0].score
           this.user.cleScore = users[0].cleScore
           this.profilModifie.emit(['score'])
         },

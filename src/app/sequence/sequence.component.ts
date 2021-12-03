@@ -96,7 +96,7 @@ export class SequenceComponent implements OnInit {
                     if (typeof (niveau.slider) != 'undefined') this.dernierSlider = niveau.slider
                     const majScore: string = (parseInt(niveau.score) * nbBonnesReponses).toString()
                     if (parseInt(majScore) > 0) {
-                      this.dataService.majScore(majScore)
+                      this.dataService.majScore(majScore, niveau.lien)
                       this.messageScore = '+ ' + majScore
                       niveau.bonneReponse = true
                       setTimeout(() => niveau.bonneReponse = false, 2000)

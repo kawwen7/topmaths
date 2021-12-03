@@ -102,7 +102,7 @@ export class ObjectifComponent implements OnInit {
                     this.dateDerniereReponse = new Date()
                     const majScore: string = (parseInt(exercice.score) * nbBonnesReponses).toString()
                     if(parseInt(majScore) > 0) {
-                      this.dataService.majScore(majScore)
+                      this.dataService.majScore(majScore, exercice.lienACopier)
                       this.messageScore = '+ ' + majScore
                       exercice.bonneReponse = true
                       setTimeout(() => exercice.bonneReponse = false, 2000)
