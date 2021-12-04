@@ -419,9 +419,19 @@ export class ApiService {
     this.http.post(this.baseUrl + `/logout.php`, this.user).subscribe(
       data => {
         this.deleteToken()
-        this.user.identifiant = ''
-        this.user.lienAvatar = ''
+        this.user = new User('', '', '', '', '', '', '', '', '', '', '')
         this.isloggedIn = false
+        this.profilModifie.emit([
+          'identifiant',
+          'lienAvatar',
+          'scores',
+          'lastLogin',
+          'lastAction',
+          'visible',
+          'pseudo',
+          'score',
+          'codeTrophees',
+          'tropheesVisibles'])
         this.router.navigate(['accueil'])
       },
       error => {
