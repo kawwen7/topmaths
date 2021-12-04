@@ -76,7 +76,7 @@ export class ApiService {
    */
   surveilleModificationsDuProfil() {
     this.profilModifie.subscribe(valeursModifiees => {
-      this.majLastAction()
+      if (!valeursModifiees.includes('score')) this.majLastAction()
     })
   }
 
