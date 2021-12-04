@@ -80,20 +80,20 @@ export class ObjectifComponent implements OnInit {
     window.addEventListener('message', (event) => {
       const dateNouvelleReponse = new Date()
       if (dateNouvelleReponse.getTime() - this.dateDerniereReponse.getTime() > 2000) {
-      const url: string = event.data.url;
-      if (typeof (url) != 'undefined') {
-        // On cherche à quel exercice correspond ce message
-        for (const exercice of this.exercices) {
-          if (typeof (exercice.lienACopier) != 'undefined') {
-            /* A décommenter pour débugger lorsqu'il n'y a pas de confettis et que le score ne se met pas à jour
-            console.log('lienACopier ' + exercice.lienACopier)
-            console.log('url ' + url) */
-            if (url.split('&serie=')[0].split(',i=')[0] == exercice.lienACopier.split('&serie=')[0].split(',i=')[0]) { // Lorsqu'un exercice n'est pas interactifReady, le ,i=0 est retiré de l'url
-              // On a trouvé à quel exercice correspond ce message
-              const nbBonnesReponses: number = event.data.nbBonnesReponses
-              const nbMauvaisesReponses: number = event.data.nbMauvaisesReponses
-              const titre: string = event.data.titre
-              if (typeof (titre) != 'undefined') {
+        const url: string = event.data.url;
+        if (typeof (url) != 'undefined') {
+          // On cherche à quel exercice correspond ce message
+          for (const exercice of this.exercices) {
+            if (typeof (exercice.lienACopier) != 'undefined') {
+              /* A décommenter pour débugger lorsqu'il n'y a pas de confettis et que le score ne se met pas à jour
+              console.log('lienACopier ' + exercice.lienACopier)
+              console.log('url ' + url) */
+              if (url.split('&serie=')[0].split(',i=')[0] == exercice.lienACopier.split('&serie=')[0].split(',i=')[0]) { // Lorsqu'un exercice n'est pas interactifReady, le ,i=0 est retiré de l'url
+                // On a trouvé à quel exercice correspond ce message
+                const nbBonnesReponses: number = event.data.nbBonnesReponses
+                const nbMauvaisesReponses: number = event.data.nbMauvaisesReponses
+                const titre: string = event.data.titre
+                if (typeof (titre) != 'undefined') {
                   // On s'assure que les exercices soient différents pour ne pas ajouter plusieurs fois du score
                   if (this.derniereUrl != exercice.lienACopier || this.derniereGraine != exercice.graine || this.dernierTitre != titre) {
                     this.derniereUrl = exercice.lienACopier
@@ -101,7 +101,7 @@ export class ObjectifComponent implements OnInit {
                     this.dernierTitre = titre
                     this.dateDerniereReponse = new Date()
                     const majScore: string = (parseInt(exercice.score) * nbBonnesReponses).toString()
-                    if(parseInt(majScore) > 0) {
+                    if (parseInt(majScore) > 0) {
                       this.dataService.majScore(majScore, exercice.lienACopier)
                       this.messageScore = '+ ' + majScore
                       exercice.bonneReponse = true
@@ -111,25 +111,21 @@ export class ObjectifComponent implements OnInit {
                       }
                     }
                   }
-              }
-              exercice.graine = event.data.graine
-              if (this.dataService.user.scores == 'actives') { // Si on est en interactif, on retire l'userId et on ajoute la graine
-                exercice.lienACopier = url.split('&userId=')[0] + '&serie=' + exercice.graine
-              } else {
-                exercice.lienACopier = url
+                }
+                exercice.graine = event.data.graine
+                if (this.dataService.user.scores == 'actives') { // Si on est en interactif, on retire l'userId et on ajoute la graine
+                  exercice.lienACopier = url.split('&userId=')[0] + '&serie=' + exercice.graine
+                } else {
+                  exercice.lienACopier = url
+                }
               }
             }
           }
         }
       }
-        
-    }
-      if (!isDevMode() && this.dataService.isloggedIn) {
-        this.dataService.majLastAction()
-      }
-    });
+    })
   }
-  
+
   /**
    * Observe les changements de route,
    * modifie ensuite les paramètres selon la référence
@@ -291,5 +287,5 @@ export class ObjectifComponent implements OnInit {
       return true;
     }
   }
-  
+
 }

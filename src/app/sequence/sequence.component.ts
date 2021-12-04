@@ -113,10 +113,7 @@ export class SequenceComponent implements OnInit {
           }
         }
       }
-      if (!isDevMode() && this.dataService.isloggedIn) {
-        this.dataService.majLastAction()
-      }
-    });
+    })
   }
 
   /**
