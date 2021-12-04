@@ -79,7 +79,7 @@ export class ObjectifComponent implements OnInit {
   ecouteMessagesPost() {
     window.addEventListener('message', (event) => {
       const dateNouvelleReponse = new Date()
-      if (dateNouvelleReponse.getTime() - this.dateDerniereReponse.getTime() > 2000) {
+      if (dateNouvelleReponse.getTime() - this.dateDerniereReponse.getTime() > 200) {
         const url: string = event.data.url;
         if (typeof (url) != 'undefined') {
           // On cherche à quel exercice correspond ce message
