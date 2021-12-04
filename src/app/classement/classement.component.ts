@@ -23,7 +23,7 @@ export class ClassementComponent implements OnInit {
    */
    voirTropheesPerso(user: UserSimplifie) {
     this.dataService.pseudoClique = user.pseudo
-    this.dataService.codeTropheesClique = user.codeTrophees
+    this.dataService.lienTropheesClique = user.lienTrophees
     this.router.navigate(['trophees', 'autre'])
   }
 }

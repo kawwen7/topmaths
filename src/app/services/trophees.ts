@@ -23,11 +23,14 @@ export class Trophee5e {
   public obtenirSonBrevetDeTuteur: number
   public faireUnExpose: number
   public presenterLeTravailDeSonGroupe: number
+  public niveau: string
+  public peutDemanderEval: string
 
   constructor(reference: string, nombreDeVerts: number, calculs: number, arithmetique: number, fractions: number, nombresRelatifs: number,
     calculLitteral: number, maitriserScratch: number, maitriserGeogebra: number, proportionnalite: number, statistiques: number, probabilites: number,
     fonctions: number, perimetreEtAire: number, volume: number, durees: number, symetries: number, triangles: number, angles: number,
-    parallelogrammes: number, espace: number, obtenirSonBrevetDeTuteur: number, faireUnExpose: number, presenterLeTravailDeSonGroupe: number) {
+    parallelogrammes: number, espace: number, obtenirSonBrevetDeTuteur: number, faireUnExpose: number, presenterLeTravailDeSonGroupe: number, niveau: string,
+    peutDemanderEval: string) {
     this.reference = reference
     this.nombreDeVerts = nombreDeVerts
     this.calculs = calculs
@@ -52,6 +55,8 @@ export class Trophee5e {
     this.obtenirSonBrevetDeTuteur = obtenirSonBrevetDeTuteur
     this.faireUnExpose = faireUnExpose
     this.presenterLeTravailDeSonGroupe = presenterLeTravailDeSonGroupe
+    this.niveau = niveau
+    this.peutDemanderEval = peutDemanderEval
   }
 }
 
@@ -76,11 +81,14 @@ export class Trophee4e {
   public presenterLeTravailDeSonGroupe: number
   public faireUnExpose: number
   public obtenirSonBrevetDeTuteur: number
+  public niveau: string
+  public peutDemanderEval: string
 
   constructor(reference: string, nombreDeVerts: number, relatifs: number, fractions: number, puissances: number, arithmetique: number,
     calculLitteral: number, maitriserLinformatique: number, statistiques: number, probabilites: number, proportionnalite: number,
     fonctions: number, translation: number, theoremeDePythagore: number, theoremeDeThales: number, cosinusDunAngleAigu: number,
-    espace: number, presenterLeTravailDeSonGroupe: number, faireUnExpose: number, obtenirSonBrevetDeTuteur: number) {
+    espace: number, presenterLeTravailDeSonGroupe: number, faireUnExpose: number, obtenirSonBrevetDeTuteur: number, niveau: string,
+    peutDemanderEval: string) {
     this.reference = reference
     this.nombreDeVerts = nombreDeVerts
     this.relatifs = relatifs
@@ -101,10 +109,23 @@ export class Trophee4e {
     this.presenterLeTravailDeSonGroupe = presenterLeTravailDeSonGroupe
     this.faireUnExpose = faireUnExpose
     this.obtenirSonBrevetDeTuteur = obtenirSonBrevetDeTuteur
+    this.niveau = niveau
+    this.peutDemanderEval = peutDemanderEval
+  }
+}
+
+export class Niveau {
+  nom: string
+  trophees: Trophee[]
+
+  constructor (nom: string, trophees: Trophee[]) {
+    this.nom = nom
+    this.trophees = trophees
   }
 }
 
 export class Trophee {
+  id: string
   lien: string
   description: string
   cle: string
@@ -114,7 +135,8 @@ export class Trophee {
   tooltip: string
   refaire: string
 
-  constructor (lien: string, description: string, cle: string, categorie: string, nbVertsMin: number, nb: number = 0, tooltip: string, refaire: string) {
+  constructor (id: string, lien: string, description: string, cle: string, categorie: string, nbVertsMin: number, nb: number = 0, tooltip: string, refaire: string) {
+    this.id = id
     this.lien = lien
     this.description = description
     this.cle = cle

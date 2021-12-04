@@ -3,6 +3,7 @@ import { first } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { User, UserSimplifie } from './user';
 import { Router } from '@angular/router';
+import { Trophee4e, Trophee5e } from './trophees';
 
 interface Message {
   message: string
@@ -35,7 +36,8 @@ export class ApiService {
   listeAdjectifs: Adjectif[]
   pseudoClique: string
   ancienPseudoClique: string
-  codeTropheesClique: string
+  lienTropheesClique: string
+  trophees!: Trophee5e | Trophee4e
 
   @Output() profilModifie: EventEmitter<string[]> = new EventEmitter();
   constructor(private http: HttpClient, private router: Router) {
@@ -58,7 +60,7 @@ export class ApiService {
     this.feminin = false
     this.pseudoClique = ''
     this.ancienPseudoClique = ''
-    this.codeTropheesClique = ''
+    this.lienTropheesClique = ''
     this.listeMasculins = []
     this.listeFeminins = []
     this.listeAdjectifs = []
@@ -88,12 +90,12 @@ export class ApiService {
           lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id1.svg',
           pseudo: 'lapin bleu',
           score: '17',
-          codeTrophees: ''
+          lienTrophees: 'tcqnfy'
         }, {
           lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id2.svg',
           pseudo: 'Pierre verte',
           score: '38',
-          codeTrophees: ''
+          lienTrophees: 'tuoocj'
         }
       ]
     } else {
@@ -116,12 +118,12 @@ export class ApiService {
           lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id1.svg',
           pseudo: 'lapin bleu',
           score: '17',
-          codeTrophees: ''
+          lienTrophees: 'tuoocj'
         }, {
           lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id2.svg',
           pseudo: 'Pierre verte',
           score: '38',
-          codeTrophees: ''
+          lienTrophees: 'tuoocj'
         }
       ]
     } else {
@@ -384,12 +386,12 @@ export class ApiService {
           lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id1.svg',
           pseudo: 'lapin bleu',
           score: '17',
-          codeTrophees: ''
+          lienTrophees: ''
         }, {
           lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id2.svg',
           pseudo: 'Pierre verte',
           score: '38',
-          codeTrophees: ''
+          lienTrophees: ''
         }
       ]
     } else {
@@ -487,6 +489,25 @@ export class ApiService {
           console.log(error)
         });
     }
+  }
+
+  /**
+   * On renseigne soit le lienTrophees, soit le codeTrophees
+   * Renvoie la liste des trophées
+   * Si on passe par le lienTrophees, ne permet pas de demander à refaire une évaluation
+   * Si on passe par le codeTrophees, permet de demander à refaire une évaluation
+   * @param lienTrophees public, affiché dans le classement et la liste des personnes en ligne
+   * @param codeTrophees privé, remis par le professeur, permet de voir ses trophées, de le lier à son profil et de demander à refaire une évaluation
+   */
+  getTrophees(lienTrophees: string, codeTrophees: string) {
+    this.http.post<Trophee5e | Trophee4e>(this.baseUrl + `/trophees.php`, { lienTrophees: lienTrophees, codeTrophees: codeTrophees }).subscribe(
+      trophees => {
+        this.trophees = trophees
+        this.profilModifie.emit(['trophees'])
+      },
+      error => {
+        console.log(error)
+      })
   }
 
   /**

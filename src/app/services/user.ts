@@ -30,12 +30,12 @@ export class UserSimplifie {
   public pseudo: string;
   public lienAvatar: string;
   public score: string;
-  public codeTrophees: string;
+  public lienTrophees: string;
 
-  constructor(lienAvatar: string, pseudo: string, score: string, codeTrophees: string) {
+  constructor(lienAvatar: string, pseudo: string, score: string, lienTrophees: string) {
     this.pseudo = pseudo
     this.lienAvatar = lienAvatar
     this.score = score
-    this.codeTrophees = codeTrophees
+    this.lienTrophees = lienTrophees
   }
 }

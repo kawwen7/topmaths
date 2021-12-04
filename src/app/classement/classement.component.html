@@ -22,7 +22,7 @@
         <div class="column is-two-fifths" style="display: flex; align-items: center; justify-content: center;">
           <div *ngIf="user.pseudo != 'anonyme'" class="is-inline-block">
             <div class="column is-three-fifths" style="display: flex; align-items: center; justify-content: center;">
-              <div *ngIf="user.codeTrophees != ''" class="dropdown is-right is-hoverable is-inline-block">
+              <div *ngIf="user.lienTrophees != ''" class="dropdown is-right is-hoverable is-inline-block">
                 <div class="dropdown-trigger">
                   <a (click)="voirTropheesPerso(user)">{{user.pseudo}}</a>
                 </div>
@@ -34,7 +34,7 @@
                   </div>
                 </div>
               </div>
-              <div *ngIf="user.codeTrophees == ''" class="is-inline-block">{{user.pseudo}}</div>
+              <div *ngIf="user.lienTrophees == ''" class="is-inline-block">{{user.pseudo}}</div>
             </div>
           </div>
           <div *ngIf="user.pseudo == 'anonyme'" class="is-inline-block">

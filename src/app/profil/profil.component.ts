@@ -38,6 +38,7 @@ export class ProfilComponent implements OnInit {
   modalePseudo!: HTMLElement
   enCoursDeModif: string
   modifTerminee: string
+  tropheeEnCoursDeVerif: string
 
   constructor(private fb: FormBuilder, public http: HttpClient, public appComponent: AppComponent, public dataService: ApiService, private router: Router) {
     this.angForm = this.fb.group({
@@ -49,6 +50,7 @@ export class ProfilComponent implements OnInit {
     this.errSpChar = false
     this.errCodeIncorrect = false
     this.shake = false
+    this.tropheeEnCoursDeVerif = ''
     this.surveilleChamp()
     this.yeux = {
       value: 1,
@@ -129,6 +131,11 @@ export class ProfilComponent implements OnInit {
       if (valeursModifiees.includes('scores') || valeursModifiees.includes('visible') || valeursModifiees.includes('tropheesVisibles')) {
         this.modifTerminee = this.enCoursDeModif
         this.enCoursDeModif = ''
+      }
+      if (valeursModifiees.includes('trophees')) {
+        this.shake = false
+        this.errCodeIncorrect = false
+        if (this.tropheeEnCoursDeVerif != '') this.dataService.majLienTrophees(this.tropheeEnCoursDeVerif)
       }
     })
   }
@@ -448,32 +455,8 @@ export class ProfilComponent implements OnInit {
     this.shake = true
     this.errCodeIncorrect = true
     this.dataService.user.codeTrophees = ''
-    this.http.get<Trophee5e[]>('assets/data/trophees5e.json').subscribe(trophees5e => {
-      for (const key in trophees5e) {
-        if (Object.prototype.hasOwnProperty.call(trophees5e, key)) {
-          const eleve = trophees5e[key]
-          if (eleve.reference == codeTrophee) {
-            this.shake = false
-            this.errCodeIncorrect = false
-            this.dataService.majLienTrophees(codeTrophee)
-            break
-          }
-        }
-      }
-    })
-    this.http.get<Trophee4e[]>('assets/data/trophees4e.json').subscribe(trophees4e => {
-      for (const key in trophees4e) {
-        if (Object.prototype.hasOwnProperty.call(trophees4e, key)) {
-          const eleve = trophees4e[key]
-          if (eleve.reference == codeTrophee) {
-            this.shake = false
-            this.errCodeIncorrect = false
-            this.dataService.majLienTrophees(codeTrophee)
-            break
-          }
-        }
-      }
-    })
+    this.tropheeEnCoursDeVerif = codeTrophee
+    this.dataService.getTrophees('', codeTrophee)
     setTimeout(() => {
       this.shake = false
     }, 1000);

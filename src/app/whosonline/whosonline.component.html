@@ -35,7 +35,7 @@
       </div>
       <!-- Pseudo -->
       <div class="column is-three-fifths" style="display: flex; align-items: center; justify-content: center;">
-        <div *ngIf="onlineUser.codeTrophees != ''" class="dropdown is-right is-hoverable is-inline-block">
+        <div *ngIf="onlineUser.lienTrophees != ''" class="dropdown is-right is-hoverable is-inline-block">
           <div class="dropdown-trigger">
             <a (click)="voirTropheesPerso(onlineUser)">{{onlineUser.pseudo}}</a>
           </div>
@@ -47,7 +47,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="onlineUser.codeTrophees == ''" class="is-inline-block">{{onlineUser.pseudo}}</div>
+        <div *ngIf="onlineUser.lienTrophees == ''" class="is-inline-block">{{onlineUser.pseudo}}</div>
       </div>
       <!-- Scores -->
       <div class="column is-one-fifth" style="display: flex; align-items: center; justify-content: center;">

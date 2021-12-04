@@ -1,0 +1,636 @@
+[
+  {
+    "nom": "5e",
+    "trophees": [
+      {
+        "id": "nombreDeVerts1",
+        "cle": "nombreDeVerts",
+        "categorie": "Obtenir son premier vert",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "nombreDeVerts5",
+        "cle": "nombreDeVerts",
+        "categorie": "Obtenir un vert dans 5 compétences",
+        "nbVertsMin": 5
+      },
+      {
+        "id": "nombreDeVerts10",
+        "cle": "nombreDeVerts",
+        "categorie": "Obtenir un vert dans 10 compétences",
+        "nbVertsMin": 10
+      },
+      {
+        "id": "nombreDeVerts20",
+        "cle": "nombreDeVerts",
+        "categorie": "Obtenir un vert dans 20 compétences",
+        "nbVertsMin": 20
+      },
+      {
+        "id": "nombreDeVerts30",
+        "cle": "nombreDeVerts",
+        "categorie": "Obtenir un vert dans 30 compétences",
+        "nbVertsMin": 30
+      },
+      {
+        "id": "nombreDeVerts50",
+        "cle": "nombreDeVerts",
+        "categorie": "Obtenir un vert dans 50 compétences",
+        "nbVertsMin": 50
+      },
+      {
+        "id": "calculs1",
+        "cle": "calculs",
+        "categorie": "Calculs",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "calculs2",
+        "cle": "calculs",
+        "categorie": "Calculs",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "calculs4",
+        "cle": "calculs",
+        "categorie": "Calculs",
+        "nbVertsMin": 4
+      },
+      {
+        "id": "arithmetique1",
+        "cle": "arithmetique",
+        "categorie": "Arithmétique",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "arithmetique3",
+        "cle": "arithmetique",
+        "categorie": "Arithmétique",
+        "nbVertsMin": 3
+      },
+      {
+        "id": "arithmetique5",
+        "cle": "arithmetique",
+        "categorie": "Arithmétique",
+        "nbVertsMin": 5
+      },
+      {
+        "id": "fractions1",
+        "cle": "fractions",
+        "categorie": "Fractions",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "fractions4",
+        "cle": "fractions",
+        "categorie": "Fractions",
+        "nbVertsMin": 4
+      },
+      {
+        "id": "fractions7",
+        "cle": "fractions",
+        "categorie": "Fractions",
+        "nbVertsMin": 7
+      },
+      {
+        "id": "nombresRelatifs1",
+        "cle": "nombresRelatifs",
+        "categorie": "Nombres Relatifs",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "nombresRelatifs4",
+        "cle": "nombresRelatifs",
+        "categorie": "Nombres Relatifs",
+        "nbVertsMin": 4
+      },
+      {
+        "id": "nombresRelatifs7",
+        "cle": "nombresRelatifs",
+        "categorie": "Nombres Relatifs",
+        "nbVertsMin": 7
+      },
+      {
+        "id": "calculLitteral1",
+        "cle": "calculLitteral",
+        "categorie": "Calcul littéral",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "calculLitteral3",
+        "cle": "calculLitteral",
+        "categorie": "Calcul littéral",
+        "nbVertsMin": 3
+      },
+      {
+        "id": "calculLitteral6",
+        "cle": "calculLitteral",
+        "categorie": "Calcul littéral",
+        "nbVertsMin": 6
+      },
+      {
+        "id": "proportionnalite1",
+        "cle": "proportionnalite",
+        "categorie": "Proportionnalité",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "proportionnalite2",
+        "cle": "proportionnalite",
+        "categorie": "Proportionnalité",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "proportionnalite4",
+        "cle": "proportionnalite",
+        "categorie": "Proportionnalité",
+        "nbVertsMin": 4
+      },
+      {
+        "id": "statistiques1",
+        "cle": "statistiques",
+        "categorie": "Statistiques",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "statistiques3",
+        "cle": "statistiques",
+        "categorie": "Statistiques",
+        "nbVertsMin": 3
+      },
+      {
+        "id": "statistiques5",
+        "cle": "statistiques",
+        "categorie": "Statistiques",
+        "nbVertsMin": 5
+      },
+      {
+        "id": "symetries1",
+        "cle": "symetries",
+        "categorie": "Symétrie",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "symetries2",
+        "cle": "symetries",
+        "categorie": "Symétrie",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "symetries4",
+        "cle": "symetries",
+        "categorie": "Symétrie",
+        "nbVertsMin": 4
+      },
+      {
+        "id": "perimetreEtAire1",
+        "cle": "perimetreEtAire",
+        "categorie": "Périmètre et aire",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "perimetreEtAire2",
+        "cle": "perimetreEtAire",
+        "categorie": "Périmètre et aire",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "perimetreEtAire4",
+        "cle": "perimetreEtAire",
+        "categorie": "Périmètre et aire",
+        "nbVertsMin": 4
+      },
+      {
+        "id": "volume1",
+        "cle": "volume",
+        "categorie": "Volume",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "volume2",
+        "cle": "volume",
+        "categorie": "Volume",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "volume4",
+        "cle": "volume",
+        "categorie": "Volume",
+        "nbVertsMin": 4
+      },
+      {
+        "id": "triangles1",
+        "cle": "triangles",
+        "categorie": "Triangles",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "triangles2",
+        "cle": "triangles",
+        "categorie": "Triangles",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "triangles4",
+        "cle": "triangles",
+        "categorie": "Triangles",
+        "nbVertsMin": 4
+      },
+      {
+        "id": "parallelogrammes1",
+        "cle": "parallelogrammes",
+        "categorie": "Parallélogrammes",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "parallelogrammes2",
+        "cle": "parallelogrammes",
+        "categorie": "Parallélogrammes",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "parallelogrammes3",
+        "cle": "parallelogrammes",
+        "categorie": "Parallélogrammes",
+        "nbVertsMin": 3
+      },
+      {
+        "id": "espace1",
+        "cle": "espace",
+        "categorie": "Espace",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "espace2",
+        "cle": "espace",
+        "categorie": "Espace",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "espace4",
+        "cle": "espace",
+        "categorie": "Espace",
+        "nbVertsMin": 4
+      },
+      {
+        "id": "presenterLeTravailDeSonGroupe1",
+        "cle": "presenterLeTravailDeSonGroupe",
+        "categorie": "Présenter 1 fois le travail de son groupe",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "presenterLeTravailDeSonGroupe2",
+        "cle": "presenterLeTravailDeSonGroupe",
+        "categorie": "Présenter 2 fois le travail de son groupe",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "presenterLeTravailDeSonGroupe3",
+        "cle": "presenterLeTravailDeSonGroupe",
+        "categorie": "Présenter 3 fois le travail de son groupe",
+        "nbVertsMin": 3
+      },
+      {
+        "id": "obtenirSonBrevetDeTuteur0",
+        "cle": "obtenirSonBrevetDeTuteur",
+        "categorie": "Obtenir son brevet de tuteur",
+        "nbVertsMin": 0
+      },
+      {
+        "id": "maitriserScratch0",
+        "cle": "maitriserScratch",
+        "categorie": "Maîtriser Scratch",
+        "nbVertsMin": 0
+      },
+      {
+        "id": "maitriserGeogebra0",
+        "cle": "maitriserGeogebra",
+        "categorie": "Maîtriser Geogebra",
+        "nbVertsMin": 0
+      },
+      {
+        "id": "probabilites2",
+        "cle": "probabilites",
+        "categorie": "Probabilités",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "fonctions2",
+        "cle": "fonctions",
+        "categorie": "Fonctions",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "durees2",
+        "cle": "durees",
+        "categorie": "Durées",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "angles2",
+        "cle": "angles",
+        "categorie": "Angles",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "faireUnExpose0",
+        "cle": "faireUnExpose",
+        "categorie": "Faire un exposé",
+        "nbVertsMin": 0
+      }
+    ]
+  },
+  {
+    "nom": "4e",
+    "trophees": [
+      {
+        "id": "nombreDeVerts1",
+        "cle": "nombreDeVerts",
+        "categorie": "Obtenir son premier vert",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "nombreDeVerts5",
+        "cle": "nombreDeVerts",
+        "categorie": "Obtenir un vert dans 5 compétences",
+        "nbVertsMin": 5
+      },
+      {
+        "id": "nombreDeVerts10",
+        "cle": "nombreDeVerts",
+        "categorie": "Obtenir un vert dans 10 compétences",
+        "nbVertsMin": 10
+      },
+      {
+        "id": "nombreDeVerts20",
+        "cle": "nombreDeVerts",
+        "categorie": "Obtenir un vert dans 20 compétences",
+        "nbVertsMin": 20
+      },
+      {
+        "id": "nombreDeVerts30",
+        "cle": "nombreDeVerts",
+        "categorie": "Obtenir un vert dans 30 compétences",
+        "nbVertsMin": 30
+      },
+      {
+        "id": "nombreDeVerts50",
+        "cle": "nombreDeVerts",
+        "categorie": "Obtenir un vert dans 50 compétences",
+        "nbVertsMin": 50
+      },
+      {
+        "id": "fractions1",
+        "cle": "fractions",
+        "categorie": "Fractions",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "fractions3",
+        "cle": "fractions",
+        "categorie": "Fractions",
+        "nbVertsMin": 3
+      },
+      {
+        "id": "fractions6",
+        "cle": "fractions",
+        "categorie": "Fractions",
+        "nbVertsMin": 6
+      },
+      {
+        "id": "puissances1",
+        "cle": "puissances",
+        "categorie": "Puissances",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "puissances4",
+        "cle": "puissances",
+        "categorie": "Puissances",
+        "nbVertsMin": 4
+      },
+      {
+        "id": "puissances7",
+        "cle": "puissances",
+        "categorie": "Puissances",
+        "nbVertsMin": 7
+      },
+      {
+        "id": "arithmetique1",
+        "cle": "arithmetique",
+        "categorie": "Arithmétique",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "arithmetique2",
+        "cle": "arithmetique",
+        "categorie": "Arithmétique",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "arithmetique3",
+        "cle": "arithmetique",
+        "categorie": "Arithmétique",
+        "nbVertsMin": 3
+      },
+      {
+        "id": "calculLitteral1",
+        "cle": "calculLitteral",
+        "categorie": "Calcul littéral",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "calculLitteral4",
+        "cle": "calculLitteral",
+        "categorie": "Calcul littéral",
+        "nbVertsMin": 4
+      },
+      {
+        "id": "calculLitteral7",
+        "cle": "calculLitteral",
+        "categorie": "Calcul littéral",
+        "nbVertsMin": 7
+      },
+      {
+        "id": "statistiques1",
+        "cle": "statistiques",
+        "categorie": "Statistiques",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "statistiques2",
+        "cle": "statistiques",
+        "categorie": "Statistiques",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "statistiques3",
+        "cle": "statistiques",
+        "categorie": "Statistiques",
+        "nbVertsMin": 3
+      },
+      {
+        "id": "probabilites1",
+        "cle": "probabilites",
+        "categorie": "Probabilités",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "probabilites2",
+        "cle": "probabilites",
+        "categorie": "Probabilités",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "probabilites3",
+        "cle": "probabilites",
+        "categorie": "Probabilités",
+        "nbVertsMin": 3
+      },
+      {
+        "id": "proportionnalite1",
+        "cle": "proportionnalite",
+        "categorie": "Proportionnalité",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "proportionnalite4",
+        "cle": "proportionnalite",
+        "categorie": "Proportionnalité",
+        "nbVertsMin": 4
+      },
+      {
+        "id": "proportionnalite8",
+        "cle": "proportionnalite",
+        "categorie": "Proportionnalité",
+        "nbVertsMin": 8
+      },
+      {
+        "id": "fonctions1",
+        "cle": "fonctions",
+        "categorie": "Fonctions",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "fonctions2",
+        "cle": "fonctions",
+        "categorie": "Fonctions",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "fonctions3",
+        "cle": "fonctions",
+        "categorie": "Fonctions",
+        "nbVertsMin": 3
+      },
+      {
+        "id": "translation1",
+        "cle": "translation",
+        "categorie": "Translation",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "translation2",
+        "cle": "translation",
+        "categorie": "Translation",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "translation3",
+        "cle": "translation",
+        "categorie": "Translation",
+        "nbVertsMin": 3
+      },
+      {
+        "id": "espace1",
+        "cle": "espace",
+        "categorie": "Espace",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "espace2",
+        "cle": "espace",
+        "categorie": "Espace",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "espace4",
+        "cle": "espace",
+        "categorie": "Espace",
+        "nbVertsMin": 4
+      },
+      {
+        "id": "theoremeDePythagore1",
+        "cle": "theoremeDePythagore",
+        "categorie": "Théorème de Pythagore",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "theoremeDePythagore4",
+        "cle": "theoremeDePythagore",
+        "categorie": "Théorème de Pythagore",
+        "nbVertsMin": 4
+      },
+      {
+        "id": "theoremeDePythagore7",
+        "cle": "theoremeDePythagore",
+        "categorie": "Théorème de Pythagore",
+        "nbVertsMin": 7
+      },
+      {
+        "id": "theoremeDeThales1",
+        "cle": "theoremeDeThales",
+        "categorie": "Théorème de Thalès",
+        "nbVertsMin": 1
+      },
+      {
+        "id": "theoremeDeThales2",
+        "cle": "theoremeDeThales",
+        "categorie": "Théorème de Thalès",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "theoremeDeThales4",
+        "cle": "theoremeDeThales",
+        "categorie": "Théorème de Thalès",
+        "nbVertsMin": 4
+      },
+      {
+        "id": "relatifs2",
+        "cle": "relatifs",
+        "categorie": "Relatifs",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "cosinusDunAngleAigu2",
+        "cle": "cosinusDunAngleAigu",
+        "categorie": "Cosinus d’un angle",
+        "nbVertsMin": 2
+      },
+      {
+        "id": "maitriserLinformatique0",
+        "cle": "maitriserLinformatique",
+        "categorie": "Maîtriser l’informatique",
+        "nbVertsMin": 0
+      },
+      {
+        "id": "presenterLeTravailDeSonGroupe0",
+        "cle": "presenterLeTravailDeSonGroupe",
+        "categorie": "Présenter le travail de son groupe",
+        "nbVertsMin": 0
+      },
+      {
+        "id": "faireUnExpose0",
+        "cle": "faireUnExpose",
+        "categorie": "Faire un exposé",
+        "nbVertsMin": 0
+      },
+      {
+        "id": "obtenirSonBrevetDeTuteur0",
+        "cle": "obtenirSonBrevetDeTuteur",
+        "categorie": "Obtenir son Brevet de tuteur",
+        "nbVertsMin": 0
+      }
+    ]
+  }
+]

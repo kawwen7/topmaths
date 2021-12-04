@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
-import { Trophee, Trophee4e, Trophee5e } from '../services/trophees';
+import { Niveau, Trophee, Trophee4e, Trophee5e } from '../services/trophees';
 
 
 @Component({
@@ -11,12 +11,11 @@ import { Trophee, Trophee4e, Trophee5e } from '../services/trophees';
   styleUrls: ['./trophees.component.css']
 })
 export class TropheesComponent implements OnInit {
-  codeTrophee: string
   totalEleves: number
   annee: string
   eleves!: Trophee4e[] | Trophee5e[]
-  eleve!: Trophee4e | Trophee5e
   lignes!: Trophee[][][]
+  stats!: any
   modal!: HTMLElement
   modalChoix!: HTMLElement
   texteModale: string
@@ -24,9 +23,9 @@ export class TropheesComponent implements OnInit {
   sujetEval: string
   peutDemanderRefaireEval: boolean
   timeoutExpire: boolean
+  codeTropheesUrl: string
 
   constructor(public http: HttpClient, private route: ActivatedRoute, public dataService: ApiService) {
-    this.codeTrophee = ''
     this.totalEleves = 0
     this.annee = ''
     this.texteModale = ''
@@ -34,6 +33,14 @@ export class TropheesComponent implements OnInit {
     this.sujetEval = ''
     this.peutDemanderRefaireEval = false
     this.timeoutExpire = false
+    this.codeTropheesUrl = ''
+    dataService.profilModifie.subscribe(valeursModifiees => {
+      if (valeursModifiees.includes('trophees')) {
+        this.recupereTrophees(dataService.trophees.niveau)
+        if (dataService.trophees.peutDemanderEval == 'oui') this.peutDemanderRefaireEval = true
+        else this.peutDemanderRefaireEval = false
+      }
+    })
   }
 
   ngOnInit(): void {
@@ -62,45 +69,11 @@ export class TropheesComponent implements OnInit {
   observeChangementsDeRoute() {
     this.route.params.subscribe(params => {
       if (params.ref == 'autre') {
-        this.codeTrophee = this.dataService.codeTropheesClique
-        this.peutDemanderRefaireEval = false
+        this.codeTropheesUrl = ''
+        this.dataService.getTrophees(this.dataService.lienTropheesClique, '')
       } else {
-        this.codeTrophee = params.ref
-        this.peutDemanderRefaireEval = true
-      }
-      this.modificationDesAttributs()
-    })
-  }
-
-  /**
-   * Cherche la référence dans les json de trophées de chaque niveau
-   * Une fois la référence trouvée, lance la construction de la liste des trophées à afficher
-   */
-  modificationDesAttributs() {
-    this.http.get<Trophee5e[]>('assets/data/trophees5e.json').subscribe(trophees5e => {
-      for (const key in trophees5e) {
-        if (Object.prototype.hasOwnProperty.call(trophees5e, key)) {
-          const eleve = trophees5e[key]
-          if (eleve.reference == this.codeTrophee) {
-            this.eleve = eleve
-            this.eleves = trophees5e
-            this.annee = '5ème'
-            this.recupereTrophees5e()
-          }
-        }
-      }
-    })
-    this.http.get<Trophee4e[]>('assets/data/trophees4e.json').subscribe(trophees4e => {
-      for (const key in trophees4e) {
-        if (Object.prototype.hasOwnProperty.call(trophees4e, key)) {
-          const eleve = trophees4e[key]
-          if (eleve.reference == this.codeTrophee) {
-            this.eleve = eleve
-            this.eleves = trophees4e
-            this.annee = '4ème'
-            this.recupereTrophees4e()
-          }
-        }
+        this.codeTropheesUrl = params.ref
+        this.dataService.getTrophees('', this.codeTropheesUrl)
       }
     })
   }
@@ -108,249 +81,61 @@ export class TropheesComponent implements OnInit {
   /**
    * Construit la liste de trophées à afficher
    */
-  recupereTrophees5e() {
-    const ligne1 = [
-      [
-        this.trophee('5e', 'nombreDeVerts', 'Obtenir son premier vert', 1),
-        this.trophee('5e', 'nombreDeVerts', 'Obtenir un vert dans 5 compétences', 5),
-        this.trophee('5e', 'nombreDeVerts', 'Obtenir un vert dans 10 compétences', 10)
-      ], [
-        this.trophee('5e', 'nombreDeVerts', 'Obtenir un vert dans 20 compétences', 20),
-        this.trophee('5e', 'nombreDeVerts', 'Obtenir un vert dans 30 compétences', 30),
-        this.trophee('5e', 'nombreDeVerts', 'Obtenir un vert dans 50 compétences', 50)
-      ]
-    ]
-    const ligne2 = [
-      [
-        this.trophee('5e', 'calculs', 'Calculs', 1),
-        this.trophee('5e', 'calculs', 'Calculs', 2),
-        this.trophee('5e', 'calculs', 'Calculs', 4)
-      ], [
-        this.trophee('5e', 'arithmetique', 'Arithmétique', 1),
-        this.trophee('5e', 'arithmetique', 'Arithmétique', 3),
-        this.trophee('5e', 'arithmetique', 'Arithmétique', 5)
-      ]
-    ]
-    const ligne3 = [
-      [
-        this.trophee('5e', 'fractions', 'Fractions', 1),
-        this.trophee('5e', 'fractions', 'Fractions', 4),
-        this.trophee('5e', 'fractions', 'Fractions', 7)
-      ], [
-        this.trophee('5e', 'nombresRelatifs', 'Nombres Relatifs', 1),
-        this.trophee('5e', 'nombresRelatifs', 'Nombres Relatifs', 4),
-        this.trophee('5e', 'nombresRelatifs', 'Nombres Relatifs', 7)
-      ]
-    ]
-    const ligne4 = [
-      [
-        this.trophee('5e', 'calculLitteral', 'Calcul littéral', 1),
-        this.trophee('5e', 'calculLitteral', 'Calcul littéral', 3),
-        this.trophee('5e', 'calculLitteral', 'Calcul littéral', 6)
-      ], [
-        this.trophee('5e', 'proportionnalite', 'Proportionnalité', 1),
-        this.trophee('5e', 'proportionnalite', 'Proportionnalité', 2),
-        this.trophee('5e', 'proportionnalite', 'Proportionnalité', 4)
-      ]
-    ]
-    const ligne5 = [
-      [
-        this.trophee('5e', 'statistiques', 'Statistiques', 1),
-        this.trophee('5e', 'statistiques', 'Statistiques', 3),
-        this.trophee('5e', 'statistiques', 'Statistiques', 5)
-      ], [
-        this.trophee('5e', 'symetries', 'Symétrie', 1),
-        this.trophee('5e', 'symetries', 'Symétrie', 2),
-        this.trophee('5e', 'symetries', 'Symétrie', 4)
-      ]
-    ]
-    const ligne6 = [
-      [
-        this.trophee('5e', 'perimetreEtAire', 'Périmètre et aire', 1),
-        this.trophee('5e', 'perimetreEtAire', 'Périmètre et aire', 2),
-        this.trophee('5e', 'perimetreEtAire', 'Périmètre et aire', 4)
-      ], [
-        this.trophee('5e', 'volume', 'Volume', 1),
-        this.trophee('5e', 'volume', 'Volume', 2),
-        this.trophee('5e', 'volume', 'Volume', 4)
-      ]
-    ]
-    const ligne7 = [
-      [
-        this.trophee('5e', 'triangles', 'Triangles', 1),
-        this.trophee('5e', 'triangles', 'Triangles', 2),
-        this.trophee('5e', 'triangles', 'Triangles', 4)
-      ], [
-        this.trophee('5e', 'parallelogrammes', 'Parallélogrammes', 1),
-        this.trophee('5e', 'parallelogrammes', 'Parallélogrammes', 2),
-        this.trophee('5e', 'parallelogrammes', 'Parallélogrammes', 3)
-      ]
-    ]
-    const ligne8 = [
-      [
-        this.trophee('5e', 'espace', 'Espace', 1),
-        this.trophee('5e', 'espace', 'Espace', 2),
-        this.trophee('5e', 'espace', 'Espace', 4)
-      ], [
-        this.trophee('5e', 'presenterLeTravailDeSonGroupe', 'Présenter 1 fois le travail de son groupe', 1),
-        this.trophee('5e', 'presenterLeTravailDeSonGroupe', 'Présenter 2 fois le travail de son groupe', 2),
-        this.trophee('5e', 'presenterLeTravailDeSonGroupe', 'Présenter 3 fois le travail de son groupe', 3)
-      ]
-    ]
-    const ligne9 = [
-      [
-        this.trophee('5e', 'obtenirSonBrevetDeTuteur', 'Obtenir son brevet de tuteur'),
-        this.trophee('5e', 'maitriserScratch', 'Maîtriser Scratch'),
-        this.trophee('5e', 'maitriserGeogebra', 'Maîtriser Geogebra')
-      ], [
-        this.trophee('5e', 'probabilites', 'Probabilités', 2),
-        this.trophee('5e', 'fonctions', 'Fonctions', 2),
-        this.trophee('5e', 'durees', 'Durées', 2)
-      ]
-    ]
-    const ligne10 = [
-      [
-        this.trophee('5e', 'angles', 'Angles', 2),
-        this.trophee('5e', 'faireUnExpose', 'Faire un exposé')
-      ]
-    ]
-    this.lignes = [ligne1, ligne2, ligne3, ligne4, ligne5, ligne6, ligne7, ligne8, ligne9, ligne10]
-    this.recupereStats()
+  recupereTrophees(annee: string) {
+    if (annee == '4e') this.annee = '4ème'
+    else if (annee == '5e') this.annee = '5ème'
+    this.http.get<Niveau[]>('assets/data/listeTrophees.json').subscribe(niveaux => {
+      for (const niveau of niveaux) {
+        if (niveau.nom == annee) {
+          this.lignes = []
+          let i = 1, ligne = [], groupe = []
+          for (const trophee of niveau.trophees) {
+            groupe.push(this.trophee(annee, trophee.id, trophee.cle, trophee.categorie, trophee.nbVertsMin))
+            if (i % 3 == 0) {
+              ligne.push(groupe)
+              groupe = []
+            }
+            if (i % 6 == 0) {
+              this.lignes.push(ligne)
+              ligne = []
+            }
+            i++
+          }
+        }
+      }
+      this.http.get(`assets/data/stats${annee}.json`).subscribe(stats => {
+        this.stats = stats
+        this.recupereStats()
+      })
+    }
+    )
   }
 
   /**
-   * Construit la liste de trophées à afficher
-   */
-  recupereTrophees4e() {
-    const ligne1 = [
-      [
-        this.trophee('4e', 'nombreDeVerts', 'Obtenir son premier vert', 1),
-        this.trophee('4e', 'nombreDeVerts', 'Obtenir un vert dans 5 compétences', 5),
-        this.trophee('4e', 'nombreDeVerts', 'Obtenir un vert dans 10 compétences', 10)
-      ], [
-        this.trophee('4e', 'nombreDeVerts', 'Obtenir un vert dans 20 compétences', 20),
-        this.trophee('4e', 'nombreDeVerts', 'Obtenir un vert dans 30 compétences', 30),
-        this.trophee('4e', 'nombreDeVerts', 'Obtenir un vert dans 50 compétences', 50)
-      ]
-    ]
-    const ligne2 = [
-      [
-        this.trophee('4e', 'fractions', 'Fractions', 1),
-        this.trophee('4e', 'fractions', 'Fractions', 3),
-        this.trophee('4e', 'fractions', 'Fractions', 6)
-      ], [
-        this.trophee('4e', 'puissances', 'Puissances', 1),
-        this.trophee('4e', 'puissances', 'Puissances', 4),
-        this.trophee('4e', 'puissances', 'Puissances', 7)
-      ]
-    ]
-    const ligne3 = [
-      [
-        this.trophee('4e', 'arithmetique', 'Arithmétique', 1),
-        this.trophee('4e', 'arithmetique', 'Arithmétique', 2),
-        this.trophee('4e', 'arithmetique', 'Arithmétique', 3)
-      ], [
-        this.trophee('4e', 'calculLitteral', 'Calcul littéral', 1),
-        this.trophee('4e', 'calculLitteral', 'Calcul littéral', 4),
-        this.trophee('4e', 'calculLitteral', 'Calcul littéral', 7)
-      ]
-    ]
-    const ligne4 = [
-      [
-        this.trophee('4e', 'statistiques', 'Statistiques', 1),
-        this.trophee('4e', 'statistiques', 'Statistiques', 2),
-        this.trophee('4e', 'statistiques', 'Statistiques', 3)
-      ], [
-        this.trophee('4e', 'probabilites', 'Probabilités', 1),
-        this.trophee('4e', 'probabilites', 'Probabilités', 2),
-        this.trophee('4e', 'probabilites', 'Probabilités', 3)
-      ]
-    ]
-    const ligne5 = [
-      [
-        this.trophee('4e', 'proportionnalite', 'Proportionnalité', 1),
-        this.trophee('4e', 'proportionnalite', 'Proportionnalité', 4),
-        this.trophee('4e', 'proportionnalite', 'Proportionnalité', 8)
-      ], [
-        this.trophee('4e', 'fonctions', 'Fonctions', 1),
-        this.trophee('4e', 'fonctions', 'Fonctions', 2),
-        this.trophee('4e', 'fonctions', 'Fonctions', 3)
-      ]
-    ]
-    const ligne6 = [
-      [
-        this.trophee('4e', 'translation', 'Translation', 1),
-        this.trophee('4e', 'translation', 'Translation', 2),
-        this.trophee('4e', 'translation', 'Translation', 3)
-      ], [
-        this.trophee('4e', 'espace', 'Espace', 1),
-        this.trophee('4e', 'espace', 'Espace', 2),
-        this.trophee('4e', 'espace', 'Espace', 4)
-      ]
-    ]
-    const ligne7 = [
-      [
-        this.trophee('4e', 'theoremeDePythagore', 'Théorème de Pythagore', 1),
-        this.trophee('4e', 'theoremeDePythagore', 'Théorème de Pythagore', 4),
-        this.trophee('4e', 'theoremeDePythagore', 'Théorème de Pythagore', 7)
-      ], [
-        this.trophee('4e', 'theoremeDeThales', 'Théorème de Thalès', 1),
-        this.trophee('4e', 'theoremeDeThales', 'Théorème de Thalès', 2),
-        this.trophee('4e', 'theoremeDeThales', 'Théorème de Thalès', 4)
-      ]
-    ]
-    const ligne8 = [
-      [
-        this.trophee('4e', 'relatifs', 'Relatifs', 2),
-        this.trophee('4e', 'cosinusDunAngleAigu', 'Cosinus d’un angle', 2),
-        this.trophee('4e', 'maitriserLinformatique', 'Maîtriser l’informatique')
-      ], [
-        this.trophee('4e', 'presenterLeTravailDeSonGroupe', 'Présenter le travail de son groupe'),
-        this.trophee('4e', 'faireUnExpose', 'Faire un exposé'),
-        this.trophee('4e', 'obtenirSonBrevetDeTuteur', 'Obtenir son Brevet de tuteur')
-      ]
-    ]
-    this.lignes = [ligne1, ligne2, ligne3, ligne4, ligne5, ligne6, ligne7, ligne8]
-    this.recupereStats()
-  }
-
-  /**
-   * Calcule le nombre total d'élèves,
+   * Récupère le nombre total d'élèves,
    * Ajoute à chaque trophée le nombre d'élèves qui l'ont obtenu,
    * Met à jour le tooltip affiché au survol du trophée
    */
   recupereStats() {
-    this.totalEleves = 0
-    for (const eleve in this.eleves) {
-      this.totalEleves++
-    }
+    this.totalEleves = this.getTropheeStat({id: 'total', lien: '', description: '', cle: '', categorie: '', nbVertsMin: 0, nb: 0, tooltip: '', refaire: ''})
     for (const ligne of this.lignes) {
       for (const groupe of ligne) {
         for (const trophee of groupe) {
-          let nb: number = 0
-          for (const eleve in this.eleves) {
-            if (Object.prototype.hasOwnProperty.call(this.eleves, eleve)) {
-              const cle = trophee.cle
-              if (this.hasKey(this.eleves[eleve], cle)) {
-                let nbVerts : number = 0
-                if (this.hasKey(this.eleves[eleve], cle)) {
-                  const nombreVerts = this.eleves[eleve][cle]
-                  typeof(nombreVerts) == 'string' ? nbVerts = parseInt(nombreVerts) : nbVerts = nombreVerts
-                }
-                if (trophee.nbVertsMin > 0) {
-                  if (nbVerts >= trophee.nbVertsMin) nb++
-                } else {
-                  if (nbVerts >= 1) nb++
-                }
-              }
-            }
-          }
-          trophee.nb = nb
+          trophee.nb = this.getTropheeStat(trophee)
           trophee.tooltip = this.tooltip(trophee)
           trophee.refaire = this.refaire(trophee)
         }
       }
     }
+  }
+
+  getTropheeStat(trophee: Trophee) {
+    for (const stat of this.stats) {
+      if (this.hasKey(stat, trophee.id)) {
+        return stat[trophee.id]
+      }
+    }
+    return 999
   }
   /**
    * Construit un objet trophée pour l'afficher sur la grille
@@ -360,7 +145,7 @@ export class TropheesComponent implements OnInit {
    * @param nbVertsMin 
    * @returns 
    */
-  trophee(niveau: string, cle: string, categorie: string, nbVertsMin: number = 0) {
+  trophee(niveau: string, id: string, cle: string, categorie: string, nbVertsMin: number = 0) {
     const base = `assets/img/trophees/${niveau}/`
     let nomImage
     let lien
@@ -371,7 +156,7 @@ export class TropheesComponent implements OnInit {
       nomImage = cle
       lien = base + this.obtenuOuPas(cle, 1) + nomImage + '.png'
     }
-    return new Trophee(lien, this.description(categorie, nbVertsMin), cle, categorie, nbVertsMin, 0, '', '')
+    return new Trophee(id, lien, this.description(categorie, nbVertsMin), cle, categorie, nbVertsMin, 0, '', '')
   }
 
   /**
@@ -382,8 +167,8 @@ export class TropheesComponent implements OnInit {
    * @returns dossier d'images de trophées correspondant
    */
   obtenuOuPas(cle: string, nbVertsMin: number) {
-    if (this.hasKey(this.eleve, cle)) {
-      if (this.eleve[cle] >= nbVertsMin) {
+    if (this.hasKey(this.dataService.trophees, cle)) {
+      if (this.dataService.trophees[cle] >= nbVertsMin) {
         return 'obtenus/'
       } else {
         return 'vierges/'
@@ -420,10 +205,10 @@ export class TropheesComponent implements OnInit {
    */
   tooltip(trophee: Trophee) {
     const nbVertsMin = trophee.nbVertsMin
-    let nbVerts : number = 0
-    if (this.hasKey(this.eleve, trophee.cle)) {
-      const nombreVerts = this.eleve[trophee.cle]
-      typeof(nombreVerts) == 'string' ? nbVerts = parseInt(nombreVerts) : nbVerts = nombreVerts
+    let nbVerts: number = 0
+    if (this.hasKey(this.dataService.trophees, trophee.cle)) {
+      const nombreVerts = this.dataService.trophees[trophee.cle]
+      typeof (nombreVerts) == 'string' ? nbVerts = parseInt(nombreVerts) : nbVerts = nombreVerts
     }
     const pourcent = Math.floor(trophee.nb / this.totalEleves * 100)
     let texte: string
@@ -462,10 +247,10 @@ export class TropheesComponent implements OnInit {
    */
   refaire(trophee: Trophee) {
     const nbVertsMin = trophee.nbVertsMin
-    let nbVerts : number = 0
-    if (this.hasKey(this.eleve, trophee.cle)) {
-      const nombreVerts = this.eleve[trophee.cle]
-      typeof(nombreVerts) == 'string' ? nbVerts = parseInt(nombreVerts) : nbVerts = nombreVerts
+    let nbVerts: number = 0
+    if (this.hasKey(this.dataService.trophees, trophee.cle)) {
+      const nombreVerts = this.dataService.trophees[trophee.cle]
+      typeof (nombreVerts) == 'string' ? nbVerts = parseInt(nombreVerts) : nbVerts = nombreVerts
     }
     const nb = trophee.nb
     let texte: string = ''
@@ -482,10 +267,10 @@ export class TropheesComponent implements OnInit {
    */
   refaireEvaluation(trophee: Trophee) {
     const nbVertsMin = trophee.nbVertsMin
-    let nbVerts : number = 0
-    if (this.hasKey(this.eleve, trophee.cle)) {
-      const nombreVerts = this.eleve[trophee.cle]
-      typeof(nombreVerts) == 'string' ? nbVerts = parseInt(nombreVerts) : nbVerts = nombreVerts
+    let nbVerts: number = 0
+    if (this.hasKey(this.dataService.trophees, trophee.cle)) {
+      const nombreVerts = this.dataService.trophees[trophee.cle]
+      typeof (nombreVerts) == 'string' ? nbVerts = parseInt(nombreVerts) : nbVerts = nombreVerts
     }
     const nb = trophee.nb
     if (nb > 0 && ((nbVerts < nbVertsMin) || (typeof (trophee['nbVertsMin']) == 'undefined' && nbVerts === 0))) {
@@ -504,13 +289,13 @@ export class TropheesComponent implements OnInit {
    */
   envoiConfirmation() {
     this.fermerModal('confirmation')
-    if (this.codeTrophee != this.dataService.user.codeTrophees && this.dataService.user.codeTrophees != '') {
+    if (this.codeTropheesUrl != this.dataService.user.codeTrophees && this.dataService.user.codeTrophees != '') {
       this.texteModaleChoix = `
-      Tu est sur la page de trophées de code "${this.codeTrophee}" mais dans ton profil tu as fait le lien avec le code trophées "${this.dataService.user.codeTrophees}".<br>
+      Tu es sur la page de trophées de code "${this.codeTropheesUrl}" mais dans ton profil tu as fait le lien avec le code trophées "${this.dataService.user.codeTrophees}".<br>
       Lequel est le code trophées de l'élève qui veut refaire l'évaluation ?`
       this.ouvrirModal('choix')
     } else {
-      this.dataService.envoiMailEval(this.codeTrophee, this.sujetEval)
+      this.dataService.envoiMailEval(this.codeTropheesUrl, this.sujetEval)
     }
   }
 
