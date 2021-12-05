@@ -47,7 +47,19 @@ import { TropheesComponent } from './trophees/trophees.component';
     ReactiveFormsModule,
     NgxSliderModule,
     NgParticlesModule,
-    MathjaxModule.forRoot(/*Optional Config, check https://github.com/sajivkumar/mathjax-angular */),
+    MathjaxModule.forRoot({
+      "config": {
+        "loader": {
+          "load": ["output/svg", "[tex]/require", "[tex]/ams"]
+        },
+        "tex": {
+          "inlineMath": [["$", "$"]],
+          "packages": ["base", "require", "ams"]
+        },
+        "svg": { "fontCache": "global" }
+      },
+      "src": "https://cdn.jsdelivr.net/npm/mathjax@3.0.0/es5/startup.js"
+    }),
     MathjaxModule.forChild()
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],

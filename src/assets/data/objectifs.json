@@ -668,7 +668,7 @@
               {
                 "reference": "4C33",
                 "titre": "Utiliser les puissances d’exposants strictement positifs d’un nombre pour simplifier l’écriture des produits",
-                "rappelDuCoursHTML": "<center>$a^n = \\underbrace{a \\times a \\times a \\times ... \\times a}_{\\text{Le } a \\text{ apparaît } n \\text{ fois}}$</center>",
+                "rappelDuCoursHTML": "<center> $ a^n = \\underbrace{a \\times a \\times a \\times ... \\times a}_{\\text{Le } a \\text{ apparaît } n \\text{ fois}} $ </center>",
                 "rappelDuCoursImage": "",
                 "videos": [
                   {
@@ -1165,6 +1165,34 @@
                 ]
               },
               {
+                "reference": "3L12",
+                "titre": "Développer et factoriser à l'aide des identités remarquables",
+                "rappelDuCoursHTML": "<center> $ \\require{color} ({\\color{green} a} + {\\color{blue} b})^2 = {\\color{green} a}^2 + 2{\\color{green} a}{\\color{blue} b} + {\\color{blue} b}^2 $ <br> $({\\color{green} a} - {\\color{blue} b})^2 = {\\color{green} a}^2 - 2{\\color{green} a}{\\color{blue} b} + {\\color{blue} b}^2$ <br> $ ({\\color{green} a} + {\\color{blue} b})({\\color{green} a} - {\\color{blue} b}) = {\\color{green} a}^2 - {\\color{blue} b}^2$ </center>",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "",
+                    "auteur": "",
+                    "lienAuteur": ""
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "2N41-6,s=1,n=3",
+                    "score": "0"
+                  },
+                  {
+                    "slug": "2N41-6,s=2,n=3",
+                    "score": "0"
+                  },
+                  {
+                    "slug": "3L12,s=2,n=3",
+                    "score": "10"
+                  }
+                ]
+              },
+              {
                 "reference": "3L13",
                 "titre": "Résoudre algébriquement des équations du 1er degré",
                 "rappelDuCoursHTML": "",
@@ -1370,6 +1398,35 @@
                   },
                   {
                     "slug": "3G20,s=2,n=1,video=j_zZOpLLl9k,cd=1",
+                    "score": "15"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nom": "Trigonométrie",
+            "objectifs": [
+              {
+                "reference": "3G30",
+                "titre": "Déterminer une longueur à l’aide des lignes trigonométriques",
+                "rappelDuCoursHTML": "<center> $  \\require{color} \\text{C} {\\color{green}\\text{A}}{\\color{red}\\text{H}} ~~ \\text{S}{\\color{blue}\\text{O}}{\\color{red}\\text{H}} ~~ \\text{T}{\\color{blue}\\text{O}} {\\color{green}\\text{A}} $ <br><br> $ \\text{Cosinus} = \\cfrac{{\\color{green}\\text{Adjacent}}}{{\\color{red}\\text{Hypoténuse}}} $ <br><br> $ \\text{Sinus} = \\cfrac{{\\color{blue}\\text{Opposé}}}{{\\color{red}\\text{Hypoténuse}}} $ <br><br> $ \\text{Tangente} = \\cfrac{{\\color{blue}\\text{Opposé}}}{{\\color{green}\\text{Adjacent}}} $</center>",
+                "rappelDuCoursImage": "",
+                "videos": [
+                  {
+                    "titre": "",
+                    "slug": "",
+                    "auteur": "",
+                    "lienAuteur": ""
+                  }
+                ],
+                "exercices": [
+                  {
+                    "slug": "3G30,s=true,cd=0",
+                    "score": "10"
+                  },
+                  {
+                    "slug": "3G30,s=false,cd=0",
                     "score": "15"
                   }
                 ]

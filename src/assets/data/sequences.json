@@ -583,7 +583,8 @@
             "niveaux": [
               {
                 "commentaire": "",
-                "lien": ""
+                "lien": "",
+                "score": ""
               }
             ]
           }
@@ -614,7 +615,8 @@
             "niveaux": [
               {
                 "commentaire": "",
-                "lien": ""
+                "lien": "",
+                "score": ""
               }
             ]
           }
@@ -648,7 +650,8 @@
             "niveaux": [
               {
                 "commentaire": "",
-                "lien": ""
+                "lien": "",
+                "score": ""
               }
             ]
           }
@@ -711,7 +714,8 @@
             "niveaux": [
               {
                 "commentaire": "",
-                "lien": ""
+                "lien": "",
+                "score": ""
               }
             ]
           }
@@ -748,7 +752,8 @@
             "niveaux": [
               {
                 "commentaire": "",
-                "lien": ""
+                "lien": "",
+                "score": ""
               }
             ]
           }
@@ -776,7 +781,47 @@
             "niveaux": [
               {
                 "commentaire": "",
-                "lien": ""
+                "lien": "https://mathsmentales.net/?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=false_i=5NC7~o=5~q=5.0,1~p=~t=20~n=2_i=5NC8~o=6~q=6.0,1~p=~t=20~n=2_i=4NC3~o=1~q=1.~p=~t=20~n=2_i=4NC4~o=1~q=1.0~p=~t=20~n=2",
+                "score": "5"
+              },
+              {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=false_i=4NC4~o=1~q=1.0,1~p=~t=20~n=2_i=4NC3~o=1~q=1.~p=~t=20~n=2_i=5NC7~o=7~q=7.~p=~t=20~n=2_i=5NC8~o=8~q=8.~p=~t=20~n=2",
+                "score": "10"
+              }
+            ]
+          }
+        ],
+        "questionsFlash": [
+          {
+            "reference": "",
+            "titre": "",
+            "slug": ""
+          }
+        ]
+      },
+      {
+        "reference": "S3S8",
+        "titre": "Trigonométrie 1",
+        "objectifs": [
+          {
+            "reference": "3G30"
+          }
+        ],
+        "calculsMentaux": [
+          {
+            "reference": "3L12",
+            "titre": "Développer et factoriser",
+            "niveaux": [
+              {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=false_i=3ND2~o=0,1,2~q=0.0,1-1.0,1-2.0,1,2,3~p=~t=30~n=8",
+                "score": "10"
+              },
+              {
+                "commentaire": "",
+                "lien": "https://mathsmentales.net/?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=false_i=3ND1~o=2~q=2.0,1-3.~p=~t=30~n=4_i=4NE5~o=0,1,2,3~q=0.-1.-2.-3.~p=~t=30~n=4",
+                "score": "15"
               }
             ]
           }
