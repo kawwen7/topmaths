@@ -5,7 +5,6 @@ import { ApiService } from '../services/api.service';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Trophee4e, Trophee5e } from '../services/trophees';
 interface Slider {
   value: number,
   options: Options
@@ -38,7 +37,6 @@ export class ProfilComponent implements OnInit {
   modalePseudo!: HTMLElement
   enCoursDeModif: string
   modifTerminee: string
-  tropheeEnCoursDeVerif: string
 
   constructor(private fb: FormBuilder, public http: HttpClient, public appComponent: AppComponent, public dataService: ApiService, private router: Router) {
     this.angForm = this.fb.group({
@@ -50,7 +48,6 @@ export class ProfilComponent implements OnInit {
     this.errSpChar = false
     this.errCodeIncorrect = false
     this.shake = false
-    this.tropheeEnCoursDeVerif = ''
     this.surveilleChamp()
     this.yeux = {
       value: 1,
@@ -132,10 +129,9 @@ export class ProfilComponent implements OnInit {
         this.modifTerminee = this.enCoursDeModif
         this.enCoursDeModif = ''
       }
-      if (valeursModifiees.includes('trophees')) {
+      if (valeursModifiees.includes('codeTrophees')) {
         this.shake = false
         this.errCodeIncorrect = false
-        if (this.tropheeEnCoursDeVerif != '') this.dataService.majLienTrophees(this.tropheeEnCoursDeVerif)
       }
     })
   }
@@ -455,7 +451,6 @@ export class ProfilComponent implements OnInit {
     this.shake = true
     this.errCodeIncorrect = true
     this.dataService.user.codeTrophees = ''
-    this.tropheeEnCoursDeVerif = codeTrophee
     this.dataService.getTrophees('', codeTrophee)
     setTimeout(() => {
       this.shake = false
@@ -467,7 +462,7 @@ export class ProfilComponent implements OnInit {
    */
   supprimerLienTrophees() {
     this.dataService.user.codeTrophees = ''
-    this.dataService.majLienTrophees('')
+    this.dataService.majCodeTrophees('')
   }
 
   /**

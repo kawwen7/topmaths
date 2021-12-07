@@ -459,7 +459,7 @@ export class ApiService {
    * Met à jour le codeTrophees du profil local et de celui de la bdd
    * @param codeTrophees
    */
-  majLienTrophees(codeTrophees: string) {
+  majCodeTrophees(codeTrophees: string) {
     this.user.codeTrophees = codeTrophees
     this.majProfil(['codeTrophees'])
   }
@@ -512,6 +512,9 @@ export class ApiService {
   getTrophees(lienTrophees: string, codeTrophees: string) {
     this.http.post<Trophee5e | Trophee4e>(this.baseUrl + `/trophees.php`, { lienTrophees: lienTrophees, codeTrophees: codeTrophees }).subscribe(
       trophees => {
+        if (codeTrophees != '' && lienTrophees == '') {
+          this.majCodeTrophees(codeTrophees)
+        }
         this.trophees = trophees
         this.profilModifie.emit(['trophees'])
       },
