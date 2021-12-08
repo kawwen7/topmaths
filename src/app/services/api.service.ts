@@ -246,7 +246,7 @@ export class ApiService {
           'score',
           'codeTrophees',
           'tropheesVisibles'])
-          this.router.navigate(['profil'])
+        this.router.navigate(['profil'])
       }, error => {
         this.erreurRegistration('userregistration', error['message'])
       });
@@ -416,27 +416,45 @@ export class ApiService {
    * Renvoie vers l'accueil.
    */
   logout() {
-    this.http.post(this.baseUrl + `/logout.php`, this.user).subscribe(
-      data => {
-        this.deleteToken()
-        this.user = new User('', '', '', '', '', '', '', '', '', '', '')
-        this.isloggedIn = false
-        this.profilModifie.emit([
-          'identifiant',
-          'lienAvatar',
-          'scores',
-          'lastLogin',
-          'lastAction',
-          'visible',
-          'pseudo',
-          'score',
-          'codeTrophees',
-          'tropheesVisibles'])
-        this.router.navigate(['accueil'])
-      },
-      error => {
-        console.log(error)
-      });
+    if (isDevMode()) {
+      this.deleteToken()
+      this.user = new User('', '', '', '', '', '', '', '', '', '', '')
+      this.isloggedIn = false
+      this.profilModifie.emit([
+        'identifiant',
+        'lienAvatar',
+        'scores',
+        'lastLogin',
+        'lastAction',
+        'visible',
+        'pseudo',
+        'score',
+        'codeTrophees',
+        'tropheesVisibles'])
+      this.router.navigate(['accueil'])
+    } else {
+      this.http.post(this.baseUrl + `/logout.php`, this.user).subscribe(
+        data => {
+          this.deleteToken()
+          this.user = new User('', '', '', '', '', '', '', '', '', '', '')
+          this.isloggedIn = false
+          this.profilModifie.emit([
+            'identifiant',
+            'lienAvatar',
+            'scores',
+            'lastLogin',
+            'lastAction',
+            'visible',
+            'pseudo',
+            'score',
+            'codeTrophees',
+            'tropheesVisibles'])
+          this.router.navigate(['accueil'])
+        },
+        error => {
+          console.log(error)
+        });
+    }
   }
 
   /**

@@ -15,6 +15,7 @@ export class LoginComponent {
   errPetitNbChar: boolean
   errSpChar: boolean
   shake: boolean
+  loginVisible: boolean
 
   constructor(private fb: FormBuilder, public dataService: ApiService, private router: Router) {
     this.angForm = this.fb.group({
@@ -25,9 +26,10 @@ export class LoginComponent {
     this.errPetitNbChar = false
     this.errSpChar = false
     this.shake = false
+    this.loginVisible = false
     this.surveilleChamp()
     this.dataService.profilModifie.subscribe(valeursModifiees => {
-      if(valeursModifiees.includes('identifiant')) this.router.navigate(['/profil'])
+      if (valeursModifiees.includes('identifiant')) this.router.navigate(['/profil'])
     })
   }
 
@@ -36,7 +38,7 @@ export class LoginComponent {
    * se connecte sinon
    * @param identifiant 
    */
-  login(identifiant: string){
+  login(identifiant: string) {
     if (this.errPetitNbChar || this.errGrandNbChar || this.errSpChar) {
       this.shake = true
       setTimeout(() => this.shake = false, 500)
@@ -49,7 +51,7 @@ export class LoginComponent {
    * Surveille le champ de connexion,
    * actualise les booléens sur lesquels s'appuie le formatage du champ
    */
-  surveilleChamp(){
+  surveilleChamp() {
     this.angForm.valueChanges.subscribe(x => {
       const str = x.identifiant
       this.defaut = true
@@ -61,5 +63,19 @@ export class LoginComponent {
       if (str.length > 5) this.errGrandNbChar = true
       if (!this.dataService.onlyLettersAndNumbers(str)) this.errSpChar = true
     })
+  }
+
+  /**
+   * Montre ou cache l'identifiant
+   */
+  montrerCacherIdentifiant() {
+    const champLogin = <HTMLInputElement>document.getElementById('champLogin')
+    if (champLogin.type === 'password') {
+      champLogin.type = 'text'
+      this.loginVisible = true
+    } else {
+      champLogin.type = 'password'
+      this.loginVisible = false
+    }
   }
 }
