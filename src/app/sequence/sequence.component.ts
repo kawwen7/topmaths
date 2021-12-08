@@ -324,9 +324,7 @@ export class SequenceComponent implements OnInit {
       extension = 'pdf'
     }
     let lien = `assets/${type}/${this.reference.slice(1, 2)}e/${type.charAt(0).toUpperCase() + type.slice(1)}_${this.reference}.${extension}`
-    if (!this.doesFileExist(lien)) {
-      lien = ''
-    }
+    this.verifieExistence(type, lien)
     return lien
   }
 
@@ -343,18 +341,40 @@ export class SequenceComponent implements OnInit {
 
   /**
    * Vérifie si un fichier existe ou pas
+   * S'il existe, on modifie le innerHTML du div concerné et on affiche le div des téléchargements
    * @param urlToFile url du fichier
    * @returns true s'il existe, false sinon
    */
-  doesFileExist(urlToFile: string) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('HEAD', urlToFile, true);
-    xhr.send();
-
-    if (xhr.status == 404) {
-      return false;
-    } else {
-      return true;
-    }
+  verifieExistence(type: string, urlToFile: string) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        let divId = '', description
+        switch (type) {
+          case 'cours':
+            divId = 'lienCours'
+            description = 'le cours'
+            break
+          case 'resume':
+            divId = 'lienResume'
+            description = 'le résumé'
+            break
+          case 'mission':
+            divId = 'lienMission'
+            description = 'la mission'
+            break
+          case 'anki':
+            divId = 'lienAnki'
+            description = 'le paquet Anki de la séquence'
+            break
+        }
+        const div = document.getElementById(divId)
+        if (div != null) div.innerHTML = `<a href=${urlToFile}>Télécharger ${description}</a>`
+        const telechargements = document.getElementById('telechargements')
+        if (telechargements != null) telechargements.style.display = 'block'
+      }
+    };
+    xhttp.open("HEAD", urlToFile, true);
+    xhttp.send();
   }
 }

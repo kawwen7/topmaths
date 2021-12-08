@@ -78,18 +78,13 @@
     <h2 class="title is-3">Évaluation</h2>
     <a [href]="lienEval" target="_blank" rel="noopener noreferrer">S'entraîner pour l'évaluation</a>
   </div>
-  <div class="box">
-    <h2 class="title is-3" *ngIf="lienCours != '' || lienResume != '' || lienMission != '' || lienAnki != ''">
-      Téléchargements</h2>
+  <div id="telechargements" class="box" style="display: none;">
+    <h2 class="title is-3">Téléchargements</h2>
     <div style="padding: 5px;">
-      <div style="padding: 5px;"><a *ngIf="lienCours != ''" [href]="lienCours">Télécharger le cours</a>
-      </div>
-      <div style="padding: 5px;"><a *ngIf="lienResume != ''" [href]="lienResume">Télécharger le résumé</a>
-      </div>
-      <div style="padding: 5px;"><a *ngIf="lienMission != ''" [href]="lienMission">Télécharger la mission</a>
-      </div>
-      <div style="padding: 5px;"><a *ngIf="lienAnki != ''" [href]="lienAnki">Télécharger le paquet Anki de la
-          séquence</a></div>
+      <div id="lienCours" style="padding: 5px;"></div>
+      <div id="lienResume" style="padding: 5px;"></div>
+      <div id="lienMission" style="padding: 5px;"></div>
+      <div id="lienAnki" style="padding: 5px;"></div>
     </div>
   </div>
   <!-- Utilisateurs connectés -->
