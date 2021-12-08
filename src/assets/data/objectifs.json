@@ -735,11 +735,7 @@
                 ],
                 "exercices": [
                   {
-                    "slug": "4A10,s=1,s2=false",
-                    "score": "5"
-                  },
-                  {
-                    "slug": "4A10,s=2,s2=false",
+                    "slug": "https://mathsmentales.net/?i=321,e=correction,o=no,s=1,so=h,f=n,a=,colors=,snd=null&p=0~t=Diapo%201~c=1~o=true_i=5ND5~o=1~q=1.~p=~t=20~n=8",
                     "score": "5"
                   }
                 ]
