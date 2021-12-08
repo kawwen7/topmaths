@@ -22,12 +22,14 @@ interface Ligne {
 })
 export class SequencesComponent implements OnInit {
   lignes: Ligne[]
+  lignesParticulieres: Ligne[]
   filtre: Ligne
   event$: any
   ongletActif: string
 
   constructor(public http: HttpClient, private route: ActivatedRoute, private router: Router) {
     this.lignes = []
+    this.lignesParticulieres = []
     this.filtre = {}
     this.ongletActif = 'tout'
     this.recupereOngletActif()
@@ -67,9 +69,11 @@ export class SequencesComponent implements OnInit {
    */
   recupereContenuLignesAAfficher() {
     this.lignes = [] // va contenir toutes les lignes à afficher.
+    this.lignesParticulieres = []
     this.http.get<SequenceParticuliere[]>('assets/data/sequencesParticulieres.json').subscribe(sequencesParticulieres => {
+      this.lignesParticulieres.push({ niveau: 'Séquences particulières'})
         for (const sequence of sequencesParticulieres) {
-          this.lignes.push({ niveau: 'Séquences particulières', reference: sequence.reference, titre: sequence.titre, numero: 0 })
+          this.lignesParticulieres.push({ niveau: 'Séquences particulières', reference: sequence.reference, titre: sequence.titre, numero: 0 })
         }
       }
     )
