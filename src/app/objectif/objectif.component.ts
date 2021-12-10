@@ -291,7 +291,10 @@ export class ObjectifComponent implements OnInit {
             break
         }
         const div = document.getElementById(divId)
-        if (div != null) div.innerHTML = `<a href=${urlToFile}>Télécharger ${description}</a>`
+        if (div != null) {
+          div.innerHTML = `<a href=${urlToFile}>Télécharger ${description}</a>`
+          div.style.display = 'block'
+        }
         const telechargements = document.getElementById('telechargements')
         if (telechargements != null) telechargements.style.display = 'block'
       }
