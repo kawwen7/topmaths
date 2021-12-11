@@ -24,6 +24,7 @@ export class ObjectifComponent implements OnInit {
   derniereUrl: string
   derniereGraine: string
   dernierTitre: string
+  dernierSlider: number
   presenceVideo: boolean
   dateDerniereReponse: Date
 
@@ -41,6 +42,7 @@ export class ObjectifComponent implements OnInit {
     this.derniereUrl = ''
     this.derniereGraine = ''
     this.dernierTitre = ''
+    this.dernierSlider = 0
     this.presenceVideo = false
     this.dateDerniereReponse = new Date()
     this.isPortraitUpdate()
@@ -76,6 +78,7 @@ export class ObjectifComponent implements OnInit {
   /**
    * Ecoute les messages Post pour récupérer l'url et modifier le lien à copier des exercices
    */
+
   ecouteMessagesPost() {
     window.addEventListener('message', (event) => {
       const dateNouvelleReponse = new Date()
@@ -93,12 +96,14 @@ export class ObjectifComponent implements OnInit {
                 const nbBonnesReponses: number = event.data.nbBonnesReponses
                 const nbMauvaisesReponses: number = event.data.nbMauvaisesReponses
                 const titre: string = event.data.titre
-                if (typeof (titre) != 'undefined') {
+                const slider: number = event.data.slider
+                if (typeof (titre) != 'undefined' || typeof (slider) != 'undefined') {
                   // On s'assure que les exercices soient différents pour ne pas ajouter plusieurs fois du score
-                  if (this.derniereUrl != exercice.lienACopier || this.derniereGraine != exercice.graine || this.dernierTitre != titre) {
+                  if (this.derniereUrl != exercice.lienACopier || this.derniereGraine != exercice.graine || this.dernierTitre != titre || this.dernierSlider != slider) {
                     this.derniereUrl = exercice.lienACopier
                     this.derniereGraine = exercice.graine
                     this.dernierTitre = titre
+                    this.dernierSlider = slider
                     this.dateDerniereReponse = new Date()
                     const majScore: string = (parseInt(exercice.score) * nbBonnesReponses).toString()
                     if (parseInt(majScore) > 0) {
@@ -211,7 +216,9 @@ export class ObjectifComponent implements OnInit {
           score: exercice.score
         })
         this.exercices[this.exercices.length - 1].lien = this.exercices[this.exercices.length - 1].lien.replace('&ex=', ',' + i + '&ex=') // dans le cas où il y aurait plusieurs exercices dans le même slug
-        if (exercice.slug.slice(0, 4) == 'http') {
+        if (exercice.slug.slice(0, 25) == 'https://mathsmentales.net') {
+          this.exercices[this.exercices.length - 1].lien = exercice.slug + '&embed=https://topmaths.fr'
+        } else if (exercice.slug.slice(0, 4) == 'http') {
           this.exercices[this.exercices.length - 1].lien = exercice.slug
         }
         this.exercices[this.exercices.length - 1].lienACopier = this.exercices[this.exercices.length - 1].lien
