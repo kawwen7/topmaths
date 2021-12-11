@@ -16,9 +16,9 @@
     </div>
     <br>
     <!-- Trophées -->
-    <div>
+    <div *ngIf="dataService.user.codeTrophees != ''">
       <a (click)="voirTropheesPerso()">
-        <button *ngIf="dataService.user.codeTrophees != ''" class="button is-success is-large">Lien vers les
+        <button class="button is-success is-large">Lien vers les
           trophées</button>
       </a>
     </div>
@@ -35,7 +35,8 @@
     </button>
     &nbsp;
     <button *ngIf="dataService.user.scores != 'actives'" type="submit" class="button is-success is-outlined"
-      (click)="dataService.majScores('actives'); enCoursDeModif = 'scores'; modifTerminee = ''">Activer les scores</button>
+      (click)="dataService.majScores('actives'); enCoursDeModif = 'scores'; modifTerminee = ''">Activer les
+      scores</button>
     <button *ngIf="dataService.user.scores == 'actives'" class="button is-success">
       Les scores sont activés
     </button>
@@ -49,7 +50,8 @@
     <br><br>
     <!-- Anonymat -->
     <button *ngIf="dataService.user.visible == 'oui'" type="submit" class="button is-danger is-outlined"
-      (click)="dataService.majVisible('non'); enCoursDeModif = 'visible'; modifTerminee = ''">Ne pas apparaître dans les personnes en ligne</button>
+      (click)="dataService.majVisible('non'); enCoursDeModif = 'visible'; modifTerminee = ''">Ne pas apparaître dans les
+      personnes en ligne</button>
     <button *ngIf="dataService.user.visible != 'oui'" class="button is-danger">
       Tu n'apparais pas dans les personnes en ligne
     </button>
@@ -70,28 +72,30 @@
     </figure>
     <br><br>
     <!-- Trophées -->
-    <button *ngIf="dataService.user.tropheesVisibles == 'oui'" type="submit" class="button is-danger is-outlined"
-      (click)="dataService.majTropheesVisibles('non'); enCoursDeModif = 'trophees'; modifTerminee = ''">
-      Cacher ses trophées aux autres utilisateurs
-    </button>
-    <button *ngIf="dataService.user.tropheesVisibles != 'oui'" class="button is-danger">
-      Tes trophées sont cachés aux autres utilisateurs
-    </button>
-    &nbsp;
-    <button *ngIf="dataService.user.tropheesVisibles != 'oui'" type="submit" class="button is-success is-outlined"
-      (click)="dataService.majTropheesVisibles('oui'); enCoursDeModif = 'trophees'; modifTerminee = ''">
-      Montrer ses trophées aux autres utilisateurs
-    </button>
-    <button *ngIf="dataService.user.tropheesVisibles == 'oui'" class="button is-success">
-      Tes trophées sont visibles par les autres utilisateurs
-    </button>
-    &nbsp;
-    <figure *ngIf="enCoursDeModif == 'trophees'" class="image is-32x32 is-inline-block">
-      <img [src]="'assets/img/Loading.gif'">
-    </figure>
-    <figure *ngIf="modifTerminee == 'trophees'" class="image is-32x32 is-inline-block">
-      <i class="fas fa-2x fa-check"></i>
-    </figure>
+    <div *ngIf="dataService.user.codeTrophees != ''">
+      <button *ngIf="dataService.user.tropheesVisibles == 'oui'" type="submit" class="button is-danger is-outlined"
+        (click)="dataService.majTropheesVisibles('non'); enCoursDeModif = 'trophees'; modifTerminee = ''">
+        Cacher ses trophées aux autres utilisateurs
+      </button>
+      <button *ngIf="dataService.user.tropheesVisibles != 'oui'" class="button is-danger">
+        Tes trophées sont cachés aux autres utilisateurs
+      </button>
+      &nbsp;
+      <button *ngIf="dataService.user.tropheesVisibles != 'oui'" type="submit" class="button is-success is-outlined"
+        (click)="dataService.majTropheesVisibles('oui'); enCoursDeModif = 'trophees'; modifTerminee = ''">
+        Montrer ses trophées aux autres utilisateurs
+      </button>
+      <button *ngIf="dataService.user.tropheesVisibles == 'oui'" class="button is-success">
+        Tes trophées sont visibles par les autres utilisateurs
+      </button>
+      &nbsp;
+      <figure *ngIf="enCoursDeModif == 'trophees'" class="image is-32x32 is-inline-block">
+        <img [src]="'assets/img/Loading.gif'">
+      </figure>
+      <figure *ngIf="modifTerminee == 'trophees'" class="image is-32x32 is-inline-block">
+        <i class="fas fa-2x fa-check"></i>
+      </figure>
+    </div>
     <br><br>
     <!-- Créer le lien vers les trophées -->
     <div class="columns is-centered">
@@ -160,7 +164,8 @@
       <div><br></div>
       <p style="text-decoration:lightslategray; font-size: small;">Quelqu'un s'est connecté sur ce compte le
         {{derniereConnexion}}.<br>
-        Si cette date ne te dit rien, c'est sûrement que ton identifiant est trop facile à deviner ou que tu as oublié de te
+        Si cette date ne te dit rien, c'est sûrement que ton identifiant est trop facile à deviner ou que tu as oublié
+        de te
         déconnecter et que quelqu'un d'autre l'a utilisé !</p>
       <div><br></div>
     </div>
