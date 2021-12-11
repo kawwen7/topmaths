@@ -254,7 +254,7 @@ export class TropheesComponent implements OnInit {
     }
     const nb = trophee.nb
     let texte: string = ''
-    if (nb > 0 && this.peutDemanderRefaireEval && trophee['cle'] !== 'nombreDeVerts' && ((nbVerts < nbVertsMin) || (typeof (trophee['nbVertsMin']) == 'undefined' && nbVerts === 0))) {
+    if (nb > 0 && this.peutDemanderRefaireEval && trophee['cle'] !== 'nombreDeVerts' && ((nbVerts < nbVertsMin) || (trophee['nbVertsMin'] == 0 && nbVerts === 0))) {
       texte = '<a>Demander à refaire l\'évaluation</a>'
     }
     return texte
@@ -273,7 +273,7 @@ export class TropheesComponent implements OnInit {
       typeof (nombreVerts) == 'string' ? nbVerts = parseInt(nombreVerts) : nbVerts = nombreVerts
     }
     const nb = trophee.nb
-    if (nb > 0 && ((nbVerts < nbVertsMin) || (typeof (trophee['nbVertsMin']) == 'undefined' && nbVerts === 0))) {
+    if (nb > 0 && ((nbVerts < nbVertsMin) || (trophee['nbVertsMin'] == 0 && nbVerts === 0))) {
       this.texteModale = `
       Est-ce que tu veux envoyer un message à M. Valmont pour lui prévenir
       que tu veux refaire l'évaluation sur "${trophee['categorie']}" ?`
