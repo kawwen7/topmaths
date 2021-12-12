@@ -5,6 +5,12 @@ import { ApiService } from '../services/api.service';
 import { ConfettiService } from '../services/confetti.service';
 import { Niveau, Objectif, Video, Exercice } from '../services/objectifs';
 
+interface ExerciceDejaFait {
+  url: string,
+  graine: string,
+  titre?: string,
+  slider?: number
+}
 @Component({
   selector: 'app-objectif',
   templateUrl: './objectif.component.html',
@@ -21,12 +27,9 @@ export class ObjectifComponent implements OnInit {
   lienAnki: string
   portrait: boolean
   messageScore: string
-  derniereUrl: string
-  derniereGraine: string
-  dernierTitre: string
-  dernierSlider: number
   presenceVideo: boolean
   dateDerniereReponse: Date
+  exercicesDejaFaits: string[]
 
   constructor(public http: HttpClient, private route: ActivatedRoute, public dataService: ApiService, public confetti: ConfettiService) {
     this.reference = ''
@@ -39,10 +42,7 @@ export class ObjectifComponent implements OnInit {
     this.lienAnki = ''
     this.portrait = true
     this.messageScore = ''
-    this.derniereUrl = ''
-    this.derniereGraine = ''
-    this.dernierTitre = ''
-    this.dernierSlider = 0
+    this.exercicesDejaFaits = []
     this.presenceVideo = false
     this.dateDerniereReponse = new Date()
     this.isPortraitUpdate()
@@ -98,12 +98,16 @@ export class ObjectifComponent implements OnInit {
                 const titre: string = event.data.titre
                 const slider: number = event.data.slider
                 if (typeof (titre) != 'undefined' || typeof (slider) != 'undefined') {
+                  const exerciceDejaFait: ExerciceDejaFait = {
+                    url : exercice.lienACopier,
+                    graine: exercice.graine,
+                    titre: titre,
+                    slider: slider
+                  }
+                  const stringExerciceDejaFait: string = exerciceDejaFait.url + exerciceDejaFait.graine + exerciceDejaFait.titre + exerciceDejaFait.slider
                   // On s'assure que les exercices soient différents pour ne pas ajouter plusieurs fois du score
-                  if (this.derniereUrl != exercice.lienACopier || this.derniereGraine != exercice.graine || this.dernierTitre != titre || this.dernierSlider != slider) {
-                    this.derniereUrl = exercice.lienACopier
-                    this.derniereGraine = exercice.graine
-                    this.dernierTitre = titre
-                    this.dernierSlider = slider
+                  if (!this.exercicesDejaFaits.includes(stringExerciceDejaFait)) {
+                    this.exercicesDejaFaits.push(stringExerciceDejaFait)
                     this.dateDerniereReponse = new Date()
                     const majScore: string = (parseInt(exercice.score) * nbBonnesReponses).toString()
                     if (parseInt(majScore) > 0) {
@@ -118,11 +122,7 @@ export class ObjectifComponent implements OnInit {
                   }
                 }
                 exercice.graine = event.data.graine
-                if (this.dataService.user.scores == 'actives') { // Si on est en interactif, on retire l'userId et on ajoute la graine
-                  exercice.lienACopier = url.split('&userId=')[0] + '&serie=' + exercice.graine
-                } else {
-                  exercice.lienACopier = url
-                }
+                exercice.lienACopier = url
               }
             }
           }
