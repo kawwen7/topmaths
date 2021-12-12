@@ -1,32 +1,32 @@
 <!-- Header -->
 <div class="tabs is-large is-centered">
   <ul class="tabs-menu">
-    <li [ngClass]="{'is-active': ongletActif == 'accueil'}">
+    <li [ngClass]="{'is-actif': ongletActif == 'accueil'}">
       <a routerLink="/accueil" routerLinkActive="active" class="tabs-menu-link is-warning">
         <i class="image is-48x48"><img src="assets/img/cc0/homepage-svgrepo-com.svg" /></i>
       </a>
     </li>
-    <li [ngClass]="{'is-active': ongletActif == 'objectifs'}">
+    <li [ngClass]="{'is-actif': ongletActif == 'objectifs' || ongletActif == 'objectif'}">
       <a routerLink="/objectifs/tout" routerLinkActive="active" class="tabs-menu-link is-info">
         <i class="image is-48x48"><img src="assets/img/cc0/dart-board-svgrepo-com.svg" /></i>
       </a>
     </li>
-    <li [ngClass]="{'is-active': ongletActif == 'sequences'}">
+    <li [ngClass]="{'is-actif': ongletActif == 'sequences' || ongletActif == 'sequence'}">
       <a routerLink="/sequences/tout" routerLinkActive="active" class="tabs-menu-link is-link">
         <i class="image is-48x48"><img src="assets/img/cc0/guest-book-svgrepo-com.svg" /></i>
       </a>
     </li>
-    <li [ngClass]="{'is-active': ongletActif == 'revisions'}">
+    <li [ngClass]="{'is-actif': ongletActif == 'revisions'}">
       <a routerLink="/revisions" routerLinkActive="active" class="tabs-menu-link is-danger">
         <i class="image is-48x48"><img src="assets/img/gvalmont/revisions-regular.svg" /></i>
       </a>
     </li>
-    <li [ngClass]="{'is-active': ongletActif == 'exercices-au-hasard'}">
+    <li [ngClass]="{'is-actif': ongletActif == 'exercices-au-hasard'}">
       <a routerLink="/exercices-au-hasard" routerLinkActive="active" class="tabs-menu-link is-primary">
         <i class="image is-48x48"><img src="assets/img/cc0/dice-svgrepo-com.svg" /></i>
       </a>
     </li>
-    <li [ngClass]="{'is-active': ongletActif == 'jeux'}">
+    <li [ngClass]="{'is-actif': ongletActif == 'jeux'}">
       <a routerLink="/jeux" routerLinkActive="active" class="tabs-menu-link is-success">
         <i class="image is-48x48"><img src="assets/img/cc0/gamepad-retro-f-svgrepo-com.svg" /></i>
       </a>

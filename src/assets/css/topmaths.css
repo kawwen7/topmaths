@@ -3,7 +3,7 @@
 ****************************************************************************************************/
 /* Met les icones en couleur */
 .tabs-menu-link.is-warning i {
-  filter: invert(86%) sepia(36%) saturate(728%) hue-rotate(344deg) brightness(100%) contrast(107%);
+  filter: invert(73%) sepia(96%) saturate(209%) hue-rotate(346deg) brightness(104%) contrast(103%);
 }
 .tabs-menu-link.is-link i {
   filter: invert(29%) sepia(98%) saturate(796%) hue-rotate(203deg) brightness(101%) contrast(88%);
@@ -26,22 +26,44 @@
 }
 /* Met le fond de la bonne couleur lors du survol */
 li:hover .is-warning {
-  background-color: hsl(48, 100%, 67%);
+  background-color: #ffe08a;
 }
 li:hover .is-link {
-  background-color: hsl(217, 71%, 53%);
+  background-color: #485fc7;
 }
 li:hover .is-info {
-  background-color: hsl(204, 86%, 53%);
+  background-color: #3e8ed0;
 }
 li:hover .is-danger {
-  background-color: hsl(348, 100%, 61%);
+  background-color: #f14668;
 }
 li:hover .is-primary {
-  background-color: hsl(171, 100%, 41%);
+  background-color: #00d1b2;
 }
 li:hover .is-success {
-  background-color: hsl(141, 53%, 53%);
+  background-color: #48c78e;
+}
+/* Met en évidence l'onglet actif */
+.is-actif > .tabs-menu-link i {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+}
+li.is-actif .is-warning {
+  background-color: #ffe08a;
+}
+li.is-actif .is-link {
+  background-color: #485fc7;
+}
+li.is-actif .is-info {
+  background-color: #3e8ed0;
+}
+li.is-actif .is-danger {
+  background-color: #f14668;
+}
+li.is-actif .is-primary {
+  background-color: #00d1b2;
+}
+li.is-actif .is-success {
+  background-color: #48c78e;
 }
 /****************************************************************************************************
 ***** Colorisation des icones en général
@@ -64,7 +86,7 @@ button:hover > i {
 }
 /* Colore l'icone selon les couleurs de Bulma */
 .is-warning i {
-  filter: invert(86%) sepia(36%) saturate(728%) hue-rotate(344deg) brightness(100%) contrast(107%);
+  filter: invert(73%) sepia(96%) saturate(209%) hue-rotate(346deg) brightness(104%) contrast(103%);
 }
 .is-link i {
   filter: invert(29%) sepia(98%) saturate(796%) hue-rotate(203deg) brightness(101%) contrast(88%);
@@ -88,10 +110,7 @@ button:hover > i {
 ***** Autres
 ****************************************************************************************************/
 
-.title {
-  text-align:center;
-}
-.subtitle {
+.centre {
   text-align:center;
 }
 
