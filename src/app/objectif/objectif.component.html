@@ -1,10 +1,10 @@
-<div class="container is-widescreen" style="text-align: center;">
+<div class="container is-widescreen centre">
   <div class="box">
     <h1 class="title is-2">{{ titre }}</h1>
   </div>
   <div class="box" *ngIf="rappelDuCoursHTML != '' || rappelDuCoursImage != ''">
     <h2 class="title is-3">Rappel du cours</h2>
-    <p [mathjax]="rappelDuCoursHTML" style="text-align: left;"></p>
+    <p class="has-text-left" [mathjax]="rappelDuCoursHTML"></p>
     <p><img *ngIf="rappelDuCoursImage != ''" [src]="rappelDuCoursImage" /></p>
   </div>
   <div *ngIf="presenceVideo">
@@ -14,11 +14,8 @@
     </ng-template>
     <div *ngFor="let video of videos" class="box">
       <h3 class="title is-4">{{video.titre}}</h3>
-      <div class="image is-16by9">
-        <iframe class="has-ratio" [src]="video.lienVideo| safe"></iframe>
-      </div>
-      <p><u>Vidéo de <a [href]="video.lienAuteur" target="_blank" rel="noopener noreferrer">{{ video.auteur }}</a></u>
-      </p>
+      <div class="image is-16by9"><iframe class="has-ratio" [src]="video.lienVideo| safe"></iframe></div>
+      <p><u>Vidéo de <a [href]="video.lienAuteur" target="_blank" rel="noopener noreferrer">{{ video.auteur }}</a></u></p>
     </div>
   </div>
   <div><br><br></div>
@@ -26,28 +23,26 @@
   <div *ngFor="let exercice of exercices; index as i">
     <div class="box">
       <h3 class="title is-4 is-inline-block">Niveau {{ i + 1 }} - {{ exercice.couleur }}
-        <i class="image is-24x24 is-inline-block" (click)="copierLien(exercice)"><img src="assets/img/cc0/copy-interface-symbol-svgrepo-com.svg" /></i>
+        <i class="image is-24x24 is-inline-block is-clickable" (click)="copierLien(exercice)"><img src="assets/img/cc0/copy-interface-symbol-svgrepo-com.svg" /></i>
       </h3>
-      <div
-        [ngClass]="{'image': true, 'is-16by9': !portrait, 'is-9by16': portrait && dataService.user.scores == 'actives', 'is-2by3': portrait && dataService.user.scores != 'actives'}">
+      <div [ngClass]="{'image': true, 'is-16by9': !portrait, 'is-9by16': portrait && dataService.user.scores == 'actives', 'is-2by3': portrait && dataService.user.scores != 'actives'}">
         <iframe class="has-ratio" [src]="exercice.lien | safe" allowfullscreen></iframe>
       </div>
       <span *ngIf="exercice.bonneReponse">
-        <h3 [ngClass]="{'pleinEcran': true, 'moveUp': exercice.bonneReponse}" style="font-size: 1000%;">{{messageScore}}</h3>
+        <p [ngClass]="{'pleinEcran is-unselectable gigantesque': true, 'moveUp': exercice.bonneReponse}">{{messageScore}}</p>
       </span>
     </div>
     <div><br></div>
   </div>
-  <div id='telechargements' class="box" style="display: none;">
+  <div id='telechargements' class="box cache">
     <h2 class="title is-3">Téléchargements</h2>
-    <div style="padding: 5px;">
-      <div id='lienFiche' style="padding: 5px; display: none;"></div>
-      <div id='lienAnki' style="padding: 5px; display: none;"></div>
+    <div class="p-1">
+      <div id='lienFiche' class="p-1 cache"></div>
+      <div id='lienAnki' class="p-1 cache"></div>
     </div>
   </div>
   <!-- Utilisateurs connectés -->
   <app-whosonline></app-whosonline>
 </div>
-<ng-particles [id]="confetti.id" [options]="confetti.particlesOptions"
-  (particlesLoaded)="confetti.particlesLoaded($event)" (particlesInit)="confetti.particlesInit($event)"></ng-particles>
+<ng-particles [id]="confetti.id" [options]="confetti.particlesOptions" (particlesLoaded)="confetti.particlesLoaded($event)" (particlesInit)="confetti.particlesInit($event)"></ng-particles>
 <div id="tsparticles"></div>

@@ -1,39 +1,39 @@
-<div class="container is-max-desktop" style="text-align:center">
+<div class="container is-max-desktop centre">
   <div class="box">
     <!-- Identifiant -->
     <h1 class="title is-3">Identifiant</h1>
     <div class="columns is-centered">
       <div class="column is-narrow">
         <!-- Champ de connexion -->
-        <form [formGroup]="angForm" (ngSubmit)="login(angForm.value.identifiant)" autocomplete="off" autocorrect="off"
-          autocapitalize="off" spellcheck="false">
+        <form [formGroup]="angForm" (ngSubmit)="login(angForm.value.identifiant)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
           <div class="field">
             <div class="columns">
-              <div class="column is-one-fifth" style="display: flex; align-items: center; justify-content: left;">
+              <div class="column is-one-fifth">
               </div>
               <!-- On fait un tableau à une seule colonne pour que les contenus restent alignés en vue portrait -->
               <div class="column is-three-fifths">
                 <div [ngClass]="{'control has-icons-left has-icons-right is-inline-block': true, 'shake': shake}">
                   <!-- Champ en lui-même -->
-                  <input id='champLogin'
-                    [ngClass]="{'input is-large': true, 'is-success': (!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut), 'is-danger': (errPetitNbChar || errGrandNbChar || errSpChar)}"
-                    type="password" name="identifiant" formControlName="identifiant" autocomplete="off"
-                    autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control input-sm"
-                    placeholder="Identifiant" size="15">
+                  <input id='champLogin' [ngClass]="{'input is-large': true, 'is-success': (!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut),
+                  'is-danger': (errPetitNbChar || errGrandNbChar || errSpChar)}" type="password" name="identifiant" formControlName="identifiant"
+                  autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control input-sm" placeholder="Identifiant" size="15">
                   <!-- icônes de part et d'autre du champ -->
                   <span class="icon is-small is-left filter-grey">
                     <i class="image is-24x24"><img src="assets/img/reshot/user-3294.svg" /></i>
                   </span>
-                  <span *ngIf="(!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut)"
-                    class="icon is-small is-right filter-grey">
-                    <i class="image is-24x24"><img src="assets/img/cc0/check-svgrepo-com.svg" /></i>
+                  <span *ngIf="(!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut)" class="icon is-small is-right filter-grey">
+                    <i class="image is-24x24">
+                      <img src="assets/img/cc0/check-svgrepo-com.svg" />
+                    </i>
                   </span>
                   <span *ngIf="(errPetitNbChar || errGrandNbChar || errSpChar)" class="icon is-small is-right filter-grey">
-                    <i class="image is-32x32"><img src="assets/img/cc0/warning-exclamation-sign-in-filled-triangle-svgrepo-com.svg" /></i>
+                    <i class="image is-32x32">
+                      <img src="assets/img/cc0/warning-exclamation-sign-in-filled-triangle-svgrepo-com.svg" />
+                    </i>
                   </span>
                 </div>
               </div>
-              <div class="column is-one-fifth" style="display: flex; align-items: center; justify-content: left;">
+              <div class="column is-one-fift is-flex is-align-items-center is-justify-content-centerh">
                 <div class="dropdown is-right is-hoverable is-inline-block">
                   <div *ngIf="!loginVisible" class="dropdown-trigger" (click)="montrerCacherIdentifiant()">
                     <i class="image is-32x32"><img src="assets/img/cc0/eye-svgrepo-com.svg" /></i>
@@ -53,12 +53,10 @@
               </div>
             </div>
             <!-- Indications sous le champ -->
-            <div *ngIf="(!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut)"
-              style="color: hsl(141, 53%, 53%);">C'est parfait !</div>
-            <div *ngIf="errPetitNbChar" style="color: hsl(348, 100%, 61%);">C'est trop court !</div>
-            <div *ngIf="errGrandNbChar" style="color: hsl(348, 100%, 61%);">C'est trop long !</div>
-            <div *ngIf="errSpChar" style="color: hsl(348, 100%, 61%);">N'utilises que des chiffres<br>et des lettres
-              sans accent !</div>
+            <div *ngIf="(!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut)" class="has-text-success">C'est parfait !</div>
+            <div *ngIf="errPetitNbChar" class="has-text-danger">C'est trop court !</div>
+            <div *ngIf="errGrandNbChar" class="has-text-danger">C'est trop long !</div>
+            <div *ngIf="errSpChar" class="has-text-danger">N'utilises que des chiffres<br>et des lettres sans accent !</div>
           </div>
           <br>
           <!-- Bouton d'envoi -->

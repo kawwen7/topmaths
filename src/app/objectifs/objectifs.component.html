@@ -1,29 +1,20 @@
-<div class="columns" style="text-align: center;">
+<div class="columns centre">
   <div class="column is-one-fifth"></div>
   <div class="column is-three-fifths">
     <div class="tabs is-medium is-centered">
       <ul class="tabs-menu">
-        <li [ngClass]="{'is-active': ongletActif == 'tout'}"><a [routerLink]="['/objectifs/tout']">Tout afficher</a>
-        </li>
+        <li [ngClass]="{'is-active': ongletActif == 'tout'}"><a [routerLink]="['/objectifs/tout']">Tout afficher</a></li>
         <li *ngFor="let ligne of lignes;" [ngClass]="{'is-active': ongletActif == ligne.niveau}">
-          <a *ngIf="ligne.niveau != null && ligne.theme == null"
-            [routerLink]="['/objectifs', ligne.niveau]">{{ligne.niveau}} </a>
+          <a *ngIf="ligne.niveau != null && ligne.theme == null" [routerLink]="['/objectifs', ligne.niveau]">{{ligne.niveau}} </a>
         </li>
       </ul>
     </div>
     <div class="container is-max-desktop">
       <span *ngFor="let ligne of lignes;">
-        <h1
-          *ngIf="ligne.niveau != null && ligne.theme == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau)"
-          class="title is-3" style="text-align:center; padding: 8px;">{{ligne.niveau}}</h1>
-        <h2
-          *ngIf="ligne.theme != null && ligne.sousTheme == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau) && (filtre.theme == null || filtre.theme == ligne.theme)"
-          class="title is-4" style="text-align:center; padding-top: 8px; padding-bottom: 0px;">{{ligne.theme}}</h2>
-        <h3
-          *ngIf="ligne.sousTheme != null && ligne.reference == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau) && (filtre.theme == null || filtre.theme == ligne.theme) && (filtre.sousTheme == null || filtre.sousTheme == ligne.sousTheme)"
-          class="subtitle is-5" style="text-align:center; padding: 16px;">{{ligne.sousTheme}}</h3>
-        <p *ngIf="ligne.reference != null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau) && (filtre.theme == null || filtre.theme == ligne.theme) && (filtre.sousTheme == null || filtre.sousTheme == ligne.sousTheme)"
-          style="text-align:center; padding: 5px;">
+        <h1 *ngIf="ligne.niveau != null && ligne.theme == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau)" class="title is-3 p-2">{{ligne.niveau}}</h1>
+        <h2 *ngIf="ligne.theme != null && ligne.sousTheme == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau) && (filtre.theme == null || filtre.theme == ligne.theme)" class="title is-4 pt-2">{{ligne.theme}}</h2>
+        <h3 *ngIf="ligne.sousTheme != null && ligne.reference == null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau) && (filtre.theme == null || filtre.theme == ligne.theme) && (filtre.sousTheme == null || filtre.sousTheme == ligne.sousTheme)" class="subtitle is-5 p-4">{{ligne.sousTheme}}</h3>
+        <p *ngIf="ligne.reference != null && (filtre.niveau == null || filtre.niveau == 'tout' || filtre.niveau == ligne.niveau) && (filtre.theme == null || filtre.theme == ligne.theme) && (filtre.sousTheme == null || filtre.sousTheme == ligne.sousTheme)" class="p-1">
           <a routerLink="/objectif/{{ligne.reference}}" routerLinkActive="active">
             {{ligne.reference}} : {{ligne.titre}}<br>
           </a>

@@ -1,19 +1,15 @@
-<div class="columns" style="text-align: center;">
+<div class="columns centre">
   <div class="column is-one-fifth"></div>
   <div class="column is-three-fifths">
     <!-- Pseudo -->
-    <div (click)="ouvrirModale('pseudo')">
+    <div class="is-clickable" (click)="ouvrirModale('pseudo')">
       <h1 class="title is-2 is-inline-block">{{dataService.user.pseudo}}</h1>&nbsp;
-      <i class="image is-24x24 is-inline-block">
-        <img src="assets/img/cc0/edit-svgrepo-com.svg" />
-      </i>
+      <i class="image is-24x24 is-inline-block"><img src="assets/img/cc0/edit-svgrepo-com.svg" /></i>
     </div>
     <!-- Avatar -->
-    <div (click)="ouvrirModale('avatar')">
+    <div class="is-clickable" (click)="ouvrirModale('avatar')">
       <img [src]="dataService.user.lienAvatar" width="160px" />
-      <i class="image is-24x24 is-inline-block">
-        <img src="assets/img/cc0/edit-svgrepo-com.svg" />
-      </i>
+      <i class="image is-24x24 is-inline-block"><img src="assets/img/cc0/edit-svgrepo-com.svg" /></i>
     </div>
     <br>
     <!-- Score -->
@@ -24,25 +20,22 @@
     <!-- Trophées -->
     <div *ngIf="dataService.user.codeTrophees != ''">
       <a (click)="voirTropheesPerso()">
-        <button class="button is-success is-large">Lien vers les
-          trophées</button>
+        <button class="button is-success is-large">Lien vers les trophées</button>
       </a>
     </div>
-    <br>
     <!-- Paramètres -->
     <br><br>
     <!-- Scores -->
-    <button *ngIf="dataService.user.scores == 'actives'" type="submit" class="button is-danger is-outlined"
-      (click)="dataService.majScores('desactives'); enCoursDeModif = 'scores'; modifTerminee = ''">
+    <button *ngIf="dataService.user.scores == 'actives'" type="submit" class="button is-danger is-outlined" (click)="dataService.majScores('desactives'); enCoursDeModif = 'scores'; modifTerminee = ''">
       Désactiver les scores
     </button>
     <button *ngIf="dataService.user.scores != 'actives'" class="button is-danger">
       Les scores sont désactivés
     </button>
     &nbsp;
-    <button *ngIf="dataService.user.scores != 'actives'" type="submit" class="button is-success is-outlined"
-      (click)="dataService.majScores('actives'); enCoursDeModif = 'scores'; modifTerminee = ''">Activer les
-      scores</button>
+    <button *ngIf="dataService.user.scores != 'actives'" type="submit" class="button is-success is-outlined" (click)="dataService.majScores('actives'); enCoursDeModif = 'scores'; modifTerminee = ''">
+      Activer les scores
+    </button>
     <button *ngIf="dataService.user.scores == 'actives'" class="button is-success">
       Les scores sont activés
     </button>
@@ -55,15 +48,14 @@
     </i>
     <br><br>
     <!-- Anonymat -->
-    <button *ngIf="dataService.user.visible == 'oui'" type="submit" class="button is-danger is-outlined"
-      (click)="dataService.majVisible('non'); enCoursDeModif = 'visible'; modifTerminee = ''">Ne pas apparaître dans les
-      personnes en ligne</button>
+    <button *ngIf="dataService.user.visible == 'oui'" type="submit" class="button is-danger is-outlined" (click)="dataService.majVisible('non'); enCoursDeModif = 'visible'; modifTerminee = ''">
+      Ne pas apparaître dans les personnes en ligne
+    </button>
     <button *ngIf="dataService.user.visible != 'oui'" class="button is-danger">
       Tu n'apparais pas dans les personnes en ligne
     </button>
     &nbsp;
-    <button *ngIf="dataService.user.visible != 'oui'" type="submit" class="button is-success is-outlined"
-      (click)="dataService.majVisible('oui'); enCoursDeModif = 'visible'; modifTerminee = ''">
+    <button *ngIf="dataService.user.visible != 'oui'" type="submit" class="button is-success is-outlined" (click)="dataService.majVisible('oui'); enCoursDeModif = 'visible'; modifTerminee = ''">
       Apparaître dans les personnes en ligne
     </button>
     <button *ngIf="dataService.user.visible == 'oui'" class="button is-success">
@@ -79,16 +71,14 @@
     <br><br>
     <!-- Trophées -->
     <div *ngIf="dataService.user.codeTrophees != ''">
-      <button *ngIf="dataService.user.tropheesVisibles == 'oui'" type="submit" class="button is-danger is-outlined"
-        (click)="dataService.majTropheesVisibles('non'); enCoursDeModif = 'trophees'; modifTerminee = ''">
+      <button *ngIf="dataService.user.tropheesVisibles == 'oui'" type="submit" class="button is-danger is-outlined" (click)="dataService.majTropheesVisibles('non'); enCoursDeModif = 'trophees'; modifTerminee = ''">
         Cacher ses trophées aux autres utilisateurs
       </button>
       <button *ngIf="dataService.user.tropheesVisibles != 'oui'" class="button is-danger">
         Tes trophées sont cachés aux autres utilisateurs
       </button>
       &nbsp;
-      <button *ngIf="dataService.user.tropheesVisibles != 'oui'" type="submit" class="button is-success is-outlined"
-        (click)="dataService.majTropheesVisibles('oui'); enCoursDeModif = 'trophees'; modifTerminee = ''">
+      <button *ngIf="dataService.user.tropheesVisibles != 'oui'" type="submit" class="button is-success is-outlined" (click)="dataService.majTropheesVisibles('oui'); enCoursDeModif = 'trophees'; modifTerminee = ''">
         Montrer ses trophées aux autres utilisateurs
       </button>
       <button *ngIf="dataService.user.tropheesVisibles == 'oui'" class="button is-success">
@@ -102,45 +92,35 @@
         <img src="assets/img/cc0/check-svgrepo-com.svg" />
       </i>
     </div>
-    <br><br>
+    <div *ngIf="dataService.user.codeTrophees != ''"><br></div>
     <!-- Créer le lien vers les trophées -->
     <div class="columns is-centered">
       <div class="column is-narrow">
         <div *ngIf="dataService.user.codeTrophees == ''" class="dropdown is-hoverable">
           <div class="dropdown-trigger">
             <!-- Champ de connexion -->
-            <form [formGroup]="angForm" (ngSubmit)="lierTrophees(angForm.value.codeTrophee)" autocomplete="off"
-              autocorrect="off" autocapitalize="off" spellcheck="false">
-              <div class="field is-inline-block" style="width: 190px;">
+            <form [formGroup]="angForm" (ngSubmit)="lierTrophees(angForm.value.codeTrophee)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+              <div class="field is-inline-block">
                 <div [ngClass]="{'control has-icons-left has-icons-right': true, 'shake': shake}">
                   <!-- Champ en lui-même -->
-                  <input
-                    [ngClass]="{'input': true, 'is-success': (!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut && !errCodeIncorrect), 'is-danger': (errPetitNbChar || errGrandNbChar || errSpChar || errCodeIncorrect)}"
-                    type="codeTrophee" name="codeTrophee" formControlName="codeTrophee" autocomplete="off"
-                    autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control input-sm"
-                    placeholder="Code Trophées" size="5">
+                  <input [ngClass]="{'input': true, 'is-success': (!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut && !errCodeIncorrect), 'is-danger': (errPetitNbChar || errGrandNbChar || errSpChar || errCodeIncorrect)}" type="codeTrophee" name="codeTrophee" formControlName="codeTrophee" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control input-sm" placeholder="Code Trophées" size="5">
                   <!-- icônes de part et d'autre du champ -->
                   <span class="icon is-small is-left filter-grey">
                     <i class="image is-24x24"><img src="assets/img/cc0/trophy-svgrepo-com.svg" /></i>
                   </span>
-                  <span *ngIf="(!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut)"
-                    class="icon is-small is-right filter-grey">
+                  <span *ngIf="(!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut)" class="icon is-small is-right filter-grey">
                     <i class="image is-24x24"><img src="assets/img/cc0/check-svgrepo-com.svg" /></i>
                   </span>
-                  <span *ngIf="(errPetitNbChar || errGrandNbChar || errSpChar)"
-                    class="icon is-small is-right filter-grey">
+                  <span *ngIf="(errPetitNbChar || errGrandNbChar || errSpChar)" class="icon is-small is-right filter-grey">
                     <i class="image is-24x24"><img src="assets/img/cc0/warning-exclamation-sign-in-filled-triangle-svgrepo-com.svg" /></i>
                   </span>
                 </div>
                 <!-- Indications sous le champ -->
-                <div *ngIf="(!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut && !errCodeIncorrect)"
-                  style="color: hsl(141, 53%, 53%);">
-                  Ça a l'air bon !</div>
-                <div *ngIf="errPetitNbChar" style="color: hsl(348, 100%, 61%);">C'est trop court !</div>
-                <div *ngIf="errGrandNbChar" style="color: hsl(348, 100%, 61%);">C'est trop long !</div>
-                <div *ngIf="errSpChar" style="color: hsl(348, 100%, 61%);">Il ne faut que des lettres en minuscule !
-                </div>
-                <div *ngIf="errCodeIncorrect" style="color: hsl(348, 100%, 61%);">Code incorrect</div>
+                <div *ngIf="(!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut && !errCodeIncorrect)" class="has-text-success">Ça a l'air bon !</div>
+                <div *ngIf="errPetitNbChar" class="has-text-danger">C'est trop court !</div>
+                <div *ngIf="errGrandNbChar" class="has-text-danger">C'est trop long !</div>
+                <div *ngIf="errSpChar" class="has-text-danger">Il ne faut que des lettres en minuscule !</div>
+                <div *ngIf="errCodeIncorrect" class="has-text-danger">Code incorrect</div>
               </div>
               &nbsp;
               <!-- Bouton d'envoi -->
@@ -149,9 +129,9 @@
           </div>
           <div class="dropdown-menu">
             <div class="dropdown-content">
-              <div class="dropdown-item" style="font-size: small">
-                <p>Si tu es un élève d'une 5ème ou d'une 4ème de M. Valmont, il t'a donné un code permettant d'accéder à
-                  ta liste de trophées.</p>
+              <div class="dropdown-item is-size-6">
+                <p>Si tu es un élève d'une 5ème ou d'une 4ème de M. Valmont,
+                  il t'a donné un code permettant d'accéder à ta liste de trophées.</p>
               </div>
             </div>
           </div>
@@ -159,21 +139,17 @@
       </div>
     </div>
     <!-- Supprimer le lien -->
-    <form *ngIf="dataService.user.codeTrophees != ''" [formGroup]="angForm" (ngSubmit)="supprimerLienTrophees()"
-      autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+    <form *ngIf="dataService.user.codeTrophees != ''" [formGroup]="angForm" (ngSubmit)="supprimerLienTrophees()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       <br>
       <!-- Bouton d'envoi -->
       <button type="submit" class="button is-danger">Supprimer le lien vers les trophées</button>
     </form>
-    <br><br>
+    <br>
     <!-- Déconnexion -->
     <div *ngIf="dataService.user.lastLogin != '' && derniereConnexion != 'undefined NaN undefined NaN à NaNhNaNmin'">
-      <div><br></div>
-      <p style="text-decoration:lightslategray; font-size: small;">Quelqu'un s'est connecté sur ce compte le
-        {{derniereConnexion}}.<br>
+      <p class="has-text-grey is-size-6">Quelqu'un s'est connecté sur ce compte le {{derniereConnexion}}.<br>
         Si cette date ne te dit rien, c'est sûrement que ton identifiant est trop facile à deviner ou que tu as oublié
-        de te
-        déconnecter et que quelqu'un d'autre l'a utilisé !</p>
+        de te déconnecter et que quelqu'un d'autre l'a utilisé !</p>
       <div><br></div>
     </div>
     <button class="button is-warning" (click)="dataService.logout()">Se déconnecter</button>
@@ -185,46 +161,42 @@
 </div>
 
 <!-- Modale de création d'avatar -->
-<div id="modaleAvatar" class="modal" style="text-align: center">
+<div id="modaleAvatar" class="modal centre">
   <div class="modal-background" (click)="fermerModale('avatar')"></div>
   <div><br><br><br></div>
-  <div class="modal-content" style="background-color: white;">
+  <div class="modal-content has-background-white">
     <!-- Avatar -->
     <div><img [src]="lienAvatar" width="200px" /></div>
     <!-- Boutons -->
     <div class="columns">
-      <div class="column is-5" style="text-align: right;" style="display: flex; align-items: center; justify-content: right;">
+      <div class="column is-5 is-flex is-align-items-center is-justify-content-right">
         <button (click)="fermerModale('avatar')" class="button is-danger">Annuler</button>
       </div>
       <div class="column is-2 has-text-centered">
-        <figure (click)="avatarAleatoire()" class="image is-64x64 is-inline-block" style="display: flex; align-items: center; justify-content: center;">
-          <img src="assets/img/cc0/dice-svgrepo-com.svg" />
-        </figure>
+        <a>
+          <figure (click)="avatarAleatoire()" class="image is-64x64 is-inline-block is-flex is-align-items-center is-justify-content-center">
+            <img src="assets/img/cc0/dice-svgrepo-com.svg" />
+          </figure>
+        </a>
       </div>
-      <div class="column is-5" style="text-align: left;" style="display: flex; align-items: center; justify-content: left;">
+      <div class="column is-5 is-flex is-align-items-center is-justify-content-left">
         <button (click)="enregistrerAvatar()" class="button is-success">Enregistrer</button>
       </div>
     </div>
     <!-- Sliders -->
     <ngx-slider [(value)]="yeux.value" [options]="yeux.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
-    <ngx-slider [(value)]="sourcils.value" [options]="sourcils.options" (valueChange)="majLienAvatar($event)">
-    </ngx-slider>
-    <ngx-slider [(value)]="bouche.value" [options]="bouche.options" (valueChange)="majLienAvatar($event)">
-    </ngx-slider>
-    <ngx-slider [(value)]="accessoire.value" [options]="accessoire.options" (valueChange)="majLienAvatar($event)">
-    </ngx-slider>
-    <ngx-slider [(value)]="cheveux.value" [options]="cheveux.options" (valueChange)="majLienAvatar($event)">
-    </ngx-slider>
-    <ngx-slider [(value)]="couleurPeau.value" [options]="couleurPeau.options" (valueChange)="majLienAvatar($event)">
-    </ngx-slider>
-    <ngx-slider [(value)]="couleurCheveux.value" [options]="couleurCheveux.options"
-      (valueChange)="majLienAvatar($event)"></ngx-slider>
+    <ngx-slider [(value)]="sourcils.value" [options]="sourcils.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
+    <ngx-slider [(value)]="bouche.value" [options]="bouche.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
+    <ngx-slider [(value)]="accessoire.value" [options]="accessoire.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
+    <ngx-slider [(value)]="cheveux.value" [options]="cheveux.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
+    <ngx-slider [(value)]="couleurPeau.value" [options]="couleurPeau.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
+    <ngx-slider [(value)]="couleurCheveux.value" [options]="couleurCheveux.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
     <!-- Copyright -->
     <footer class="footer">
       <div class="content has-text-centered">
-        <p style="text-decoration: white">Les avatars ont été dessinés par <a
-            href="https://www.instagram.com/lischis_adventures/">Lisa Wischofsky</a> sous
-          licence CC BY 4.0.</p>
+        <p>Les avatars ont été dessinés par
+          <a href="https://www.instagram.com/lischis_adventures/">Lisa Wischofsky</a> sous licence CC BY 4.0.
+        </p>
       </div>
     </footer>
   </div>
@@ -232,38 +204,36 @@
 </div>
 
 <!-- Modale de création de pseudo -->
-<div id="modalePseudo" class="modal" style="text-align: center">
+<div id="modalePseudo" class="modal centre">
   <div class="modal-background" (click)="fermerModale('pseudo')"></div>
   <div><br><br><br></div>
-  <div class="modal-content" style="background-color: white;">
+  <div class="modal-content has-background-white">
     <!-- Pseudo -->
     <br><br>
     <h1 class="title is-2">{{pseudo}}</h1>
     <br><br>
     <!-- Boutons -->
     <div class="columns">
-      <div class="column is-5" style="display: flex; align-items: center; justify-content: right;">
+      <div class="column is-5 is-flex is-align-items-center is-justify-content-right">
         <button (click)="fermerModale('pseudo')" class="button is-danger">Annuler</button>
       </div>
-      <div class="column is-2 has-text-centered" style="display: flex; align-items: center; justify-content: center;">
-        <figure (click)="pseudoAleatoire()" class="image is-64x64 is-inline-block">
-          <img src="assets/img/cc0/dice-svgrepo-com.svg" />
-        </figure>
+      <div class="column is-2 is-flex is-align-items-center is-justify-content-center">
+        <a>
+          <figure (click)="pseudoAleatoire()" class="image is-64x64 is-inline-block">
+            <img src="assets/img/cc0/dice-svgrepo-com.svg" />
+          </figure>
+        </a>
       </div>
-      <div class="column is-5" style="display: flex; align-items: center; justify-content: left;">
+      <div class="column is-5 is-flex is-align-items-center is-justify-content-left">
         <button (click)="enregistrerPseudo()" class="button is-success">Enregistrer</button>
       </div>
     </div>
     <br><br><br>
     <!-- Paramètres -->
-    <button *ngIf="dataService.feminin" type="submit" class="button is-info is-light"
-      (click)="dataService.majFeminin(false)">Pseudo
-      masculin</button>
+    <button *ngIf="dataService.feminin" type="submit" class="button is-info is-light" (click)="dataService.majFeminin(false)">Pseudo masculin</button>
     <button *ngIf="!dataService.feminin" class="button is-info">Pseudo masculin</button>
     &nbsp;
-    <button *ngIf="!dataService.feminin" type="submit" class="button is-sponsor is-light"
-      (click)="dataService.majFeminin(true)">Pseudo
-      féminin</button>
+    <button *ngIf="!dataService.feminin" type="submit" class="button is-sponsor is-light" (click)="dataService.majFeminin(true)">Pseudo féminin</button>
     <button *ngIf="dataService.feminin" class="button is-sponsor">Pseudo féminin</button>
     <br><br>
   </div>

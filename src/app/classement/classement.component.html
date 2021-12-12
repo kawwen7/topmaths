@@ -1,16 +1,15 @@
-<div class="container is-max-desktop" style="text-align: center">
+<div class="container is-max-desktop centre">
   <h1 class="title is-1">Classement</h1>
   <div *ngFor="let user of dataService.classement; index as i">
     <div class="columns">
       <!-- On fait un tableau à une seule colonne pour que les contenus restent alignés en vue portrait -->
-      <div class="column" style="display: flex; align-items: center; justify-content: center;">
-        <!-- L'affichage est cassé sans tous ces styles -->
+      <div class="column is-flex is-align-items-center is-justify-content-center">
         <!-- Classement -->
-        <div class="column is-one-fifth" style="display: flex; align-items: center; justify-content: center;">
+        <div class="column is-one-fifth">
           <p class="title is-5">{{ i + 1 }}</p>
         </div>
         <!-- Avatar -->
-        <div class="column is-one-fifth" style="display: flex; align-items: center; justify-content: center;">
+        <div class="column is-one-fifth">
           <figure *ngIf="user.pseudo != 'anonyme'" class="image is-48x48 is-inline-block">
             <img [src]="user.lienAvatar" />
           </figure>
@@ -19,14 +18,14 @@
           </span>
         </div>
         <!-- Pseudo -->
-        <div class="column is-two-fifths" style="display: flex; align-items: center; justify-content: center;">
+        <div class="column is-two-fifths">
           <div *ngIf="user.pseudo != 'anonyme'" class="is-inline-block">
-            <div class="column is-three-fifths" style="display: flex; align-items: center; justify-content: center;">
+            <div class="column is-three-fifths">
               <div *ngIf="user.lienTrophees != ''" class="dropdown is-right is-hoverable is-inline-block">
                 <div class="dropdown-trigger">
                   <a (click)="voirTropheesPerso(user)">{{user.pseudo}}</a>
                 </div>
-                <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                <div class="dropdown-menu">
                   <div class="dropdown-content">
                     <div class="dropdown-item">
                       <p>Afficher ses trophées</p>
@@ -42,7 +41,7 @@
           </div>
         </div>
         <!-- Scores -->
-        <div class="column is-one-fifth" style="display: flex; align-items: center; justify-content: center;">
+        <div class="column is-one-fifth">
           {{user.score}}
         </div>
       </div>
