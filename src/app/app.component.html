@@ -1,22 +1,44 @@
 <!-- Header -->
 <div class="tabs is-large is-centered">
   <ul class="tabs-menu">
-    <li [ngClass]="{'is-active': ongletActif == 'accueil'}"><a routerLink="/accueil" routerLinkActive="active"
-        class="tabs-menu-link">Accueil</a></li>
-    <li [ngClass]="{'is-active': ongletActif == 'objectifs'}"><a routerLink="/objectifs/tout" routerLinkActive="active"
-        class="tabs-menu-link">Objectifs</a></li>
-    <li [ngClass]="{'is-active': ongletActif == 'sequences'}"><a routerLink="/sequences/tout" routerLinkActive="active"
-        class="tabs-menu-link">Séquences</a></li>
-    <li [ngClass]="{'is-active': ongletActif == 'jeux'}"><a routerLink="/jeux" routerLinkActive="active"
-        class="tabs-menu-link">Jeux</a></li>
+    <li [ngClass]="{'is-active': ongletActif == 'accueil'}">
+      <a routerLink="/accueil" routerLinkActive="active" class="tabs-menu-link is-warning">
+        <i class="image is-48x48"><img src="assets/img/cc0/homepage-svgrepo-com.svg" /></i>
+      </a>
+    </li>
+    <li [ngClass]="{'is-active': ongletActif == 'objectifs'}">
+      <a routerLink="/objectifs/tout" routerLinkActive="active" class="tabs-menu-link is-info">
+        <i class="image is-48x48"><img src="assets/img/cc0/dart-board-svgrepo-com.svg" /></i>
+      </a>
+    </li>
+    <li [ngClass]="{'is-active': ongletActif == 'sequences'}">
+      <a routerLink="/sequences/tout" routerLinkActive="active" class="tabs-menu-link is-link">
+        <i class="image is-48x48"><img src="assets/img/cc0/guest-book-svgrepo-com.svg" /></i>
+      </a>
+    </li>
+    <li [ngClass]="{'is-active': ongletActif == 'revisions'}">
+      <a routerLink="/revisions" routerLinkActive="active" class="tabs-menu-link is-danger">
+        <i class="image is-48x48"><img src="assets/img/gvalmont/revisions-regular.svg" /></i>
+      </a>
+    </li>
+    <li [ngClass]="{'is-active': ongletActif == 'exercices-au-hasard'}">
+      <a routerLink="/exercices-au-hasard" routerLinkActive="active" class="tabs-menu-link is-primary">
+        <i class="image is-48x48"><img src="assets/img/cc0/dice-svgrepo-com.svg" /></i>
+      </a>
+    </li>
+    <li [ngClass]="{'is-active': ongletActif == 'jeux'}">
+      <a routerLink="/jeux" routerLinkActive="active" class="tabs-menu-link is-success">
+        <i class="image is-48x48"><img src="assets/img/cc0/gamepad-retro-f-svgrepo-com.svg" /></i>
+      </a>
+    </li>
   </ul>
   <a *ngIf="dataService.isloggedIn" routerLink="profil" routerLinkActive="active">
-    <figure class="image is-32x32">
+    <figure class="image is-48x48">
       <img [src]="dataService.user.lienAvatar">
     </figure>
   </a>
   <a *ngIf="!dataService.isloggedIn" routerLink="login" routerLinkActive="active">
-    <i class="far fa-user"></i>
+    <i class="image is-48x48"><img src="assets/img/reshot/user-3291.svg" /></i>
   </a>
 </div>
 <!-- Affichage principal -->
@@ -26,9 +48,13 @@
 <footer class="footer">
   <div class="content has-text-centered">
     <p>
-      <strong>topmaths.fr</strong> © 2021 de <a href="https://github.com/gvalmont/" target="_blank" rel="noopener noreferrer">Guillaume Valmont</a>.
-      Le <a href="https://github.com/gvalmont/topmaths" target="_blank" rel="noopener noreferrer">code source du site</a> est sous licence <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener noreferrer">AGPL 3.0</a>.
-      Le contenu du site est sous licence <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" target="_blank" rel="noopener noreferrer">CC-BY-SA 4.0</a>.
+      <strong>topmaths.fr</strong> © 2021 de <a href="https://github.com/gvalmont/" target="_blank"
+        rel="noopener noreferrer">Guillaume Valmont</a>.
+      Le <a href="https://github.com/gvalmont/topmaths" target="_blank" rel="noopener noreferrer">
+        code source dusite</a> est sous licence <a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank"
+        rel="noopener noreferrer">AGPL 3.0</a>.
+      Le contenu du site est sous licence <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr"
+        target="_blank" rel="noopener noreferrer">CC-BY-SA 4.0</a>.
     </p>
   </div>
 </footer>

@@ -26,7 +26,7 @@
   <div *ngFor="let exercice of exercices; index as i">
     <div class="box">
       <h3 class="title is-4 is-inline-block">Niveau {{ i + 1 }} - {{ exercice.couleur }}
-        <i class="far fa-copy" (click)="copierLien(exercice)"></i>
+        <i class="image is-24x24 is-inline-block" (click)="copierLien(exercice)"><img src="assets/img/cc0/copy-interface-symbol-svgrepo-com.svg" /></i>
       </h3>
       <div
         [ngClass]="{'image': true, 'is-16by9': !portrait, 'is-9by16': portrait && dataService.user.scores == 'actives', 'is-2by3': portrait && dataService.user.scores != 'actives'}">

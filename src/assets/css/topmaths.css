@@ -1,3 +1,100 @@
+/****************************************************************************************************
+***** Bandeau supérieur
+****************************************************************************************************/
+/* Met les icones en couleur */
+.tabs-menu-link.is-warning i {
+  filter: invert(86%) sepia(36%) saturate(728%) hue-rotate(344deg) brightness(100%) contrast(107%);
+}
+.tabs-menu-link.is-link i {
+  filter: invert(29%) sepia(98%) saturate(796%) hue-rotate(203deg) brightness(101%) contrast(88%);
+}
+.tabs-menu-link.is-info i {
+  filter: invert(49%) sepia(45%) saturate(746%) hue-rotate(165deg) brightness(94%) contrast(83%);
+}
+.tabs-menu-link.is-danger i {
+  filter: invert(44%) sepia(73%) saturate(4057%) hue-rotate(324deg) brightness(98%) contrast(92%);
+}
+.tabs-menu-link.is-primary i {
+  filter: invert(56%) sepia(99%) saturate(1427%) hue-rotate(128deg) brightness(97%) contrast(103%);
+}
+.tabs-menu-link.is-success i {
+  filter: invert(67%) sepia(17%) saturate(1218%) hue-rotate(101deg) brightness(96%) contrast(92%);
+}
+/* Met les icones en blanc lors du survol */
+.tabs-menu-link:hover i {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+}
+/* Met le fond de la bonne couleur lors du survol */
+li:hover .is-warning {
+  background-color: hsl(48, 100%, 67%);
+}
+li:hover .is-link {
+  background-color: hsl(217, 71%, 53%);
+}
+li:hover .is-info {
+  background-color: hsl(204, 86%, 53%);
+}
+li:hover .is-danger {
+  background-color: hsl(348, 100%, 61%);
+}
+li:hover .is-primary {
+  background-color: hsl(171, 100%, 41%);
+}
+li:hover .is-success {
+  background-color: hsl(141, 53%, 53%);
+}
+/****************************************************************************************************
+***** Colorisation des icones en général
+****************************************************************************************************/
+/* Gris foncé par défaut */
+i {
+  filter: invert(26%) sepia(0%) saturate(3266%) hue-rotate(151deg) brightness(95%) contrast(83%);
+}
+/* Gris clair pour les icones des champs qui n'ont pas le focus */
+input ~ .filter-grey {
+  filter: invert(96%) sepia(0%) saturate(540%) hue-rotate(210deg) brightness(99%) contrast(81%);
+}
+/* Gris foncé lorsque le champ a le focus */
+input:focus ~ .filter-grey{
+  filter: invert(26%) sepia(0%) saturate(3266%) hue-rotate(151deg) brightness(95%) contrast(83%);
+}
+/* Blanc lorsque l'icône est dans un bouton qu'on survole */
+button:hover > i {
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+}
+/* Colore l'icone selon les couleurs de Bulma */
+.is-warning i {
+  filter: invert(86%) sepia(36%) saturate(728%) hue-rotate(344deg) brightness(100%) contrast(107%);
+}
+.is-link i {
+  filter: invert(29%) sepia(98%) saturate(796%) hue-rotate(203deg) brightness(101%) contrast(88%);
+}
+.is-info i {
+  filter: invert(49%) sepia(45%) saturate(746%) hue-rotate(165deg) brightness(94%) contrast(83%);
+}
+.is-danger i {
+  filter: invert(44%) sepia(73%) saturate(4057%) hue-rotate(324deg) brightness(98%) contrast(92%);
+}
+.is-primary i {
+  filter: invert(56%) sepia(99%) saturate(1427%) hue-rotate(128deg) brightness(97%) contrast(103%);
+}
+.is-success i {
+  filter: invert(67%) sepia(17%) saturate(1218%) hue-rotate(101deg) brightness(96%) contrast(92%);
+}
+.is-sponsor i {
+  filter: invert(41%) sepia(47%) saturate(2515%) hue-rotate(298deg) brightness(97%) contrast(88%);
+}
+/****************************************************************************************************
+***** Autres
+****************************************************************************************************/
+
+.title {
+  text-align:center;
+}
+.subtitle {
+  text-align:center;
+}
+
 .MathJax {
   font-size: 1.8em;
   line-height: 2;

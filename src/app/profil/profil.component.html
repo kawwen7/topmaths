@@ -3,11 +3,17 @@
   <div class="column is-three-fifths">
     <!-- Pseudo -->
     <div (click)="ouvrirModale('pseudo')">
-      <h1 class="title is-2 is-inline-block">{{dataService.user.pseudo}}</h1>&nbsp; <i class="far fa-edit"></i>
+      <h1 class="title is-2 is-inline-block">{{dataService.user.pseudo}}</h1>&nbsp;
+      <i class="image is-24x24 is-inline-block">
+        <img src="assets/img/cc0/edit-svgrepo-com.svg" />
+      </i>
     </div>
     <!-- Avatar -->
     <div (click)="ouvrirModale('avatar')">
-      <img [src]="dataService.user.lienAvatar" width="160px" /> <i class="far fa-edit"></i>
+      <img [src]="dataService.user.lienAvatar" width="160px" />
+      <i class="image is-24x24 is-inline-block">
+        <img src="assets/img/cc0/edit-svgrepo-com.svg" />
+      </i>
     </div>
     <br>
     <!-- Score -->
@@ -44,9 +50,9 @@
     <figure *ngIf="enCoursDeModif == 'scores'" class="image is-32x32 is-inline-block">
       <img [src]="'assets/img/Loading.gif'">
     </figure>
-    <figure *ngIf="modifTerminee == 'scores'" class="image is-32x32 is-inline-block">
-      <i class="fas fa-2x fa-check"></i>
-    </figure>
+    <i *ngIf="modifTerminee == 'scores'" class="image is-32x32 is-inline-block">
+      <img src="assets/img/cc0/check-svgrepo-com.svg" />
+    </i>
     <br><br>
     <!-- Anonymat -->
     <button *ngIf="dataService.user.visible == 'oui'" type="submit" class="button is-danger is-outlined"
@@ -67,9 +73,9 @@
     <figure *ngIf="enCoursDeModif == 'visible'" class="image is-32x32 is-inline-block">
       <img [src]="'assets/img/Loading.gif'">
     </figure>
-    <figure *ngIf="modifTerminee == 'visible'" class="image is-32x32 is-inline-block">
-      <i class="fas fa-2x fa-check"></i>
-    </figure>
+    <i *ngIf="modifTerminee == 'visible'" class="image is-32x32 is-inline-block">
+      <img src="assets/img/cc0/check-svgrepo-com.svg" />
+    </i>
     <br><br>
     <!-- Trophées -->
     <div *ngIf="dataService.user.codeTrophees != ''">
@@ -92,9 +98,9 @@
       <figure *ngIf="enCoursDeModif == 'trophees'" class="image is-32x32 is-inline-block">
         <img [src]="'assets/img/Loading.gif'">
       </figure>
-      <figure *ngIf="modifTerminee == 'trophees'" class="image is-32x32 is-inline-block">
-        <i class="fas fa-2x fa-check"></i>
-      </figure>
+      <i *ngIf="modifTerminee == 'trophees'" class="image is-32x32 is-inline-block">
+        <img src="assets/img/cc0/check-svgrepo-com.svg" />
+      </i>
     </div>
     <br><br>
     <!-- Créer le lien vers les trophées -->
@@ -114,15 +120,16 @@
                     autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control input-sm"
                     placeholder="Code Trophées" size="5">
                   <!-- icônes de part et d'autre du champ -->
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-trophy"></i>
+                  <span class="icon is-small is-left filter-grey">
+                    <i class="image is-24x24"><img src="assets/img/cc0/trophy-svgrepo-com.svg" /></i>
                   </span>
                   <span *ngIf="(!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut)"
-                    class="icon is-small is-right">
-                    <i class="fas fa-check"></i>
+                    class="icon is-small is-right filter-grey">
+                    <i class="image is-24x24"><img src="assets/img/cc0/check-svgrepo-com.svg" /></i>
                   </span>
-                  <span *ngIf="(errPetitNbChar || errGrandNbChar || errSpChar)" class="icon is-small is-right">
-                    <i class="fas fa-exclamation-triangle"></i>
+                  <span *ngIf="(errPetitNbChar || errGrandNbChar || errSpChar)"
+                    class="icon is-small is-right filter-grey">
+                    <i class="image is-24x24"><img src="assets/img/cc0/warning-exclamation-sign-in-filled-triangle-svgrepo-com.svg" /></i>
                   </span>
                 </div>
                 <!-- Indications sous le champ -->
@@ -185,10 +192,19 @@
     <!-- Avatar -->
     <div><img [src]="lienAvatar" width="200px" /></div>
     <!-- Boutons -->
-    <button (click)="fermerModale('avatar')" class="button is-danger">Annuler</button>
-    <i class="fas fa-2x fa-question is-large" (click)="avatarAleatoire()"
-      style="padding-left: 50px; padding-right: 50px"></i>
-    <button (click)="enregistrerAvatar()" class="button is-success">Enregistrer</button>
+    <div class="columns">
+      <div class="column is-5" style="text-align: right;" style="display: flex; align-items: center; justify-content: right;">
+        <button (click)="fermerModale('avatar')" class="button is-danger">Annuler</button>
+      </div>
+      <div class="column is-2 has-text-centered">
+        <figure (click)="avatarAleatoire()" class="image is-64x64 is-inline-block" style="display: flex; align-items: center; justify-content: center;">
+          <img src="assets/img/cc0/dice-svgrepo-com.svg" />
+        </figure>
+      </div>
+      <div class="column is-5" style="text-align: left;" style="display: flex; align-items: center; justify-content: left;">
+        <button (click)="enregistrerAvatar()" class="button is-success">Enregistrer</button>
+      </div>
+    </div>
     <!-- Sliders -->
     <ngx-slider [(value)]="yeux.value" [options]="yeux.options" (valueChange)="majLienAvatar($event)"></ngx-slider>
     <ngx-slider [(value)]="sourcils.value" [options]="sourcils.options" (valueChange)="majLienAvatar($event)">
@@ -225,10 +241,19 @@
     <h1 class="title is-2">{{pseudo}}</h1>
     <br><br>
     <!-- Boutons -->
-    <button (click)="fermerModale('pseudo')" class="button is-danger">Annuler</button>
-    <i class="fas fa-2x fa-question is-large" (click)="pseudoAleatoire()"
-      style="padding-left: 50px; padding-right: 50px"></i>
-    <button (click)="enregistrerPseudo()" class="button is-success">Enregistrer</button>
+    <div class="columns">
+      <div class="column is-5" style="display: flex; align-items: center; justify-content: right;">
+        <button (click)="fermerModale('pseudo')" class="button is-danger">Annuler</button>
+      </div>
+      <div class="column is-2 has-text-centered" style="display: flex; align-items: center; justify-content: center;">
+        <figure (click)="pseudoAleatoire()" class="image is-64x64 is-inline-block">
+          <img src="assets/img/cc0/dice-svgrepo-com.svg" />
+        </figure>
+      </div>
+      <div class="column is-5" style="display: flex; align-items: center; justify-content: left;">
+        <button (click)="enregistrerPseudo()" class="button is-success">Enregistrer</button>
+      </div>
+    </div>
     <br><br><br>
     <!-- Paramètres -->
     <button *ngIf="dataService.feminin" type="submit" class="button is-info is-light"

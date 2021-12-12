@@ -21,25 +21,25 @@
                     autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control input-sm"
                     placeholder="Identifiant" size="15">
                   <!-- icônes de part et d'autre du champ -->
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-user"></i>
+                  <span class="icon is-small is-left filter-grey">
+                    <i class="image is-24x24"><img src="assets/img/reshot/user-3294.svg" /></i>
                   </span>
                   <span *ngIf="(!errPetitNbChar && !errGrandNbChar && !errSpChar && !defaut)"
-                    class="icon is-small is-right">
-                    <i class="fas fa-check"></i>
+                    class="icon is-small is-right filter-grey">
+                    <i class="image is-24x24"><img src="assets/img/cc0/check-svgrepo-com.svg" /></i>
                   </span>
-                  <span *ngIf="(errPetitNbChar || errGrandNbChar || errSpChar)" class="icon is-small is-right">
-                    <i class="fas fa-exclamation-triangle"></i>
+                  <span *ngIf="(errPetitNbChar || errGrandNbChar || errSpChar)" class="icon is-small is-right filter-grey">
+                    <i class="image is-32x32"><img src="assets/img/cc0/warning-exclamation-sign-in-filled-triangle-svgrepo-com.svg" /></i>
                   </span>
                 </div>
               </div>
               <div class="column is-one-fifth" style="display: flex; align-items: center; justify-content: left;">
                 <div class="dropdown is-right is-hoverable is-inline-block">
                   <div *ngIf="!loginVisible" class="dropdown-trigger" (click)="montrerCacherIdentifiant()">
-                    <i class="fas fa-2x fa-eye"></i>
+                    <i class="image is-32x32"><img src="assets/img/cc0/eye-svgrepo-com.svg" /></i>
                   </div>
                   <div *ngIf="loginVisible" class="dropdown-trigger" (click)="montrerCacherIdentifiant()">
-                    <i class="fas fa-2x fa-eye-slash"></i>
+                    <i class="image is-32x32"><img src="assets/img/cc0/blind-svgrepo-com.svg" /></i>
                   </div>
                   <div class="dropdown-menu">
                     <div class="dropdown-content">

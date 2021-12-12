@@ -14,8 +14,8 @@
           <figure *ngIf="user.pseudo != 'anonyme'" class="image is-48x48 is-inline-block">
             <img [src]="user.lienAvatar" />
           </figure>
-          <span *ngIf="user.pseudo == 'anonyme'" class="icon fas fa-2x">
-            <i class="far fa-user"></i>
+          <span *ngIf="user.pseudo == 'anonyme'" class="is-inline-block">
+            <i class="image is-24x24"><img src="assets/img/reshot/user-3291.svg" /></i>
           </span>
         </div>
         <!-- Pseudo -->

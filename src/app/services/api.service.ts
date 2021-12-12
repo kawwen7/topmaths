@@ -24,7 +24,7 @@ interface Adjectif {
 
 export class ApiService {
   redirectUrl: string = ''
-  baseUrl: string = "https://topmaths.fr/api";
+  baseUrl: string = "https://beta.topmaths.fr/api";
   isloggedIn: boolean
   user: User
   onlineUsers: UserSimplifie[]
@@ -92,8 +92,8 @@ export class ApiService {
           score: '17',
           lienTrophees: 'tcqnfy'
         }, {
-          lienAvatar: 'https://avatars.dicebear.com/api/adventurer/id2.svg',
-          pseudo: 'Pierre verte',
+          lienAvatar: '',
+          pseudo: 'anonyme',
           score: '38',
           lienTrophees: 'tuoocj'
         }

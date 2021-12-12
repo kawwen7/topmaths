@@ -15,7 +15,9 @@
   <div class="box" *ngIf="calculsMentaux[0] != null && calculsMentaux[0].reference != ''; else divPasDeCalculMental">
     <h2 class="title is-3">Calcul Mental
       <i *ngIf="calculsMentaux[0] != null && calculsMentaux.length == 1 && calculsMentaux[0].niveaux.length == 1"
-        class="far fa-copy" (click)="copierLien(calculsMentaux[0].niveaux[0])"></i>
+        class="image is-24x24 is-inline-block" (click)="copierLien(calculsMentaux[0].niveaux[0])">
+        <img src="assets/img/cc0/copy-interface-symbol-svgrepo-com.svg" />
+      </i>
     </h2>
     <div *ngIf="presenceCalculMental">
       <div *ngFor="let calculMental of calculsMentaux; index as i">
@@ -24,20 +26,26 @@
           <a [routerLink]="['/objectif',calculMental.reference]">{{calculMental.reference}} : {{calculMental.titre}}</a>
           &nbsp;
           <i *ngIf="calculsMentaux[0] != null && calculsMentaux.length > 1 && calculsMentaux[0].niveaux.length == 1"
-            class="far fa-copy" (click)="copierLien(calculsMentaux[0].niveaux[0])"></i>
+            class="image is-24x24 is-inline-block" (click)="copierLien(calculsMentaux[0].niveaux[0])">
+            <img src="assets/img/cc0/copy-interface-symbol-svgrepo-com.svg" />
+          </i>
         </p>
         <ng-template #calculMentalSansLien>
           <p>Dans cette séquence, le calcul mental porte sur :<br>
             {{calculMental.reference}} : {{calculMental.titre}} &nbsp;
             <i *ngIf="calculsMentaux[0] != null && calculsMentaux.length > 1 && calculsMentaux[0].niveaux.length == 1"
-              class="far fa-copy" (click)="copierLien(calculsMentaux[0].niveaux[0])"></i>
+              class="image is-24x24 is-inline-block" (click)="copierLien(calculsMentaux[0].niveaux[0])">
+              <img src="assets/img/cc0/copy-interface-symbol-svgrepo-com.svg" />
+            </i>
           </p>
         </ng-template>
         <div><br></div>
         <div *ngFor="let niveau of calculMental.niveaux; index as j">
           <div><br></div>
           <h3 class="title is-4" *ngIf="calculMental.niveaux.length > 1">Niveau {{j + 1}}
-            <i class="far fa-copy" (click)="copierLien(niveau)"></i>
+            <i class="image is-24x24 is-inline-block" (click)="copierLien(niveau)">
+              <img src="assets/img/cc0/copy-interface-symbol-svgrepo-com.svg" />
+            </i>
           </h3>
           <p>{{niveau.commentaire}}</p>
           <div class="image is-16by9">
