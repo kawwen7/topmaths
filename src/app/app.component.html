@@ -31,15 +31,17 @@
         <i class="image is-48x48"><img src="assets/img/cc0/gamepad-retro-f-svgrepo-com.svg" /></i>
       </a>
     </li>
+    <li [ngClass]="{'is-actif': ongletActif == 'profil' || ongletActif == 'login'}">
+      <a *ngIf="dataService.isloggedIn" routerLink="profil" routerLinkActive="active" class="tabs-menu-link is-orange">
+        <figure class="image is-48x48">
+          <img [src]="dataService.user.lienAvatar">
+        </figure>
+      </a>
+      <a *ngIf="!dataService.isloggedIn" routerLink="login" routerLinkActive="active" class="tabs-menu-link is-orange">
+        <i class="image is-48x48"><img src="assets/img/gvalmont/user-regular.svg" /></i>
+      </a>
+    </li>
   </ul>
-  <a *ngIf="dataService.isloggedIn" routerLink="profil" routerLinkActive="active">
-    <figure class="image is-48x48">
-      <img [src]="dataService.user.lienAvatar">
-    </figure>
-  </a>
-  <a *ngIf="!dataService.isloggedIn" routerLink="login" routerLinkActive="active">
-    <i class="image is-48x48"><img src="assets/img/reshot/user-3291.svg" /></i>
-  </a>
 </div>
 <!-- Affichage principal -->
 <router-outlet></router-outlet>

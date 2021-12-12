@@ -20,6 +20,9 @@
 .tabs-menu-link.is-success i {
   filter: invert(67%) sepia(17%) saturate(1218%) hue-rotate(101deg) brightness(96%) contrast(92%);
 }
+.tabs-menu-link.is-orange i {
+  filter: invert(99%) sepia(56%) saturate(6131%) hue-rotate(302deg) brightness(101%) contrast(98%);
+}
 /* Met les icones en blanc lors du survol */
 .tabs-menu-link:hover i {
   filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
@@ -43,6 +46,9 @@ li:hover .is-primary {
 li:hover .is-success {
   background-color: #48c78e;
 }
+li:hover .is-orange {
+  background-color: #FCBA82;
+}
 /* Met en évidence l'onglet actif */
 .is-actif > .tabs-menu-link i {
   filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
@@ -64,6 +70,12 @@ li.is-actif .is-primary {
 }
 li.is-actif .is-success {
   background-color: #48c78e;
+}
+li.is-actif .is-orange {
+  background-color: #FCBA82;
+}
+.tabs a:hover {
+  border-bottom-color: #dbdbdb;
 }
 /****************************************************************************************************
 ***** Colorisation des icones en général
