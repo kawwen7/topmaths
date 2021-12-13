@@ -102,7 +102,7 @@ export class SequenceComponent implements OnInit {
                         this.dataService.majScore(majScore, niveau.lien)
                         this.messageScore = '+ ' + majScore
                         niveau.bonneReponse = true
-                        setTimeout(() => niveau.bonneReponse = false, 2000)
+                        setTimeout(() => niveau.bonneReponse = false, 1.)
                         if (nbMauvaisesReponses == 0) {
                           this.confetti.lanceConfetti()
                         }
